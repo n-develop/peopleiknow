@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.Design.Serialization;
+using System.Linq;
 
 namespace PeopleIKnow.Models
 {
@@ -29,6 +31,20 @@ namespace PeopleIKnow.Models
         public List<Relationship> Relationships { get; set; }
 
         public List<StatusUpdate> StatusUpdates { get; set; }
+
+        [NotMapped]
+        public List<StatusUpdate> Timeline
+        {
+            get
+            {
+                if (StatusUpdates.Any())
+                {
+                    return StatusUpdates.OrderByDescending(c => c.Created).ToList();
+                }
+
+                return new List<StatusUpdate>();
+            }
+        }
 
         public string FullName
         {
