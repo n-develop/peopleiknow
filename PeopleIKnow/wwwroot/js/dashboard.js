@@ -21,20 +21,6 @@ contactCards.forEach(function (currentValue, currentIndex, listObj) {
     currentValue.onclick = handleTeaserClick;
 });
 
-var deleteEmailLinks = document.querySelectorAll(".remove-email");
-deleteEmailLinks.forEach(function (currentValue, currentIndex, listObj) {
-    currentValue.onclick = handleDeleteEmailClick;
-});
-
-function handleDeleteEmailClick(element) {
-    var id = element.currentTarget.getAttribute("data-email-id");
-    fetch("/Email/Delete/" + id)
-        .then(function (response) {
-            //TODO Handle the response
-
-        });
-}
-
 function handleTeaserClick(element) {
     var id = element.currentTarget.getAttribute("data-contact-id");
     fetch("/Dashboard/Details/" + id)
@@ -44,6 +30,16 @@ function handleTeaserClick(element) {
                 detailsPane.innerHTML = value;
             });
 
+        });
+}
+
+function deleteEmail(id) {
+    fetch("/Email/Delete/" + id)
+        .then(function (response) {
+            var detailsPane = document.getElementById("people-pane");
+            response.text().then(function (value) {
+                detailsPane.innerHTML = value;
+            });
         });
 }
 

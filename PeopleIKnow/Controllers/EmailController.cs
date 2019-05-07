@@ -42,5 +42,23 @@ namespace PeopleIKnow.Controllers
 
             return RedirectToAction("Details", "Dashboard", new {id = mail.ContactId});
         }
+
+        public ActionResult Delete(int id)
+        {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
+
+            var mail = _repository.GetEmailById(id);
+            if (mail.IsNull())
+            {
+                return NotFound();
+            }
+
+            _repository.DeleteEmailAddress(mail);
+
+            return RedirectToAction("Details", "Dashboard", new {id = mail.ContactId});
+        }
     }
 }

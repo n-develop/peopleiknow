@@ -67,5 +67,28 @@ namespace PeopleIKnow.Repositories
             _context.EmailAddresses.Add(mail);
             _context.SaveChanges();
         }
+
+        public EmailAddress GetEmailById(int mailId)
+        {
+            if (mailId <= 0)
+            {
+                return NullEmailAddress.GetInstance();
+            }
+
+            var mail = _context.EmailAddresses.Find(mailId);
+
+            if (mail == null)
+            {
+                return NullEmailAddress.GetInstance();
+            }
+
+            return mail;
+        }
+
+        public void DeleteEmailAddress(EmailAddress mail)
+        {
+            _context.EmailAddresses.Remove(mail);
+            _context.SaveChanges();
+        }
     }
 }
