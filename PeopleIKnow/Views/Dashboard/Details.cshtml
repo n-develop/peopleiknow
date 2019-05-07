@@ -1,0 +1,182 @@
+@model Contact
+@{
+    Layout = null;
+}
+<div class="box contact-preview" data-contact-id="@Model.Id">
+    <form id="contact-form" asp-controller="Dashboard" asp-action="Details" method="post">
+        <input type="hidden" asp-for="Id"/>
+        @* NAMES *@
+        <div class="field">
+            <label class="label">Firstname</label>
+            <div class="control">
+                <input class="input" asp-for="Firstname" type="text" placeholder="Firstname">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Middlename</label>
+            <div class="control">
+                <input class="input" asp-for="Middlename" type="text" placeholder="Middlename">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Lastname</label>
+            <div class="control">
+                <input class="input" asp-for="Lastname" type="text" placeholder="Lastname">
+            </div>
+        </div>
+        @* NAMES *@
+
+        @* EMAILS *@
+        <div class="panel">
+            <p class="panel-heading">
+                Emails
+                <a class="button is-pulled-right is-small is-success" onclick="addEmail()">
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            </p>
+
+            @foreach (var email in Model.EmailAddresses)
+            {
+                <div class="panel-block">
+                    <div class="field is-horizontal">
+                        <div class="field-label">
+                            <label class="label">@email.Type</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control has-icons-left is-expanded">
+                                    <input class="input" value="@email.Email" type="email" placeholder="email@@domoain.com" disabled="disabled">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <a class="button is-danger remove-email" data-email-id="@email.Id">
+                                        <i class="fa fa-minus-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        @* EMAILS *@
+
+        @* BIRTHDAY *@
+        <div class="field">
+            <label class="label">Birthday</label>
+            <div class="control has-icons-left">
+                <input class="input" asp-for="Birthday" type="date">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-birthday-cake"></i>
+                </span>
+            </div>
+        </div>
+        @* BIRTHDAY *@
+
+        @* ADDRESS *@
+        <div class="field">
+            <label class="label">Address</label>
+            <div class="control">
+                <textarea class="textarea" asp-for="Address">
+            </textarea>
+            </div>
+        </div>
+        @* ADDRESS *@
+
+        @* WORK *@
+        <div class="field">
+            <label class="label">Employer</label>
+            <div class="control has-icons-left">
+                <input class="input" asp-for="Employer" placeholder="Employer">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-building"></i>
+                </span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Business Title</label>
+            <div class="control has-icons-left">
+                <input class="input" asp-for="BusinessTitle" placeholder="Business Title">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-briefcase"></i>
+                </span>
+            </div>
+        </div>
+        @* WORK *@
+
+        @* TELEPHONE *@
+        <div class="panel">
+            <p class="panel-heading">
+                Telephone
+            </p>
+
+            @foreach (var telephone in Model.TelephoneNumbers)
+            {
+                <div class="panel-block">
+                    <div class="field">
+                        <label class="label">@telephone.Type</label>
+                        <div class="control has-icons-left">
+                            <input class="input" value="@telephone.Telephone" placeholder="Telephone number" disabled="disabled">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        @* TELEPHONE *@
+
+        @* RELATIONSHIPS *@
+        <div class="panel">
+            <p class="panel-heading">
+                Relationships
+            </p>
+
+            @foreach (var relationship in Model.Relationships)
+            {
+                <div class="panel-block">
+                    <div class="field">
+                        <label class="label">@relationship.Type</label>
+                        <div class="control has-icons-left">
+                            <input class="input" value="@relationship.Person" placeholder="Relationship" disabled="disabled">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-user-friends"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        @* RELATIONSHIPS *@
+
+        @* TIMELINE *@
+        <div class="panel">
+            <p class="panel-heading">
+                Status Updates
+            </p>
+
+            @foreach (var statusUpdate in Model.StatusUpdates)
+            {
+                <div class="panel-block">
+                    <div class="field">
+                        <label class="label">@statusUpdate.Created.ToString("dd.MM.yyyy")</label>
+                        <div class="control">
+                            <input class="input" value="@statusUpdate.StatusText" placeholder="Status update" disabled="disabled">
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        @* TIMELINE *@
+
+        <a class="button is-info is-medium" onclick="saveContact()">Save</a>
+    </form>
+</div>

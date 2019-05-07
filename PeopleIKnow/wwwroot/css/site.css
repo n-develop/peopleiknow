@@ -1,0 +1,33 @@
+﻿html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.segments {
+    background-color: #0E082B;
+    color: lightgray;
+    padding: 40px;
+}
+
+.feed {
+    background-color: #2B677E;
+}
+
+.feed > .card {
+    margin-top: 10px;
+}
+
+.pane {
+    background-color: #91D2EC;
+}
+
+.pane > .box {
+    margin: 10px 10px 0 0;
+}
+
+.highlight-color {
+    color: #0139D3;
+}
+
+.contact-preview > form > .panel > .panel-block {
+    display: block !important;
+}

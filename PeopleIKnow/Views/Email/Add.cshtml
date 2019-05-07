@@ -1,0 +1,26 @@
+@model EmailAddress
+@{
+    Layout = null;
+}
+<div class="box">
+    <form id="email-form" asp-controller="Email" asp-action="Add" method="post">
+        <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="ContactId"/>
+
+        <div class="field">
+            <label class="label">Type</label>
+            <div class="control">
+                <input class="input" asp-for="Type" type="text" placeholder="Type e.g. Private">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+                <input class="input" asp-for="Email" type="email" placeholder="test@@domain.com">
+            </div>
+        </div>
+
+        <a onclick="saveEmail()" class="button is-info is-medium">Add Email</a>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@* MENU START *@
+<div id="people-menu" class="column is-2 hero is-fullheight segments">
+    @await Component.InvokeAsync("Segments")
+</div>
+@* MENU END *@
+
+
+@* ContactList START *@
+<div id="people-feed" class="column is-3 feed">
+    @await Component.InvokeAsync("ContactList")
+</div>
+@* ContactList END *@
+
+@* DETAILS START *@
+<div id="people-pane" class="column is-7 pane">
+    <div class="columns is-desktop is-vcentered" style="height: 100%;">
+        <div class="column">
+            <h2 class="has-text-centered">Choose a Contact from the list!</h2>
+        </div>
+    </div>
+</div>
+@* DETAILS END *@
+
+<div class="modal" id="successfully-saved-modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <article class="message is-info">
+            <div class="message-header">
+                Successfully saved!
+                <button class="delete"></button>
+            </div>
+            <div class="message-body">
+                The contact was successfully saved. You can close this popup now.
+            </div>
+        </article>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+@section Scripts
+{
+    <environment include="Development">
+        <script src="~/js/dashboard.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/dashboard.min.js" asp-append-version="true"></script>
+    </environment>
+}
