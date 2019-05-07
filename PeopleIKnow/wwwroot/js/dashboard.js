@@ -24,23 +24,12 @@ contactCards.forEach(function (currentValue, currentIndex, listObj) {
 function handleTeaserClick(element) {
     var id = element.currentTarget.getAttribute("data-contact-id");
     fetch("/Dashboard/Details/" + id)
-        .then(function (response) {
-            var detailsPane = document.getElementById("people-pane");
-            response.text().then(function (value) {
-                detailsPane.innerHTML = value;
-            });
-
-        });
+        .then(updatePane);
 }
 
 function deleteEmail(id) {
     fetch("/Email/Delete/" + id)
-        .then(function (response) {
-            var detailsPane = document.getElementById("people-pane");
-            response.text().then(function (value) {
-                detailsPane.innerHTML = value;
-            });
-        });
+        .then(updatePane);
 }
 
 function saveContact() {
@@ -48,12 +37,9 @@ function saveContact() {
     fetch("/dashboard/details", {
         method: "POST",
         body: form
-    }).then(function (response) {
-        var detailsPane = document.getElementById("people-pane");
-        response.text().then(function (value) {
-            detailsPane.innerHTML = value;
-        });
-    }).then(function () {
+    })
+        .then(updatePane)
+        .then(function () {
         var $target = document.getElementById("successfully-saved-modal");
         rootEl.classList.add('is-clipped');
         $target.classList.add('is-active');
@@ -74,12 +60,7 @@ function addEmail() {
     var preview = document.querySelector(".contact-preview");
     var id = preview.getAttribute("data-contact-id");
     fetch("/Email/Add?contactId=" + id)
-        .then(function (response) {
-            var detailsPane = document.getElementById("people-pane");
-            response.text().then(function (value) {
-                detailsPane.innerHTML = value;
-            });
-        });
+        .then(updatePane);
 }
 
 function saveEmail() {
@@ -87,12 +68,7 @@ function saveEmail() {
     fetch("/Email/Add", {
         method: "POST",
         body: form
-    }).then(function (response) {
-        var detailsPane = document.getElementById("people-pane");
-        response.text().then(function (value) {
-            detailsPane.innerHTML = value;
-        });
-    })
+    }).then(updatePane);
 }
 
 function getAll(selector) {
