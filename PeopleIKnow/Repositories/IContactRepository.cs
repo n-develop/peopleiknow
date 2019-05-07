@@ -17,5 +17,6 @@ namespace PeopleIKnow.Repositories
         void AddEmail(EmailAddress mail);
         EmailAddress GetEmailById(int mailId);
         void DeleteEmailAddress(EmailAddress mail);
+        void AddStatusUpdate(StatusUpdate statusUpdate);
     }
 }

@@ -90,5 +90,17 @@ namespace PeopleIKnow.Repositories
             _context.EmailAddresses.Remove(mail);
             _context.SaveChanges();
         }
+
+        public void AddStatusUpdate(StatusUpdate statusUpdate)
+        {
+            if (statusUpdate.Id == 0)
+            {
+                var maxId = _context.StatusUpdates.Max(c => c.Id);
+                statusUpdate.Id = maxId + 1;
+            }
+
+            _context.StatusUpdates.Add(statusUpdate);
+            _context.SaveChanges();
+        }
     }
 }

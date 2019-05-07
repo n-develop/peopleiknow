@@ -71,6 +71,28 @@ function saveEmail() {
     }).then(updatePane);
 }
 
+function addStatusUpdate() {
+    var preview = document.querySelector(".contact-preview");
+    var id = preview.getAttribute("data-contact-id");
+    fetch("/StatusUpdate/Add?contactId=" + id)
+        .then(updatePane);
+}
+
+function saveStatusUpdate() {
+    var form = new FormData(document.getElementById('status-update-form'));
+    fetch("/StatusUpdate/Add", {
+        method: "POST",
+        body: form
+    }).then(updatePane);
+}
+
+function updatePane(response) {
+    var detailsPane = document.getElementById("people-pane");
+    response.text().then(function (value) {
+        detailsPane.innerHTML = value;
+    });
+}
+
 function getAll(selector) {
     return Array.prototype.slice.call(document.querySelectorAll(selector), 0);
 }
