@@ -2,6 +2,10 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+#pik-app {
+    margin-top: 0;
+}
+
 .segments {
     background-color: #0E082B;
     color: lightgray;
@@ -10,6 +14,7 @@
 
 .feed {
     background-color: #2B677E;
+    overflow-y: scroll;
 }
 
 .feed > .card {
@@ -18,6 +23,7 @@
 
 .pane {
     background-color: #91D2EC;
+    overflow-y: scroll;
 }
 
 .pane > .box {

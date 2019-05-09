@@ -3,7 +3,7 @@
 }
 
 @* MENU START *@
-<div id="people-menu" class="column is-2 hero is-fullheight segments">
+<div id="people-menu" class="column is-2 segments">
     @await Component.InvokeAsync("Segments")
 </div>
 @* MENU END *@
@@ -49,4 +49,13 @@
     <environment exclude="Development">
         <script src="~/js/dashboard.min.js" asp-append-version="true"></script>
     </environment>
+    <script>
+        window.onload = function() {
+            var feed = document.getElementById('people-feed');
+            var pane = document.getElementById('people-pane');
+            feed.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
+            pane.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
+        }
+    </script>
+
 }
