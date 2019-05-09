@@ -16,6 +16,8 @@ namespace PeopleIKnow.Models
 
         public string Lastname { get; set; }
 
+        public string ImagePath { get; set; }
+
         public DateTime Birthday { get; set; }
 
         public string Address { get; set; }
@@ -46,6 +48,7 @@ namespace PeopleIKnow.Models
             }
         }
 
+        [NotMapped]
         public string FullName
         {
             get

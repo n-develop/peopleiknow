@@ -4,17 +4,24 @@
 {
     foreach (var contact in Model)
     {
+        if (string.IsNullOrEmpty(contact.ImagePath))
+        {
+            contact.ImagePath = "images/contacts/unknown.jpg";
+        }
         <div class="card" id="contact-teaser-@contact.Id" data-contact-id="@contact.Id">
             <div class="card-content">
                 <div class="media">
                     <div class="media-left">
                         <figure class="image is-48x48">
-                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                            <img src="@contact.ImagePath" alt="Placeholder image">
                         </figure>
                     </div>
                     <div class="media-content">
                         <p class="title is-4">@contact.FullName</p>
-                        <p class="subtitle is-6">@contact.EmailAddresses.First().Email</p>
+                        @if (contact.EmailAddresses != null && contact.EmailAddresses.Any())
+                        {
+                            <p class="subtitle is-6">@contact.EmailAddresses.First().Email</p>
+                        }
                     </div>
                 </div>
 
