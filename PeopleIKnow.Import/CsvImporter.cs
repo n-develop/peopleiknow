@@ -32,6 +32,7 @@ namespace PeopleIKnow.Import
 
                 foreach (var googleContact in records)
                 {
+                    Console.Write($"Importing '{googleContact.Name}'... ");
                     var imagePath = GetImagePath(googleContact, nextContactId);
 
                     CreateContact(nextContactId, googleContact, imagePath);
@@ -43,6 +44,8 @@ namespace PeopleIKnow.Import
 
                     _db.SaveChanges();
                     nextContactId++;
+                    contactCounter++;
+                    Console.WriteLine("Done.");
                 }
             }
 
