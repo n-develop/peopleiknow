@@ -1,8 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
+using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
 
-namespace PeopleIKnow.Models
+namespace PeopleIKnow.Controllers
 {
     public class StatusUpdateController : Controller
     {
