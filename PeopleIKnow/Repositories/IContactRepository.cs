@@ -18,5 +18,11 @@ namespace PeopleIKnow.Repositories
         EmailAddress GetEmailById(int mailId);
         void DeleteEmailAddress(EmailAddress mail);
         void AddStatusUpdate(StatusUpdate statusUpdate);
+        void AddTelephoneNumber(TelephoneNumber telephoneNumber);
+        TelephoneNumber GetTelephoneNumberById(int id);
+        void DeleteTelephoneNumber(TelephoneNumber telephoneNumber);
+        void AddRelationship(Relationship relationship);
+        Relationship GetRelationshipById(int id);
+        void DeleteRelationship(Relationship relationship);
     }
 }

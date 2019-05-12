@@ -102,5 +102,75 @@ namespace PeopleIKnow.Repositories
             _context.StatusUpdates.Add(statusUpdate);
             _context.SaveChanges();
         }
+
+        public void AddTelephoneNumber(TelephoneNumber telephoneNumber)
+        {
+            if (telephoneNumber.Id == 0)
+            {
+                var maxId = _context.TelephoneNumbers.Max(c => c.Id);
+                telephoneNumber.Id = maxId + 1;
+            }
+
+            _context.TelephoneNumbers.Add(telephoneNumber);
+            _context.SaveChanges();
+        }
+
+        public TelephoneNumber GetTelephoneNumberById(int id)
+        {
+            if (id <= 0)
+            {
+                return NullTelephoneNumber.GetInstance();
+            }
+
+            var telephoneNumber = _context.TelephoneNumbers.Find(id);
+
+            if (telephoneNumber == null)
+            {
+                return NullTelephoneNumber.GetInstance();
+            }
+
+            return telephoneNumber;
+        }
+
+        public void DeleteTelephoneNumber(TelephoneNumber telephoneNumber)
+        {
+            _context.TelephoneNumbers.Remove(telephoneNumber);
+            _context.SaveChanges();
+        }
+
+        public void AddRelationship(Relationship relationship)
+        {
+            if (relationship.Id == 0)
+            {
+                var maxId = _context.Relationships.Max(c => c.Id);
+                relationship.Id = maxId + 1;
+            }
+
+            _context.Relationships.Add(relationship);
+            _context.SaveChanges();
+        }
+
+        public Relationship GetRelationshipById(int id)
+        {
+            if (id <= 0)
+            {
+                return NullRelationship.GetInstance();
+            }
+
+            var relationship = _context.Relationships.Find(id);
+
+            if (relationship == null)
+            {
+                return NullRelationship.GetInstance();
+            }
+
+            return relationship;
+        }
+
+        public void DeleteRelationship(Relationship relationship)
+        {
+            _context.Relationships.Remove(relationship);
+            _context.SaveChanges();
+        }
     }
 }

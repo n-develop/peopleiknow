@@ -1,0 +1,26 @@
+@model TelephoneNumber
+@{
+    Layout = null;
+}
+<div class="box">
+    <form id="telephone-form" asp-controller="Telephone" asp-action="Add" method="post">
+        <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="ContactId"/>
+
+        <div class="field">
+            <label class="label">Type</label>
+            <div class="control">
+                <input class="input" asp-for="Type" type="text" placeholder="Type e.g. Private">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+                <input class="input" asp-for="Telephone" type="tel" placeholder="+01 555 84893">
+            </div>
+        </div>
+
+        <a onclick="saveTelephone()" class="button is-info is-medium">Add Telephone</a>
+    </form>
+</div>

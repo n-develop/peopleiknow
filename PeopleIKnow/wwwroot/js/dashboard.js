@@ -56,10 +56,43 @@ function saveContact() {
     });
 }
 
-function addEmail() {
+function addTelephone() {
     var preview = document.querySelector(".contact-preview");
     var id = preview.getAttribute("data-contact-id");
-    fetch("/Email/Add?contactId=" + id)
+    fetch("/Telephone/Add?contactId=" + id)
+        .then(updatePane);
+}
+
+function saveTelephone() {
+    var form = new FormData(document.getElementById('telephone-form'));
+    fetch("/Telephone/Add", {
+        method: "POST",
+        body: form
+    }).then(updatePane);
+}
+
+function deleteTelephone(id) {
+    fetch("/Telephone/Delete/" + id)
+        .then(updatePane);
+}
+
+function addRelationship() {
+    var preview = document.querySelector(".contact-preview");
+    var id = preview.getAttribute("data-contact-id");
+    fetch("/Relationship/Add?contactId=" + id)
+        .then(updatePane);
+}
+
+function saveRelationship() {
+    var form = new FormData(document.getElementById('relationship-form'));
+    fetch("/Relationship/Add", {
+        method: "POST",
+        body: form
+    }).then(updatePane);
+}
+
+function deleteRelationship(id) {
+    fetch("/Relationship/Delete/" + id)
         .then(updatePane);
 }
 
@@ -69,6 +102,13 @@ function saveEmail() {
         method: "POST",
         body: form
     }).then(updatePane);
+}
+
+function addEmail() {
+    var preview = document.querySelector(".contact-preview");
+    var id = preview.getAttribute("data-contact-id");
+    fetch("/Email/Add?contactId=" + id)
+        .then(updatePane);
 }
 
 function addStatusUpdate() {
