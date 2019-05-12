@@ -39,7 +39,7 @@ namespace PeopleIKnow.Models
         {
             get
             {
-                if (StatusUpdates.Any())
+                if (StatusUpdates != null && StatusUpdates.Any())
                 {
                     return StatusUpdates.OrderByDescending(c => c.Created).ToList();
                 }
