@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using PeopleIKnow.Repositories;
 
@@ -21,7 +22,8 @@ namespace PeopleIKnow.Models
 
             var statusUpdate = new StatusUpdate
             {
-                ContactId = contactId
+                ContactId = contactId,
+                Created = DateTime.Now
             };
 
             return View(statusUpdate);
