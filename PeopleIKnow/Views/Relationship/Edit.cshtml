@@ -1,0 +1,26 @@
+@model Relationship
+@{
+    Layout = null;
+}
+<div class="box">
+    <form id="relationship-form" asp-controller="Relationship" asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="ContactId"/>
+
+        <div class="field">
+            <label class="label">Type</label>
+            <div class="control">
+                <input class="input" asp-for="Type" type="text" placeholder="Sister, Spouse, etc.">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+                <input class="input" asp-for="Person" type="text" placeholder="John Smith">
+            </div>
+        </div>
+
+        <a onclick="updateRelationship()" class="button is-info is-medium">Save Relationship</a>
+    </form>
+</div>

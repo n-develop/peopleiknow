@@ -25,5 +25,6 @@ namespace PeopleIKnow.Repositories
         Relationship GetRelationshipById(int id);
         void DeleteRelationship(Relationship relationship);
         void UpdateEmail(EmailAddress mail);
+        void UpdateRelationship(Relationship relationship);
     }
 }

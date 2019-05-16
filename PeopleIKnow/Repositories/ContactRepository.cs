@@ -191,5 +191,24 @@ namespace PeopleIKnow.Repositories
 
             _context.SaveChanges();
         }
+
+        public void UpdateRelationship(Relationship relationship)
+        {
+            if (relationship == null || relationship.Id <= 0)
+            {
+                return;
+            }
+
+            var relationshipFromRepository = _context.Relationships.Find(relationship.Id);
+            if (relationshipFromRepository == null)
+            {
+                return;
+            }
+
+            relationshipFromRepository.Type = relationship.Type;
+            relationshipFromRepository.Person = relationship.Person;
+
+            _context.SaveChanges();
+        }
     }
 }

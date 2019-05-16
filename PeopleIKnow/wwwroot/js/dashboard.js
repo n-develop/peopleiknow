@@ -124,6 +124,19 @@ function updateEmail() {
     }).then(updatePane);
 }
 
+function editRelationship(id) {
+    fetch("/Relationship/Edit/" + id)
+        .then(updatePane);
+}
+
+function updateRelationship() {
+    var form = new FormData(document.getElementById('relationship-form'));
+    fetch("/Relationship/Edit", {
+        method: "POST",
+        body: form
+    }).then(updatePane);
+}
+
 function addStatusUpdate() {
     var preview = document.querySelector(".contact-preview");
     var id = preview.getAttribute("data-contact-id");

@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
 
@@ -39,6 +40,35 @@ namespace PeopleIKnow.Controllers
             }
 
             _repository.AddRelationship(relationship);
+
+            return RedirectToAction("Details", "Dashboard", new {id = relationship.ContactId});
+        }
+
+        public ActionResult Edit(int id)
+        {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
+
+            var relationship = _repository.GetRelationshipById(id);
+            if (relationship == null)
+            {
+                return NotFound();
+            }
+
+            return View(relationship);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Relationship relationship)
+        {
+            if (relationship == null)
+            {
+                return BadRequest();
+            }
+
+            _repository.UpdateRelationship(relationship);
 
             return RedirectToAction("Details", "Dashboard", new {id = relationship.ContactId});
         }
