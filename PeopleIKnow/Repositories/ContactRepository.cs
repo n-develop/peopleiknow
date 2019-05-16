@@ -172,5 +172,24 @@ namespace PeopleIKnow.Repositories
             _context.Relationships.Remove(relationship);
             _context.SaveChanges();
         }
+
+        public void UpdateEmail(EmailAddress mail)
+        {
+            if (mail == null || mail.Id <= 0)
+            {
+                return;
+            }
+
+            var emailFromRepository = _context.EmailAddresses.Find(mail.Id);
+            if (emailFromRepository == null)
+            {
+                return;
+            }
+
+            emailFromRepository.Type = mail.Type;
+            emailFromRepository.Email = mail.Email;
+
+            _context.SaveChanges();
+        }
     }
 }

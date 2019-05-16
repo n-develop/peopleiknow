@@ -111,6 +111,19 @@ function addEmail() {
         .then(updatePane);
 }
 
+function editEmail(id) {
+    fetch("/Email/Edit/" + id)
+        .then(updatePane);
+}
+
+function updateEmail() {
+    var form = new FormData(document.getElementById('email-form'));
+    fetch("/Email/Edit", {
+        method: "POST",
+        body: form
+    }).then(updatePane);
+}
+
 function addStatusUpdate() {
     var preview = document.querySelector(".contact-preview");
     var id = preview.getAttribute("data-contact-id");
