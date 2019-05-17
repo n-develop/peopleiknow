@@ -210,5 +210,24 @@ namespace PeopleIKnow.Repositories
 
             _context.SaveChanges();
         }
+
+        public void UpdateTelephoneNumber(TelephoneNumber telephoneNumber)
+        {
+            if (telephoneNumber == null || telephoneNumber.Id <= 0)
+            {
+                return;
+            }
+
+            var telephoneNumberFromRepository = _context.TelephoneNumbers.Find(telephoneNumber.Id);
+            if (telephoneNumberFromRepository == null)
+            {
+                return;
+            }
+
+            telephoneNumberFromRepository.Type = telephoneNumber.Type;
+            telephoneNumberFromRepository.Telephone = telephoneNumber.Telephone;
+
+            _context.SaveChanges();
+        }
     }
 }

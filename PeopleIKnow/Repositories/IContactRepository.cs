@@ -26,5 +26,6 @@ namespace PeopleIKnow.Repositories
         void DeleteRelationship(Relationship relationship);
         void UpdateEmail(EmailAddress mail);
         void UpdateRelationship(Relationship relationship);
+        void UpdateTelephoneNumber(TelephoneNumber telephoneNumber);
     }
 }

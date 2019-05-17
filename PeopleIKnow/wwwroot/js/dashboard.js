@@ -76,6 +76,19 @@ function deleteTelephone(id) {
         .then(updatePane);
 }
 
+function editTelephone(id) {
+    fetch("/Telephone/Edit/" + id)
+        .then(updatePane);
+}
+
+function updateTelephone() {
+    var form = new FormData(document.getElementById('telephone-form'));
+    fetch("/Telephone/Edit", {
+        method: "POST",
+        body: form
+    }).then(updatePane);
+}
+
 function addRelationship() {
     var preview = document.querySelector(".contact-preview");
     var id = preview.getAttribute("data-contact-id");
@@ -94,6 +107,19 @@ function saveRelationship() {
 function deleteRelationship(id) {
     fetch("/Relationship/Delete/" + id)
         .then(updatePane);
+}
+
+function editRelationship(id) {
+    fetch("/Relationship/Edit/" + id)
+        .then(updatePane);
+}
+
+function updateRelationship() {
+    var form = new FormData(document.getElementById('relationship-form'));
+    fetch("/Relationship/Edit", {
+        method: "POST",
+        body: form
+    }).then(updatePane);
 }
 
 function saveEmail() {
@@ -119,19 +145,6 @@ function editEmail(id) {
 function updateEmail() {
     var form = new FormData(document.getElementById('email-form'));
     fetch("/Email/Edit", {
-        method: "POST",
-        body: form
-    }).then(updatePane);
-}
-
-function editRelationship(id) {
-    fetch("/Relationship/Edit/" + id)
-        .then(updatePane);
-}
-
-function updateRelationship() {
-    var form = new FormData(document.getElementById('relationship-form'));
-    fetch("/Relationship/Edit", {
         method: "POST",
         body: form
     }).then(updatePane);

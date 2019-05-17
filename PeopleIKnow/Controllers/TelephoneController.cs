@@ -43,6 +43,35 @@ namespace PeopleIKnow.Controllers
             return RedirectToAction("Details", "Dashboard", new {id = telephoneNumber.ContactId});
         }
 
+        public ActionResult Edit(int id)
+        {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
+
+            var telephone = _repository.GetTelephoneNumberById(id);
+            if (telephone == null)
+            {
+                return NotFound();
+            }
+
+            return View(telephone);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(TelephoneNumber telephoneNumber)
+        {
+            if (telephoneNumber == null)
+            {
+                return BadRequest();
+            }
+
+            _repository.UpdateTelephoneNumber(telephoneNumber);
+
+            return RedirectToAction("Details", "Dashboard", new {id = telephoneNumber.ContactId});
+        }
+
         public ActionResult Delete(int id)
         {
             if (id <= 0)
