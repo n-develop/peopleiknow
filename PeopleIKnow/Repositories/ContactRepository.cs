@@ -41,7 +41,36 @@ namespace PeopleIKnow.Repositories
 
         public bool DeleteContact(int id)
         {
-            throw new System.NotImplementedException();
+            var contact = GetContactById(id);
+            if (contact.IsNull())
+            {
+                return false;
+            }
+
+            foreach (var emailAddress in contact.EmailAddresses)
+            {
+                _context.EmailAddresses.Remove(emailAddress);
+            }
+
+            foreach (var statusUpdate in contact.StatusUpdates)
+            {
+                _context.StatusUpdates.Remove(statusUpdate);
+            }
+
+            foreach (var relationship in contact.Relationships)
+            {
+                _context.Relationships.Remove(relationship);
+            }
+
+            foreach (var telephoneNumber in contact.TelephoneNumbers)
+            {
+                _context.TelephoneNumbers.Remove(telephoneNumber);
+            }
+
+            _context.Contacts.Remove(contact);
+
+            _context.SaveChanges();
+            return true;
         }
 
         public Contact AddContact(Contact contact)

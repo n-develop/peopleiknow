@@ -1,4 +1,7 @@
 var rootEl = document.documentElement;
+
+/* modal  stuff */
+
 var $modals = getAll('.modal');
 var $modalCloses = getAll('.modal-close, .delete');
 if ($modalCloses.length > 0) {
@@ -16,20 +19,44 @@ function closeModals() {
     });
 }
 
+/* Handle Teaser clicks */
+
 var contactCards = document.querySelectorAll("#people-feed > .card");
 contactCards.forEach(function (currentValue, currentIndex, listObj) {
     currentValue.onclick = handleTeaserClick;
 });
 
 function handleTeaserClick(element) {
-    var id = element.currentTarget.getAttribute("data-contact-id");
+    const id = element.currentTarget.getAttribute("data-contact-id");
     fetch("/Dashboard/Details/" + id)
         .then(updatePane);
 }
 
-function deleteEmail(id) {
-    fetch("/Email/Delete/" + id)
-        .then(updatePane);
+/* Actions on Entities */
+
+function deleteContact() {
+    const id = document.querySelector(".contact-preview").getAttribute("data-contact-id");
+    fetch("/contact/delete/" + id, {
+        method: "DELETE"
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((responseObj) => {
+            if (responseObj.success) {
+                const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
+                    '        <div class="column">\n' +
+                    '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
+                    '        </div>\n' +
+                    '    </div>';
+                var detailsPane = document.getElementById("people-pane");
+                detailsPane.innerHTML = empty;
+
+                document.getElementById("contact-teaser-" + id).remove();
+            } else {
+                alert("Something went wrong...");
+            }
+        });
 }
 
 function saveContact() {
@@ -137,6 +164,11 @@ function addEmail() {
         .then(updatePane);
 }
 
+function deleteEmail(id) {
+    fetch("/Email/Delete/" + id)
+        .then(updatePane);
+}
+
 function editEmail(id) {
     fetch("/Email/Edit/" + id)
         .then(updatePane);
@@ -165,12 +197,16 @@ function saveStatusUpdate() {
     }).then(updatePane);
 }
 
+/* Update Pane */
+
 function updatePane(response) {
     var detailsPane = document.getElementById("people-pane");
     response.text().then(function (value) {
         detailsPane.innerHTML = value;
     });
 }
+
+/* Helper stuff */
 
 function getAll(selector) {
     return Array.prototype.slice.call(document.querySelectorAll(selector), 0);

@@ -27,5 +27,23 @@ namespace PeopleIKnow.Controllers
 
             return View(contact);
         }
+
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
+
+            var success = _repository.DeleteContact(id);
+
+            if (success)
+            {
+                return Json(new {Success = true, Message = "Successfully deleted"});
+            }
+
+            return Json(new {success = true, Message = "Contact cannot be deleted"});
+        }
     }
 }
