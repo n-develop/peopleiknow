@@ -3,20 +3,22 @@
 }
 
 @* MENU START *@
+@*
 <div id="people-menu" class="column is-2 segments">
     @await Component.InvokeAsync("Segments")
 </div>
+*@
 @* MENU END *@
 
 
 @* ContactList START *@
-<div id="people-feed" class="column is-3 feed">
+<div id="people-feed" class="column is-4 feed">
     @await Component.InvokeAsync("ContactList")
 </div>
 @* ContactList END *@
 
 @* DETAILS START *@
-<div id="people-pane" class="column is-7 pane">
+<div id="people-pane" class="column is-8 pane">
     <div class="columns is-desktop is-vcentered" style="height: 100%;">
         <div class="column">
             <h2 class="has-text-centered">Choose a Contact from the list!</h2>
@@ -24,6 +26,46 @@
     </div>
 </div>
 @* DETAILS END *@
+
+<button id="add-button" class="button is-success is-large" onclick="addContact()">
+    <i class="fa fa-plus-circle"></i>
+</button>
+
+<div class="modal" id="success-modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <article class="message is-success">
+            <div class="message-header">
+                Successful
+                <button class="delete"></button>
+            </div>
+            <div class="message-body">
+                Action successful.
+            </div>
+        </article>
+    </div>
+</div>
+
+<div class="modal" id="confirm-modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <article class="message is-info">
+            <div class="message-header">
+                Are you sure?
+                <button class="delete"></button>
+            </div>
+            <div class="message-body">
+                <p id="confirm-message">
+                    Are you sure, that you want to do that?<br/>
+                </p>
+                <p class="is-">
+                    <a class="button is-info">Yes</a>
+                    <a class="button is-danger">No</a>
+                </p>
+            </div>
+        </article>
+    </div>
+</div>
 
 <div class="modal" id="successfully-saved-modal">
     <div class="modal-background"></div>
@@ -50,6 +92,13 @@
         <script src="~/js/dashboard.min.js" asp-append-version="true"></script>
     </environment>
     <script>
+        window.onresize = function() {
+            var feed = document.getElementById('people-feed');
+            var pane = document.getElementById('people-pane');
+            feed.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
+            pane.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
+        }
+
         window.onload = function() {
             var feed = document.getElementById('people-feed');
             var pane = document.getElementById('people-pane');

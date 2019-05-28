@@ -4,6 +4,7 @@
 
 #pik-app {
     margin-top: 0;
+    margin-left: 0;
 }
 
 .segments {
@@ -36,4 +37,10 @@
 
 .contact-preview > form > .panel > .panel-block {
     display: block !important;
+}
+
+#add-button {
+    bottom: 10px;
+    right: 10px;
+    position: fixed;
 }
