@@ -1,9 +1,9 @@
-var rootEl = document.documentElement;
+const rootEl = document.documentElement;
 
 /* modal  stuff */
 
-var $modals = getAll('.modal');
-var $modalCloses = getAll('.modal-close, .delete');
+const $modals = getAll('.modal');
+const $modalCloses = getAll('.modal-close, .delete');
 if ($modalCloses.length > 0) {
     $modalCloses.forEach(function ($el) {
         $el.addEventListener('click', function () {
@@ -28,7 +28,7 @@ function addContact() {
 
 /* Handle Teaser clicks */
 
-var contactCards = document.querySelectorAll("#people-feed > .card");
+const contactCards = document.querySelectorAll("#people-feed > .card");
 contactCards.forEach(function (currentValue, currentIndex, listObj) {
     currentValue.onclick = handleTeaserClick;
 });
@@ -58,7 +58,7 @@ function deleteContact() {
                     '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
                     '        </div>\n' +
                     '    </div>';
-                var detailsPane = document.getElementById("people-pane");
+                const detailsPane = document.getElementById("people-pane");
                 detailsPane.innerHTML = empty;
 
                 document.getElementById("contact-teaser-" + id).remove();
@@ -69,20 +69,20 @@ function deleteContact() {
 }
 
 function saveContact() {
-    var form = new FormData(document.getElementById('contact-form'));
+    const form = new FormData(document.getElementById('contact-form'));
     fetch("/dashboard/details", {
         method: "POST",
         body: form
     })
         .then(updatePane)
         .then(function () {
-        var $target = document.getElementById("successfully-saved-modal");
-        rootEl.classList.add('is-clipped');
+            const $target = document.getElementById("successfully-saved-modal");
+            rootEl.classList.add('is-clipped');
         $target.classList.add('is-active');
     }).then(function () {
-        var preview = document.querySelector(".contact-preview");
-        var id = preview.getAttribute("data-contact-id");
-        var teaser = document.getElementById("contact-teaser-" + id);
+        const preview = document.querySelector(".contact-preview");
+        const id = preview.getAttribute("data-contact-id");
+        const teaser = document.getElementById("contact-teaser-" + id);
         fetch("/contact/teaser?id=" + id).then(function (response) {
             response.text().then(function (value) {
                 teaser.outerHTML = value;
@@ -93,14 +93,14 @@ function saveContact() {
 }
 
 function addTelephone() {
-    var preview = document.querySelector(".contact-preview");
-    var id = preview.getAttribute("data-contact-id");
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
     fetch("/Telephone/Add?contactId=" + id)
         .then(updatePane);
 }
 
 function saveTelephone() {
-    var form = new FormData(document.getElementById('telephone-form'));
+    const form = new FormData(document.getElementById('telephone-form'));
     fetch("/Telephone/Add", {
         method: "POST",
         body: form
@@ -118,7 +118,7 @@ function editTelephone(id) {
 }
 
 function updateTelephone() {
-    var form = new FormData(document.getElementById('telephone-form'));
+    const form = new FormData(document.getElementById('telephone-form'));
     fetch("/Telephone/Edit", {
         method: "POST",
         body: form
@@ -126,14 +126,14 @@ function updateTelephone() {
 }
 
 function addRelationship() {
-    var preview = document.querySelector(".contact-preview");
-    var id = preview.getAttribute("data-contact-id");
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
     fetch("/Relationship/Add?contactId=" + id)
         .then(updatePane);
 }
 
 function saveRelationship() {
-    var form = new FormData(document.getElementById('relationship-form'));
+    const form = new FormData(document.getElementById('relationship-form'));
     fetch("/Relationship/Add", {
         method: "POST",
         body: form
@@ -151,7 +151,7 @@ function editRelationship(id) {
 }
 
 function updateRelationship() {
-    var form = new FormData(document.getElementById('relationship-form'));
+    const form = new FormData(document.getElementById('relationship-form'));
     fetch("/Relationship/Edit", {
         method: "POST",
         body: form
@@ -159,7 +159,7 @@ function updateRelationship() {
 }
 
 function saveEmail() {
-    var form = new FormData(document.getElementById('email-form'));
+    const form = new FormData(document.getElementById('email-form'));
     fetch("/Email/Add", {
         method: "POST",
         body: form
@@ -167,8 +167,8 @@ function saveEmail() {
 }
 
 function addEmail() {
-    var preview = document.querySelector(".contact-preview");
-    var id = preview.getAttribute("data-contact-id");
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
     fetch("/Email/Add?contactId=" + id)
         .then(updatePane);
 }
@@ -184,7 +184,7 @@ function editEmail(id) {
 }
 
 function updateEmail() {
-    var form = new FormData(document.getElementById('email-form'));
+    const form = new FormData(document.getElementById('email-form'));
     fetch("/Email/Edit", {
         method: "POST",
         body: form
@@ -192,14 +192,14 @@ function updateEmail() {
 }
 
 function addStatusUpdate() {
-    var preview = document.querySelector(".contact-preview");
-    var id = preview.getAttribute("data-contact-id");
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
     fetch("/StatusUpdate/Add?contactId=" + id)
         .then(updatePane);
 }
 
 function saveStatusUpdate() {
-    var form = new FormData(document.getElementById('status-update-form'));
+    const form = new FormData(document.getElementById('status-update-form'));
     fetch("/StatusUpdate/Add", {
         method: "POST",
         body: form
@@ -209,7 +209,7 @@ function saveStatusUpdate() {
 /* Update Pane */
 
 function updatePane(response) {
-    var detailsPane = document.getElementById("people-pane");
+    const detailsPane = document.getElementById("people-pane");
     response.text().then(function (value) {
         detailsPane.innerHTML = value;
     });
