@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
 
 namespace PeopleIKnow.Controllers
@@ -44,6 +45,24 @@ namespace PeopleIKnow.Controllers
             }
 
             return Json(new {success = true, Message = "Contact cannot be deleted"});
+        }
+
+        public ActionResult Add()
+        {
+            var contact = new Contact();
+
+            return View(contact);
+        }
+
+        [HttpPost]
+        public ActionResult Add(Contact contact)
+        {
+            if (contact.Id > 0)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("Details", "Dashboard", new {id = contact.Id});
         }
     }
 }

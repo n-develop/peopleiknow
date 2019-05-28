@@ -19,6 +19,13 @@ function closeModals() {
     });
 }
 
+/* Handle add button click */
+
+function addContact() {
+    fetch("/contact/add")
+        .then(updatePane);
+}
+
 /* Handle Teaser clicks */
 
 var contactCards = document.querySelectorAll("#people-feed > .card");
@@ -44,6 +51,8 @@ function deleteContact() {
         })
         .then((responseObj) => {
             if (responseObj.success) {
+                alert(responseObj.message);
+                
                 const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
                     '        <div class="column">\n' +
                     '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
@@ -54,7 +63,7 @@ function deleteContact() {
 
                 document.getElementById("contact-teaser-" + id).remove();
             } else {
-                alert("Something went wrong...");
+                alert(responseObj.message);
             }
         });
 }
