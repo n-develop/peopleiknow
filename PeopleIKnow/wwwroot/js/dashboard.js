@@ -26,6 +26,15 @@ function addContact() {
         .then(updatePane);
 }
 
+function createContact() {
+    const form = new FormData(document.getElementById('contact-form'));
+    fetch("/contact/add", {
+        method: "POST",
+        body: form
+    })
+        .then(updatePane)
+}
+
 /* Handle Teaser clicks */
 
 const contactCards = document.querySelectorAll("#people-feed > .card");
