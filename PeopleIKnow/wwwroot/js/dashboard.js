@@ -33,19 +33,37 @@ function createContact() {
         body: form
     })
         .then(updatePane)
+        .then(updateContactList);
 }
 
 /* Handle Teaser clicks */
 
-const contactCards = document.querySelectorAll("#people-feed > .card");
-contactCards.forEach(function (currentValue, currentIndex, listObj) {
-    currentValue.onclick = handleTeaserClick;
-});
+function addContactTeaserClickEvent() {
+    const contactCards = document.querySelectorAll("#people-feed > .card");
+    contactCards.forEach(function (currentValue, currentIndex, listObj) {
+        currentValue.onclick = handleTeaserClick;
+    });
+}
 
 function handleTeaserClick(element) {
     const id = element.currentTarget.getAttribute("data-contact-id");
     fetch("/Dashboard/Details/" + id)
         .then(updatePane);
+}
+
+addContactTeaserClickEvent();
+
+/* Contact List Stuff */
+
+function updateContactList() {
+    fetch("/dashboard/contactlist")
+        .then((response) => {
+            const feed = document.getElementById("people-feed");
+            response.text().then(function (value) {
+                feed.innerHTML = value;
+            })
+                .then(addContactTeaserClickEvent);
+        });
 }
 
 /* Actions on Entities */
@@ -61,7 +79,7 @@ function deleteContact() {
         .then((responseObj) => {
             if (responseObj.success) {
                 alert(responseObj.message);
-                
+
                 const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
                     '        <div class="column">\n' +
                     '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
@@ -87,8 +105,8 @@ function saveContact() {
         .then(function () {
             const $target = document.getElementById("successfully-saved-modal");
             rootEl.classList.add('is-clipped');
-        $target.classList.add('is-active');
-    }).then(function () {
+            $target.classList.add('is-active');
+        }).then(function () {
         const preview = document.querySelector(".contact-preview");
         const id = preview.getAttribute("data-contact-id");
         const teaser = document.getElementById("contact-teaser-" + id);

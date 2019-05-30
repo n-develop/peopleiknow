@@ -13,7 +13,7 @@ namespace PeopleIKnow.Controllers
             _repository = repository;
         }
 
-        public ActionResult Teaser(int id)
+        public IActionResult Teaser(int id)
         {
             if (id <= 0)
             {
@@ -30,7 +30,7 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             if (id <= 0)
             {
@@ -47,7 +47,7 @@ namespace PeopleIKnow.Controllers
             return Json(new {success = true, Message = "Contact cannot be deleted"});
         }
 
-        public ActionResult Add()
+        public IActionResult Add()
         {
             var contact = new Contact();
 
@@ -55,7 +55,7 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Contact contact)
+        public IActionResult Add(Contact contact)
         {
             if (contact.Id > 0)
             {

@@ -19,12 +19,12 @@ namespace PeopleIKnow.Controllers
             _repository = repository;
         }
 
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
             if (id <= 0)
             {
@@ -41,7 +41,7 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Details(Contact contact)
+        public IActionResult Details(Contact contact)
         {
             var contactFromDb = _repository.GetContactById(contact.Id);
             if (contactFromDb.IsNull())
@@ -60,6 +60,11 @@ namespace PeopleIKnow.Controllers
             _repository.SaveContact(contactFromDb);
 
             return Details(contact.Id);
+        }
+
+        public IActionResult ContactList()
+        {
+            return ViewComponent("ContactList");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
