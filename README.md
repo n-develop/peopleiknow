@@ -8,6 +8,12 @@ A PRM is a "Personal Relationship Management". On the web, you will also find th
 
 ## Features
 Right now the features are pretty limited. But the app is under (more or less) active development.
+So current features are
+* Adding Contacts
+* Deleting Contacts
+* Changing / Saving Contacts
+* Adding status updates to contacts
+* Adding eMail addresses, telephone numbers, relationships to  contacts
 
 ### Contacts data
 First things first. Of course you can store the standard contact data like
@@ -24,9 +30,16 @@ First things first. Of course you can store the standard contact data like
 * Status Updates
 
 ### Import your Google Contacts
-You can import your Google Contacts, if you export them in the Google CSV format. The importer will also save your contact photos.
+The solution contains an importer project, with which you can import your Google contacts into "People I Know".
+
+Simply export all your contacts in the "Google CSV format" and use it as the input file in the importer.
+The importer will also save your contact photos.
 
 ### Relationships
+In the past, one of my main problems always was remembering the relationships between various people.
+"What was the name of Johns son again?", "Is Mark a cousin of Lisa or a cousin of Noah?".
+
+Today, I just check the respective contact and see the relationships to other people in seconds.
 Just like in your Google contacts, you can store relationships on all of your contacts.
 It's just a simple list of "Relationship-Name pairs", like "Wife - Jane Smith".
 
