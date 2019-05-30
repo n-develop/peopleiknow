@@ -4,7 +4,14 @@
 "People I Know" is (or will be)  a PRM.
 
 ## What is a PRM?
-A PRM is a "Personal Relationship Management". On the web, you will also find the name "Personal CRM". 
+A PRM is a "Personal Relationship Management". On the web, you will also find the name "Personal CRM".
+So you can use "People I Know" to store information about the people you know. ;-)
+
+### Is it like my "Contacts" app on my phone?
+Yes, somehow it is.
+
+### So, why would I use it?
+If you use "People I Know", you own your data.
 
 ## Features
 Right now the features are pretty limited. But the app is under (more or less) active development.
