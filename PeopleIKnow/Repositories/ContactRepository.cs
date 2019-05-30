@@ -75,7 +75,13 @@ namespace PeopleIKnow.Repositories
 
         public Contact AddContact(Contact contact)
         {
-            throw new System.NotImplementedException();
+            var maxId = _context.Contacts.Max(c => c.Id);
+            contact.Id = maxId + 1;
+
+            var entry = _context.Contacts.Add(contact);
+            _context.SaveChanges();
+
+            return entry.Entity;
         }
 
         public bool SaveContact(Contact contact)

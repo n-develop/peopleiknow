@@ -62,7 +62,14 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            return RedirectToAction("Details", "Dashboard", new {id = contact.Id});
+            var contactFromRepository = _repository.AddContact(contact);
+
+            if (contactFromRepository.IsNull())
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("Details", "Dashboard", new {id = contactFromRepository.Id});
         }
     }
 }
