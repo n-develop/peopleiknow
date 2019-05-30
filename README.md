@@ -12,20 +12,25 @@ Right now the features are pretty limited. But the app is under (more or less) a
 ### Contacts data
 First things first. Of course you can store the standard contact data like
 * Names
+  * First Name
+  * Middle Name
+  * Last Name
 * eMail addresses
 * Telephone numbers
 * Employer
+* Business Title
 * Birthday
-* etc. etc.
+* Relationships
+* Status Updates
 
 ### Import your Google Contacts
 You can import your Google Contacts, if you export them in the Google CSV format. The importer will also save your contact photos.
-
-### Adding and Removing Contacts
-This is still not done. But it is one of the next features, that I will tackle. :-D
 
 ### Relationships
 Just like in your Google contacts, you can store relationships on all of your contacts.
 It's just a simple list of "Relationship-Name pairs", like "Wife - Jane Smith".
 
-### 
+### Status Updates / Timeline
+"People I Know" makes it easy for you, to keep track of recent things in the life of your friends/contacts.
+Just add updates to the "timeline" of your contacts. Before you meet your friends again, just check their
+contact in "People I Know" and you can ask about the exam they had a week ago or about the broken leg of their brother.
