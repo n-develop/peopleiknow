@@ -114,6 +114,7 @@ function saveContact() {
             response.text().then(function (value) {
                 teaser.outerHTML = value;
             })
+                .then(addContactTeaserClickEvent);
         });
 
     });
