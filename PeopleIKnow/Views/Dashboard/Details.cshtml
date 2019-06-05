@@ -212,12 +212,23 @@
     @foreach (var statusUpdate in Model.Timeline)
     {
         <div class="panel-block">
-            <div class="field">
-                <label class="label">@statusUpdate.Created.ToString("dd.MM.yyyy")</label>
-                <div class="control">
+            <label class="label">@statusUpdate.Created.ToString("dd.MM.yyyy")</label>
+            <div class="field has-addons">
+                <div class="control is-expanded">
                     <input class="input" value="@statusUpdate.StatusText" placeholder="Status update" disabled="disabled">
                 </div>
+                <p class="control">
+                    <a class="button is-warning" onclick="editStatusUpdate(@statusUpdate.Id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger" onclick="deleteStatusUpdate(@statusUpdate.Id)">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </p>
             </div>
+
         </div>
     }
 </div>
