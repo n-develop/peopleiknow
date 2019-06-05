@@ -84,11 +84,10 @@ namespace PeopleIKnow.Repositories
             return entry.Entity;
         }
 
-        public bool SaveContact(Contact contact)
+        public void SaveContact(Contact contact)
         {
             _context.Contacts.Update(contact);
             _context.SaveChanges();
-            return true;
         }
 
         public void AddEmail(EmailAddress mail)
@@ -210,7 +209,7 @@ namespace PeopleIKnow.Repositories
 
         public void UpdateEmail(EmailAddress mail)
         {
-            if (mail == null || mail.Id <= 0)
+            if (mail.IsNull() || mail.Id <= 0)
             {
                 return;
             }
@@ -229,7 +228,7 @@ namespace PeopleIKnow.Repositories
 
         public void UpdateRelationship(Relationship relationship)
         {
-            if (relationship == null || relationship.Id <= 0)
+            if (relationship.IsNull() || relationship.Id <= 0)
             {
                 return;
             }
@@ -248,7 +247,7 @@ namespace PeopleIKnow.Repositories
 
         public void UpdateTelephoneNumber(TelephoneNumber telephoneNumber)
         {
-            if (telephoneNumber == null || telephoneNumber.Id <= 0)
+            if (telephoneNumber.IsNull() || telephoneNumber.Id <= 0)
             {
                 return;
             }
@@ -262,6 +261,47 @@ namespace PeopleIKnow.Repositories
             telephoneNumberFromRepository.Type = telephoneNumber.Type;
             telephoneNumberFromRepository.Telephone = telephoneNumber.Telephone;
 
+            _context.SaveChanges();
+        }
+
+        public StatusUpdate GetStatusUpdateById(int id)
+        {
+            if (id <= 0)
+            {
+                return NullStatusUpdate.GetInstance();
+            }
+
+            var statusUpdate = _context.StatusUpdates.Find(id);
+            if (statusUpdate == null)
+            {
+                return NullStatusUpdate.GetInstance();
+            }
+
+            return statusUpdate;
+        }
+
+        public void UpdateStatusUpdate(StatusUpdate statusUpdate)
+        {
+            if (statusUpdate.IsNull() || statusUpdate.Id <= 0)
+            {
+                return;
+            }
+
+            var statusFromRepository = _context.StatusUpdates.Find(statusUpdate.Id);
+            if (statusFromRepository == null)
+            {
+                return;
+            }
+
+            statusFromRepository.Created = statusUpdate.Created;
+            statusFromRepository.StatusText = statusUpdate.StatusText;
+
+            _context.SaveChanges();
+        }
+
+        public void DeleteStatusUpdate(StatusUpdate statusUpdate)
+        {
+            _context.StatusUpdates.Remove(statusUpdate);
             _context.SaveChanges();
         }
     }

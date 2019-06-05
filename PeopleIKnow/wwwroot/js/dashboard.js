@@ -234,6 +234,24 @@ function saveStatusUpdate() {
     }).then(updatePane);
 }
 
+function editStatusUpdate(id) {
+    fetch("/StatusUpdate/Edit/" + id)
+        .then(updatePane);
+}
+
+function updateStatusUpdate() {
+    const form = new FormData(document.getElementById('status-update-form'));
+    fetch("/StatusUpdate/Edit", {
+        method: "POST",
+        body: form
+    }).then(updatePane);
+}
+
+function deleteStatusUpdate(id) {
+    fetch("/StatusUpdate/Delete/" + id)
+        .then(updatePane);
+}
+
 /* Update Pane */
 
 function updatePane(response) {

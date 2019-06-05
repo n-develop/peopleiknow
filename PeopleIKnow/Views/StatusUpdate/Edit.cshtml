@@ -1,0 +1,27 @@
+@model PeopleIKnow.Models.StatusUpdate
+@{
+    Layout = null;
+}
+<div class="box">
+    <form id="status-update-form">
+        <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="ContactId"/>
+
+        <div class="field">
+            <label class="label">Date</label>
+            <div class="control">
+                <input class="input" asp-for="Created" type="date">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Status Update</label>
+            <div class="control">
+                <textarea class="textarea" asp-for="StatusText" placeholder="Write the status update here...">
+                </textarea>
+            </div>
+        </div>
+
+        <a onclick="updateStatusUpdate()" class="button is-info is-medium">Update Status Update</a>
+    </form>
+</div>

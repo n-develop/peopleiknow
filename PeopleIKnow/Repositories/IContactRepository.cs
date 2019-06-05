@@ -13,7 +13,7 @@ namespace PeopleIKnow.Repositories
         Contact GetContactById(int id);
         bool DeleteContact(int id);
         Contact AddContact(Contact contact);
-        bool SaveContact(Contact contact);
+        void SaveContact(Contact contact);
         void AddEmail(EmailAddress mail);
         EmailAddress GetEmailById(int mailId);
         void DeleteEmailAddress(EmailAddress mail);
@@ -27,5 +27,8 @@ namespace PeopleIKnow.Repositories
         void UpdateEmail(EmailAddress mail);
         void UpdateRelationship(Relationship relationship);
         void UpdateTelephoneNumber(TelephoneNumber telephoneNumber);
+        StatusUpdate GetStatusUpdateById(int id);
+        void UpdateStatusUpdate(StatusUpdate statusUpdate);
+        void DeleteStatusUpdate(StatusUpdate statusUpdate);
     }
 }
