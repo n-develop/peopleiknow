@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PeopleIKnow.Models;
 
@@ -303,6 +304,16 @@ namespace PeopleIKnow.Repositories
         {
             _context.StatusUpdates.Remove(statusUpdate);
             _context.SaveChanges();
+        }
+
+        public async Task<IEnumerable<Contact>> SearchContacts(string term)
+        {
+            var allContacts = await GetAllContacts();
+            var filtered = allContacts.Where(c =>
+                c.Firstname != null && c.Firstname.Contains(term)
+                || c.Lastname != null && c.Lastname.Contains(term)
+                || c.Middlename != null && c.Middlename.Contains(term)).ToList();
+            return filtered;
         }
     }
 }

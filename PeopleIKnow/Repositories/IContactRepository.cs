@@ -30,5 +30,6 @@ namespace PeopleIKnow.Repositories
         StatusUpdate GetStatusUpdateById(int id);
         void UpdateStatusUpdate(StatusUpdate statusUpdate);
         void DeleteStatusUpdate(StatusUpdate statusUpdate);
+        Task<IEnumerable<Contact>> SearchContacts(string term);
     }
 }

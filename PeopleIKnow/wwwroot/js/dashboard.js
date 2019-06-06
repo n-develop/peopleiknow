@@ -33,7 +33,7 @@ function createContact() {
         body: form
     })
         .then(updatePane)
-        .then(updateContactList);
+        .then(reloadContactList);
 }
 
 /* Handle Teaser clicks */
@@ -55,16 +55,28 @@ addContactTeaserClickEvent();
 
 /* Contact List Stuff */
 
-function updateContactList() {
-    fetch("/dashboard/contactlist")
-        .then((response) => {
-            const feed = document.getElementById("people-feed");
-            response.text().then(function (value) {
-                feed.innerHTML = value;
-            })
-                .then(addContactTeaserClickEvent);
-        });
+function updateContactList(response) {
+    const feed = document.getElementById("people-feed");
+    response.text().then(function (value) {
+        feed.innerHTML = value;
+    })
+        .then(addContactTeaserClickEvent);
 }
+
+function reloadContactList() {
+    fetch("/dashboard/contactlist")
+        .then(updateContactList);
+}
+
+/* Search */
+
+function search() {
+    fetch("/Search?term=x")
+        .then(updateContactList);
+}
+
+const searchButton = document.getElementById("search-button");
+searchButton.onclick = search;
 
 /* Actions on Entities */
 
