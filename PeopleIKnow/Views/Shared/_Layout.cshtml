@@ -17,20 +17,30 @@
 <body>
 @* NAVBAR START *@
 <nav id="top" class="navbar has-shadow">
-    <div class="container-fluid">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <span class="icon is-large">
-                    <i class="fa fa-lg fa-users"></i>
-                </span>
-                <span class="title">People I Know</span>
-            </a>
-        </div>
-        <div class="navbar-right">
-            <a id="search-button" class="navbar-item">
-                Search
-            </a>
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <span class="icon is-large">
+                <i class="fa fa-lg fa-users"></i>
+            </span>
+            <span class="title">People I Know</span>
+        </a>
+    </div>
+    <div class="navbar-menu">
 
+        <div class="navbar-end">
+            <div class="navbar-item">
+
+                <div class="field has-addons">
+                    <div class="control">
+                        <input id="search-term" class="input" type="text" placeholder="Find contacts...">
+                    </div>
+                    <div class="control">
+                        <a id="search-button" class="button is-info">
+                            Search
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </nav>

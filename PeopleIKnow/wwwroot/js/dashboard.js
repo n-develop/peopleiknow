@@ -71,7 +71,9 @@ function reloadContactList() {
 /* Search */
 
 function search() {
-    fetch("/Search?term=x")
+    const searchInput = document.getElementById("search-term");
+    const term = searchInput.value;
+    fetch("/Search?term=" + term)
         .then(updateContactList);
 }
 
