@@ -40,31 +40,26 @@
     @foreach (var email in Model.EmailAddresses)
     {
         <div class="panel-block">
-            <div class="field is-horizontal">
-                <div class="field-label">
-                    <label class="label">@email.Type</label>
+            <label class="label">@email.Type</label>
+            <div class="field has-addons">
+                <p class="control">
+                    <a class="button is-info" href="mailto:@email.Email">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                </p>
+                <div class="control is-expanded ">
+                    <input class="input" value="@email.Email" type="email" placeholder="email@@domoain.com" disabled="disabled">
                 </div>
-                <div class="field-body">
-                    <div class="field">
-                        <div class="control has-icons-left is-expanded">
-                            <input class="input" value="@email.Email" type="email" placeholder="email@@domoain.com" disabled="disabled">
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-envelope"></i>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <div class="control">
-                            <a class="button is-warning" onclick="editEmail(@email.Id)">
-                                <i class="fa fa-pencil-alt"></i>
-                            </a>
-                            <a class="button is-danger" onclick="deleteEmail(@email.Id)">
-                                <i class="fa fa-minus-circle"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <p class="control">
+                    <a class="button is-warning" onclick="editEmail(@email.Id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger" onclick="deleteEmail(@email.Id)">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </p>
             </div>
         </div>
     }
@@ -126,31 +121,26 @@
     @foreach (var telephone in Model.TelephoneNumbers)
     {
         <div class="panel-block">
-            <div class="field is-horizontal">
-                <div class="field-label">
-                    <label class="label">@telephone.Type</label>
+            <label class="label">@telephone.Type</label>
+            <div class="field has-addons">
+                <p class="control">
+                    <a class="button is-info" href="tel:@telephone.TelephoneNormalized">
+                        <i class="fa fa-phone"></i>
+                    </a>
+                </p>
+                <div class="control is-expanded">
+                    <input class="input" value="@telephone.Telephone" type="tel" disabled="disabled">
                 </div>
-                <div class="field-body">
-                    <div class="field">
-                        <div class="control has-icons-left is-expanded">
-                            <input class="input" value="@telephone.Telephone" type="tel" disabled="disabled">
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-phone"></i>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <div class="control">
-                            <a class="button is-warning" onclick="editTelephone(@telephone.Id)">
-                                <i class="fa fa-pencil-alt"></i>
-                            </a>
-                            <a class="button is-danger" onclick="deleteTelephone(@telephone.Id)">
-                                <i class="fa fa-minus-circle"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <p class="control">
+                    <a class="button is-warning" onclick="editTelephone(@telephone.Id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger" onclick="deleteTelephone(@telephone.Id)">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </p>
             </div>
         </div>
     }
@@ -169,31 +159,24 @@
     @foreach (var relationship in Model.Relationships)
     {
         <div class="panel-block">
-            <div class="field is-horizontal">
-                <div class="field-label">
-                    <label class="label">@relationship.Type</label>
+            <label class="label">@relationship.Type</label>
+            <div class="field has-addons">
+                <div class="control is-expanded has-icons-left">
+                    <input class="input" value="@relationship.Person" disabled="disabled">
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-user-friends"></i>
+                    </span>
                 </div>
-                <div class="field-body">
-                    <div class="field">
-                        <div class="control has-icons-left is-expanded">
-                            <input class="input" value="@relationship.Person" disabled="disabled">
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-user-friends"></i>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <div class="control">
-                            <a class="button is-warning" onclick="editRelationship(@relationship.Id)">
-                                <i class="fa fa-pencil-alt"></i>
-                            </a>
-                            <a class="button is-danger" onclick="deleteRelationship(@relationship.Id)">
-                                <i class="fa fa-minus-circle"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <p class="control">
+                    <a class="button is-warning" onclick="editRelationship(@relationship.Id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger" onclick="deleteRelationship(@relationship.Id)">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </p>
             </div>
         </div>
     }
@@ -228,7 +211,6 @@
                     </a>
                 </p>
             </div>
-
         </div>
     }
 </div>

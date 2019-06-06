@@ -12,6 +12,13 @@ namespace PeopleIKnow.Models
 
         [IgnoreDataMember] public virtual Contact Contact { get; set; }
 
+        public string TelephoneNormalized => string.IsNullOrEmpty(Telephone)
+            ? string.Empty
+            : Telephone.Replace(" ", "")
+                .Replace("-", "")
+                .Replace("(", "")
+                .Replace(")", "");
+
         public virtual bool IsNull()
         {
             return false;
