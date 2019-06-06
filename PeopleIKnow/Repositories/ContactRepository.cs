@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -310,9 +311,10 @@ namespace PeopleIKnow.Repositories
         {
             var allContacts = await GetAllContacts();
             var filtered = allContacts.Where(c =>
-                c.Firstname != null && c.Firstname.Contains(term)
-                || c.Lastname != null && c.Lastname.Contains(term)
-                || c.Middlename != null && c.Middlename.Contains(term)).ToList();
+                    c.Firstname != null && c.Firstname.Contains(term, StringComparison.InvariantCultureIgnoreCase)
+                    || c.Lastname != null && c.Lastname.Contains(term, StringComparison.InvariantCultureIgnoreCase)
+                    || c.Middlename != null && c.Middlename.Contains(term, StringComparison.InvariantCultureIgnoreCase))
+                .ToList();
             return filtered;
         }
     }

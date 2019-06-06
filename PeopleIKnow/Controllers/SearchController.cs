@@ -23,7 +23,7 @@ namespace PeopleIKnow.Controllers
 
             var searchResult = await _repository.SearchContacts(term);
 
-            return View("Components/ContactList/Default", searchResult.ToList());
+            return View("Components/ContactList/Default", searchResult.OrderBy(p => p.Lastname).ToList());
         }
     }
 }
