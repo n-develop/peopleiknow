@@ -15,7 +15,7 @@ namespace PeopleIKnow.Import
 
             var db = serviceProvider.GetService<ContactContext>();
 
-            var filePath = "/Users/larsrichter/Downloads/contacts.csv";
+            var filePath = "contacts.csv";
             var importer = new CsvImporter(db);
             Console.WriteLine("Importing contacts...");
             var contactsImported = importer.ImportFromFile(filePath);
