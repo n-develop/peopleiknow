@@ -14,6 +14,7 @@ namespace PeopleIKnow
                 Firstname = "John",
                 Middlename = "Michael",
                 Lastname = "Smith",
+                ImagePath = "/images/contacts/1.jpg",
                 Birthday = new DateTime(1991, 1, 1),
                 Address = "Hollywood Boulevard 10, 20099 Hamburg",
                 TelephoneNumbers =
@@ -49,6 +50,7 @@ namespace PeopleIKnow
                 Firstname = "Jane",
                 Middlename = null,
                 Lastname = "Smith",
+                ImagePath = "/images/contacts/2.jpg",
                 Birthday = new DateTime(1981, 1, 1),
                 Address = "Hollywood Boulevard 10, 20099 Hamburg",
                 TelephoneNumbers =
@@ -85,6 +87,7 @@ namespace PeopleIKnow
                 Firstname = "Max",
                 Middlename = null,
                 Lastname = "Mustermann",
+                ImagePath = "/images/contacts/3.jpg",
                 Birthday = new DateTime(1981, 2, 21),
                 Address = "Musterstr. 39, 38104 Musterstadt",
                 TelephoneNumbers =
