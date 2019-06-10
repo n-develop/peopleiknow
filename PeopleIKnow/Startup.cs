@@ -38,7 +38,7 @@ namespace PeopleIKnow
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options => { options.LoginPath = "/Auth/Login"; });
+            }).AddCookie(options => { options.LoginPath = "/login"; });
 
             services.AddMvc(options =>
             {
