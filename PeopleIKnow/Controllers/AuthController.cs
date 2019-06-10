@@ -29,13 +29,17 @@ namespace PeopleIKnow.Controllers
 
         [Route("/login")]
         [AllowAnonymous]
+        [HttpGet]
         public IActionResult Login(string returnUrl)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
-        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
+        [Route("/login")]
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> LoginAsync(string returnUrl, LoginViewModel model)
         {
             ViewData["ReturnUrl"] = returnUrl;

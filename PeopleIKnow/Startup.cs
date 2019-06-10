@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using PeopleIKnow.Repositories;
 
 namespace PeopleIKnow
@@ -33,12 +34,15 @@ namespace PeopleIKnow
 
             services.AddTransient<IContactRepository, ContactRepository>();
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options => { options.LoginPath = "/login"; });
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/login/";
+                    options.LogoutPath = "/logout/";
+                });
 
             services.AddMvc(options =>
             {
@@ -47,6 +51,7 @@ namespace PeopleIKnow
                     .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddDbContext<ContactContext>(options => options.UseSqlite("Data Source=people.db"));
         }
 
@@ -66,6 +71,7 @@ namespace PeopleIKnow
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
