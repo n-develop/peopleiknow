@@ -33,6 +33,8 @@ namespace PeopleIKnow.Models
 
         public List<StatusUpdate> StatusUpdates { get; set; }
 
+        public string Tags { get; set; }
+
         [NotMapped]
         public List<StatusUpdate> Timeline
         {

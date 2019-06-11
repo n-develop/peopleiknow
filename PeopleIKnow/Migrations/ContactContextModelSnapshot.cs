@@ -38,6 +38,8 @@ namespace PeopleIKnow.Migrations
 
                 b.Property<string>("Middlename");
 
+                b.Property<string>("Tags");
+
                 b.HasKey("Id");
 
                 b.ToTable("Contacts");

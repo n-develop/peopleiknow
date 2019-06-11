@@ -51,6 +51,7 @@ namespace PeopleIKnow.Controllers
             contactFromDb.Firstname = contact.Firstname;
             contactFromDb.Middlename = contact.Middlename;
             contactFromDb.BusinessTitle = contact.BusinessTitle;
+            contactFromDb.Tags = contact.Tags;
 
             _repository.SaveContact(contactFromDb);
 
