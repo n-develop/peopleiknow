@@ -309,10 +309,20 @@ namespace PeopleIKnow.Repositories
         public async Task<IEnumerable<Contact>> SearchContacts(string term)
         {
             var allContacts = await GetAllContacts();
-            var filtered = allContacts.Where(c =>
-                    c.Firstname != null && c.Firstname.Contains(term, StringComparison.InvariantCultureIgnoreCase)
-                    || c.Lastname != null && c.Lastname.Contains(term, StringComparison.InvariantCultureIgnoreCase)
-                    || c.Middlename != null && c.Middlename.Contains(term, StringComparison.InvariantCultureIgnoreCase))
+            var filtered = allContacts
+                .Select(c =>
+                {
+                    var namesWithoutEmptyEntries = string
+                        .Join(" ", c.Firstname ?? "", c.Middlename ?? "", c.Lastname ?? "")
+                        .Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    return new
+                    {
+                        Name = string.Join(" ", namesWithoutEmptyEntries),
+                        Contact = c
+                    };
+                })
+                .Where(c => c.Name.Contains(term, StringComparison.InvariantCultureIgnoreCase))
+                .Select(c => c.Contact)
                 .ToList();
             return filtered;
         }
