@@ -84,10 +84,5 @@ namespace PeopleIKnow.Controllers
             var hashText = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
             return hashText == config["user:password"];
         }
-
-        public IActionResult Logout()
-        {
-            return View();
-        }
     }
 }
