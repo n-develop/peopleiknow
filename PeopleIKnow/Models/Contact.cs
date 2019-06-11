@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.Design.Serialization;
 using System.Linq;
 
 namespace PeopleIKnow.Models

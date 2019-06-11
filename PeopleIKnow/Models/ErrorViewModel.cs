@@ -1,5 +1,3 @@
-using System;
-
 namespace PeopleIKnow.Models
 {
     public class ErrorViewModel
