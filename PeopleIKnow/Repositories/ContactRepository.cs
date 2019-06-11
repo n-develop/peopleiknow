@@ -310,19 +310,7 @@ namespace PeopleIKnow.Repositories
         {
             var allContacts = await GetAllContacts();
             var filtered = allContacts
-                .Select(c =>
-                {
-                    var namesWithoutEmptyEntries = string
-                        .Join(" ", c.Firstname ?? "", c.Middlename ?? "", c.Lastname ?? "")
-                        .Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                    return new
-                    {
-                        Name = string.Join(" ", namesWithoutEmptyEntries),
-                        Contact = c
-                    };
-                })
-                .Where(c => c.Name.Contains(term, StringComparison.InvariantCultureIgnoreCase))
-                .Select(c => c.Contact)
+                .Where(c => c.FullName.Contains(term, StringComparison.InvariantCultureIgnoreCase))
                 .ToList();
             return filtered;
         }
