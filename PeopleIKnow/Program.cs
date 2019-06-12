@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace PeopleIKnow
 {
@@ -22,7 +17,8 @@ namespace PeopleIKnow
             using (var scope = scopeFactory.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<ContactContext>();
-                if (db.Database.EnsureCreated())
+                db.Database.Migrate();
+                if (!db.Contacts.Any())
                 {
                     SeedData.Initialize(db);
                 }
