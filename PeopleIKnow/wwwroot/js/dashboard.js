@@ -86,6 +86,12 @@ searchTerm.addEventListener("keyup", function onEvent(e) {
     }
 });
 
+function searchRelationship(contactName) {
+    const searchInput = document.getElementById("search-term");
+    searchInput.value = contactName;
+    search();
+}
+
 /* Actions on Entities */
 
 function deleteContact() {
