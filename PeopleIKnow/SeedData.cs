@@ -42,7 +42,8 @@ namespace PeopleIKnow
                         Created = new DateTime(2018, 2, 1),
                         StatusText = "He resigned. Wow. But he is much more relaxed now. Good decision."
                     },
-                }
+                },
+                Tags = "football,family"
             };
             var jane = new Contact
             {
@@ -78,7 +79,8 @@ namespace PeopleIKnow
                         Created = new DateTime(2018, 2, 1),
                         StatusText = "He resigned. Wow. But he is much more relaxed now. Good decision."
                     },
-                }
+                },
+                Tags = "family,boardgames"
             };
 
             var max = new Contact
@@ -118,7 +120,8 @@ namespace PeopleIKnow
                         Created = new DateTime(2018, 2, 1),
                         StatusText = "Announced, that he will be a father in September again. Awesome."
                     },
-                }
+                },
+                Tags = "football"
             };
 
             var contacts = new List<Contact>
