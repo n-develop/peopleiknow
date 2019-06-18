@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using PeopleIKnow.Repositories;
+using PeopleIKnow.Services;
 
 namespace PeopleIKnow
 {
@@ -33,6 +34,9 @@ namespace PeopleIKnow
             });
 
             services.AddTransient<IContactRepository, ContactRepository>();
+            services.AddTransient<INotificationService, TelegramNotificationService>();
+            var section = Configuration.GetSection("Notifications");
+            services.Configure<NotificationSettings>(section);
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

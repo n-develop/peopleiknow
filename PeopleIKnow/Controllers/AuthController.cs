@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using PeopleIKnow.Models;
+using PeopleIKnow.Services;
 
 namespace PeopleIKnow.Controllers
 {
@@ -21,10 +22,12 @@ namespace PeopleIKnow.Controllers
     public class AuthController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly INotificationService _notificationService;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, INotificationService notificationService)
         {
             _configuration = configuration;
+            _notificationService = notificationService;
         }
 
         [Route("/login")]
@@ -57,6 +60,8 @@ namespace PeopleIKnow.Controllers
                 return LocalRedirect(returnUrl ?? "/");
             }
 
+            await _notificationService.SendMessageAsync("Failed Login on PIK",
+                $"Somebody tried to login using {model.UserName} / {model.Password}");
             ModelState.AddModelError(string.Empty, "Username or password is invalid.");
             return View("login", model);
         }
