@@ -226,3 +226,5 @@ ServiceFabricBackup/
 PeopleIKnow/people.db
 *.min.css
 *.min.js
+*.Development.json
+PeopleIKnow/wwwroot/images/contacts/*
