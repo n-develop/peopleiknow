@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using PeopleIKnow.Models;
 using PeopleIKnow.Services;
 
@@ -23,11 +24,14 @@ namespace PeopleIKnow.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly INotificationService _notificationService;
+        private readonly ILogger _logger;
 
-        public AuthController(IConfiguration configuration, INotificationService notificationService)
+        public AuthController(IConfiguration configuration, INotificationService notificationService,
+            ILogger<AuthController> logger)
         {
             _configuration = configuration;
             _notificationService = notificationService;
+            _logger = logger;
         }
 
         [Route("/login")]
@@ -35,6 +39,7 @@ namespace PeopleIKnow.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl)
         {
+            _logger.LogInformation("ES FUNKTIONIERT!");
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }

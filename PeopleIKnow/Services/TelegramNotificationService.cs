@@ -16,7 +16,8 @@ namespace PeopleIKnow.Services
 
         private const string MessageTemplate = "*{0}*\n\n{1}";
 
-        public TelegramNotificationService(IOptions<NotificationSettings> notificationSettings, ILogger logger)
+        public TelegramNotificationService(IOptions<NotificationSettings> notificationSettings,
+            ILogger<TelegramNotificationService> logger)
         {
             _logger = logger;
             _notificationSettings = notificationSettings.Value;
