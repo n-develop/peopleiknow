@@ -9,10 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 using PeopleIKnow.Repositories;
 using PeopleIKnow.Services;
-using Serilog.Extensions.Logging.File;
 
 namespace PeopleIKnow
 {
@@ -37,12 +35,8 @@ namespace PeopleIKnow
 
             services.AddTransient<IContactRepository, ContactRepository>();
             services.AddTransient<INotificationService, TelegramNotificationService>();
-
             var section = Configuration.GetSection("Notifications");
             services.Configure<NotificationSettings>(section);
-
-            services.AddLogging();
-
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services
@@ -65,7 +59,7 @@ namespace PeopleIKnow
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -76,10 +70,6 @@ namespace PeopleIKnow
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-            loggerFactory.AddFile("logs/log-{Date}.log");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

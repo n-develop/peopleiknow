@@ -65,6 +65,8 @@ namespace PeopleIKnow.Controllers
                 return LocalRedirect(returnUrl ?? "/");
             }
 
+            _logger.LogWarning("Failed login");
+
             await _notificationService.SendMessageAsync("Failed Login on PIK",
                 $"Somebody tried to login using {model.UserName} / {model.Password}");
             ModelState.AddModelError(string.Empty, "Username or password is invalid.");
