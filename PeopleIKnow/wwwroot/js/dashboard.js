@@ -45,10 +45,37 @@ function addContactTeaserClickEvent() {
     });
 }
 
+function showFeed() {
+    const feed = document.getElementById("people-feed");
+    feed.classList.remove("is-full-mobile");
+    feed.classList.add("is-hidden-mobile");
+}
+
+function showPane() {
+    const pane = document.getElementById("people-pane");
+    pane.classList.remove("is-hidden-mobile");
+    pane.classList.add("is-full-mobile");
+}
+
+function hideFeed() {
+    const feed = document.getElementById("people-feed");
+    feed.classList.remove("is-hidden-mobile");
+    feed.classList.add("is-full-mobile");
+}
+
+function hidePane() {
+    const pane = document.getElementById("people-pane");
+    pane.classList.remove("is-full-mobile");
+    pane.classList.add("is-hidden-mobile");
+}
+
 function handleTeaserClick(element) {
     const id = element.currentTarget.getAttribute("data-contact-id");
     fetch("/Dashboard/Details/" + id)
         .then(updatePane);
+
+    showFeed();
+    showPane();
 }
 
 addContactTeaserClickEvent();
