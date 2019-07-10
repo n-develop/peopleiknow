@@ -84,6 +84,11 @@ function handleTeaserClick(element) {
     showPane();
 }
 
+function backToDetails(id) {
+    fetch("/Dashboard/Details/" + id)
+        .then(updatePane);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Get all "navbar-burger" elements
