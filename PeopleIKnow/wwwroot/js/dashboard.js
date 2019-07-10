@@ -48,38 +48,32 @@ function addContactTeaserClickEvent() {
     backButton.onclick = showFeed;
 }
 
-function hideFeed() {
-    const feed = document.getElementById("people-feed");
-    feed.classList.remove("is-full-mobile");
-    feed.classList.add("is-hidden-mobile");
-}
-
 function showPane() {
     const pane = document.getElementById("people-pane");
-    pane.classList.remove("is-hidden-mobile");
-    pane.classList.add("is-full-mobile");
-
-    hideFeed();
-
+    showElementOnMobile(pane);
+    const feed = document.getElementById("people-feed");
+    hideElementOnMobile(feed);
     const backButton = document.getElementById("back-button");
     backButton.classList.remove("is-hidden-mobile");
 }
 
 function showFeed() {
     const feed = document.getElementById("people-feed");
-    feed.classList.remove("is-hidden-mobile");
-    feed.classList.add("is-full-mobile");
-
-    hidePane();
-
+    showElementOnMobile(feed);
+    const pane = document.getElementById("people-pane");
+    hideElementOnMobile(pane);
     const backButton = document.getElementById("back-button");
     backButton.classList.add("is-hidden-mobile");
 }
 
-function hidePane() {
-    const pane = document.getElementById("people-pane");
-    pane.classList.remove("is-full-mobile");
-    pane.classList.add("is-hidden-mobile");
+function showElementOnMobile(el) {
+    el.classList.remove("is-hidden-mobile");
+    el.classList.add("is-full-mobile");
+}
+
+function hideElementOnMobile(el) {
+    el.classList.remove("is-full-mobile");
+    el.classList.add("is-hidden-mobile");
 }
 
 function handleTeaserClick(element) {
