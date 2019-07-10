@@ -134,6 +134,7 @@ function search() {
     const term = searchInput.value;
     fetch("/Search?term=" + term)
         .then(updateContactList);
+    showFeed();
 }
 
 const searchButton = document.getElementById("search-button");
