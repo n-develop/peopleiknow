@@ -2,6 +2,7 @@
 
 # People I Know
 "People I Know" is (or will be)  a PRM.
+![Screenshot](images/general.png)
 
 ## What is a PRM?
 A PRM is a "Personal Relationship Management". On the web, you will also find the name "Personal CRM".
