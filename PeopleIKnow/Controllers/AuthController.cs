@@ -39,7 +39,6 @@ namespace PeopleIKnow.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl)
         {
-            _logger.LogInformation("ES FUNKTIONIERT!");
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
