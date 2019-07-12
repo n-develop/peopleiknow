@@ -47,5 +47,23 @@ namespace PeopleIKnow.UnitTests.TelegramNotificationServiceTests
             // Assert
             _messageHandler.Calls.Should().Be(0);
         }
+
+        [Fact]
+        public async Task EnabledNotifications_CallsTelegram()
+        {
+            // Arrange
+            _options.Value.Returns(new NotificationSettings
+            {
+                Enabled = true,
+                Token = "not important"
+            });
+            var service = CreateService();
+
+            // Act
+            await service.SendMessageAsync("not important", "not important");
+
+            // Assert
+            _messageHandler.Calls.Should().Be(1);
+        }
     }
 }
