@@ -8,6 +8,7 @@ namespace PeopleIKnow.Services
 {
     public class TelegramNotificationService : INotificationService
     {
+        private readonly HttpClient _httpClient;
         private readonly ILogger _logger;
         private readonly NotificationSettings _notificationSettings;
 
@@ -16,9 +17,11 @@ namespace PeopleIKnow.Services
 
         private const string MessageTemplate = "*{0}*\n\n{1}";
 
-        public TelegramNotificationService(IOptions<NotificationSettings> notificationSettings,
+        public TelegramNotificationService(HttpClient httpClient,
+            IOptions<NotificationSettings> notificationSettings,
             ILogger<TelegramNotificationService> logger)
         {
+            _httpClient = httpClient;
             _logger = logger;
             _notificationSettings = notificationSettings.Value;
         }
@@ -32,12 +35,9 @@ namespace PeopleIKnow.Services
 
             try
             {
-                using (var client = new HttpClient())
-                {
-                    var text = string.Format(MessageTemplate, title, message);
-                    await client.GetAsync(string.Format(ApiUrl, _notificationSettings,
-                        System.Net.WebUtility.UrlEncode(text)));
-                }
+                var text = string.Format(MessageTemplate, title, message);
+                await _httpClient.GetAsync(string.Format(ApiUrl, _notificationSettings,
+                    System.Net.WebUtility.UrlEncode(text)));
             }
             catch (Exception e)
             {

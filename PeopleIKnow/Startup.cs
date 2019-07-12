@@ -34,7 +34,8 @@ namespace PeopleIKnow
             });
 
             services.AddTransient<IContactRepository, ContactRepository>();
-            services.AddTransient<INotificationService, TelegramNotificationService>();
+            //services.AddTransient<INotificationService, TelegramNotificationService>();
+            services.AddHttpClient<INotificationService, TelegramNotificationService>();
             var section = Configuration.GetSection("Notifications");
             services.Configure<NotificationSettings>(section);
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
