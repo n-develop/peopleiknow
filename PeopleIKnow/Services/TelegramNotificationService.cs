@@ -36,7 +36,7 @@ namespace PeopleIKnow.Services
             try
             {
                 var text = string.Format(MessageTemplate, title, message);
-                await _httpClient.GetAsync(string.Format(ApiUrl, _notificationSettings,
+                await _httpClient.GetAsync(string.Format(ApiUrl, _notificationSettings.Token,
                     System.Net.WebUtility.UrlEncode(text)));
             }
             catch (Exception e)

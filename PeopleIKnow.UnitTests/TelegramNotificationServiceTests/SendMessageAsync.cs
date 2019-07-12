@@ -65,5 +65,24 @@ namespace PeopleIKnow.UnitTests.TelegramNotificationServiceTests
             // Assert
             _messageHandler.Calls.Should().Be(1);
         }
+
+        [Fact]
+        public async Task ExceptionIsThrown_DoesNotFail()
+        {
+            // Arrange
+            _options.Value.Returns(new NotificationSettings
+            {
+                Enabled = true,
+                Token = "not important"
+            });
+            _messageHandler = new FailingHttpMessageHandler();
+            var service = CreateService();
+
+            // Act
+            await service.SendMessageAsync("not important", "not important");
+
+            // Assert
+            _messageHandler.Calls.Should().Be(1);
+        }
     }
 }
