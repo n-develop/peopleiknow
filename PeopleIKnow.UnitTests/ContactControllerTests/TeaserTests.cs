@@ -39,7 +39,7 @@ namespace PeopleIKnow.UnitTests.ContactControllerTests
             actionResult.Should().BeOfType<NotFoundResult>();
         }
 
-        [Fact(Skip = "Still one reference missing")]
+        [Fact]
         public void FindsContact_ReturnsView()
         {
             // Arrange
