@@ -1,5 +1,3 @@
-**IMPORTANT**: This project is under development and (at the moment) far from being "ready to use". ;-)
-
 # People I Know
 "People I Know" is (or will be)  a PRM.
 ![Screenshot](images/general.png)
