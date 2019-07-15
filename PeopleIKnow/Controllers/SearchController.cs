@@ -22,8 +22,12 @@ namespace PeopleIKnow.Controllers
             }
 
             var searchResult = await _repository.SearchContacts(term);
+            var orderedContacts = searchResult
+                .OrderByDescending(p => p.IsFavorite)
+                .ThenBy(p => p.Lastname)
+                .ToList();
 
-            return View("Components/ContactList/Default", searchResult.OrderBy(p => p.Lastname).ToList());
+            return View("Components/ContactList/Default", orderedContacts);
         }
     }
 }

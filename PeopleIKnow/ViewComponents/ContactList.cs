@@ -18,7 +18,8 @@ namespace PeopleIKnow.ViewComponents
         {
             var contacts = await _repository.GetAllContacts();
 
-            return View(contacts.OrderBy(contact => contact.Lastname).ToList());
+            return View(contacts.OrderByDescending(contact => contact.IsFavorite).ThenBy(contact => contact.Lastname)
+                .ToList());
         }
     }
 }
