@@ -20,7 +20,16 @@
                         </figure>
                     </div>
                     <div class="media-content">
+                        @if (contact.IsFavorite)
+                        {
+                            <i class="fas fa-heart is-pulled-right is-4 title is-favorite"></i>
+                        }
+                        else
+                        {
+                            <i class="far fa-heart is-pulled-right is-4 title is-not-favorite"></i>
+                        }
                         <p class="title is-4">@contact.FullName</p>
+
                         @if (contact.EmailAddresses != null && contact.EmailAddresses.Any())
                         {
                             <p class="subtitle is-6">@contact.EmailAddresses.First().Email</p>

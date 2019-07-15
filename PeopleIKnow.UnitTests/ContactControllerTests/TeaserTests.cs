@@ -1,9 +1,7 @@
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using PeopleIKnow.Controllers;
 using PeopleIKnow.Models;
-using PeopleIKnow.Repositories;
 using Xunit;
 
 namespace PeopleIKnow.UnitTests.ContactControllerTests

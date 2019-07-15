@@ -15,6 +15,14 @@
                 </figure>
             </div>
             <div class="media-content">
+                @if (Model.IsFavorite)
+                {
+                    <i class="fas fa-heart is-pulled-right is-4 title is-favorite"></i>
+                }
+                else
+                {
+                    <i class="far fa-heart is-pulled-right is-4 title is-not-favorite"></i>
+                }
                 <p class="title is-4">@Model.FullName</p>
                 @if (Model.EmailAddresses != null && Model.EmailAddresses.Any())
                 {

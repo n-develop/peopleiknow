@@ -34,6 +34,8 @@ namespace PeopleIKnow.Migrations
 
                 b.Property<string>("ImagePath");
 
+                b.Property<bool>("IsFavorite");
+
                 b.Property<string>("Lastname");
 
                 b.Property<string>("Middlename");
