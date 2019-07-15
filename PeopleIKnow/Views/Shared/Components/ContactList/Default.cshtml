@@ -11,6 +11,7 @@
         {
             contact.ImagePath = "images/contacts/unknown.jpg";
         }
+        var favoriteClass = contact.IsFavorite ? "fas fa-heart" : "far fa-heart";
         <div class="card" id="contact-teaser-@contact.Id" data-contact-id="@contact.Id">
             <div class="card-content">
                 <div class="media">
@@ -20,16 +21,10 @@
                         </figure>
                     </div>
                     <div class="media-content">
-                        @if (contact.IsFavorite)
-                        {
-                            <i class="fas fa-heart is-pulled-right is-4 title is-favorite"></i>
-                        }
-                        else
-                        {
-                            <i class="far fa-heart is-pulled-right is-4 title is-not-favorite"></i>
-                        }
+                        <span class="is-pulled-right is-4 title favorite" data-contact-id="@contact.Id">
+                            <i class="@favoriteClass"></i>
+                        </span>
                         <p class="title is-4">@contact.FullName</p>
-
                         @if (contact.EmailAddresses != null && contact.EmailAddresses.Any())
                         {
                             <p class="subtitle is-6">@contact.EmailAddresses.First().Email</p>

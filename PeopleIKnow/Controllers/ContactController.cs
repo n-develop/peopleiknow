@@ -71,5 +71,19 @@ namespace PeopleIKnow.Controllers
 
             return RedirectToAction("Details", "Dashboard", new {id = contactFromRepository.Id});
         }
+
+        public IActionResult Favorite(int id)
+        {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
+
+            var contact = _repository.GetContactById(id);
+            contact.IsFavorite = !contact.IsFavorite;
+            _repository.SaveContact(contact);
+
+            return ViewComponent("ContactList");
+        }
     }
 }

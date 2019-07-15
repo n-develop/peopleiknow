@@ -44,6 +44,11 @@ function addContactTeaserClickEvent() {
         currentValue.onclick = handleTeaserClick;
     });
 
+    const favs = document.querySelectorAll(".favorite");
+    favs.forEach(function (currentValue, currentIndex, listObj) {
+        currentValue.onclick = favClick;
+    });
+
     const backButton = document.getElementById("back-button");
     backButton.onclick = showFeed;
 }
@@ -132,6 +137,15 @@ function reloadContactList() {
         .then(updateContactList);
 }
 
+function favClick(event) {
+    event.stopPropagation();
+    const i = event.currentTarget;
+    const id = i.getAttribute("data-contact-id");
+    fetch("/Contact/Favorite/" + id, {
+        method: "POST"
+    })
+        .then(updateContactList);
+}
 /* Search */
 
 function search() {
