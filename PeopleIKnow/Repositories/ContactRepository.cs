@@ -8,7 +8,7 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.Repositories
 {
-    class ContactRepository : IContactRepository
+    public class ContactRepository : IContactRepository
     {
         private readonly ContactContext _context;
         private readonly ILogger<ContactRepository> _logger;
