@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
 
@@ -7,10 +8,12 @@ namespace PeopleIKnow.Controllers
     public class ContactController : Controller
     {
         private readonly IContactRepository _repository;
+        private readonly ILogger<ContactController> _logger;
 
-        public ContactController(IContactRepository repository)
+        public ContactController(IContactRepository repository, ILogger<ContactController> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         public IActionResult Teaser(int id)
@@ -32,6 +35,7 @@ namespace PeopleIKnow.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
+            _logger.LogInformation($"DELETE request for Contact with ID '{id}'");
             if (id <= 0)
             {
                 return NotFound();
@@ -57,6 +61,7 @@ namespace PeopleIKnow.Controllers
         [HttpPost]
         public IActionResult Add(Contact contact)
         {
+            _logger.LogInformation($"ADD request for Contact '{contact.FullName}'");
             if (contact.Id > 0)
             {
                 return BadRequest();
@@ -74,6 +79,7 @@ namespace PeopleIKnow.Controllers
 
         public IActionResult Favorite(int id)
         {
+            _logger.LogInformation($"FAVORITE request for Contact with ID '{id}'");
             if (id <= 0)
             {
                 return NotFound();

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
 
@@ -7,10 +8,12 @@ namespace PeopleIKnow.Controllers
     public class EmailController : Controller
     {
         private readonly IContactRepository _repository;
+        private readonly ILogger<EmailController> _logger;
 
-        public EmailController(IContactRepository repository)
+        public EmailController(IContactRepository repository, ILogger<EmailController> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
         public ActionResult Add(int contactId)
@@ -35,6 +38,8 @@ namespace PeopleIKnow.Controllers
             {
                 return BadRequest();
             }
+
+            _logger.LogInformation($"ADD request for Email '{mail.Email}' on contact with ID '{mail.ContactId}'");
 
             _repository.AddEmail(mail);
 
@@ -65,6 +70,8 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
+            _logger.LogInformation($"EDIT request for Email '{mail.Email}' on contact with ID '{mail.ContactId}'");
+
             _repository.UpdateEmail(mail);
 
             return RedirectToAction("Details", "Dashboard", new {id = mail.ContactId});
@@ -72,6 +79,7 @@ namespace PeopleIKnow.Controllers
 
         public ActionResult Delete(int id)
         {
+            _logger.LogInformation($"DELETE request for Email with ID '{id}'");
             if (id <= 0)
             {
                 return NotFound();

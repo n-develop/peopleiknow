@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PeopleIKnow.Models;
 
 namespace PeopleIKnow.Repositories
@@ -10,10 +11,12 @@ namespace PeopleIKnow.Repositories
     class ContactRepository : IContactRepository
     {
         private readonly ContactContext _context;
+        private readonly ILogger<ContactRepository> _logger;
 
-        public ContactRepository(ContactContext context)
+        public ContactRepository(ContactContext context, ILogger<ContactRepository> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<Contact>> GetAllContacts()
@@ -45,6 +48,7 @@ namespace PeopleIKnow.Repositories
             var contact = GetContactById(id);
             if (contact.IsNull())
             {
+                _logger.LogInformation($"Contact with ID {id} could not be found for deletion");
                 return false;
             }
 
@@ -70,6 +74,8 @@ namespace PeopleIKnow.Repositories
 
             _context.Contacts.Remove(contact);
 
+            _logger.LogInformation($"Contact with ID {id} successfully deleted");
+
             _context.SaveChanges();
             return true;
         }
@@ -81,7 +87,7 @@ namespace PeopleIKnow.Repositories
 
             var entry = _context.Contacts.Add(contact);
             _context.SaveChanges();
-
+            _logger.LogInformation($"New contact with ID {contact.Id} was created");
             return entry.Entity;
         }
 
@@ -89,6 +95,7 @@ namespace PeopleIKnow.Repositories
         {
             _context.Contacts.Update(contact);
             _context.SaveChanges();
+            _logger.LogInformation($"Contact with ID {contact.Id} was saved");
         }
 
         public void AddEmail(EmailAddress mail)
@@ -101,6 +108,7 @@ namespace PeopleIKnow.Repositories
 
             _context.EmailAddresses.Add(mail);
             _context.SaveChanges();
+            _logger.LogInformation($"Email with ID {mail.Id} was created");
         }
 
         public EmailAddress GetEmailById(int mailId)
@@ -136,6 +144,7 @@ namespace PeopleIKnow.Repositories
 
             _context.StatusUpdates.Add(statusUpdate);
             _context.SaveChanges();
+            _logger.LogInformation($"Status update with ID {statusUpdate.Id} was created");
         }
 
         public void AddTelephoneNumber(TelephoneNumber telephoneNumber)
@@ -148,6 +157,7 @@ namespace PeopleIKnow.Repositories
 
             _context.TelephoneNumbers.Add(telephoneNumber);
             _context.SaveChanges();
+            _logger.LogInformation($"Telephone number with ID {telephoneNumber.Id} was created");
         }
 
         public TelephoneNumber GetTelephoneNumberById(int id)
@@ -171,6 +181,7 @@ namespace PeopleIKnow.Repositories
         {
             _context.TelephoneNumbers.Remove(telephoneNumber);
             _context.SaveChanges();
+            _logger.LogInformation($"Telephone number with ID {telephoneNumber.Id} was deleted");
         }
 
         public void AddRelationship(Relationship relationship)
@@ -183,6 +194,7 @@ namespace PeopleIKnow.Repositories
 
             _context.Relationships.Add(relationship);
             _context.SaveChanges();
+            _logger.LogInformation($"Relationship with ID {relationship.Id} was created");
         }
 
         public Relationship GetRelationshipById(int id)
@@ -206,6 +218,7 @@ namespace PeopleIKnow.Repositories
         {
             _context.Relationships.Remove(relationship);
             _context.SaveChanges();
+            _logger.LogInformation($"Relationship with ID {relationship.Id} was deleted");
         }
 
         public void UpdateEmail(EmailAddress mail)
@@ -221,10 +234,12 @@ namespace PeopleIKnow.Repositories
                 return;
             }
 
+
             emailFromRepository.Type = mail.Type;
             emailFromRepository.Email = mail.Email;
 
             _context.SaveChanges();
+            _logger.LogInformation($"Email with ID {mail.Id} was updated");
         }
 
         public void UpdateRelationship(Relationship relationship)
@@ -244,6 +259,7 @@ namespace PeopleIKnow.Repositories
             relationshipFromRepository.Person = relationship.Person;
 
             _context.SaveChanges();
+            _logger.LogInformation($"Relationship with ID {relationship.Id} was updated");
         }
 
         public void UpdateTelephoneNumber(TelephoneNumber telephoneNumber)
@@ -263,6 +279,7 @@ namespace PeopleIKnow.Repositories
             telephoneNumberFromRepository.Telephone = telephoneNumber.Telephone;
 
             _context.SaveChanges();
+            _logger.LogInformation($"Telephone number with ID {telephoneNumber.Id} was updated");
         }
 
         public StatusUpdate GetStatusUpdateById(int id)
@@ -298,6 +315,7 @@ namespace PeopleIKnow.Repositories
             statusFromRepository.StatusText = statusUpdate.StatusText;
 
             _context.SaveChanges();
+            _logger.LogInformation($"Status update with ID {statusUpdate.Id} was updated");
         }
 
         public void DeleteStatusUpdate(StatusUpdate statusUpdate)
