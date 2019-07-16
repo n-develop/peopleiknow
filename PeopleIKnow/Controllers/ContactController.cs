@@ -1,3 +1,4 @@
+using System.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PeopleIKnow.Models;
@@ -29,7 +30,7 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            return View(contact);
+            return PartialView("_ContactTeaser", contact);
         }
 
         [HttpDelete]

@@ -17,7 +17,6 @@ namespace PeopleIKnow.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var contacts = await _repository.GetAllContacts();
-
             return View(contacts.OrderByDescending(contact => contact.IsFavorite).ThenBy(contact => contact.Lastname)
                 .ToList());
         }

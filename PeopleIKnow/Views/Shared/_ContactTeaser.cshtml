@@ -1,6 +1,5 @@
 @model PeopleIKnow.Models.Contact
 @{
-    Layout = null;
     var favoriteClass = Model.IsFavorite ? "fas fa-heart" : "far fa-heart";
 }
 @if (string.IsNullOrEmpty(Model.ImagePath))

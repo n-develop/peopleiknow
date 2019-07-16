@@ -7,49 +7,6 @@
 {
     foreach (var contact in Model)
     {
-        if (string.IsNullOrEmpty(contact.ImagePath))
-        {
-            contact.ImagePath = "images/contacts/unknown.jpg";
-        }
-        var favoriteClass = contact.IsFavorite ? "fas fa-heart" : "far fa-heart";
-        <div class="card" id="contact-teaser-@contact.Id" data-contact-id="@contact.Id">
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-left">
-                        <figure class="image is-48x48">
-                            <img src="@contact.ImagePath" alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <span class="is-pulled-right is-4 title favorite" data-contact-id="@contact.Id">
-                            <i class="@favoriteClass"></i>
-                        </span>
-                        <p class="title is-4">@contact.FullName</p>
-                        @if (contact.EmailAddresses != null && contact.EmailAddresses.Any())
-                        {
-                            <p class="subtitle is-6">@contact.EmailAddresses.First().Email</p>
-                        }
-                    </div>
-                </div>
-
-                <div class="content">
-                    @if (!string.IsNullOrWhiteSpace(contact.Address))
-                    {
-                        <i class="fa fa-map-marked-alt"></i>
-                        @contact.Address<br/>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(contact.Employer))
-                    {
-                        <i class="fa fa-building"></i>
-                        @contact.Employer<br/>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(contact.BusinessTitle))
-                    {
-                        <i class="fa fa-briefcase"></i>
-                        @contact.BusinessTitle<br/>
-                    }
-                </div>
-            </div>
-        </div>
+        await Html.RenderPartialAsync("_ContactTeaser", contact);
     }
 }
