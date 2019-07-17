@@ -77,16 +77,25 @@ function showElementOnMobile(el) {
 }
 
 function hideElementOnMobile(el) {
-    el.classList.remove("is-full-mobile");
+    el.classList.remove("is-full-mobile");  
     el.classList.add("is-hidden-mobile");
 }
 
 function handleTeaserClick(element) {
     const id = element.currentTarget.getAttribute("data-contact-id");
     fetch("/Dashboard/Details/" + id)
-        .then(updatePane);
+        .then(showDetailsInPane);
 
     showPane();
+}
+
+function addOnChangeEventToImageInput() {
+    const file = document.getElementById("image-input");
+    file.onchange = function () {
+        if (file.files.length > 0) {
+            document.getElementById('file-name').innerHTML = file.files[0].name;
+        }
+    };
 }
 
 function backToDetails(id) {
@@ -364,6 +373,14 @@ function updatePane(response) {
     response.text().then(function (value) {
         detailsPane.innerHTML = value;
     });
+}
+
+function showDetailsInPane(response) {
+    const detailsPane = document.getElementById("people-pane");
+    response.text().then(function (value) {
+        detailsPane.innerHTML = value;
+    })
+        .then(addOnChangeEventToImageInput);
 }
 
 /* Helper stuff */
