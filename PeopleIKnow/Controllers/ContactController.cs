@@ -7,6 +7,8 @@ namespace PeopleIKnow.Controllers
 {
     public class ContactController : Controller
     {
+        public static readonly string SuccessfullyDeletedMessage = "Successfully deleted";
+        public static readonly string ContactCannotBeDeleted = "Contact cannot be deleted";
         private readonly IContactRepository _repository;
         private readonly ILogger<ContactController> _logger;
 
@@ -45,10 +47,10 @@ namespace PeopleIKnow.Controllers
 
             if (success)
             {
-                return Json(new {Success = true, Message = "Successfully deleted"});
+                return Json(new {Success = true, Message = SuccessfullyDeletedMessage});
             }
 
-            return Json(new {success = true, Message = "Contact cannot be deleted"});
+            return Json(new {Success = false, Message = ContactCannotBeDeleted});
         }
 
         public IActionResult Add()

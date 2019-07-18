@@ -38,7 +38,7 @@ namespace PeopleIKnow.UnitTests.ContactControllerTests
         }
 
         [Fact]
-        public void FindsContact_ReturnsView()
+        public void FindsContact_ReturnsPartialView()
         {
             // Arrange
             _contactRepository.GetContactById(2).Returns(new Contact
@@ -55,7 +55,7 @@ namespace PeopleIKnow.UnitTests.ContactControllerTests
 
             // Assert
             actionResult.Should().NotBeNull();
-            actionResult.Should().BeOfType<ViewResult>();
+            actionResult.Should().BeOfType<PartialViewResult>();
         }
     }
 }
