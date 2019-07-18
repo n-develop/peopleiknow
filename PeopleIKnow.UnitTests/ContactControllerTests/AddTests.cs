@@ -49,5 +49,38 @@ namespace PeopleIKnow.UnitTests.ContactControllerTests
             // Assert
             actionResult.Should().BeOfType<BadRequestResult>();
         }
+
+        [Fact]
+        public void Post_ContactWasCreated_ReturnsRedirect()
+        {
+            // Arrange
+            _contactRepository.AddContact(Arg.Any<Contact>()).Returns(new Contact {Id = 1});
+            var controller = CreateController();
+
+            // Act
+            var actionResult = controller.Add(new Contact());
+
+            // Assert
+            actionResult.Should().BeOfType<RedirectToActionResult>();
+        }
+
+        [Fact]
+        public void Post_ContactWasCreated_ReturnsRedirectToDetails()
+        {
+            // Arrange
+            _contactRepository.AddContact(Arg.Any<Contact>()).Returns(new Contact {Id = 1});
+            var controller = CreateController();
+
+            // Act
+            var actionResult = controller.Add(new Contact());
+
+            // Assert
+            actionResult.Should().BeOfType<RedirectToActionResult>();
+            var result = actionResult as RedirectToActionResult;
+            result.Should().NotBeNull();
+            result.ActionName.Should().Be("Details");
+            result.RouteValues.Should().ContainKey("id");
+            result.RouteValues["id"].Should().Be(1);
+        }
     }
 }
