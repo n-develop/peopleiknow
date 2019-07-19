@@ -55,7 +55,7 @@ namespace PeopleIKnow.Controllers
             }
 
             var relationship = _repository.GetRelationshipById(id);
-            if (relationship == null)
+            if (relationship.IsNull())
             {
                 return NotFound();
             }

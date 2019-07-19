@@ -1,6 +1,6 @@
 namespace PeopleIKnow.Models
 {
-    class NullRelationship : Relationship
+    public class NullRelationship : Relationship
     {
         private static NullRelationship _instance;
 
