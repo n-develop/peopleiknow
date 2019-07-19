@@ -4,9 +4,9 @@ using NSubstitute;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
 {
-    public class EditTests : BaseStatusUpdateControllerTests
+    public class EditTests : BaseTelephoneControllerTests
     {
         [Fact]
         public void Get_ReceivesInvalidId_ReturnsNotFound()
@@ -25,7 +25,7 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
         public void Get_CannotFindContactById_ReturnsNotFound()
         {
             // Arrange
-            _contactRepository.GetStatusUpdateById(2).Returns(NullStatusUpdate.GetInstance());
+            _contactRepository.GetTelephoneNumberById(2).Returns(NullTelephoneNumber.GetInstance());
             var controller = CreateController();
 
             // Act
@@ -39,7 +39,7 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
         public void Get_ReceivesValidId_ReturnsView()
         {
             // Arrange
-            _contactRepository.GetStatusUpdateById(2).Returns(new StatusUpdate {Id = 2});
+            _contactRepository.GetTelephoneNumberById(2).Returns(new TelephoneNumber {Id = 2});
             var controller = CreateController();
 
             // Act
@@ -53,7 +53,7 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
         public void Get_ReceivesValidId_ReturnsModelWithId()
         {
             // Arrange
-            _contactRepository.GetStatusUpdateById(2).Returns(new StatusUpdate {Id = 2});
+            _contactRepository.GetTelephoneNumberById(2).Returns(new TelephoneNumber {Id = 2});
             var controller = CreateController();
 
             // Act
@@ -61,8 +61,8 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
 
             // Assert
             var model = (actionResult as ViewResult).Model;
-            model.Should().BeOfType<StatusUpdate>();
-            (model as StatusUpdate).Id.Should().Be(2);
+            model.Should().BeOfType<TelephoneNumber>();
+            (model as TelephoneNumber).Id.Should().Be(2);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Edit(new StatusUpdate());
+            var actionResult = controller.Edit(new TelephoneNumber());
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();
@@ -98,7 +98,7 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Edit(new StatusUpdate()) as RedirectToActionResult;
+            var actionResult = controller.Edit(new TelephoneNumber()) as RedirectToActionResult;
 
             // Assert
             actionResult.ActionName.Should().Be("Details");

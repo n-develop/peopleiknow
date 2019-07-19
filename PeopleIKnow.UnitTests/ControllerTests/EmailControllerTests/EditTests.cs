@@ -4,7 +4,7 @@ using NSubstitute;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.EmailControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
 {
     public class EditTests : BaseEmailControllerTests
     {

@@ -4,7 +4,7 @@ using NSubstitute;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.ContactControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
 {
     public class FavoriteTests : BaseContactControllerTests
     {

@@ -4,9 +4,9 @@ using NSubstitute;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.RelationshipControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.StatusUpdateControllerTests
 {
-    public class EditTests : BaseRelationshipControllerTests
+    public class EditTests : BaseStatusUpdateControllerTests
     {
         [Fact]
         public void Get_ReceivesInvalidId_ReturnsNotFound()
@@ -25,7 +25,7 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
         public void Get_CannotFindContactById_ReturnsNotFound()
         {
             // Arrange
-            _contactRepository.GetRelationshipById(2).Returns(NullRelationship.GetInstance());
+            _contactRepository.GetStatusUpdateById(2).Returns(NullStatusUpdate.GetInstance());
             var controller = CreateController();
 
             // Act
@@ -39,7 +39,7 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
         public void Get_ReceivesValidId_ReturnsView()
         {
             // Arrange
-            _contactRepository.GetRelationshipById(2).Returns(new Relationship {Id = 2});
+            _contactRepository.GetStatusUpdateById(2).Returns(new StatusUpdate {Id = 2});
             var controller = CreateController();
 
             // Act
@@ -53,7 +53,7 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
         public void Get_ReceivesValidId_ReturnsModelWithId()
         {
             // Arrange
-            _contactRepository.GetRelationshipById(2).Returns(new Relationship {Id = 2});
+            _contactRepository.GetStatusUpdateById(2).Returns(new StatusUpdate {Id = 2});
             var controller = CreateController();
 
             // Act
@@ -61,8 +61,8 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
 
             // Assert
             var model = (actionResult as ViewResult).Model;
-            model.Should().BeOfType<Relationship>();
-            (model as Relationship).Id.Should().Be(2);
+            model.Should().BeOfType<StatusUpdate>();
+            (model as StatusUpdate).Id.Should().Be(2);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Edit(new Relationship());
+            var actionResult = controller.Edit(new StatusUpdate());
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();
@@ -98,7 +98,7 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Edit(new Relationship()) as RedirectToActionResult;
+            var actionResult = controller.Edit(new StatusUpdate()) as RedirectToActionResult;
 
             // Assert
             actionResult.ActionName.Should().Be("Details");

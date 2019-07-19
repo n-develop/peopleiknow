@@ -3,7 +3,7 @@ using NSubstitute;
 using PeopleIKnow.Controllers;
 using PeopleIKnow.Repositories;
 
-namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.StatusUpdateControllerTests
 {
     public abstract class BaseStatusUpdateControllerTests
     {

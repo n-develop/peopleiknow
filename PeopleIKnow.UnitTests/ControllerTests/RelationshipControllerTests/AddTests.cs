@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.RelationshipControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.RelationshipControllerTests
 {
     public class AddTests : BaseRelationshipControllerTests
     {

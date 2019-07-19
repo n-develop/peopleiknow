@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.TelephoneControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
 {
     public class AddTests : BaseTelephoneControllerTests
     {

@@ -4,9 +4,9 @@ using NSubstitute;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.TelephoneControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
 {
-    public class DeleteTests : BaseTelephoneControllerTests
+    public class DeleteTests : BaseEmailControllerTests
     {
         [Fact]
         public void ReceivesInvalidId_ReturnsNotFound()
@@ -22,10 +22,10 @@ namespace PeopleIKnow.UnitTests.TelephoneControllerTests
         }
 
         [Fact]
-        public void CannotFindTelephoneNumber_ReturnsNotFound()
+        public void CannotFindEmailAddress_ReturnsNotFound()
         {
             // Arrange
-            _contactRepository.GetTelephoneNumberById(1).Returns(NullTelephoneNumber.GetInstance());
+            _contactRepository.GetEmailById(1).Returns(NullEmailAddress.GetInstance());
             var controller = CreateController();
 
             // Act
@@ -39,7 +39,7 @@ namespace PeopleIKnow.UnitTests.TelephoneControllerTests
         public void ReceivesValidId_ReturnRedirect()
         {
             // Arrange
-            _contactRepository.GetTelephoneNumberById(1).Returns(new TelephoneNumber {ContactId = 2});
+            _contactRepository.GetEmailById(1).Returns(new EmailAddress {ContactId = 2});
             var controller = CreateController();
 
             // Act
@@ -53,7 +53,7 @@ namespace PeopleIKnow.UnitTests.TelephoneControllerTests
         public void ReceivesValidId_ReturnsRedirectToDetails()
         {
             // Arrange
-            _contactRepository.GetTelephoneNumberById(1).Returns(new TelephoneNumber {ContactId = 2});
+            _contactRepository.GetEmailById(1).Returns(new EmailAddress {ContactId = 2});
             var controller = CreateController();
 
             // Act

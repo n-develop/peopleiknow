@@ -3,7 +3,7 @@ using NSubstitute;
 using PeopleIKnow.Controllers;
 using PeopleIKnow.Repositories;
 
-namespace PeopleIKnow.UnitTests.TelephoneControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
 {
     public abstract class BaseTelephoneControllerTests
     {

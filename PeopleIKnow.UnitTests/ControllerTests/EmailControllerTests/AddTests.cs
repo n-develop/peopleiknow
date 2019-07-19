@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
 {
-    public class AddTests : BaseStatusUpdateControllerTests
+    public class AddTests : BaseEmailControllerTests
     {
         [Fact]
         public void Get_ReceivesInvalidId_ReturnsNotFound()
@@ -45,8 +45,8 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
             // Assert
             var resultObject = actionResult as ViewResult;
             var model = resultObject.Model;
-            model.Should().BeOfType<StatusUpdate>();
-            ((StatusUpdate) model).ContactId.Should().Be(1);
+            model.Should().BeOfType<EmailAddress>();
+            ((EmailAddress) model).ContactId.Should().Be(1);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Add(new StatusUpdate());
+            var actionResult = controller.Add(new EmailAddress());
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();
@@ -82,7 +82,7 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Add(new StatusUpdate());
+            var actionResult = controller.Add(new EmailAddress());
 
             // Assert
             var redirect = actionResult as RedirectToActionResult;

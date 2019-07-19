@@ -4,7 +4,7 @@ using NSubstitute;
 using PeopleIKnow.Controllers;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.ContactControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
 {
     public class DeleteTests : BaseContactControllerTests
     {

@@ -3,7 +3,7 @@ using NSubstitute;
 using PeopleIKnow.Controllers;
 using PeopleIKnow.Repositories;
 
-namespace PeopleIKnow.UnitTests.EmailControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
 {
     public abstract class BaseEmailControllerTests
     {

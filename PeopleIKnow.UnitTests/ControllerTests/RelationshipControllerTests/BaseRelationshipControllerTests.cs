@@ -3,7 +3,7 @@ using NSubstitute;
 using PeopleIKnow.Controllers;
 using PeopleIKnow.Repositories;
 
-namespace PeopleIKnow.UnitTests.RelationshipControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.RelationshipControllerTests
 {
     public abstract class BaseRelationshipControllerTests
     {

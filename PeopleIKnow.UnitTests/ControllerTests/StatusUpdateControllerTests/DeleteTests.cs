@@ -4,9 +4,9 @@ using NSubstitute;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.RelationshipControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.StatusUpdateControllerTests
 {
-    public class DeleteTests : BaseRelationshipControllerTests
+    public class DeleteTests : BaseStatusUpdateControllerTests
     {
         [Fact]
         public void ReceivesInvalidId_ReturnsNotFound()
@@ -22,10 +22,10 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
         }
 
         [Fact]
-        public void CannotFindRelationship_ReturnsNotFound()
+        public void CannotFindStatusUpdate_ReturnsNotFound()
         {
             // Arrange
-            _contactRepository.GetRelationshipById(1).Returns(NullRelationship.GetInstance());
+            _contactRepository.GetStatusUpdateById(1).Returns(NullStatusUpdate.GetInstance());
             var controller = CreateController();
 
             // Act
@@ -39,7 +39,7 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
         public void ReceivesValidId_ReturnRedirect()
         {
             // Arrange
-            _contactRepository.GetRelationshipById(1).Returns(new Relationship {ContactId = 2});
+            _contactRepository.GetStatusUpdateById(1).Returns(new StatusUpdate {ContactId = 2});
             var controller = CreateController();
 
             // Act
@@ -53,7 +53,7 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
         public void ReceivesValidId_ReturnsRedirectToDetails()
         {
             // Arrange
-            _contactRepository.GetRelationshipById(1).Returns(new Relationship {ContactId = 2});
+            _contactRepository.GetStatusUpdateById(1).Returns(new StatusUpdate {ContactId = 2});
             var controller = CreateController();
 
             // Act

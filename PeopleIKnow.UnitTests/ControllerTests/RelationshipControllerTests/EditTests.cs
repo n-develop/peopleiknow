@@ -1,14 +1,12 @@
-using System;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using NSubstitute.Core;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.TelephoneControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.RelationshipControllerTests
 {
-    public class EditTests : BaseTelephoneControllerTests
+    public class EditTests : BaseRelationshipControllerTests
     {
         [Fact]
         public void Get_ReceivesInvalidId_ReturnsNotFound()
@@ -27,7 +25,7 @@ namespace PeopleIKnow.UnitTests.TelephoneControllerTests
         public void Get_CannotFindContactById_ReturnsNotFound()
         {
             // Arrange
-            _contactRepository.GetTelephoneNumberById(2).Returns(NullTelephoneNumber.GetInstance());
+            _contactRepository.GetRelationshipById(2).Returns(NullRelationship.GetInstance());
             var controller = CreateController();
 
             // Act
@@ -41,7 +39,7 @@ namespace PeopleIKnow.UnitTests.TelephoneControllerTests
         public void Get_ReceivesValidId_ReturnsView()
         {
             // Arrange
-            _contactRepository.GetTelephoneNumberById(2).Returns(new TelephoneNumber {Id = 2});
+            _contactRepository.GetRelationshipById(2).Returns(new Relationship {Id = 2});
             var controller = CreateController();
 
             // Act
@@ -55,7 +53,7 @@ namespace PeopleIKnow.UnitTests.TelephoneControllerTests
         public void Get_ReceivesValidId_ReturnsModelWithId()
         {
             // Arrange
-            _contactRepository.GetTelephoneNumberById(2).Returns(new TelephoneNumber {Id = 2});
+            _contactRepository.GetRelationshipById(2).Returns(new Relationship {Id = 2});
             var controller = CreateController();
 
             // Act
@@ -63,8 +61,8 @@ namespace PeopleIKnow.UnitTests.TelephoneControllerTests
 
             // Assert
             var model = (actionResult as ViewResult).Model;
-            model.Should().BeOfType<TelephoneNumber>();
-            (model as TelephoneNumber).Id.Should().Be(2);
+            model.Should().BeOfType<Relationship>();
+            (model as Relationship).Id.Should().Be(2);
         }
 
         [Fact]
@@ -87,7 +85,7 @@ namespace PeopleIKnow.UnitTests.TelephoneControllerTests
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Edit(new TelephoneNumber());
+            var actionResult = controller.Edit(new Relationship());
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();
@@ -100,7 +98,7 @@ namespace PeopleIKnow.UnitTests.TelephoneControllerTests
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Edit(new TelephoneNumber()) as RedirectToActionResult;
+            var actionResult = controller.Edit(new Relationship()) as RedirectToActionResult;
 
             // Assert
             actionResult.ActionName.Should().Be("Details");

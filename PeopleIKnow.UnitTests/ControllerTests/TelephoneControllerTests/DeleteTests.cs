@@ -4,9 +4,9 @@ using NSubstitute;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
 {
-    public class DeleteTests : BaseStatusUpdateControllerTests
+    public class DeleteTests : BaseTelephoneControllerTests
     {
         [Fact]
         public void ReceivesInvalidId_ReturnsNotFound()
@@ -22,10 +22,10 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
         }
 
         [Fact]
-        public void CannotFindStatusUpdate_ReturnsNotFound()
+        public void CannotFindTelephoneNumber_ReturnsNotFound()
         {
             // Arrange
-            _contactRepository.GetStatusUpdateById(1).Returns(NullStatusUpdate.GetInstance());
+            _contactRepository.GetTelephoneNumberById(1).Returns(NullTelephoneNumber.GetInstance());
             var controller = CreateController();
 
             // Act
@@ -39,7 +39,7 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
         public void ReceivesValidId_ReturnRedirect()
         {
             // Arrange
-            _contactRepository.GetStatusUpdateById(1).Returns(new StatusUpdate {ContactId = 2});
+            _contactRepository.GetTelephoneNumberById(1).Returns(new TelephoneNumber {ContactId = 2});
             var controller = CreateController();
 
             // Act
@@ -53,7 +53,7 @@ namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
         public void ReceivesValidId_ReturnsRedirectToDetails()
         {
             // Arrange
-            _contactRepository.GetStatusUpdateById(1).Returns(new StatusUpdate {ContactId = 2});
+            _contactRepository.GetTelephoneNumberById(1).Returns(new TelephoneNumber {ContactId = 2});
             var controller = CreateController();
 
             // Act
