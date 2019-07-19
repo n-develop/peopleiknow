@@ -88,6 +88,11 @@ namespace PeopleIKnow.Controllers
             }
 
             var contact = _repository.GetContactById(id);
+            if (contact.IsNull())
+            {
+                return NotFound();
+            }
+
             contact.IsFavorite = !contact.IsFavorite;
             _repository.SaveContact(contact);
 
