@@ -54,7 +54,7 @@ namespace PeopleIKnow.Controllers
             }
 
             var mail = _repository.GetEmailById(id);
-            if (mail == null)
+            if (mail.IsNull())
             {
                 return NotFound();
             }
