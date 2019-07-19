@@ -22,7 +22,7 @@ namespace PeopleIKnow.UnitTests.RelationshipControllerTests
         }
 
         [Fact]
-        public void CannotFindTelephoneNumber_ReturnsNotFound()
+        public void CannotFindRelationship_ReturnsNotFound()
         {
             // Arrange
             _contactRepository.GetRelationshipById(1).Returns(NullRelationship.GetInstance());

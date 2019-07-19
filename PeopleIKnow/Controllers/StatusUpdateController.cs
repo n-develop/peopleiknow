@@ -57,7 +57,7 @@ namespace PeopleIKnow.Controllers
             }
 
             var statusUpdate = _repository.GetStatusUpdateById(id);
-            if (statusUpdate == null)
+            if (statusUpdate.IsNull())
             {
                 return NotFound();
             }

@@ -4,9 +4,9 @@ using NSubstitute;
 using PeopleIKnow.Models;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.EmailControllerTests
+namespace PeopleIKnow.UnitTests.StatusUpdateControllerTests
 {
-    public class DeleteTests : BaseEmailControllerTests
+    public class DeleteTests : BaseStatusUpdateControllerTests
     {
         [Fact]
         public void ReceivesInvalidId_ReturnsNotFound()
@@ -22,10 +22,10 @@ namespace PeopleIKnow.UnitTests.EmailControllerTests
         }
 
         [Fact]
-        public void CannotFindEmailAddress_ReturnsNotFound()
+        public void CannotFindStatusUpdate_ReturnsNotFound()
         {
             // Arrange
-            _contactRepository.GetEmailById(1).Returns(NullEmailAddress.GetInstance());
+            _contactRepository.GetStatusUpdateById(1).Returns(NullStatusUpdate.GetInstance());
             var controller = CreateController();
 
             // Act
@@ -39,7 +39,7 @@ namespace PeopleIKnow.UnitTests.EmailControllerTests
         public void ReceivesValidId_ReturnRedirect()
         {
             // Arrange
-            _contactRepository.GetEmailById(1).Returns(new EmailAddress {ContactId = 2});
+            _contactRepository.GetStatusUpdateById(1).Returns(new StatusUpdate {ContactId = 2});
             var controller = CreateController();
 
             // Act
@@ -53,7 +53,7 @@ namespace PeopleIKnow.UnitTests.EmailControllerTests
         public void ReceivesValidId_ReturnsRedirectToDetails()
         {
             // Arrange
-            _contactRepository.GetEmailById(1).Returns(new EmailAddress {ContactId = 2});
+            _contactRepository.GetStatusUpdateById(1).Returns(new StatusUpdate {ContactId = 2});
             var controller = CreateController();
 
             // Act
