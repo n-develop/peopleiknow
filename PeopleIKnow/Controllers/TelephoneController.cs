@@ -55,7 +55,7 @@ namespace PeopleIKnow.Controllers
             }
 
             var telephone = _repository.GetTelephoneNumberById(id);
-            if (telephone == null)
+            if (telephone.IsNull())
             {
                 return NotFound();
             }

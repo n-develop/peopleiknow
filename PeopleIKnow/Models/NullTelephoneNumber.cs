@@ -1,6 +1,6 @@
 namespace PeopleIKnow.Models
 {
-    class NullTelephoneNumber : TelephoneNumber
+    public class NullTelephoneNumber : TelephoneNumber
     {
         private static NullTelephoneNumber _instance;
 
