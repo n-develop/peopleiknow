@@ -45,6 +45,11 @@ namespace PeopleIKnow.Controllers
         [HttpPost]
         public async Task<IActionResult> Details(ContactUpdateViewModel contact)
         {
+            if (contact == null)
+            {
+                return BadRequest();
+            }
+
             var contactFromDb = _repository.GetContactById(contact.Id);
             if (contactFromDb.IsNull())
             {

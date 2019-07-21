@@ -1,0 +1,124 @@
+using System;
+using System.Threading.Tasks;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
+using NSubstitute;
+using PeopleIKnow.Models;
+using PeopleIKnow.ViewModels;
+using Xunit;
+
+namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
+{
+    public class DetailsTests : BaseDashboardControllerTests
+    {
+        [Fact]
+        public void Get_ReceivesInvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            var controller = CreateController();
+
+            // Act
+            var actionResult = controller.Details(0);
+
+            // Assert
+            actionResult.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
+        public void Get_CannotFindContact_ReturnsNotFound()
+        {
+            // Arrange
+            _contactRepository.GetContactById(1).Returns(NullContact.GetInstance());
+            var controller = CreateController();
+
+            // Act
+            var actionResult = controller.Details(1);
+
+            // Assert
+            actionResult.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
+        public void Get_FoundContact_ReturnsView()
+        {
+            // Arrange
+            _contactRepository.GetContactById(2).Returns(new Contact());
+            var controller = CreateController();
+
+            // Act
+            var actionResult = controller.Details(2);
+
+            // Assert
+            actionResult.Should().BeOfType<ViewResult>();
+        }
+
+        [Fact]
+        public void Get_FoundContact_ReturnsContactAsModel()
+        {
+            // Arrange
+            _contactRepository.GetContactById(3).Returns(new Contact {Id = 3});
+            var controller = CreateController();
+
+            // Act
+            var viewResult = controller.Details(3) as ViewResult;
+
+            // Assert
+            viewResult.Model.Should().BeOfType<Contact>();
+            (viewResult.Model as Contact).Id.Should().Be(3);
+        }
+
+        [Fact]
+        public async Task Post_ReceivesNull_ReturnsBadRequest()
+        {
+            // Arrange
+            var controller = CreateController();
+
+            // Act
+            var actionResult = await controller.Details(null);
+
+            // Assert
+            actionResult.Should().BeOfType<BadRequestResult>();
+        }
+
+        [Fact]
+        public async Task Post_ReceivesUnknownId_ReturnsNotFound()
+        {
+            // Arrange
+            _contactRepository.GetContactById(1).Returns(NullContact.GetInstance());
+            var controller = CreateController();
+
+            // Act
+            var actionResult = await controller.Details(new ContactUpdateViewModel {Id = 1});
+
+            // Assert
+            actionResult.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
+        public async Task Post_ReceivesValidModel_SavesPropertiesCorrectly()
+        {
+            // Arrange
+            var contact = new Contact {Id = 1};
+            _contactRepository.GetContactById(1).Returns(contact);
+            var controller = CreateController();
+
+            // Act
+            var actionResult = await controller.Details(new ContactUpdateViewModel
+            {
+                Id = 1,
+                Address = "Address",
+                Birthday = new DateTime(2001, 1, 1),
+                BusinessTitle = "BusinessTitle",
+                Employer = "Employer",
+                Firstname = "Firstname",
+                Middlename = "Middlename",
+                Lastname = "Lastname",
+                Tags = "Tags"
+            });
+
+            // Assert
+            contact.Address.Should().Be("Address");
+            throw new NotImplementedException("check all properties!");
+        }
+    }
+}
