@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using PeopleIKnow.Models;
@@ -100,7 +101,10 @@ namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
             // Arrange
             var contact = new Contact {Id = 1};
             _contactRepository.GetContactById(1).Returns(contact);
+            _imageRepository.WriteFileToDiskAsync(Arg.Any<IFormFile>(), 1).Returns("test.jpg");
             var controller = CreateController();
+            var imageFile = Substitute.For<IFormFile>();
+            imageFile.Length.Returns(1);
 
             // Act
             var actionResult = await controller.Details(new ContactUpdateViewModel
@@ -113,12 +117,20 @@ namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
                 Firstname = "Firstname",
                 Middlename = "Middlename",
                 Lastname = "Lastname",
-                Tags = "Tags"
+                Tags = "Tags",
+                Image = imageFile,
             });
 
             // Assert
             contact.Address.Should().Be("Address");
-            throw new NotImplementedException("check all properties!");
+            contact.Birthday.Should().Be(new DateTime(2001, 1, 1));
+            contact.BusinessTitle.Should().Be("BusinessTitle");
+            contact.Employer.Should().Be("Employer");
+            contact.Firstname.Should().Be("Firstname");
+            contact.Middlename.Should().Be("Middlename");
+            contact.Lastname.Should().Be("Lastname");
+            contact.Tags.Should().Be("Tags");
+            contact.ImagePath.Should().Be("test.jpg");
         }
     }
 }

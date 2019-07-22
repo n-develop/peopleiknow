@@ -1,11 +1,9 @@
 ﻿using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
+using PeopleIKnow.Services;
 using PeopleIKnow.ViewModels;
 
 namespace PeopleIKnow.Controllers
@@ -13,12 +11,12 @@ namespace PeopleIKnow.Controllers
     public class DashboardController : Controller
     {
         private readonly IContactRepository _repository;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IImageRepository _imageRepository;
 
-        public DashboardController(IContactRepository repository, IHostingEnvironment hostingEnvironment)
+        public DashboardController(IContactRepository repository, IImageRepository imageRepository)
         {
             _repository = repository;
-            _hostingEnvironment = hostingEnvironment;
+            _imageRepository = imageRepository;
         }
 
         public IActionResult Index()
@@ -67,27 +65,13 @@ namespace PeopleIKnow.Controllers
 
             if (contact.Image != null && contact.Image.Length > 0)
             {
-                contactFromDb.ImagePath = await ReadImageFile(contact.Image, contact.Id);
+                contactFromDb.ImagePath = await _imageRepository.WriteFileToDiskAsync(contact.Image, contact.Id);
             }
 
             _repository.SaveContact(contactFromDb);
 
             return Details(contact.Id);
         }
-
-        private async Task<string> ReadImageFile(IFormFile formFile, int contactId)
-        {
-            var filename = contactId + formFile.FileName.Substring(formFile.FileName.LastIndexOf("."));
-            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", "contacts", filename);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await formFile.CopyToAsync(stream);
-            }
-
-            return "images/contacts/" + filename;
-        }
-
 
         public IActionResult ContactList()
         {

@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Hosting;
 using NSubstitute;
 using PeopleIKnow.Controllers;
 using PeopleIKnow.Repositories;
+using PeopleIKnow.Services;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
 {
@@ -10,17 +10,17 @@ namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
         #region test infrastructure
 
         protected IContactRepository _contactRepository;
-        private IHostingEnvironment _hostingEnvironment;
+        protected IImageRepository _imageRepository;
 
         protected BaseDashboardControllerTests()
         {
             _contactRepository = Substitute.For<IContactRepository>();
-            _hostingEnvironment = Substitute.For<IHostingEnvironment>();
+            _imageRepository = Substitute.For<IImageRepository>();
         }
 
         protected DashboardController CreateController()
         {
-            return new DashboardController(_contactRepository, _hostingEnvironment);
+            return new DashboardController(_contactRepository, _imageRepository);
         }
 
         #endregion
