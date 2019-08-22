@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
-namespace PeopleIKnow.Services
+namespace PeopleIKnow.Repositories
 {
     public class ImageRepository : IImageRepository
     {

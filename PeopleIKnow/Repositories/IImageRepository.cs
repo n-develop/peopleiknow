@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace PeopleIKnow.Services
+namespace PeopleIKnow.Repositories
 {
     public interface IImageRepository
     {

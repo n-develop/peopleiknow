@@ -328,18 +328,10 @@ namespace PeopleIKnow.Repositories
         {
             var allContacts = await GetAllContacts();
 
-            if (term.StartsWith("tag:", StringComparison.InvariantCultureIgnoreCase))
-            {
-                term = term.Substring(4).Trim();
-                var tagged = allContacts.Where(c => !string.IsNullOrEmpty(c.Tags)
-                                                    && c.Tags.Contains(term,
-                                                        StringComparison.InvariantCultureIgnoreCase))
-                    .ToList();
-                return tagged;
-            }
-
             var filtered = allContacts
-                .Where(c => c.FullName.Contains(term, StringComparison.InvariantCultureIgnoreCase))
+                .Where(c => c.FullName.Contains(term, StringComparison.InvariantCultureIgnoreCase)
+                            || !string.IsNullOrEmpty(c.Tags) && c.Tags.Contains(term,
+                                StringComparison.InvariantCultureIgnoreCase))
                 .ToList();
             return filtered;
         }
