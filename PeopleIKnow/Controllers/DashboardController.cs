@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
-using PeopleIKnow.Services;
 using PeopleIKnow.ViewModels;
 
 namespace PeopleIKnow.Controllers

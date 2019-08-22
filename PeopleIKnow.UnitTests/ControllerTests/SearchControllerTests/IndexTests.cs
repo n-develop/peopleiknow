@@ -58,7 +58,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.SearchControllerTests
         }
 
         [Fact]
-        public void ValidSearchTerm_ReturnsView()
+        public async Task ValidSearchTerm_ReturnsView()
         {
             // Arrange
             var contacts = new List<Contact>
@@ -85,11 +85,51 @@ namespace PeopleIKnow.UnitTests.ControllerTests.SearchControllerTests
                 },
             };
             _contactRepository.SearchContacts(Arg.Any<string>()).Returns(contacts);
+            var controller = CreateController();
 
             // Act
+            var searchResult = await controller.Index("AAB");
 
             // Assert
-            throw new NotImplementedException();
+            searchResult.Should().BeOfType<ViewResult>();
+        }
+
+        [Fact]
+        public async Task ValidSearchTerm_ReturnsContactListView()
+        {
+            // Arrange
+            var controller = CreateController();
+
+            // Act
+            var searchResult = await controller.Index("Max") as ViewResult;
+
+            // Assert
+            searchResult.ViewName.Should().Be("Components/ContactList/Default");
+        }
+
+        [Fact]
+        public async Task ValidSearchTerm_ReturnsContactsInModel()
+        {
+            // Arrange
+            var contacts = new List<Contact>
+            {
+                new Contact
+                {
+                    Lastname = "AAA",
+                    IsFavorite = false
+                }
+            };
+            _contactRepository.SearchContacts(Arg.Any<string>()).Returns(contacts);
+            var controller = CreateController();
+
+            // Act
+            var searchResult = await controller.Index("AAA") as ViewResult;
+
+            // Assert
+            searchResult.Model.Should().BeOfType<List<Contact>>();
+            var model = searchResult.Model as List<Contact>;
+            model.Count.Should().Be(1);
+            model[0].Lastname.Should().Be("AAA");
         }
     }
 }
