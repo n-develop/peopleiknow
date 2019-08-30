@@ -24,6 +24,7 @@ function closeModals() {
 function addContact() {
     fetch("/contact/add")
         .then(updatePane);
+    showPane();
 }
 
 function createContact() {
