@@ -1,0 +1,42 @@
+@model Contact
+
+@* RELATIONSHIPS *@
+<div class="panel">
+    <p class="panel-heading">
+        Relationships
+        <a class="button is-pulled-right is-small is-success" onclick="addRelationship()">
+            <i class="fa fa-plus-circle"></i>
+        </a>
+    </p>
+
+    @foreach (var relationship in Model.Relationships)
+    {
+        <div class="panel-block">
+            <label class="label">@relationship.Type</label>
+            <div class="field has-addons">
+                <p class="control">
+                    <a class="button is-info" onclick="searchRelationship('@relationship.Person')">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </p>
+                <div class="control is-expanded has-icons-left">
+                    <input class="input" value="@relationship.Person" disabled="disabled">
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-user-friends"></i>
+                    </span>
+                </div>
+                <p class="control">
+                    <a class="button is-warning" onclick="editRelationship(@relationship.Id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger" onclick="deleteRelationship(@relationship.Id)">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    }
+</div>
+@* RELATIONSHIPS *@

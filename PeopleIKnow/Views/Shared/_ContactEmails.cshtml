@@ -1,0 +1,39 @@
+@model Contact
+
+@* EMAILS *@
+<div class="panel">
+    <p class="panel-heading">
+        Emails
+        <a class="button is-pulled-right is-small is-success" onclick="addEmail()">
+            <i class="fa fa-plus-circle"></i>
+        </a>
+    </p>
+
+    @foreach (var email in Model.EmailAddresses)
+    {
+        <div class="panel-block">
+            <label class="label">@email.Type</label>
+            <div class="field has-addons">
+                <p class="control">
+                    <a class="button is-info" href="mailto:@email.Email">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                </p>
+                <div class="control is-expanded ">
+                    <input class="input" value="@email.Email" type="email" placeholder="email@@domoain.com" disabled="disabled">
+                </div>
+                <p class="control">
+                    <a class="button is-warning" onclick="editEmail(@email.Id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger" onclick="deleteEmail(@email.Id)">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    }
+</div>
+@* EMAILS *@

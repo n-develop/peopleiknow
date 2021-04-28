@@ -1,0 +1,39 @@
+@model Contact
+
+@* TELEPHONE *@
+<div class="panel">
+    <p class="panel-heading">
+        Telephone
+        <a class="button is-pulled-right is-small is-success" onclick="addTelephone()">
+            <i class="fa fa-plus-circle"></i>
+        </a>
+    </p>
+
+    @foreach (var telephone in Model.TelephoneNumbers)
+    {
+        <div class="panel-block">
+            <label class="label">@telephone.Type</label>
+            <div class="field has-addons">
+                <p class="control">
+                    <a class="button is-info" href="tel:@telephone.TelephoneNormalized">
+                        <i class="fa fa-phone"></i>
+                    </a>
+                </p>
+                <div class="control is-expanded">
+                    <input class="input" value="@telephone.Telephone" type="tel" disabled="disabled">
+                </div>
+                <p class="control">
+                    <a class="button is-warning" onclick="editTelephone(@telephone.Id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger" onclick="deleteTelephone(@telephone.Id)">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    }
+</div>
+@* TELEPHONE *@

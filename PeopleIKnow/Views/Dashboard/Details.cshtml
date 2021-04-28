@@ -3,265 +3,55 @@
     Layout = null;
 }
 <div class="box contact-preview" data-contact-id="@Model.Id">
-<form id="contact-form" asp-controller="Dashboard" asp-action="Details" method="post">
-<input type="hidden" asp-for="Id"/>
-<div class="field">
-    <label class="label">Profile Image</label>
-    <div class="field">
-        <figure class="image is-96x96">
-            <img src="@Model.ImagePath" alt="Profile image">
-        </figure>
-    </div>
-    <div class="control">
-        <div class="file has-name is-fullwidth">
-            <label class="file-label">
-                <input id="image-input" class="file-input" type="file" name="Image">
-                <span class="file-cta">
-                    <span class="file-icon">
-                        <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">
-                        Browse…
-                    </span>
-                </span>
-                <span id="file-name" class="file-name">
-                    Select a file
-                </span>
-            </label>
-        </div>
-    </div>
-</div>
-
-
-@* NAMES *@
-<div class="field">
-    <label class="label">Firstname</label>
-    <div class="control">
-        <input class="input" asp-for="Firstname" type="text" placeholder="Firstname">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Middlename</label>
-    <div class="control">
-        <input class="input" asp-for="Middlename" type="text" placeholder="Middlename">
-    </div>
-</div>
-
-<div class="field">
-    <label class="label">Lastname</label>
-    <div class="control">
-        <input class="input" asp-for="Lastname" type="text" placeholder="Lastname">
-    </div>
-</div>
-@* NAMES *@
-
-@* EMAILS *@
-<div class="panel">
-    <p class="panel-heading">
-        Emails
-        <a class="button is-pulled-right is-small is-success" onclick="addEmail()">
-            <i class="fa fa-plus-circle"></i>
-        </a>
-    </p>
-
-    @foreach (var email in Model.EmailAddresses)
-    {
-        <div class="panel-block">
-            <label class="label">@email.Type</label>
-            <div class="field has-addons">
-                <p class="control">
-                    <a class="button is-info" href="mailto:@email.Email">
-                        <i class="fa fa-envelope"></i>
-                    </a>
-                </p>
-                <div class="control is-expanded ">
-                    <input class="input" value="@email.Email" type="email" placeholder="email@@domoain.com" disabled="disabled">
+    <form id="contact-form" asp-controller="Dashboard" asp-action="Details" method="post">
+        <input type="hidden" asp-for="Id"/>
+        <div class="field">
+            <label class="label">Profile Image</label>
+            <div class="field">
+                <figure class="image is-96x96">
+                    <img src="@Model.ImagePath" alt="Profile image">
+                </figure>
+            </div>
+            <div class="control">
+                <div class="file has-name is-fullwidth">
+                    <label class="file-label">
+                        <input id="image-input" class="file-input" type="file" name="Image">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Browse…
+                            </span>
+                        </span>
+                        <span id="file-name" class="file-name">
+                            Select a file
+                        </span>
+                    </label>
                 </div>
-                <p class="control">
-                    <a class="button is-warning" onclick="editEmail(@email.Id)">
-                        <i class="fa fa-pencil-alt"></i>
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button is-danger" onclick="deleteEmail(@email.Id)">
-                        <i class="fa fa-minus-circle"></i>
-                    </a>
-                </p>
             </div>
         </div>
-    }
-</div>
-@* EMAILS *@
 
-@* BIRTHDAY *@
-<div class="field">
-    <label class="label">Birthday</label>
-    <div class="control has-icons-left">
-        <input class="input" asp-for="Birthday" type="date" min="1900-01-01">
-        <span class="icon is-small is-left">
-            <i class="fa fa-birthday-cake"></i>
-        </span>
-    </div>
-</div>
-@* BIRTHDAY *@
 
-@* ADDRESS *@
-<div class="field">
-    <label class="label">Address</label>
-    <div class="control">
-        <textarea class="textarea" asp-for="Address">
-            </textarea>
-    </div>
-</div>
-@* ADDRESS *@
+        <partial name="_ContactName"/>
 
-@* WORK *@
-<div class="field">
-    <label class="label">Employer</label>
-    <div class="control has-icons-left">
-        <input class="input" asp-for="Employer" placeholder="Employer">
-        <span class="icon is-small is-left">
-            <i class="fa fa-building"></i>
-        </span>
-    </div>
-</div>
-<div class="field">
-    <label class="label">Business Title</label>
-    <div class="control has-icons-left">
-        <input class="input" asp-for="BusinessTitle" placeholder="Business Title">
-        <span class="icon is-small is-left">
-            <i class="fa fa-briefcase"></i>
-        </span>
-    </div>
-</div>
-@* WORK *@
+        <partial name="_ContactEmails"/>
 
-@* TELEPHONE *@
-<div class="panel">
-    <p class="panel-heading">
-        Telephone
-        <a class="button is-pulled-right is-small is-success" onclick="addTelephone()">
-            <i class="fa fa-plus-circle"></i>
-        </a>
-    </p>
+        <partial name="_ContactBirthday"/>
 
-    @foreach (var telephone in Model.TelephoneNumbers)
-    {
-        <div class="panel-block">
-            <label class="label">@telephone.Type</label>
-            <div class="field has-addons">
-                <p class="control">
-                    <a class="button is-info" href="tel:@telephone.TelephoneNormalized">
-                        <i class="fa fa-phone"></i>
-                    </a>
-                </p>
-                <div class="control is-expanded">
-                    <input class="input" value="@telephone.Telephone" type="tel" disabled="disabled">
-                </div>
-                <p class="control">
-                    <a class="button is-warning" onclick="editTelephone(@telephone.Id)">
-                        <i class="fa fa-pencil-alt"></i>
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button is-danger" onclick="deleteTelephone(@telephone.Id)">
-                        <i class="fa fa-minus-circle"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-    }
-</div>
-@* TELEPHONE *@
+        <partial name="_ContactAddress"/>
 
-@* RELATIONSHIPS *@
-<div class="panel">
-    <p class="panel-heading">
-        Relationships
-        <a class="button is-pulled-right is-small is-success" onclick="addRelationship()">
-            <i class="fa fa-plus-circle"></i>
-        </a>
-    </p>
+        <partial name="_ContactWork"/>
 
-    @foreach (var relationship in Model.Relationships)
-    {
-        <div class="panel-block">
-            <label class="label">@relationship.Type</label>
-            <div class="field has-addons">
-                <p class="control">
-                    <a class="button is-info" onclick="searchRelationship('@relationship.Person')">
-                        <i class="fa fa-search"></i>
-                    </a>
-                </p>
-                <div class="control is-expanded has-icons-left">
-                    <input class="input" value="@relationship.Person" disabled="disabled">
-                    <span class="icon is-small is-left">
-                        <i class="fa fa-user-friends"></i>
-                    </span>
-                </div>
-                <p class="control">
-                    <a class="button is-warning" onclick="editRelationship(@relationship.Id)">
-                        <i class="fa fa-pencil-alt"></i>
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button is-danger" onclick="deleteRelationship(@relationship.Id)">
-                        <i class="fa fa-minus-circle"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-    }
-</div>
-@* RELATIONSHIPS *@
+        <partial name="_ContactTelephone"/>
 
-@* TIMELINE *@
-<div class="panel">
-    <p class="panel-heading">
-        Status Updates
-        <a class="button is-pulled-right is-small is-success" onclick="addStatusUpdate()">
-            <i class="fa fa-plus-circle"></i>
-        </a>
-    </p>
+        <partial name="_ContactRelationships"/>
 
-    @foreach (var statusUpdate in Model.Timeline)
-    {
-        <div class="panel-block">
-            <label class="label">@statusUpdate.Created.ToString("dd.MM.yyyy")</label>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <input class="input" value="@statusUpdate.StatusText" placeholder="Status update" disabled="disabled">
-                </div>
-                <p class="control">
-                    <a class="button is-warning" onclick="editStatusUpdate(@statusUpdate.Id)">
-                        <i class="fa fa-pencil-alt"></i>
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button is-danger" onclick="deleteStatusUpdate(@statusUpdate.Id)">
-                        <i class="fa fa-minus-circle"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-    }
-</div>
-@* TIMELINE *@
+        <partial name="_ContactTimeline"/>
 
-@* TAGS *@
-<div class="field">
-    <label class="label">Tags</label>
-    <div class="control has-icons-left">
-        <input class="input" asp-for="Tags" placeholder="e.g. football,boardgames,family">
-        <span class="icon is-small is-left">
-            <i class="fa fa-tag"></i>
-        </span>
-    </div>
-</div>
-@* TAGS *@
+        <partial name="_ContactTags"/>
 
-<a class="button is-info is-medium" onclick="saveContact()">Save</a>
-<a class="button is-danger is-medium" onclick="deleteContact()">Delete</a>
-</form>
+        <a class="button is-info is-medium" onclick="saveContact()">Save</a>
+        <a class="button is-danger is-medium" onclick="deleteContact()">Delete</a>
+    </form>
 </div>
