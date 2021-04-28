@@ -39,6 +39,7 @@ namespace PeopleIKnow.Repositories
                 .Include(c => c.TelephoneNumbers)
                 .Include(c => c.Relationships)
                 .Include(c => c.StatusUpdates)
+                .Include(c => c.Activities)
                 .FirstOrDefault(c => c.Id == id);
             return contact ?? NullContact.GetInstance();
         }
@@ -60,6 +61,11 @@ namespace PeopleIKnow.Repositories
             foreach (var statusUpdate in contact.StatusUpdates)
             {
                 _context.StatusUpdates.Remove(statusUpdate);
+            }
+
+            foreach (var commonActivity in contact.Activities)
+            {
+                _context.CommonActivities.Remove(commonActivity);
             }
 
             foreach (var relationship in contact.Relationships)
