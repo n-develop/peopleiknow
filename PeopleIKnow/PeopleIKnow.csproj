@@ -27,5 +27,10 @@
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-  </ItemGroup>
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="Views\Shared\CommonActivity\Add.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Shared\CommonActivity\Edit.cshtml"/>
+    </ItemGroup>
 </Project>

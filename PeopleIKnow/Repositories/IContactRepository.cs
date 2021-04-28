@@ -29,5 +29,9 @@ namespace PeopleIKnow.Repositories
         void UpdateStatusUpdate(StatusUpdate statusUpdate);
         void DeleteStatusUpdate(StatusUpdate statusUpdate);
         Task<IEnumerable<Contact>> SearchContacts(string term);
+        void AddCommonActivity(CommonActivity commonActivity);
+        CommonActivity GetCommonActivityById(int id);
+        void UpdateCommonActivity(CommonActivity commonActivity);
+        void DeleteCommonActivity(CommonActivity commonActivity);
     }
 }

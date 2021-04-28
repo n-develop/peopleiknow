@@ -428,6 +428,51 @@ function deleteStatusUpdate(id) {
         .finally(() => hideLoadingIndicator());
 }
 
+/* Common Activities */
+
+function addActivity() {
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
+    showLoadingIndicator();
+    fetch("/CommonActivity/Add?contactId=" + id)
+        .then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function saveActivity() {
+    const form = new FormData(document.getElementById('common-activity-form'));
+    showLoadingIndicator();
+    fetch("/CommonActivity/Add", {
+        method: "POST",
+        body: form
+    }).then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function editActivity(id) {
+    showLoadingIndicator();
+    fetch("/CommonActivity/Edit/" + id)
+        .then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function updateActivity() {
+    const form = new FormData(document.getElementById('common-activity-form'));
+    showLoadingIndicator();
+    fetch("/CommonActivity/Edit", {
+        method: "POST",
+        body: form
+    }).then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function deleteActivity(id) {
+    showLoadingIndicator();
+    fetch("/CommonActivity/Delete/" + id)
+        .then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
 /* Update Pane */
 
 function updatePane(response) {

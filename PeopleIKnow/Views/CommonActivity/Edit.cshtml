@@ -1,0 +1,28 @@
+@model PeopleIKnow.Models.CommonActivity
+@{
+    Layout = null;
+}
+<div class="box">
+    <form id="common-activity-form">
+        <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="ContactId"/>
+
+        <div class="field">
+            <label class="label">Date</label>
+            <div class="control">
+                <input class="input" asp-for="Date" type="date">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+                <textarea class="textarea" asp-for="Description" placeholder="Describe the activity here...">
+                </textarea>
+            </div>
+        </div>
+
+        <a onclick="updateActivity()" class="button is-info is-medium">Update</a>
+        <a onclick="backToDetails(@Model.ContactId)" class="button is-danger is-medium">Cancel</a>
+    </form>
+</div>

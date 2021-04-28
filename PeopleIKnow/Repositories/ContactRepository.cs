@@ -341,5 +341,67 @@ namespace PeopleIKnow.Repositories
                 .ToList();
             return filtered;
         }
+
+        public void AddCommonActivity(CommonActivity commonActivity)
+        {
+            if (commonActivity.Id == 0)
+            {
+                if (!_context.CommonActivities.Any())
+                {
+                    commonActivity.Id = 1;
+                }
+                else
+                {
+                    var maxId = _context.CommonActivities.Max(c => c.Id);
+                    commonActivity.Id = maxId + 1;
+                }
+            }
+
+            _context.CommonActivities.Add(commonActivity);
+            _context.SaveChanges();
+            _logger.LogInformation("Common activity with ID {Id} was created", commonActivity.Id);
+        }
+
+        public CommonActivity GetCommonActivityById(int id)
+        {
+            if (id <= 0)
+            {
+                return NullCommonActivity.GetInstance();
+            }
+
+            var commonActivity = _context.CommonActivities.Find(id);
+            if (commonActivity == null)
+            {
+                return NullCommonActivity.GetInstance();
+            }
+
+            return commonActivity;
+        }
+
+        public void UpdateCommonActivity(CommonActivity commonActivity)
+        {
+            if (commonActivity.IsNull() || commonActivity.Id <= 0)
+            {
+                return;
+            }
+
+            var commonActivityRepository = _context.CommonActivities.Find(commonActivity.Id);
+            if (commonActivityRepository == null)
+            {
+                return;
+            }
+
+            commonActivityRepository.Date = commonActivity.Date;
+            commonActivityRepository.Description = commonActivity.Description;
+
+            _context.SaveChanges();
+            _logger.LogInformation("Common activity with ID {Id} was updated", commonActivity.Id);
+        }
+
+        public void DeleteCommonActivity(CommonActivity commonActivity)
+        {
+            _context.CommonActivities.Remove(commonActivity);
+            _context.SaveChanges();
+        }
     }
 }
