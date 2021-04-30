@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
@@ -7,6 +8,7 @@ using PeopleIKnow.ViewModels;
 
 namespace PeopleIKnow.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly IContactRepository _repository;

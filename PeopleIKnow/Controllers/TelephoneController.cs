@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PeopleIKnow.Models;
@@ -5,6 +6,7 @@ using PeopleIKnow.Repositories;
 
 namespace PeopleIKnow.Controllers
 {
+    [Authorize]
     public class TelephoneController : Controller
     {
         private readonly IContactRepository _repository;

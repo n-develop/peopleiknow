@@ -1,10 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PeopleIKnow.Repositories;
 
 namespace PeopleIKnow.Controllers
 {
+    [Authorize]
     public class SearchController : Controller
     {
         private readonly IContactRepository _repository;
