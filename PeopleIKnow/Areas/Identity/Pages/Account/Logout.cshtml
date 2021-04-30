@@ -1,21 +1,50 @@
 ﻿@page
 @model LogoutModel
 @{
+    Layout = null;
     ViewData["Title"] = "Log out";
 }
+<!DOCTYPE html>
+<html lang="en">
 
-<header>
-    <h1>@ViewData["Title"]</h1>
-    @{
-        if (User.Identity.IsAuthenticated)
-        {
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new {area = ""})" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
-            </form>
-        }
-        else
-        {
-            <p>You have successfully logged out of the application.</p>
-        }
-    }
-</header>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <meta name="description" content="Sign in to the website"/>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bulma/bulma.css"/>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/bulma/bulma.min.css"/>
+    </environment>
+    <link rel="stylesheet" href="~/css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<section id="login-screen" class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    <div class="box">
+                        @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new {area = ""})" method="post">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <p>You have successfully logged out of the application.</p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,10 +1,39 @@
 ﻿@page
 @model AccessDeniedModel
 @{
+    Layout = null;
     ViewData["Title"] = "Access denied";
 }
+<!DOCTYPE html>
+<html lang="en">
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <meta name="description" content="Sign in to the website"/>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bulma/bulma.css"/>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/bulma/bulma.min.css"/>
+    </environment>
+    <link rel="stylesheet" href="~/css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<section id="login-screen" class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    <div class="box">
+                        <p class="has-text-danger">You do not have access to this resource.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
