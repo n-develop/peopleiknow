@@ -33,6 +33,7 @@ namespace PeopleIKnow
             services.AddDbContext<ContactContext>(options => options.UseSqlite("Data Source=people.db"));
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ContactContext>()
+                .AddDefaultTokenProviders()
                 .AddDefaultUI();
         }
 
