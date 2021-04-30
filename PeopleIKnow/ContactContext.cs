@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PeopleIKnow.Models;
 
 namespace PeopleIKnow
 {
-    public class ContactContext : DbContext
+    public class ContactContext : IdentityDbContext<IdentityUser>
     {
         public ContactContext()
         {

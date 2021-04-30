@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PeopleIKnow;
 
 namespace PeopleIKnow.Migrations
 {
     [DbContext(typeof(ContactContext))]
-    partial class ContactContextModelSnapshot : ModelSnapshot
+    [Migration("20210430210128_AuthUpdate")]
+    partial class AuthUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

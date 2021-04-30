@@ -7,9 +7,9 @@ namespace PeopleIKnow.Repositories
 {
     public class ImageRepository : IImageRepository
     {
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public ImageRepository(IHostingEnvironment hostingEnvironment)
+        public ImageRepository(IWebHostEnvironment hostingEnvironment)
         {
             _hostingEnvironment = hostingEnvironment;
         }

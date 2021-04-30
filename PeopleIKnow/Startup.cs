@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 using PeopleIKnow.Repositories;
 using PeopleIKnow.Services;
 
@@ -26,41 +22,22 @@ namespace PeopleIKnow
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<IContactRepository, ContactRepository>();
             services.AddHttpClient<INotificationService, TelegramNotificationService>();
-            var section = Configuration.GetSection("Notifications");
-            services.Configure<NotificationSettings>(section);
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.Configure<NotificationSettings>(Configuration.GetSection("Notifications"));
 
-            services
-                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = "/login/";
-                    options.LogoutPath = "/logout/";
-                });
 
-            services.AddMvc(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddDbContext<ContactContext>(options => options.UseSqlite("Data Source=people.db"));
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ContactContext>()
+                .AddDefaultUI();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -74,14 +51,15 @@ namespace PeopleIKnow
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-            app.UseAuthentication();
+            app.UseRouting();
+            app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Dashboard}/{action=Index}/{id?}");
+                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
