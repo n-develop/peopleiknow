@@ -32,17 +32,17 @@
                     <form id="account" aria-labelledby="legend" class="box" method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="field">
-                            <label asp-for="Input.Email"></label>
+                            <label class="label" asp-for="Input.Email"></label>
                             <div class="control has-icons-left">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-user-circle-o"></i>
                                 </span>
-                                <input asp-for="Input.Email" class="input"/>
+                                <input asp-for="Input.Email" class="input" placeholder="john.smith@yourmail.com"/>
                             </div>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="field">
-                            <label asp-for="Input.Password"></label>
+                            <label class="label" asp-for="Input.Password"></label>
                             <div class="control has-icons-left">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-lock"></i>
