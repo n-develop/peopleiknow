@@ -36,6 +36,7 @@
         <Content Update="appsettings.Development.json">
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <DependentUpon>appsettings.json</DependentUpon>
         </Content>
     </ItemGroup>
 </Project>
