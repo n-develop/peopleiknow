@@ -2,6 +2,10 @@
 @{
     Layout = null;
 }
+@if (string.IsNullOrEmpty(Model.ImagePath))
+{
+    Model.ImagePath = "images/contacts/unknown.jpg";
+}
 <div class="box contact-preview" data-contact-id="@Model.Id">
     <form id="contact-form" asp-controller="Dashboard" asp-action="Details" method="post">
         <input type="hidden" asp-for="Id"/>
