@@ -228,4 +228,5 @@ PeopleIKnow/people.db
 *.min.css
 *.min.js
 *.Development.json
+*.Production.json
 PeopleIKnow/wwwroot/images/contacts/*
