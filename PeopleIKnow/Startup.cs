@@ -27,6 +27,7 @@ namespace PeopleIKnow
             services.AddHttpClient<INotificationService, TelegramNotificationService>();
             services.Configure<NotificationSettings>(Configuration.GetSection("Notifications"));
 
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddControllersWithViews();
             services.AddRazorPages();

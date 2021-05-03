@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,10 +11,11 @@ namespace PeopleIKnow.Controllers
     [Authorize]
     public class CommonActivityController : Controller
     {
-        private readonly IContactRepository _repository;
+        private readonly IRepository<CommonActivity> _repository;
         private readonly ILogger<CommonActivityController> _logger;
 
-        public CommonActivityController(IContactRepository repository, ILogger<CommonActivityController> logger)
+        public CommonActivityController(IRepository<CommonActivity> repository,
+            ILogger<CommonActivityController> logger)
         {
             _repository = repository;
             _logger = logger;
@@ -36,7 +38,7 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(CommonActivity commonActivity)
+        public async Task<ActionResult> Add(CommonActivity commonActivity)
         {
             if (commonActivity == null)
             {
@@ -46,19 +48,19 @@ namespace PeopleIKnow.Controllers
             _logger.LogInformation("ADD request for activity '{Description}' on contact with ID '{ContactId}'",
                 commonActivity.Description, commonActivity.ContactId);
 
-            _repository.AddCommonActivity(commonActivity);
+            await _repository.AddAsync(commonActivity);
 
             return RedirectToAction("Details", "Dashboard", new {id = commonActivity.ContactId});
         }
 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             if (id <= 0)
             {
                 return NotFound();
             }
 
-            var commonActivity = _repository.GetCommonActivityById(id);
+            var commonActivity = await _repository.GetByIdAsync(id);
             if (commonActivity.IsNull())
             {
                 return NotFound();
@@ -68,7 +70,7 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(CommonActivity commonActivity)
+        public async Task<ActionResult> Edit(CommonActivity commonActivity)
         {
             if (commonActivity == null)
             {
@@ -79,12 +81,12 @@ namespace PeopleIKnow.Controllers
                 "EDIT request for common activity '{Description}' on contact with ID '{ContactId}'",
                 commonActivity.Description, commonActivity.ContactId);
 
-            _repository.UpdateCommonActivity(commonActivity);
+            await _repository.UpdateAsync(commonActivity);
 
             return RedirectToAction("Details", "Dashboard", new {id = commonActivity.ContactId});
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             _logger.LogInformation("DELETE request for common activity with ID '{Id}'", id);
             if (id <= 0)
@@ -92,13 +94,13 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            var commonActivity = _repository.GetCommonActivityById(id);
+            var commonActivity = await _repository.GetByIdAsync(id);
             if (commonActivity.IsNull())
             {
                 return NotFound();
             }
 
-            _repository.DeleteCommonActivity(commonActivity);
+            await _repository.DeleteAsync(commonActivity);
 
             return RedirectToAction("Details", "Dashboard", new {id = commonActivity.ContactId});
         }
