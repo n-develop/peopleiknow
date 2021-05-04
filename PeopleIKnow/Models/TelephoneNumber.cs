@@ -18,10 +18,5 @@ namespace PeopleIKnow.Models
                 .Replace("-", "")
                 .Replace("(", "")
                 .Replace(")", "");
-
-        public virtual bool IsNull()
-        {
-            return false;
-        }
     }
 }

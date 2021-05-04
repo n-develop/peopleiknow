@@ -13,15 +13,5 @@ namespace PeopleIKnow.Repositories
         bool DeleteContact(int id);
         Contact AddContact(Contact contact);
         void SaveContact(Contact contact);
-
-        void AddTelephoneNumber(TelephoneNumber telephoneNumber);
-        TelephoneNumber GetTelephoneNumberById(int id);
-        void DeleteTelephoneNumber(TelephoneNumber telephoneNumber);
-        void UpdateTelephoneNumber(TelephoneNumber telephoneNumber);
-
-        StatusUpdate GetStatusUpdateById(int id);
-        void UpdateStatusUpdate(StatusUpdate statusUpdate);
-        void DeleteStatusUpdate(StatusUpdate statusUpdate);
-        void AddStatusUpdate(StatusUpdate statusUpdate);
     }
 }

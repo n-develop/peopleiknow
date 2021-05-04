@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PeopleIKnow.Controllers;
+using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
@@ -9,18 +10,18 @@ namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
     {
         #region test infrastructure
 
-        protected IContactRepository _contactRepository;
+        protected IRepository<TelephoneNumber> _repository;
         private ILogger<TelephoneController> _logger;
 
         protected BaseTelephoneControllerTests()
         {
-            _contactRepository = Substitute.For<IContactRepository>();
+            _repository = Substitute.For<IRepository<TelephoneNumber>>();
             _logger = Substitute.For<ILogger<TelephoneController>>();
         }
 
         protected TelephoneController CreateController()
         {
-            return new TelephoneController(_contactRepository, _logger);
+            return new TelephoneController(_repository, _logger);
         }
 
         #endregion

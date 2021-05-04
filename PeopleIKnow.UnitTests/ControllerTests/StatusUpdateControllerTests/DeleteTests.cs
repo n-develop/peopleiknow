@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
+using NSubstitute.ReturnsExtensions;
 using PeopleIKnow.Models;
 using Xunit;
 
@@ -9,55 +11,55 @@ namespace PeopleIKnow.UnitTests.ControllerTests.StatusUpdateControllerTests
     public class DeleteTests : BaseStatusUpdateControllerTests
     {
         [Fact]
-        public void ReceivesInvalidId_ReturnsNotFound()
+        public async Task ReceivesInvalidId_ReturnsNotFound()
         {
             // Arrange
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Delete(0);
+            var actionResult = await controller.Delete(0);
 
             // Assert
             actionResult.Should().BeOfType<NotFoundResult>();
         }
 
         [Fact]
-        public void CannotFindStatusUpdate_ReturnsNotFound()
+        public async Task CannotFindStatusUpdate_ReturnsNotFound()
         {
             // Arrange
-            _contactRepository.GetStatusUpdateById(1).Returns(NullStatusUpdate.GetInstance());
+            _repository.GetByIdAsync(1).ReturnsNull();
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Delete(1);
+            var actionResult = await controller.Delete(1);
 
             // Assert
             actionResult.Should().BeOfType<NotFoundResult>();
         }
 
         [Fact]
-        public void ReceivesValidId_ReturnRedirect()
+        public async Task ReceivesValidId_ReturnRedirect()
         {
             // Arrange
-            _contactRepository.GetStatusUpdateById(1).Returns(new StatusUpdate {ContactId = 2});
+            _repository.GetByIdAsync(1).Returns(new StatusUpdate {ContactId = 2});
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Delete(1);
+            var actionResult = await controller.Delete(1);
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();
         }
 
         [Fact]
-        public void ReceivesValidId_ReturnsRedirectToDetails()
+        public async Task ReceivesValidId_ReturnsRedirectToDetails()
         {
             // Arrange
-            _contactRepository.GetStatusUpdateById(1).Returns(new StatusUpdate {ContactId = 2});
+            _repository.GetByIdAsync(1).Returns(new StatusUpdate {ContactId = 2});
             var controller = CreateController();
 
             // Act
-            var redirectResult = controller.Delete(1) as RedirectToActionResult;
+            var redirectResult = await controller.Delete(1) as RedirectToActionResult;
 
             // Assert
             redirectResult.ActionName.Should().Be("Details");

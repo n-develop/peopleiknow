@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using PeopleIKnow.Models;
@@ -50,39 +51,39 @@ namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
         }
 
         [Fact]
-        public void Post_ReceivesNull_ReturnsBadRequest()
+        public async Task Post_ReceivesNull_ReturnsBadRequest()
         {
             // Arrange
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Add(null);
+            var actionResult = await controller.Add(null);
 
             // Assert
             actionResult.Should().BeOfType<BadRequestResult>();
         }
 
         [Fact]
-        public void Post_ReceivesCorrectModel_ReturnsRedirectResult()
+        public async Task Post_ReceivesCorrectModel_ReturnsRedirectResult()
         {
             // Arrange
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Add(new TelephoneNumber());
+            var actionResult = await controller.Add(new TelephoneNumber());
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();
         }
 
         [Fact]
-        public void Post_ReceivesCorrectModel_ReturnsRedirectToDetails()
+        public async Task Post_ReceivesCorrectModel_ReturnsRedirectToDetails()
         {
             // Arrange
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Add(new TelephoneNumber());
+            var actionResult = await controller.Add(new TelephoneNumber());
 
             // Assert
             var redirect = actionResult as RedirectToActionResult;
