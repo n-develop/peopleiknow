@@ -14,11 +14,6 @@ namespace PeopleIKnow.Repositories
         Contact AddContact(Contact contact);
         void SaveContact(Contact contact);
 
-        void AddEmail(EmailAddress mail);
-        EmailAddress GetEmailById(int mailId);
-        void DeleteEmailAddress(EmailAddress mail);
-        void UpdateEmail(EmailAddress mail);
-
         void AddTelephoneNumber(TelephoneNumber telephoneNumber);
         TelephoneNumber GetTelephoneNumberById(int id);
         void DeleteTelephoneNumber(TelephoneNumber telephoneNumber);

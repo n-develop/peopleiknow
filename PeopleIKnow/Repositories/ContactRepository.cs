@@ -104,42 +104,6 @@ namespace PeopleIKnow.Repositories
             _logger.LogInformation($"Contact with ID {contact.Id} was saved");
         }
 
-        public void AddEmail(EmailAddress mail)
-        {
-            if (mail.Id == 0)
-            {
-                var maxId = _context.EmailAddresses.Max(c => c.Id);
-                mail.Id = maxId + 1;
-            }
-
-            _context.EmailAddresses.Add(mail);
-            _context.SaveChanges();
-            _logger.LogInformation($"Email with ID {mail.Id} was created");
-        }
-
-        public EmailAddress GetEmailById(int mailId)
-        {
-            if (mailId <= 0)
-            {
-                return NullEmailAddress.GetInstance();
-            }
-
-            var mail = _context.EmailAddresses.Find(mailId);
-
-            if (mail == null)
-            {
-                return NullEmailAddress.GetInstance();
-            }
-
-            return mail;
-        }
-
-        public void DeleteEmailAddress(EmailAddress mail)
-        {
-            _context.EmailAddresses.Remove(mail);
-            _context.SaveChanges();
-        }
-
         public void AddStatusUpdate(StatusUpdate statusUpdate)
         {
             if (statusUpdate.Id == 0)
@@ -225,27 +189,6 @@ namespace PeopleIKnow.Repositories
             _context.Relationships.Remove(relationship);
             _context.SaveChanges();
             _logger.LogInformation($"Relationship with ID {relationship.Id} was deleted");
-        }
-
-        public void UpdateEmail(EmailAddress mail)
-        {
-            if (mail.IsNull() || mail.Id <= 0)
-            {
-                return;
-            }
-
-            var emailFromRepository = _context.EmailAddresses.Find(mail.Id);
-            if (emailFromRepository == null)
-            {
-                return;
-            }
-
-
-            emailFromRepository.Type = mail.Type;
-            emailFromRepository.Email = mail.Email;
-
-            _context.SaveChanges();
-            _logger.LogInformation($"Email with ID {mail.Id} was updated");
         }
 
         public void UpdateRelationship(Relationship relationship)

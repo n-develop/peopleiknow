@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,10 +10,10 @@ namespace PeopleIKnow.Controllers
     [Authorize]
     public class EmailController : Controller
     {
-        private readonly IContactRepository _repository;
+        private readonly IRepository<EmailAddress> _repository;
         private readonly ILogger<EmailController> _logger;
 
-        public EmailController(IContactRepository repository, ILogger<EmailController> logger)
+        public EmailController(IRepository<EmailAddress> repository, ILogger<EmailController> logger)
         {
             _repository = repository;
             _logger = logger;
@@ -34,29 +35,29 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(EmailAddress mail)
+        public async Task<ActionResult> Add(EmailAddress mail)
         {
             if (mail == null)
             {
                 return BadRequest();
             }
 
-            _logger.LogInformation($"ADD request for Email '{mail.Email}' on contact with ID '{mail.ContactId}'");
+            _logger.LogInformation("ADD request for Email '{Email}' on contact with ID '{ContactId}'", mail.Email, mail.ContactId);
 
-            _repository.AddEmail(mail);
+            await _repository.AddAsync(mail);
 
             return RedirectToAction("Details", "Dashboard", new {id = mail.ContactId});
         }
 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             if (id <= 0)
             {
                 return NotFound();
             }
 
-            var mail = _repository.GetEmailById(id);
-            if (mail.IsNull())
+            var mail = await _repository.GetByIdAsync(id);
+            if (mail is null)
             {
                 return NotFound();
             }
@@ -65,35 +66,35 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(EmailAddress mail)
+        public async Task<ActionResult> Edit(EmailAddress mail)
         {
             if (mail == null)
             {
                 return BadRequest();
             }
 
-            _logger.LogInformation($"EDIT request for Email '{mail.Email}' on contact with ID '{mail.ContactId}'");
+            _logger.LogInformation("EDIT request for Email '{Email}' on contact with ID '{ContactId}'", mail.Email, mail.ContactId);
 
-            _repository.UpdateEmail(mail);
+            await _repository.UpdateAsync(mail);
 
             return RedirectToAction("Details", "Dashboard", new {id = mail.ContactId});
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            _logger.LogInformation($"DELETE request for Email with ID '{id}'");
+            _logger.LogInformation("DELETE request for Email with ID '{Id}'", id);
             if (id <= 0)
             {
                 return NotFound();
             }
 
-            var mail = _repository.GetEmailById(id);
-            if (mail.IsNull())
+            var mail = await _repository.GetByIdAsync(id);
+            if (mail is null)
             {
                 return NotFound();
             }
 
-            _repository.DeleteEmailAddress(mail);
+            await _repository.DeleteAsync(mail);
 
             return RedirectToAction("Details", "Dashboard", new {id = mail.ContactId});
         }

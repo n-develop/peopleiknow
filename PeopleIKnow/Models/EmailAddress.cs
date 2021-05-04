@@ -11,10 +11,5 @@ namespace PeopleIKnow.Models
         public int ContactId { get; set; }
 
         [IgnoreDataMember] public virtual Contact Contact { get; set; }
-
-        public virtual bool IsNull()
-        {
-            return false;
-        }
     }
 }
