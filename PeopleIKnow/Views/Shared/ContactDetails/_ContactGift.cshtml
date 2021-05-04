@@ -8,25 +8,28 @@
         </a>
     </p>
 
-    @foreach (var gift in Model.Gifts)
+    @foreach (var giftGroup in Model.Gifts.GroupBy(g => g.GiftType))
     {
         <div class="panel-block">
-            <label class="label">@gift.GiftType</label>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <input class="input" value="@gift.Description" placeholder="Gift description..." disabled="disabled">
+            <label class="label">@giftGroup.Key</label>
+            @foreach (var gift in giftGroup)
+            {
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input" value="@gift.Description" placeholder="Gift description..." disabled="disabled">
+                    </div>
+                    <p class="control">
+                        <a class="button is-warning" onclick="editGift(@gift.Id)">
+                            <i class="fa fa-pencil-alt"></i>
+                        </a>
+                    </p>
+                    <p class="control">
+                        <a class="button is-danger" onclick="deleteGift(@gift.Id)">
+                            <i class="fa fa-minus-circle"></i>
+                        </a>
+                    </p>
                 </div>
-                <p class="control">
-                    <a class="button is-warning" onclick="editGift(@gift.Id)">
-                        <i class="fa fa-pencil-alt"></i>
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button is-danger" onclick="deleteGift(@gift.Id)">
-                        <i class="fa fa-minus-circle"></i>
-                    </a>
-                </p>
-            </div>
+            }
         </div>
     }
 </div>
