@@ -26,5 +26,7 @@ namespace PeopleIKnow
         public DbSet<TelephoneNumber> TelephoneNumbers { get; set; }
 
         public DbSet<CommonActivity> CommonActivities { get; set; }
+        
+        public DbSet<Gift> Gifts { get; set; }
     }
 }

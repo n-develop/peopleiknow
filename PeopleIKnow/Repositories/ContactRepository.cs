@@ -40,6 +40,7 @@ namespace PeopleIKnow.Repositories
                 .Include(c => c.Relationships)
                 .Include(c => c.StatusUpdates)
                 .Include(c => c.Activities)
+                .Include(c => c.Gifts)
                 .FirstOrDefault(c => c.Id == id);
             return contact ?? NullContact.GetInstance();
         }
@@ -49,7 +50,7 @@ namespace PeopleIKnow.Repositories
             var contact = GetContactById(id);
             if (contact.IsNull())
             {
-                _logger.LogInformation($"Contact with ID {id} could not be found for deletion");
+                _logger.LogInformation("Contact with ID {Id} could not be found for deletion", id);
                 return false;
             }
 
@@ -77,10 +78,15 @@ namespace PeopleIKnow.Repositories
             {
                 _context.TelephoneNumbers.Remove(telephoneNumber);
             }
+            
+            foreach (var gift in contact.Gifts)
+            {
+                _context.Gifts.Remove(gift);
+            }
 
             _context.Contacts.Remove(contact);
 
-            _logger.LogInformation($"Contact with ID {id} successfully deleted");
+            _logger.LogInformation("Contact with ID {Id} successfully deleted", id);
 
             _context.SaveChanges();
             return true;
@@ -98,7 +104,7 @@ namespace PeopleIKnow.Repositories
         {
             _context.Contacts.Update(contact);
             await _context.SaveChangesAsync();
-            _logger.LogInformation($"Contact with ID {contact.Id} was saved");
+            _logger.LogInformation("Contact with ID {ContactId} was saved", contact.Id);
         }
 
         public async Task<IEnumerable<Contact>> SearchContacts(string term)

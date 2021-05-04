@@ -35,6 +35,7 @@ namespace PeopleIKnow.Models
 
         public List<StatusUpdate> StatusUpdates { get; set; }
         public List<CommonActivity> Activities { get; set; }
+        public List<Gift> Gifts { get; set; }
 
         public string Tags { get; set; }
 

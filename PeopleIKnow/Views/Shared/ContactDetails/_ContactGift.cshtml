@@ -1,0 +1,32 @@
+@model Contact
+
+<div class="panel">
+    <p class="panel-heading">
+        🎁 Gifts
+        <a class="button is-pulled-right is-small is-success" onclick="addGift()">
+            <i class="fa fa-plus-circle"></i>
+        </a>
+    </p>
+
+    @foreach (var gift in Model.Gifts)
+    {
+        <div class="panel-block">
+            <label class="label">@gift.GiftType</label>
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" value="@gift.Description" placeholder="Gift description..." disabled="disabled">
+                </div>
+                <p class="control">
+                    <a class="button is-warning" onclick="editGift(@gift.Id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger" onclick="deleteGift(@gift.Id)">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    }
+</div>

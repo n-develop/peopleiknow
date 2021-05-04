@@ -473,6 +473,51 @@ function deleteActivity(id) {
         .finally(() => hideLoadingIndicator());
 }
 
+/* Gifts */
+
+function addGift() {
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
+    showLoadingIndicator();
+    fetch("/Gift/Add?contactId=" + id)
+        .then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function saveGift() {
+    const form = new FormData(document.getElementById('gift-form'));
+    showLoadingIndicator();
+    fetch("/Gift/Add", {
+        method: "POST",
+        body: form
+    }).then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function editGift(id) {
+    showLoadingIndicator();
+    fetch("/Gift/Edit/" + id)
+        .then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function updateGift() {
+    const form = new FormData(document.getElementById('gift-form'));
+    showLoadingIndicator();
+    fetch("/Gift/Edit", {
+        method: "POST",
+        body: form
+    }).then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function deleteGift(id) {
+    showLoadingIndicator();
+    fetch("/Gift/Delete/" + id)
+        .then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
 /* Update Pane */
 
 function updatePane(response) {
