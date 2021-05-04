@@ -11,7 +11,7 @@ namespace PeopleIKnow.Repositories
         Task<IEnumerable<Contact>> GetContacts(int skip, int take);
         Contact GetContactById(int id);
         bool DeleteContact(int id);
-        Contact AddContact(Contact contact);
-        void SaveContact(Contact contact);
+        Task<Contact> AddContact(Contact contact);
+        Task SaveContact(Contact contact);
     }
 }

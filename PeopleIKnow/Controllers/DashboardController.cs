@@ -69,7 +69,7 @@ namespace PeopleIKnow.Controllers
                 contactFromDb.ImagePath = await _imageRepository.WriteFileToDiskAsync(contact.Image, contact.Id);
             }
 
-            _repository.SaveContact(contactFromDb);
+            await _repository.SaveContact(contactFromDb);
 
             return Details(contact.Id);
         }

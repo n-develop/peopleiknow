@@ -86,21 +86,18 @@ namespace PeopleIKnow.Repositories
             return true;
         }
 
-        public Contact AddContact(Contact contact)
+        public async Task<Contact> AddContact(Contact contact)
         {
-            var maxId = _context.Contacts.Max(c => c.Id);
-            contact.Id = maxId + 1;
-
-            var entry = _context.Contacts.Add(contact);
-            _context.SaveChanges();
-            _logger.LogInformation($"New contact with ID {contact.Id} was created");
+            var entry = await _context.Contacts.AddAsync(contact);
+            await _context.SaveChangesAsync();
+            _logger.LogInformation("New contact with ID {Id} was created", entry.Entity.Id);
             return entry.Entity;
         }
 
-        public void SaveContact(Contact contact)
+        public async Task SaveContact(Contact contact)
         {
             _context.Contacts.Update(contact);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             _logger.LogInformation($"Contact with ID {contact.Id} was saved");
         }
 

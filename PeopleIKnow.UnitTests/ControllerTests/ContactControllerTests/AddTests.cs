@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
@@ -23,13 +24,13 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
         }
 
         [Fact]
-        public void Post_ReceivesContactWithId_ReturnsBadRequest()
+        public async Task Post_ReceivesContactWithId_ReturnsBadRequest()
         {
             // Arrange
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Add(new Contact {Id = 3});
+            var actionResult = await controller.Add(new Contact {Id = 3});
 
             // Assert
             actionResult.Should().NotBeNull();
@@ -37,42 +38,42 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
         }
 
         [Fact]
-        public void Post_ContactCouldNotBeCreated_ReturnsBadRequest()
+        public async Task Post_ContactCouldNotBeCreated_ReturnsBadRequest()
         {
             // Arrange
             _contactRepository.AddContact(Arg.Any<Contact>()).Returns(NullContact.GetInstance());
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Add(new Contact());
+            var actionResult = await controller.Add(new Contact());
 
             // Assert
             actionResult.Should().BeOfType<BadRequestResult>();
         }
 
         [Fact]
-        public void Post_ContactWasCreated_ReturnsRedirect()
+        public async Task Post_ContactWasCreated_ReturnsRedirect()
         {
             // Arrange
             _contactRepository.AddContact(Arg.Any<Contact>()).Returns(new Contact {Id = 1});
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Add(new Contact());
+            var actionResult = await controller.Add(new Contact());
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();
         }
 
         [Fact]
-        public void Post_ContactWasCreated_ReturnsRedirectToDetails()
+        public async Task Post_ContactWasCreated_ReturnsRedirectToDetails()
         {
             // Arrange
             _contactRepository.AddContact(Arg.Any<Contact>()).Returns(new Contact {Id = 1});
             var controller = CreateController();
 
             // Act
-            var actionResult = controller.Add(new Contact());
+            var actionResult = await controller.Add(new Contact());
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();

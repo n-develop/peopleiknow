@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -63,7 +64,7 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Contact contact)
+        public async Task<IActionResult> Add(Contact contact)
         {
             _logger.LogInformation($"ADD request for Contact '{contact.FullName}'");
             if (contact.Id > 0)
@@ -71,7 +72,7 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            var contactFromRepository = _repository.AddContact(contact);
+            var contactFromRepository = await _repository.AddContact(contact);
 
             if (contactFromRepository.IsNull())
             {
@@ -81,7 +82,7 @@ namespace PeopleIKnow.Controllers
             return RedirectToAction("Details", "Dashboard", new {id = contactFromRepository.Id});
         }
 
-        public IActionResult Favorite(int id)
+        public async Task<IActionResult> Favorite(int id)
         {
             _logger.LogInformation($"FAVORITE request for Contact with ID '{id}'");
             if (id <= 0)
@@ -96,7 +97,7 @@ namespace PeopleIKnow.Controllers
             }
 
             contact.IsFavorite = !contact.IsFavorite;
-            _repository.SaveContact(contact);
+            await _repository.SaveContact(contact);
 
             return ViewComponent("ContactList");
         }
