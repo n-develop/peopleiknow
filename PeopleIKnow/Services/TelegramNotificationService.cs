@@ -13,7 +13,7 @@ namespace PeopleIKnow.Services
         private readonly NotificationSettings _notificationSettings;
 
         private const string ApiUrl =
-            "https://api.telegram.org/bot{0}/sendMessage?chat_id=10190803&parse_mode=Markdown&text={1}";
+            "https://api.telegram.org/bot{0}/sendMessage?chat_id={2}&parse_mode=Markdown&text={1}";
 
         private const string MessageTemplate = "*{0}*\n\n{1}";
 
@@ -37,11 +37,12 @@ namespace PeopleIKnow.Services
             {
                 var text = string.Format(MessageTemplate, title, message);
                 await _httpClient.GetAsync(string.Format(ApiUrl, _notificationSettings.Token,
-                    System.Net.WebUtility.UrlEncode(text)));
+                    System.Net.WebUtility.UrlEncode(text), _notificationSettings.ChatId));
             }
             catch (Exception e)
             {
-                _logger.LogWarning(e, $"Notification could not be send.\nTitle: {title}\nMessage: {message}");
+                _logger.LogWarning(e, "Notification could not be send.\nTitle: {Title}\nMessage: {Message}",
+                    title, message);
             }
         }
     }

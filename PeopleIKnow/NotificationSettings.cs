@@ -4,5 +4,6 @@ namespace PeopleIKnow
     {
         public string Token { get; set; }
         public bool Enabled { get; set; }
+        public string ChatId { get; set; }
     }
 }
