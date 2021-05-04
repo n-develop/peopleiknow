@@ -61,7 +61,7 @@ namespace PeopleIKnow.Controllers
             }
 
             var commonActivity = await _repository.GetByIdAsync(id);
-            if (commonActivity.IsNull())
+            if (commonActivity is null)
             {
                 return NotFound();
             }
@@ -95,7 +95,7 @@ namespace PeopleIKnow.Controllers
             }
 
             var commonActivity = await _repository.GetByIdAsync(id);
-            if (commonActivity.IsNull())
+            if (commonActivity is null)
             {
                 return NotFound();
             }
