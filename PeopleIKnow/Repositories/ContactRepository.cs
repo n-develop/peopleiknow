@@ -41,6 +41,7 @@ namespace PeopleIKnow.Repositories
                 .Include(c => c.StatusUpdates)
                 .Include(c => c.Activities)
                 .Include(c => c.Gifts)
+                .Include(c => c.Reminders)
                 .FirstOrDefault(c => c.Id == id);
             return contact ?? NullContact.GetInstance();
         }
@@ -78,10 +79,15 @@ namespace PeopleIKnow.Repositories
             {
                 _context.TelephoneNumbers.Remove(telephoneNumber);
             }
-            
+
             foreach (var gift in contact.Gifts)
             {
                 _context.Gifts.Remove(gift);
+            }
+
+            foreach (var reminder in contact.Reminders)
+            {
+                _context.Reminders.Remove(reminder);
             }
 
             _context.Contacts.Remove(contact);

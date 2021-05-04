@@ -518,6 +518,51 @@ function deleteGift(id) {
         .finally(() => hideLoadingIndicator());
 }
 
+/* Reminder */
+
+function addReminder() {
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
+    showLoadingIndicator();
+    fetch("/Reminder/Add?contactId=" + id)
+        .then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function saveReminder() {
+    const form = new FormData(document.getElementById('reminder-form'));
+    showLoadingIndicator();
+    fetch("/Reminder/Add", {
+        method: "POST",
+        body: form
+    }).then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function editReminder(id) {
+    showLoadingIndicator();
+    fetch("/Reminder/Edit/" + id)
+        .then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function updateReminder() {
+    const form = new FormData(document.getElementById('reminder-form'));
+    showLoadingIndicator();
+    fetch("/Reminder/Edit", {
+        method: "POST",
+        body: form
+    }).then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
+function deleteReminder(id) {
+    showLoadingIndicator();
+    fetch("/Reminder/Delete/" + id)
+        .then(updatePane)
+        .finally(() => hideLoadingIndicator());
+}
+
 /* Update Pane */
 
 function updatePane(response) {

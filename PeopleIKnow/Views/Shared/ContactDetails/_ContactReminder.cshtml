@@ -1,0 +1,32 @@
+@model Contact
+
+<div class="panel">
+    <p class="panel-heading">
+        ⏰ Reminders
+        <a class="button is-pulled-right is-small is-success" onclick="addReminder()">
+            <i class="fa fa-plus-circle"></i>
+        </a>
+    </p>
+
+    @foreach (var reminder in Model.Reminders)
+    {
+        <div class="panel-block">
+            <label class="label">@reminder.Date.ToString("dd.MM.yyyy")</label>
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" value="@reminder.Description" disabled="disabled">
+                </div>
+                <p class="control">
+                    <a class="button is-warning" onclick="editReminder(@reminder.Id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                </p>
+                <p class="control">
+                    <a class="button is-danger" onclick="deleteReminder(@reminder.Id)">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    }
+</div>
