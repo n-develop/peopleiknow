@@ -19,11 +19,6 @@ namespace PeopleIKnow.Repositories
         void DeleteTelephoneNumber(TelephoneNumber telephoneNumber);
         void UpdateTelephoneNumber(TelephoneNumber telephoneNumber);
 
-        void AddRelationship(Relationship relationship);
-        Relationship GetRelationshipById(int id);
-        void DeleteRelationship(Relationship relationship);
-        void UpdateRelationship(Relationship relationship);
-
         StatusUpdate GetStatusUpdateById(int id);
         void UpdateStatusUpdate(StatusUpdate statusUpdate);
         void DeleteStatusUpdate(StatusUpdate statusUpdate);

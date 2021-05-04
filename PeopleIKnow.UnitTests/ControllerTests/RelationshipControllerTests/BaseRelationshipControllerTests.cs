@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PeopleIKnow.Controllers;
+using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.RelationshipControllerTests
@@ -9,18 +10,18 @@ namespace PeopleIKnow.UnitTests.ControllerTests.RelationshipControllerTests
     {
         #region test infrastructure
 
-        protected IContactRepository _contactRepository;
+        protected IRepository<Relationship> _repository;
         private ILogger<RelationshipController> _logger;
 
         protected BaseRelationshipControllerTests()
         {
-            _contactRepository = Substitute.For<IContactRepository>();
+            _repository = Substitute.For<IRepository<Relationship>>();
             _logger = Substitute.For<ILogger<RelationshipController>>();
         }
 
         protected RelationshipController CreateController()
         {
-            return new RelationshipController(_contactRepository, _logger);
+            return new RelationshipController(_repository, _logger);
         }
 
         #endregion

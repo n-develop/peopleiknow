@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,10 +10,10 @@ namespace PeopleIKnow.Controllers
     [Authorize]
     public class RelationshipController : Controller
     {
-        private readonly IContactRepository _repository;
+        private readonly IRepository<Relationship> _repository;
         private readonly ILogger<RelationshipController> _logger;
 
-        public RelationshipController(IContactRepository repository, ILogger<RelationshipController> logger)
+        public RelationshipController(IRepository<Relationship> repository, ILogger<RelationshipController> logger)
         {
             _repository = repository;
             _logger = logger;
@@ -34,7 +35,7 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Relationship relationship)
+        public async Task<ActionResult> Add(Relationship relationship)
         {
             if (relationship == null)
             {
@@ -44,20 +45,20 @@ namespace PeopleIKnow.Controllers
             _logger.LogInformation(
                 $"ADD request for relationship '{relationship.Type}:{relationship.Person}' on contact with ID '{relationship.ContactId}'");
 
-            _repository.AddRelationship(relationship);
+            await _repository.AddAsync(relationship);
 
             return RedirectToAction("Details", "Dashboard", new {id = relationship.ContactId});
         }
 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             if (id <= 0)
             {
                 return NotFound();
             }
 
-            var relationship = _repository.GetRelationshipById(id);
-            if (relationship.IsNull())
+            var relationship = await _repository.GetByIdAsync(id);
+            if (relationship is null)
             {
                 return NotFound();
             }
@@ -66,7 +67,7 @@ namespace PeopleIKnow.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Relationship relationship)
+        public async Task<ActionResult> Edit(Relationship relationship)
         {
             if (relationship == null)
             {
@@ -76,12 +77,12 @@ namespace PeopleIKnow.Controllers
             _logger.LogInformation(
                 $"EDIT request for relationship ({relationship.Id}) '{relationship.Type}:{relationship.Person}' on contact with ID '{relationship.ContactId}'");
 
-            _repository.UpdateRelationship(relationship);
+            await _repository.UpdateAsync(relationship);
 
             return RedirectToAction("Details", "Dashboard", new {id = relationship.ContactId});
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             _logger.LogInformation($"DELETE request for relationship with ID '{id}'");
             if (id <= 0)
@@ -89,13 +90,13 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            var relationship = _repository.GetRelationshipById(id);
-            if (relationship.IsNull())
+            var relationship = await _repository.GetByIdAsync(id);
+            if (relationship is null)
             {
                 return NotFound();
             }
 
-            _repository.DeleteRelationship(relationship);
+            await _repository.DeleteAsync(relationship);
 
             return RedirectToAction("Details", "Dashboard", new {id = relationship.ContactId});
         }

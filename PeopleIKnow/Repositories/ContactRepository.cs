@@ -154,64 +154,7 @@ namespace PeopleIKnow.Repositories
             _logger.LogInformation($"Telephone number with ID {telephoneNumber.Id} was deleted");
         }
 
-        public void AddRelationship(Relationship relationship)
-        {
-            if (relationship.Id == 0)
-            {
-                var maxId = _context.Relationships.Max(c => c.Id);
-                relationship.Id = maxId + 1;
-            }
-
-            _context.Relationships.Add(relationship);
-            _context.SaveChanges();
-            _logger.LogInformation($"Relationship with ID {relationship.Id} was created");
-        }
-
-        public Relationship GetRelationshipById(int id)
-        {
-            if (id <= 0)
-            {
-                return NullRelationship.GetInstance();
-            }
-
-            var relationship = _context.Relationships.Find(id);
-
-            if (relationship == null)
-            {
-                return NullRelationship.GetInstance();
-            }
-
-            return relationship;
-        }
-
-        public void DeleteRelationship(Relationship relationship)
-        {
-            _context.Relationships.Remove(relationship);
-            _context.SaveChanges();
-            _logger.LogInformation($"Relationship with ID {relationship.Id} was deleted");
-        }
-
-        public void UpdateRelationship(Relationship relationship)
-        {
-            if (relationship.IsNull() || relationship.Id <= 0)
-            {
-                return;
-            }
-
-            var relationshipFromRepository = _context.Relationships.Find(relationship.Id);
-            if (relationshipFromRepository == null)
-            {
-                return;
-            }
-
-            relationshipFromRepository.Type = relationship.Type;
-            relationshipFromRepository.Person = relationship.Person;
-
-            _context.SaveChanges();
-            _logger.LogInformation($"Relationship with ID {relationship.Id} was updated");
-        }
-
-        public void UpdateTelephoneNumber(TelephoneNumber telephoneNumber)
+       public void UpdateTelephoneNumber(TelephoneNumber telephoneNumber)
         {
             if (telephoneNumber.IsNull() || telephoneNumber.Id <= 0)
             {
