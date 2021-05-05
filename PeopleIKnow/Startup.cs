@@ -25,6 +25,7 @@ namespace PeopleIKnow
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<IContactRepository, ContactRepository>();
             services.AddHttpClient<IMessagingService, TelegramMessagingService>();
+            services.AddTransient<IReminderService, ReminderService>();
             services.Configure<NotificationSettings>(Configuration.GetSection("Notifications"));
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
@@ -36,6 +37,8 @@ namespace PeopleIKnow
                 .AddEntityFrameworkStores<ContactContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
+
+            services.AddHostedService<NotificationHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
