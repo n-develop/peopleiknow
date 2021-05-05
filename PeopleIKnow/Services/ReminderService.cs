@@ -1,4 +1,7 @@
+using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PeopleIKnow.Models;
 using PeopleIKnow.Repositories;
 
@@ -14,10 +17,16 @@ namespace PeopleIKnow.Services
             _messagingService = messagingService;
             _repository = repository;
         }
-        
-        public Task SendReminders()
+
+        public async Task SendReminders()
         {
-            throw new System.NotImplementedException();
+            var reminders = _repository.GetAll().Include(r => r.Contact)
+                .Where(r => r.Date == DateTime.Today).ToList();
+            foreach (var reminder in reminders)
+            {
+                await _messagingService.SendMessageAsync("⏰ " + reminder.Description,
+                    $"{reminder.Description} reminder for {reminder.Contact.FullName}");
+            }
         }
     }
 }

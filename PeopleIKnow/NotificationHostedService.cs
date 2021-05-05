@@ -1,8 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PeopleIKnow.Services;
 
 namespace PeopleIKnow
 {
@@ -10,34 +12,30 @@ namespace PeopleIKnow
     {
         private Timer _timer;
         private ILogger<NotificationHostedService> _logger;
+        private readonly IServiceScopeFactory _scopeFactory;
 
-        public NotificationHostedService(ILogger<NotificationHostedService> logger)
+        public NotificationHostedService(ILogger<NotificationHostedService> logger, IServiceScopeFactory scopeFactory)
         {
             _logger = logger;
+            _scopeFactory = scopeFactory;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
             var daily = TimeSpan.FromHours(24);
-            var todaysScheduled = DateTime.Today.AddHours(6).AddMinutes(34);
-            var nextRunTime = todaysScheduled > DateTime.Now ? todaysScheduled : todaysScheduled.AddDays(1);
+            var todaysSchedule = DateTime.Today.AddHours(6);
+            var nextRunTime = todaysSchedule > DateTime.Now ? todaysSchedule : todaysSchedule.AddDays(1);
             var timeUntilFirstRuntime = nextRunTime.Subtract(DateTime.Now);
+            _timer = new Timer(Notify, null, timeUntilFirstRuntime, daily);
 
-            void FireTaskAtSchedule()
-            {
-                var firstExecutionDelay = Task.Delay(timeUntilFirstRuntime, cancellationToken);
-                firstExecutionDelay.Wait(cancellationToken);
-                DoWork(null);
-                _timer = new Timer(DoWork, null, TimeSpan.Zero, daily);
-            }
-
-            Task.Run((Action) FireTaskAtSchedule, cancellationToken);
             return Task.CompletedTask;
         }
 
-        private void DoWork(object state)
+        private async void Notify(object state)
         {
-            _logger.LogInformation("NotificationHostedService is working");
+            using var scope = _scopeFactory.CreateScope();
+            var reminderService = scope.ServiceProvider.GetRequiredService<IReminderService>();
+            await reminderService.SendReminders();
         }
 
         public Task StopAsync(CancellationToken stoppingToken)
