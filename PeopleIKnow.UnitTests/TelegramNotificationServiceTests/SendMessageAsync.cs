@@ -13,20 +13,20 @@ namespace PeopleIKnow.UnitTests.TelegramNotificationServiceTests
     {
         #region test infrastructure
 
-        private ILogger<TelegramNotificationService> _logger;
+        private ILogger<TelegramMessagingService> _logger;
         private IOptions<NotificationSettings> _options;
         private MockHttpMessageHandler _messageHandler;
 
         public SendMessage()
         {
-            _logger = Substitute.For<ILogger<TelegramNotificationService>>();
+            _logger = Substitute.For<ILogger<TelegramMessagingService>>();
             _options = Substitute.For<IOptions<NotificationSettings>>();
             _messageHandler = new MockHttpMessageHandler();
         }
 
-        private TelegramNotificationService CreateService()
+        private TelegramMessagingService CreateService()
         {
-            return new TelegramNotificationService(new HttpClient(_messageHandler), _options, _logger);
+            return new TelegramMessagingService(new HttpClient(_messageHandler), _options, _logger);
         }
 
         #endregion

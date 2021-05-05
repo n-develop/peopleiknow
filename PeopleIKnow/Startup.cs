@@ -24,7 +24,7 @@ namespace PeopleIKnow
         {
             services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<IContactRepository, ContactRepository>();
-            services.AddHttpClient<INotificationService, TelegramNotificationService>();
+            services.AddHttpClient<IMessagingService, TelegramMessagingService>();
             services.Configure<NotificationSettings>(Configuration.GetSection("Notifications"));
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace PeopleIKnow.Services
 {
-    public class TelegramNotificationService : INotificationService
+    public class TelegramMessagingService : IMessagingService
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger _logger;
@@ -17,9 +17,9 @@ namespace PeopleIKnow.Services
 
         private const string MessageTemplate = "*{0}*\n\n{1}";
 
-        public TelegramNotificationService(HttpClient httpClient,
+        public TelegramMessagingService(HttpClient httpClient,
             IOptions<NotificationSettings> notificationSettings,
-            ILogger<TelegramNotificationService> logger)
+            ILogger<TelegramMessagingService> logger)
         {
             _httpClient = httpClient;
             _logger = logger;
