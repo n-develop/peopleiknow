@@ -266,7 +266,7 @@ function addEntity(entityName) {
     const preview = document.querySelector(".contact-preview");
     const id = preview.getAttribute("data-contact-id");
     showLoadingIndicator();
-    fetch("/" + entityName + "/Add?contactId=" + id)
+    fetch(`/${entityName}/Add?contactId=${id}`)
         .then(updatePane)
         .finally(() => hideLoadingIndicator());
 }
@@ -274,7 +274,7 @@ function addEntity(entityName) {
 function saveEntity(entityName, formId) {
     const form = new FormData(document.getElementById(formId));
     showLoadingIndicator();
-    fetch("/" + entityName + "/Add", {
+    fetch(`/${entityName}/Add`, {
         method: "POST",
         body: form
     }).then(updatePane)
@@ -283,7 +283,7 @@ function saveEntity(entityName, formId) {
 
 function editEntity(id, entityName) {
     showLoadingIndicator();
-    fetch("/" + entityName + "/Edit/" + id)
+    fetch(`/${entityName}/Edit/${id}`)
         .then(updatePane)
         .finally(() => hideLoadingIndicator());
 }
@@ -291,7 +291,7 @@ function editEntity(id, entityName) {
 function updateEntity(entityName, formId) {
     const form = new FormData(document.getElementById(formId));
     showLoadingIndicator();
-    fetch("/" + entityName + "/Edit", {
+    fetch(`/${entityName}/Edit`, {
         method: "POST",
         body: form
     }).then(updatePane)
@@ -300,7 +300,7 @@ function updateEntity(entityName, formId) {
 
 function deleteEntity(id, entityName) {
     showLoadingIndicator();
-    fetch("/" + entityName + "/Delete/" + id)
+    fetch(`/${entityName}/Delete/${id}`)
         .then(updatePane)
         .finally(() => hideLoadingIndicator());
 }
