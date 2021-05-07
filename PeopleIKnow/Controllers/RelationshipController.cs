@@ -31,7 +31,7 @@ namespace PeopleIKnow.Controllers
                 ContactId = contactId
             };
 
-            return View(relationship);
+            return View("Editor", relationship);
         }
 
         [HttpPost]
@@ -63,7 +63,7 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            return View(relationship);
+            return View("Editor", relationship);
         }
 
         [HttpPost]

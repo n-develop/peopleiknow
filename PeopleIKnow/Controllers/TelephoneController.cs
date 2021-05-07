@@ -31,7 +31,7 @@ namespace PeopleIKnow.Controllers
                 ContactId = contactId
             };
 
-            return View(telephoneNumber);
+            return View("Editor", telephoneNumber);
         }
 
         [HttpPost]
@@ -63,7 +63,7 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            return View(telephone);
+            return View("Editor", telephone);
         }
 
         [HttpPost]

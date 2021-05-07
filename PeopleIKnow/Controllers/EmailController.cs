@@ -31,7 +31,7 @@ namespace PeopleIKnow.Controllers
                 ContactId = contactId
             };
 
-            return View(mail);
+            return View("Editor", mail);
         }
 
         [HttpPost]
@@ -42,7 +42,8 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            _logger.LogInformation("ADD request for Email '{Email}' on contact with ID '{ContactId}'", mail.Email, mail.ContactId);
+            _logger.LogInformation("ADD request for Email '{Email}' on contact with ID '{ContactId}'", mail.Email,
+                mail.ContactId);
 
             await _repository.AddAsync(mail);
 
@@ -62,7 +63,7 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            return View(mail);
+            return View("Editor", mail);
         }
 
         [HttpPost]
@@ -73,7 +74,8 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            _logger.LogInformation("EDIT request for Email '{Email}' on contact with ID '{ContactId}'", mail.Email, mail.ContactId);
+            _logger.LogInformation("EDIT request for Email '{Email}' on contact with ID '{ContactId}'", mail.Email,
+                mail.ContactId);
 
             await _repository.UpdateAsync(mail);
 

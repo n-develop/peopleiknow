@@ -34,7 +34,7 @@ namespace PeopleIKnow.Controllers
                 Date = DateTime.Now
             };
 
-            return View(commonActivity);
+            return View("Editor", commonActivity);
         }
 
         [HttpPost]
@@ -66,7 +66,7 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            return View(commonActivity);
+            return View("Editor", commonActivity);
         }
 
         [HttpPost]

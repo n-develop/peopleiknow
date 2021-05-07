@@ -33,7 +33,7 @@ namespace PeopleIKnow.Controllers
                 Created = DateTime.Now
             };
 
-            return View(statusUpdate);
+            return View("Editor", statusUpdate);
         }
 
         [HttpPost]
@@ -65,7 +65,7 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            return View(statusUpdate);
+            return View("Editor", statusUpdate);
         }
 
         [HttpPost]

@@ -33,7 +33,7 @@ namespace PeopleIKnow.Controllers
                 ContactId = contactId
             };
 
-            return View(reminder);
+            return View("Editor", reminder);
         }
 
         [HttpPost]
@@ -65,7 +65,7 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            return View(reminder);
+            return View("Editor", reminder);
         }
 
         [HttpPost]

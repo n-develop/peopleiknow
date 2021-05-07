@@ -18,7 +18,7 @@ namespace PeopleIKnow.Controllers
             _logger = logger;
             _repository = repository;
         }
-        
+
         public ActionResult Add(int contactId)
         {
             if (contactId <= 0)
@@ -31,9 +31,9 @@ namespace PeopleIKnow.Controllers
                 ContactId = contactId
             };
 
-            return View(gift);
+            return View("Editor", gift);
         }
-        
+
         [HttpPost]
         public async Task<ActionResult> Add(Gift gift)
         {
@@ -42,7 +42,8 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            _logger.LogInformation("ADD request for Gift '{Descriptoin}' on contact with ID '{ContactId}'", gift.Description, gift.ContactId);
+            _logger.LogInformation("ADD request for Gift '{Descriptoin}' on contact with ID '{ContactId}'",
+                gift.Description, gift.ContactId);
 
             await _repository.AddAsync(gift);
 
@@ -62,7 +63,7 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            return View(gift);
+            return View("Editor", gift);
         }
 
         [HttpPost]
@@ -73,7 +74,8 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            _logger.LogInformation("EDIT request for Gift '{Description}' on contact with ID '{ContactId}'", gift.Description, gift.ContactId);
+            _logger.LogInformation("EDIT request for Gift '{Description}' on contact with ID '{ContactId}'",
+                gift.Description, gift.ContactId);
 
             await _repository.UpdateAsync(gift);
 
