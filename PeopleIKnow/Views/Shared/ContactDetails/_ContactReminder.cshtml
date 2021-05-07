@@ -3,7 +3,7 @@
 <div class="panel">
     <p class="panel-heading">
         ⏰ Reminders
-        <a class="button is-pulled-right is-small is-success" onclick="addReminder()">
+        <a class="button is-pulled-right is-small is-success" onclick="addEntity('Reminder')">
             <i class="fa fa-plus-circle"></i>
         </a>
     </p>
@@ -17,12 +17,12 @@
                     <input class="input" value="@reminder.Description" disabled="disabled">
                 </div>
                 <p class="control">
-                    <a class="button is-warning" onclick="editReminder(@reminder.Id)">
+                    <a class="button is-warning" onclick="editEntity(@reminder.Id, 'Reminder')">
                         <i class="fa fa-pencil-alt"></i>
                     </a>
                 </p>
                 <p class="control">
-                    <a class="button is-danger" onclick="deleteReminder(@reminder.Id)">
+                    <a class="button is-danger" onclick="deleteEntity(@reminder.Id, 'Reminder')">
                         <i class="fa fa-minus-circle"></i>
                     </a>
                 </p>

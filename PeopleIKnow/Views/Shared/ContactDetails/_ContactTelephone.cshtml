@@ -1,10 +1,9 @@
 @model Contact
 
-@* TELEPHONE *@
 <div class="panel">
     <p class="panel-heading">
         ☎️ Telephone
-        <a class="button is-pulled-right is-small is-success" onclick="addTelephone()">
+        <a class="button is-pulled-right is-small is-success" onclick="addEntity('Telephone')">
             <i class="fa fa-plus-circle"></i>
         </a>
     </p>
@@ -23,12 +22,12 @@
                     <input class="input" value="@telephone.Telephone" type="tel" disabled="disabled">
                 </div>
                 <p class="control">
-                    <a class="button is-warning" onclick="editTelephone(@telephone.Id)">
+                    <a class="button is-warning" onclick="editEntity(@telephone.Id, 'Telephone')">
                         <i class="fa fa-pencil-alt"></i>
                     </a>
                 </p>
                 <p class="control">
-                    <a class="button is-danger" onclick="deleteTelephone(@telephone.Id)">
+                    <a class="button is-danger" onclick="deleteEntity(@telephone.Id, 'Telephone')">
                         <i class="fa fa-minus-circle"></i>
                     </a>
                 </p>
@@ -36,4 +35,3 @@
         </div>
     }
 </div>
-@* TELEPHONE *@

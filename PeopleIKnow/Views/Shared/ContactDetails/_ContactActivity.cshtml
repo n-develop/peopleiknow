@@ -3,7 +3,7 @@
 <div class="panel">
     <p class="panel-heading">
         🚴 Activities
-        <a class="button is-pulled-right is-small is-success" onclick="addActivity()">
+        <a class="button is-pulled-right is-small is-success" onclick="addEntity('CommonActivity')">
             <i class="fa fa-plus-circle"></i>
         </a>
     </p>
@@ -17,12 +17,12 @@
                     <input class="input" value="@activity.Description" placeholder="Description" disabled="disabled">
                 </div>
                 <p class="control">
-                    <a class="button is-warning" onclick="editActivity(@activity.Id)">
+                    <a class="button is-warning" onclick="editEntity(@activity.Id, 'CommonActivity')">
                         <i class="fa fa-pencil-alt"></i>
                     </a>
                 </p>
                 <p class="control">
-                    <a class="button is-danger" onclick="deleteActivity(@activity.Id)">
+                    <a class="button is-danger" onclick="deleteEntity(@activity.Id, 'CommonActivity')">
                         <i class="fa fa-minus-circle"></i>
                     </a>
                 </p>

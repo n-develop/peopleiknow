@@ -1,10 +1,9 @@
 @model Contact
 
-@* TIMELINE *@
 <div class="panel">
     <p class="panel-heading">
         📝 Status Updates
-        <a class="button is-pulled-right is-small is-success" onclick="addStatusUpdate()">
+        <a class="button is-pulled-right is-small is-success" onclick="addEntity('StatusUpdate')">
             <i class="fa fa-plus-circle"></i>
         </a>
     </p>
@@ -18,12 +17,12 @@
                     <input class="input" value="@statusUpdate.StatusText" placeholder="Status update" disabled="disabled">
                 </div>
                 <p class="control">
-                    <a class="button is-warning" onclick="editStatusUpdate(@statusUpdate.Id)">
+                    <a class="button is-warning" onclick="editEntity(@statusUpdate.Id, 'StatusUpdate')">
                         <i class="fa fa-pencil-alt"></i>
                     </a>
                 </p>
                 <p class="control">
-                    <a class="button is-danger" onclick="deleteStatusUpdate(@statusUpdate.Id)">
+                    <a class="button is-danger" onclick="deleteEntity(@statusUpdate.Id, 'StatusUpdate')">
                         <i class="fa fa-minus-circle"></i>
                     </a>
                 </p>
@@ -31,4 +30,3 @@
         </div>
     }
 </div>
-@* TIMELINE *@

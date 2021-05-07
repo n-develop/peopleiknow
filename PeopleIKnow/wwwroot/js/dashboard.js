@@ -256,309 +256,47 @@ function saveContact() {
         .finally(() => hideLoadingIndicator());
 }
 
-function addTelephone() {
+/* CRUD entities */
+
+function addEntity(entityName) {
     const preview = document.querySelector(".contact-preview");
     const id = preview.getAttribute("data-contact-id");
     showLoadingIndicator();
-    fetch("/Telephone/Add?contactId=" + id)
+    fetch("/" + entityName + "/Add?contactId=" + id)
         .then(updatePane)
         .finally(() => hideLoadingIndicator());
 }
 
-function saveTelephone() {
-    const form = new FormData(document.getElementById('telephone-form'));
+function saveEntity(entityName, formId) {
+    const form = new FormData(document.getElementById(formId));
     showLoadingIndicator();
-    fetch("/Telephone/Add", {
+    fetch("/" + entityName + "/Add", {
         method: "POST",
         body: form
     }).then(updatePane)
         .finally(() => hideLoadingIndicator());
 }
 
-function deleteTelephone(id) {
+function editEntity(id, entityName) {
     showLoadingIndicator();
-    fetch("/Telephone/Delete/" + id)
+    fetch("/" + entityName + "/Edit/" + id)
         .then(updatePane)
         .finally(() => hideLoadingIndicator());
 }
 
-function editTelephone(id) {
+function updateEntity(entityName, formId) {
+    const form = new FormData(document.getElementById(formId));
     showLoadingIndicator();
-    fetch("/Telephone/Edit/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function updateTelephone() {
-    const form = new FormData(document.getElementById('telephone-form'));
-    showLoadingIndicator();
-    fetch("/Telephone/Edit", {
+    fetch("/" + entityName + "/Edit", {
         method: "POST",
         body: form
     }).then(updatePane)
         .finally(() => hideLoadingIndicator());
 }
 
-function addRelationship() {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
+function deleteEntity(id, entityName) {
     showLoadingIndicator();
-    fetch("/Relationship/Add?contactId=" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function saveRelationship() {
-    const form = new FormData(document.getElementById('relationship-form'));
-    showLoadingIndicator();
-    fetch("/Relationship/Add", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function deleteRelationship(id) {
-    showLoadingIndicator();
-    fetch("/Relationship/Delete/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function editRelationship(id) {
-    showLoadingIndicator();
-    fetch("/Relationship/Edit/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function updateRelationship() {
-    const form = new FormData(document.getElementById('relationship-form'));
-    showLoadingIndicator();
-    fetch("/Relationship/Edit", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function saveEmail() {
-    const form = new FormData(document.getElementById('email-form'));
-    showLoadingIndicator();
-    fetch("/Email/Add", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function addEmail() {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
-    showLoadingIndicator();
-    fetch("/Email/Add?contactId=" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function deleteEmail(id) {
-    showLoadingIndicator();
-    fetch("/Email/Delete/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function editEmail(id) {
-    showLoadingIndicator();
-    fetch("/Email/Edit/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function updateEmail() {
-    const form = new FormData(document.getElementById('email-form'));
-    showLoadingIndicator();
-    fetch("/Email/Edit", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function addStatusUpdate() {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
-    showLoadingIndicator();
-    fetch("/StatusUpdate/Add?contactId=" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function saveStatusUpdate() {
-    const form = new FormData(document.getElementById('status-update-form'));
-    showLoadingIndicator();
-    fetch("/StatusUpdate/Add", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function editStatusUpdate(id) {
-    showLoadingIndicator();
-    fetch("/StatusUpdate/Edit/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function updateStatusUpdate() {
-    const form = new FormData(document.getElementById('status-update-form'));
-    showLoadingIndicator();
-    fetch("/StatusUpdate/Edit", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function deleteStatusUpdate(id) {
-    showLoadingIndicator();
-    fetch("/StatusUpdate/Delete/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-/* Common Activities */
-
-function addActivity() {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
-    showLoadingIndicator();
-    fetch("/CommonActivity/Add?contactId=" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function saveActivity() {
-    const form = new FormData(document.getElementById('common-activity-form'));
-    showLoadingIndicator();
-    fetch("/CommonActivity/Add", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function editActivity(id) {
-    showLoadingIndicator();
-    fetch("/CommonActivity/Edit/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function updateActivity() {
-    const form = new FormData(document.getElementById('common-activity-form'));
-    showLoadingIndicator();
-    fetch("/CommonActivity/Edit", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function deleteActivity(id) {
-    showLoadingIndicator();
-    fetch("/CommonActivity/Delete/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-/* Gifts */
-
-function addGift() {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
-    showLoadingIndicator();
-    fetch("/Gift/Add?contactId=" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function saveGift() {
-    const form = new FormData(document.getElementById('gift-form'));
-    showLoadingIndicator();
-    fetch("/Gift/Add", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function editGift(id) {
-    showLoadingIndicator();
-    fetch("/Gift/Edit/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function updateGift() {
-    const form = new FormData(document.getElementById('gift-form'));
-    showLoadingIndicator();
-    fetch("/Gift/Edit", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function deleteGift(id) {
-    showLoadingIndicator();
-    fetch("/Gift/Delete/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-/* Reminder */
-
-function addReminder() {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
-    showLoadingIndicator();
-    fetch("/Reminder/Add?contactId=" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function saveReminder() {
-    const form = new FormData(document.getElementById('reminder-form'));
-    showLoadingIndicator();
-    fetch("/Reminder/Add", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function editReminder(id) {
-    showLoadingIndicator();
-    fetch("/Reminder/Edit/" + id)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function updateReminder() {
-    const form = new FormData(document.getElementById('reminder-form'));
-    showLoadingIndicator();
-    fetch("/Reminder/Edit", {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function deleteReminder(id) {
-    showLoadingIndicator();
-    fetch("/Reminder/Delete/" + id)
+    fetch("/" + entityName + "/Delete/" + id)
         .then(updatePane)
         .finally(() => hideLoadingIndicator());
 }

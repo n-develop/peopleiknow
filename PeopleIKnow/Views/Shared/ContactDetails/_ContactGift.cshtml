@@ -3,7 +3,7 @@
 <div class="panel">
     <p class="panel-heading">
         🎁 Gifts
-        <a class="button is-pulled-right is-small is-success" onclick="addGift()">
+        <a class="button is-pulled-right is-small is-success" onclick="addEntity('Gift')">
             <i class="fa fa-plus-circle"></i>
         </a>
     </p>
@@ -19,12 +19,12 @@
                         <input class="input" value="@gift.Description" placeholder="Gift description..." disabled="disabled">
                     </div>
                     <p class="control">
-                        <a class="button is-warning" onclick="editGift(@gift.Id)">
+                        <a class="button is-warning" onclick="editEntity(@gift.Id, 'Gift')">
                             <i class="fa fa-pencil-alt"></i>
                         </a>
                     </p>
                     <p class="control">
-                        <a class="button is-danger" onclick="deleteGift(@gift.Id)">
+                        <a class="button is-danger" onclick="deleteEntity(@gift.Id, 'Gift')">
                             <i class="fa fa-minus-circle"></i>
                         </a>
                     </p>
