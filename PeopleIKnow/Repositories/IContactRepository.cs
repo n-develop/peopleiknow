@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using PeopleIKnow.Models;
 
@@ -13,5 +14,6 @@ namespace PeopleIKnow.Repositories
         bool DeleteContact(int id);
         Task<Contact> AddContact(Contact contact);
         Task SaveContact(Contact contact);
+        Task<IEnumerable<Contact>> GetBirthdayContacts(DateTime birthday);
     }
 }

@@ -113,6 +113,11 @@ namespace PeopleIKnow.Repositories
             _logger.LogInformation("Contact with ID {ContactId} was saved", contact.Id);
         }
 
+        public async Task<IEnumerable<Contact>> GetBirthdayContacts(DateTime birthday)
+        {
+            return await _context.Contacts.Where(c => c.Birthday == birthday.Date).ToListAsync();
+        }
+
         public async Task<IEnumerable<Contact>> SearchContacts(string term)
         {
             var allContacts = await GetAllContacts();
