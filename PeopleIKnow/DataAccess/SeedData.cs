@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using PeopleIKnow.Models;
 
-namespace PeopleIKnow
+namespace PeopleIKnow.DataAccess
 {
     internal static class SeedData
     {

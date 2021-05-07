@@ -6,7 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PeopleIKnow.Configuration;
-using PeopleIKnow.Repositories;
+using PeopleIKnow.DataAccess;
+using PeopleIKnow.DataAccess.Repositories;
 using PeopleIKnow.Services;
 
 namespace PeopleIKnow

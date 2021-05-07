@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PeopleIKnow.Repositories
+namespace PeopleIKnow.DataAccess.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class, new()
     {

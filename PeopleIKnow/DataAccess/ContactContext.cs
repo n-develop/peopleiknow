@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PeopleIKnow.Models;
 
-namespace PeopleIKnow
+namespace PeopleIKnow.DataAccess
 {
     public class ContactContext : IdentityDbContext<IdentityUser>
     {

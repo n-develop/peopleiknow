@@ -1,6 +1,6 @@
 using NSubstitute;
 using PeopleIKnow.Controllers;
-using PeopleIKnow.Repositories;
+using PeopleIKnow.DataAccess.Repositories;
 using PeopleIKnow.Services;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests

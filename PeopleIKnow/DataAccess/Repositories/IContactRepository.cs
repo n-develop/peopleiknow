@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using PeopleIKnow.Models;
 
-namespace PeopleIKnow.Repositories
+namespace PeopleIKnow.DataAccess.Repositories
 {
     public interface IContactRepository
     {

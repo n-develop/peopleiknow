@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PeopleIKnow.Controllers;
-using PeopleIKnow.Repositories;
+using PeopleIKnow.DataAccess.Repositories;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
 {

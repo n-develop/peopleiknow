@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NSubstitute.Core;
 using PeopleIKnow.Controllers;
+using PeopleIKnow.DataAccess.Repositories;
 using PeopleIKnow.Models;
-using PeopleIKnow.Repositories;
 using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.SearchControllerTests

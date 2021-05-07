@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using PeopleIKnow.Controllers;
+using PeopleIKnow.DataAccess.Repositories;
 using PeopleIKnow.Models;
-using PeopleIKnow.Repositories;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.StatusUpdateControllerTests
 {

@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PeopleIKnow.DataAccess.Repositories;
 using PeopleIKnow.Models;
-using PeopleIKnow.Repositories;
 using PeopleIKnow.ViewModels;
 
 namespace PeopleIKnow.Controllers
