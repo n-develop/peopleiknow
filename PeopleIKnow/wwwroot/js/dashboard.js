@@ -183,13 +183,17 @@ function search() {
     showFeed();
 }
 
+let timeout = null;
+
 const searchButton = document.getElementById("search-button");
 searchButton.onclick = search;
+
 const searchTerm = document.getElementById("search-term");
 searchTerm.addEventListener("keyup", function onEvent(e) {
-    if (e.keyCode === 13) {
-        search();
-    }
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+        search()
+    }, 600);
 });
 
 function searchRelationship(contactName) {
