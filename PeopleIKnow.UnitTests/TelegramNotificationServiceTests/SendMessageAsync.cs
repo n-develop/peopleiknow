@@ -4,6 +4,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSubstitute;
+using PeopleIKnow.Configuration;
 using Xunit;
 using PeopleIKnow.Services;
 
