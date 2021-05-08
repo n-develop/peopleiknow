@@ -69,6 +69,12 @@ for your birthday.
 That's why you can keep track of gifts in "People I Know". Keep track of presents anyone gave you, presents you gave to
 your contacts, or even ideas for presents.
 
+## Reminders through Telegram
+
+If you use [Telegram](https://telegram.org/) as a messenger, you can setup
+"People I Know" to use your custom bot to send yourself reminders about birthdays, anniversaries, or any other stuff you
+want a reminder for.
+
 ## Something is missing?
 
 Are you missing some kind of feature? You are welcome to create an issue here in the GitHub repo. Let's discuss it and
