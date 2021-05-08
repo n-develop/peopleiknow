@@ -245,6 +245,10 @@ function saveContact() {
             const $target = document.getElementById("successfully-saved-modal");
             rootEl.classList.add('is-clipped');
             $target.classList.add('is-active');
+            setTimeout(() => {
+                rootEl.classList.remove('is-clipped');
+                $target.classList.remove('is-active');
+            }, 2000);
         }).then(function () {
         const preview = document.querySelector(".contact-preview");
         const id = preview.getAttribute("data-contact-id");
