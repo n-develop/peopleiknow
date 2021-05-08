@@ -60,6 +60,15 @@ Know" and you can ask about the exam they had a week ago or about the broken leg
 Store information about common activities with your contacts. No more "When was the last time we met Carl?". Just
 check "People I Know" and you will instantly know it.
 
+### Gifts
+
+Sometimes it is hard to remember what you got someone as a birthday present last year. Or you are looking for a gift for
+Michael and this one book would be perfect for him. But you are not sure if it was Anne or Michael who gave it to you
+for your birthday.
+
+That's why you can keep track of gifts in "People I Know". Keep track of presents anyone gave you, presents you gave to
+your contacts, or even ideas for presents.
+
 ## Something is missing?
 
 Are you missing some kind of feature? You are welcome to create an issue here in the GitHub repo. Let's discuss it and
