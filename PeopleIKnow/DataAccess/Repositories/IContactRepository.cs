@@ -14,6 +14,6 @@ namespace PeopleIKnow.DataAccess.Repositories
         bool DeleteContact(int id);
         Task<Contact> AddContact(Contact contact);
         Task SaveContact(Contact contact);
-        Task<IEnumerable<Contact>> GetBirthdayContacts(DateTime birthday);
+        Task<IEnumerable<Contact>> GetBirthdayContactsAsync(DateTime birthday);
     }
 }

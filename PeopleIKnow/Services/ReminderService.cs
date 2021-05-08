@@ -40,7 +40,7 @@ namespace PeopleIKnow.Services
 
         private async Task SendBirthdayRemindersAsync()
         {
-            var birthdayContacts = await _contactRepository.GetBirthdayContacts(DateTime.Today);
+            var birthdayContacts = await _contactRepository.GetBirthdayContactsAsync(DateTime.Today);
             foreach (var birthdayContact in birthdayContacts)
             {
                 await _messagingService.SendMessageAsync("🎁 " + birthdayContact.FullName,

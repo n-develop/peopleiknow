@@ -113,9 +113,13 @@ namespace PeopleIKnow.DataAccess.Repositories
             _logger.LogInformation("Contact with ID {ContactId} was saved", contact.Id);
         }
 
-        public async Task<IEnumerable<Contact>> GetBirthdayContacts(DateTime birthday)
+        public async Task<IEnumerable<Contact>> GetBirthdayContactsAsync(DateTime birthday)
         {
-            return await _context.Contacts.Where(c => c.Birthday == birthday.Date).ToListAsync();
+            return await _context.Contacts.Where(c =>
+                    c.Birthday != DateTime.MinValue &&
+                    c.Birthday.Day == birthday.Day &&
+                    c.Birthday.Month == birthday.Month)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Contact>> SearchContacts(string term)
