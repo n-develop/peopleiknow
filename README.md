@@ -27,8 +27,9 @@ So the main goal of this application is to do standard contact management plus
    possibility to link to other contacts.
 
 ## Features
-Right now the features are pretty limited. But the app is under (more or less) active development.
-So current features are
+
+Right now the features are pretty limited. But the app is under (more or less) active development. So current features
+are
 
 * Adding status updates to your contacts
 * Adding information about given and received gifts, as well as ideas for gifts
@@ -36,6 +37,8 @@ So current features are
 * Save information about your common activities (chats, calls, dates, etc.)
 * Add tags to your contacts
 * Searching contacts by name and tags
+
+![Another Screenshot](images/features.png)
 
 ### Relationships
 
