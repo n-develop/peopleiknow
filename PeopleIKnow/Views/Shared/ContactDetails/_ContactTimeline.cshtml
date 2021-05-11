@@ -8,7 +8,7 @@
         </a>
     </p>
 
-    @foreach (var statusUpdate in Model.Timeline)
+    @foreach (var statusUpdate in Model.StatusTimeline)
     {
         <div class="panel-block">
             <label class="label">@statusUpdate.Created.ToString("dd.MM.yyyy")</label>

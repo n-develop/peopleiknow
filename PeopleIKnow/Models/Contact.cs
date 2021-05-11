@@ -44,7 +44,7 @@ namespace PeopleIKnow.Models
         public string Tags { get; set; }
 
         [NotMapped]
-        public List<StatusUpdate> Timeline
+        public List<StatusUpdate> StatusTimeline
         {
             get
             {
@@ -54,6 +54,20 @@ namespace PeopleIKnow.Models
                 }
 
                 return new List<StatusUpdate>();
+            }
+        }
+        
+        [NotMapped]
+        public List<CommonActivity> ActivityTimeline
+        {
+            get
+            {
+                if (Activities != null && Activities.Any())
+                {
+                    return Activities.OrderByDescending(c => c.Date).ToList();
+                }
+
+                return new List<CommonActivity>();
             }
         }
 

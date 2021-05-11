@@ -8,7 +8,7 @@
         </a>
     </p>
 
-    @foreach (var activity in Model.Activities)
+    @foreach (var activity in Model.ActivityTimeline)
     {
         <div class="panel-block">
             <label class="label">@activity.Date.ToString("dd.MM.yyyy")</label>
