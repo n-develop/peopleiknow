@@ -8,7 +8,7 @@ using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.GiftControllerTests
 {
-    public class DeleteTests : BaseGiftControllerTests
+    public class DeleteTests : TestBase
     {
         [Fact]
         public async Task ReceivesInvalidId_ReturnsNotFound()

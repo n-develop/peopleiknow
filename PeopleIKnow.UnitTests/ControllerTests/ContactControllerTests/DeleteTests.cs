@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
 {
-    public class DeleteTests : BaseContactControllerTests
+    public class DeleteTests : TestBase
     {
         [Fact]
         public void ReceivesZeroId_ReturnsNotFound()

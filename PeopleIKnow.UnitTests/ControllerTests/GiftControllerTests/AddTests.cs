@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.GiftControllerTests
 {
-    public class AddTests : BaseGiftControllerTests
+    public class AddTests : TestBase
     {
         [Fact]
         public void Get_ReceivesInvalidId_ReturnsNotFound()

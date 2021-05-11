@@ -6,16 +6,14 @@ using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
 {
-    public class AddTests : BaseEmailControllerTests
+    public class AddTests : TestBase
     {
         [Fact]
         public void Get_ReceivesInvalidId_ReturnsNotFound()
         {
             // Arrange
-            var controller = CreateController();
-
             // Act
-            var actionResult = controller.Add(0);
+            var actionResult = _sut.Add(0);
 
             // Assert
             actionResult.Should().BeOfType<NotFoundResult>();
@@ -25,10 +23,8 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         public void Get_ReceivesValidId_ReturnsViewResult()
         {
             // Arrange
-            var controller = CreateController();
-
             // Act
-            var actionResult = controller.Add(1);
+            var actionResult = _sut.Add(1);
 
             // Assert
             actionResult.Should().BeOfType<ViewResult>();
@@ -38,10 +34,8 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         public void Get_ReceivesValidId_ReturnsViewWithCorrectIdInModel()
         {
             // Arrange
-            var controller = CreateController();
-
             // Act
-            var actionResult = controller.Add(1);
+            var actionResult = _sut.Add(1);
 
             // Assert
             var resultObject = actionResult as ViewResult;
@@ -54,10 +48,8 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         public async Task Post_ReceivesNull_ReturnsBadRequest()
         {
             // Arrange
-            var controller = CreateController();
-
             // Act
-            var actionResult = await controller.Add(null);
+            var actionResult = await _sut.Add(null);
 
             // Assert
             actionResult.Should().BeOfType<BadRequestResult>();
@@ -67,10 +59,8 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         public async Task Post_ReceivesCorrectModel_ReturnsRedirectResult()
         {
             // Arrange
-            var controller = CreateController();
-
             // Act
-            var actionResult = await controller.Add(new EmailAddress());
+            var actionResult = await _sut.Add(new EmailAddress());
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();
@@ -80,10 +70,8 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         public async Task Post_ReceivesCorrectModel_ReturnsRedirectToDetails()
         {
             // Arrange
-            var controller = CreateController();
-
             // Act
-            var actionResult = await controller.Add(new EmailAddress());
+            var actionResult = await _sut.Add(new EmailAddress());
 
             // Assert
             var redirect = actionResult as RedirectToActionResult;

@@ -6,22 +6,19 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.RelationshipControllerTests
 {
-    public abstract class BaseRelationshipControllerTests
+    public abstract class TestBase
     {
         #region test infrastructure
 
         protected IRepository<Relationship> _repository;
         private ILogger<RelationshipController> _logger;
+        protected readonly RelationshipController _sut;
 
-        protected BaseRelationshipControllerTests()
+        protected TestBase()
         {
             _repository = Substitute.For<IRepository<Relationship>>();
             _logger = Substitute.For<ILogger<RelationshipController>>();
-        }
-
-        protected RelationshipController CreateController()
-        {
-            return new RelationshipController(_repository, _logger);
+            _sut = new RelationshipController(_repository, _logger);
         }
 
         #endregion

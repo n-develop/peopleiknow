@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
 {
-    public class TeaserTests : BaseContactControllerTests
+    public class TeaserTests : TestBase
     {
         [Fact]
         public void ReceivesZeroId_ReturnsNotFound()

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
 {
-    public class FavoriteTests : BaseContactControllerTests
+    public class FavoriteTests : TestBase
     {
         [Fact]
         public async Task InvalidId_ReturnsNotFound()

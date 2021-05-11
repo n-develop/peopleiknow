@@ -5,14 +5,14 @@ using PeopleIKnow.DataAccess.Repositories;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
 {
-    public abstract class BaseContactControllerTests
+    public abstract class TestBase
     {
         #region test infrastructure
 
         protected IContactRepository _contactRepository;
         private ILogger<ContactController> _logger;
 
-        protected BaseContactControllerTests()
+        protected TestBase()
         {
             _contactRepository = Substitute.For<IContactRepository>();
             _logger = Substitute.For<ILogger<ContactController>>();

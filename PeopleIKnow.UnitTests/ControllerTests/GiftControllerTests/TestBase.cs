@@ -6,7 +6,7 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.GiftControllerTests
 {
-    public class BaseGiftControllerTests
+    public class TestBase
     {
         #region test infrastructure
 
@@ -14,7 +14,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.GiftControllerTests
         protected IRepository<Gift> _repository;
         private ILogger<GiftController> _logger;
 
-        public BaseGiftControllerTests()
+        public TestBase()
         {
             _repository = Substitute.For<IRepository<Gift>>();
             _logger = Substitute.For<ILogger<GiftController>>();

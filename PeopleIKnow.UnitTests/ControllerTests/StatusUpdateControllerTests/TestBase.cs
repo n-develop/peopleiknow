@@ -6,22 +6,19 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.StatusUpdateControllerTests
 {
-    public abstract class BaseStatusUpdateControllerTests
+    public abstract class TestBase
     {
         #region test infrastructure
 
         protected IRepository<StatusUpdate> _repository;
         private ILogger<StatusUpdateController> _logger;
+        protected readonly StatusUpdateController _sut;
 
-        protected BaseStatusUpdateControllerTests()
+        protected TestBase()
         {
             _repository = Substitute.For<IRepository<StatusUpdate>>();
             _logger = Substitute.For<ILogger<StatusUpdateController>>();
-        }
-
-        protected StatusUpdateController CreateController()
-        {
-            return new StatusUpdateController(_repository, _logger);
+            _sut = new StatusUpdateController(_repository, _logger);
         }
 
         #endregion

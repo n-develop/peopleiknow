@@ -6,22 +6,19 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
 {
-    public abstract class BaseEmailControllerTests
+    public abstract class TestBase
     {
         #region test infrastructure
 
         protected IRepository<EmailAddress> _repository;
         private ILogger<EmailController> _logger;
+        protected readonly EmailController _sut;
 
-        protected BaseEmailControllerTests()
+        protected TestBase()
         {
             _repository = Substitute.For<IRepository<EmailAddress>>();
             _logger = Substitute.For<ILogger<EmailController>>();
-        }
-
-        protected EmailController CreateController()
-        {
-            return new EmailController(_repository, _logger);
+            _sut = new EmailController(_repository, _logger);
         }
 
         #endregion

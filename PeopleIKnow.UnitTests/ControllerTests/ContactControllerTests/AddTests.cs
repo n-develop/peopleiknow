@@ -7,7 +7,7 @@ using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
 {
-    public class AddTests : BaseContactControllerTests
+    public class AddTests : TestBase
     {
         [Fact]
         public void Get_ReturnsView()

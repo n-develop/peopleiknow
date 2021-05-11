@@ -8,16 +8,14 @@ using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
 {
-    public class DeleteTests : BaseEmailControllerTests
+    public class DeleteTests : TestBase
     {
         [Fact]
         public async Task ReceivesInvalidId_ReturnsNotFound()
         {
             // Arrange
-            var controller = CreateController();
-
             // Act
-            var actionResult = await controller.Delete(0);
+            var actionResult = await _sut.Delete(0);
 
             // Assert
             actionResult.Should().BeOfType<NotFoundResult>();
@@ -28,10 +26,9 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         {
             // Arrange
             _repository.GetByIdAsync(1).ReturnsNull();
-            var controller = CreateController();
 
             // Act
-            var actionResult = await controller.Delete(1);
+            var actionResult = await _sut.Delete(1);
 
             // Assert
             actionResult.Should().BeOfType<NotFoundResult>();
@@ -42,10 +39,9 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         {
             // Arrange
             _repository.GetByIdAsync(1).Returns(new EmailAddress {ContactId = 2});
-            var controller = CreateController();
 
             // Act
-            var actionResult = await controller.Delete(1);
+            var actionResult = await _sut.Delete(1);
 
             // Assert
             actionResult.Should().BeOfType<RedirectToActionResult>();
@@ -56,10 +52,9 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         {
             // Arrange
             _repository.GetByIdAsync(1).Returns(new EmailAddress {ContactId = 2});
-            var controller = CreateController();
 
             // Act
-            var redirectResult = await controller.Delete(1) as RedirectToActionResult;
+            var redirectResult = await _sut.Delete(1) as RedirectToActionResult;
 
             // Assert
             redirectResult.ActionName.Should().Be("Details");
