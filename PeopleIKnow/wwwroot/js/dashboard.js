@@ -215,7 +215,13 @@ function deleteContact() {
         })
         .then((responseObj) => {
             if (responseObj.success) {
-                alert(responseObj.message); // TODO alert???? No! Show a nice modal or something like that.
+                const $target = document.getElementById("successfully-deleted-modal");
+                rootEl.classList.add('is-clipped');
+                $target.classList.add('is-active');
+                setTimeout(() => {
+                    rootEl.classList.remove('is-clipped');
+                    $target.classList.remove('is-active');
+                }, 1800);
 
                 const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
                     '        <div class="column">\n' +
@@ -246,9 +252,9 @@ function saveContact() {
             rootEl.classList.add('is-clipped');// TODO maybe make a reusable function to add und remove this classes for different modals/notifications
             $target.classList.add('is-active');
             setTimeout(() => {
-                rootEl.classList.remove('is-clipped');  
+                rootEl.classList.remove('is-clipped');
                 $target.classList.remove('is-active');
-            }, 1500);
+            }, 1800);
         }).then(function () {
         const preview = document.querySelector(".contact-preview");
         const id = preview.getAttribute("data-contact-id");
