@@ -216,12 +216,7 @@ function deleteContact() {
         .then((responseObj) => {
             if (responseObj.success) {
                 const $target = document.getElementById("successfully-deleted-modal");
-                rootEl.classList.add('is-clipped');
-                $target.classList.add('is-active');
-                setTimeout(() => {
-                    rootEl.classList.remove('is-clipped');
-                    $target.classList.remove('is-active');
-                }, 1800);
+                showToastNotification($target);
 
                 const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
                     '        <div class="column">\n' +
@@ -239,6 +234,15 @@ function deleteContact() {
         .finally(() => hideLoadingIndicator());
 }
 
+function showToastNotification($target) {
+    rootEl.classList.add('is-clipped');
+    $target.classList.add('is-active');
+    setTimeout(() => {
+        rootEl.classList.remove('is-clipped');
+        $target.classList.remove('is-active');
+    }, 1800);
+}
+
 function saveContact() {
     const form = new FormData(document.getElementById('contact-form'));
     showLoadingIndicator();
@@ -249,12 +253,7 @@ function saveContact() {
         .then(updatePane)
         .then(function () {
             const $target = document.getElementById("successfully-saved-modal");
-            rootEl.classList.add('is-clipped');// TODO maybe make a reusable function to add und remove this classes for different modals/notifications
-            $target.classList.add('is-active');
-            setTimeout(() => {
-                rootEl.classList.remove('is-clipped');
-                $target.classList.remove('is-active');
-            }, 1800);
+            showToastNotification($target);
         }).then(function () {
         const preview = document.querySelector(".contact-preview");
         const id = preview.getAttribute("data-contact-id");
