@@ -29,8 +29,6 @@ namespace PeopleIKnow.UnitTests.Services
         public async Task NoReminderFound_NoReminderSent()
         {
             // Arrange
-            _reminderRepository.GetAll().Returns(new List<Reminder>().AsQueryable());
-
             // Act
             await _sut.SendReminders(DateTime.Today);
 
@@ -115,6 +113,29 @@ namespace PeopleIKnow.UnitTests.Services
 
             // Assert
             await _messagingService.DidNotReceiveWithAnyArgs().SendMessageAsync(null, null);
+        }
+
+
+        [Fact]
+        public async Task OneBirthdayFound_ReminderSentWithCorrectMessage()
+        {
+            // Arrange
+            _contactRepository.GetBirthdayContactsAsync(Arg.Any<DateTime>())
+                .Returns(new List<Contact>
+                {
+                    new Contact
+                    {
+                        Firstname = "Joseph",
+                        Lastname = "Jasper",
+                        Birthday = new DateTime(1990, 9, 21)
+                    }
+                });
+
+            // Act
+            await _sut.SendReminders(new DateTime(2021, 9, 21));
+
+            // Assert
+            await _messagingService.Received(1).SendMessageAsync("🎁 Joseph Jasper", "It's Joseph Jasper's birthday");
         }
     }
 }
