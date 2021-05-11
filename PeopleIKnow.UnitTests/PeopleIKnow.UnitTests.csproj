@@ -21,8 +21,4 @@
     <ItemGroup>
         <ProjectReference Include="..\PeopleIKnow\PeopleIKnow.csproj"/>
     </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="ControllerTests\CommonActivityControllerTests"/>
-    </ItemGroup>
 </Project>
