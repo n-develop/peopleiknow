@@ -215,7 +215,7 @@ function deleteContact() {
         })
         .then((responseObj) => {
             if (responseObj.success) {
-                alert(responseObj.message);
+                alert(responseObj.message); // TODO alert???? No! Show a nice modal or something like that.
 
                 const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
                     '        <div class="column">\n' +
@@ -243,12 +243,12 @@ function saveContact() {
         .then(updatePane)
         .then(function () {
             const $target = document.getElementById("successfully-saved-modal");
-            rootEl.classList.add('is-clipped');
+            rootEl.classList.add('is-clipped');// TODO maybe make a reusable function to add und remove this classes for different modals/notifications
             $target.classList.add('is-active');
             setTimeout(() => {
-                rootEl.classList.remove('is-clipped');
+                rootEl.classList.remove('is-clipped');  
                 $target.classList.remove('is-active');
-            }, 2000);
+            }, 1500);
         }).then(function () {
         const preview = document.querySelector(".contact-preview");
         const id = preview.getAttribute("data-contact-id");
