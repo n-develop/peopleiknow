@@ -40,7 +40,7 @@ namespace PeopleIKnow
         {
             using var scope = _scopeFactory.CreateScope();
             var reminderService = scope.ServiceProvider.GetRequiredService<IReminderService>();
-            await reminderService.SendReminders();
+            await reminderService.SendReminders(DateTime.Today);
         }
 
         public Task StopAsync(CancellationToken stoppingToken)

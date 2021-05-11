@@ -21,16 +21,18 @@ namespace PeopleIKnow.Services
             _contactRepository = contactRepository;
         }
 
-        public async Task SendReminders()
+        public async Task SendReminders(DateTime reminderDate)
         {
-            await SendGeneralRemindersAsync();
-            await SendBirthdayRemindersAsync();
+            await SendGeneralRemindersAsync(reminderDate);
+            await SendBirthdayRemindersAsync(reminderDate);
         }
 
-        private async Task SendGeneralRemindersAsync()
+        private async Task SendGeneralRemindersAsync(DateTime reminderDate)
         {
             var reminders = _reminderRepository.GetAll().Include(r => r.Contact)
-                .Where(r => r.Date == DateTime.Today).ToList();
+                .Where(r => r.Date == reminderDate
+                            || (r.RemindMeEveryYear && r.Date.Day == reminderDate.Day &&
+                                r.Date.Month == reminderDate.Month)).ToList();
             foreach (var reminder in reminders)
             {
                 await _messagingService.SendMessageAsync("⏰ " + reminder.Description,
@@ -38,9 +40,9 @@ namespace PeopleIKnow.Services
             }
         }
 
-        private async Task SendBirthdayRemindersAsync()
+        private async Task SendBirthdayRemindersAsync(DateTime reminderDate)
         {
-            var birthdayContacts = await _contactRepository.GetBirthdayContactsAsync(DateTime.Today);
+            var birthdayContacts = await _contactRepository.GetBirthdayContactsAsync(reminderDate);
             foreach (var birthdayContact in birthdayContacts)
             {
                 await _messagingService.SendMessageAsync("🎁 " + birthdayContact.FullName,
