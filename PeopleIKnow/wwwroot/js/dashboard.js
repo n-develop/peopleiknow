@@ -43,17 +43,21 @@ async function addContact() {
     showPane();
 }
 
-function createContact() {
+async function createContact() {
     const form = new FormData(document.getElementById('contact-form'));
     showLoadingIndicator();
-    fetch("/contact/add", {
+    const response = await fetch("/contact/add", {
         method: "POST",
         body: form
-    })
-        .then(updatePane)
-        .then(reloadContactList)
-        .finally(() => hideLoadingIndicator());
-
+    });
+    if (!response.ok) {
+        // TODO maybe make sure there is a nice error message in the data?
+        console.log("Something went wrong while creating a contact. " + response.statusText);
+    } else {
+        updatePane(response);
+        reloadContactList();
+    }
+    hideLoadingIndicator()
 }
 
 /* Handle Teaser clicks */
