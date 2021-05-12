@@ -1,0 +1,39 @@
+<nav id="top" class="navbar has-shadow">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <span class="icon is-large">
+                <i class="fa fa-lg fa-users"></i>
+            </span>
+            <span class="title">People I Know</span>
+        </a>
+        <div class="navbar-item is-hidden-mobile is-hidden-tablet" id="back-button">
+            <a class="button">
+                <span class="icon">
+                    <i class="fa fa-lg fa-arrow-left"></i>
+                </span>
+            </a>
+        </div>
+        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="field has-addons">
+                    <div class="control">
+                        <input id="search-term" class="input" type="text" placeholder="Find contacts...">
+                    </div>
+                    <div class="control">
+                        <a id="search-button" class="button is-info">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <partial name="_LoginPartial"/>
+        </div>
+    </div>
+</nav>
