@@ -31,11 +31,15 @@ function hideLoadingIndicator() {
 
 /* Handle add button click */
 
-function addContact() {
+async function addContact() {
     showLoadingIndicator();
-    fetch("/contact/add")
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
+    const response = await fetch("/contact/add");
+    if (!response.ok) {
+        console.log("Something went wrong while creating a contact. " + response.statusText);
+    } else {
+        updatePane(response);
+    }
+    hideLoadingIndicator();
     showPane();
 }
 
