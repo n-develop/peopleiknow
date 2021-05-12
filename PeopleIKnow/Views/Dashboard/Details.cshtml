@@ -9,32 +9,8 @@
 <div class="box contact-preview" data-contact-id="@Model.Id">
     <form id="contact-form" asp-controller="Dashboard" asp-action="Details" method="post">
         <input type="hidden" asp-for="Id"/>
-        <div class="field">
-            <label class="label">Profile Image</label>
-            <div class="field">
-                <figure class="image is-96x96">
-                    <img src="@Model.ImagePath" alt="Profile image">
-                </figure>
-            </div>
-            <div class="control">
-                <div class="file has-name is-fullwidth">
-                    <label class="file-label">
-                        <input id="image-input" class="file-input" type="file" name="Image">
-                        <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                            </span>
-                            <span class="file-label">
-                                Browse…
-                            </span>
-                        </span>
-                        <span id="file-name" class="file-name">
-                            Select a file
-                        </span>
-                    </label>
-                </div>
-            </div>
-        </div>
+        
+        <partial name="ContactDetails/_ContactImage"/>
 
         <partial name="ContactDetails/_ContactName"/>
 

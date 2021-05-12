@@ -2,13 +2,10 @@
     ViewData["Title"] = "Dashboard";
 }
 
-@* ContactList START *@
 <div id="people-feed" class="column is-4-desktop is-full-mobile feed">
     @await Component.InvokeAsync("ContactList")
 </div>
-@* ContactList END *@
 
-@* DETAILS START *@
 <div id="people-pane" class="column is-8-desktop is-hidden-mobile pane">
     <div class="columns is-desktop is-vcentered" style="height: 100%;">
         <div class="column">
@@ -16,26 +13,10 @@
         </div>
     </div>
 </div>
-@* DETAILS END *@
 
 <button id="add-button" class="button is-success is-large" onclick="addContact()">
     <i class="fa fa-plus-circle"></i>
 </button>
-
-<div class="modal" id="success-modal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-        <article class="message is-success">
-            <div class="message-header">
-                Successful
-                <button class="delete"></button>
-            </div>
-            <div class="message-body">
-                Action successful.
-            </div>
-        </article>
-    </div>
-</div>
 
 <div class="modal" id="confirm-modal">
     <div class="modal-background"></div>
@@ -47,7 +28,7 @@
             </div>
             <div class="message-body">
                 <p id="confirm-message">
-                    Are you sure, that you want to do that?<br/>
+                    Are you sure, that you want to delete this contact?<br/>
                 </p>
                 <p class="is-">
                     <a class="button is-info">Yes</a>
@@ -65,7 +46,6 @@
             <h3 class="title is-3">✔️ Successfully saved!</h3>
         </div>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
 </div>
 
 <div class="modal" id="successfully-deleted-modal">
@@ -75,7 +55,6 @@
             <h3 class="title is-3">✔️ Successfully deleted!</h3>
         </div>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
 </div>
 
 @section Scripts
@@ -88,15 +67,15 @@
     </environment>
     <script>
         window.onresize = function() {
-            var feed = document.getElementById('people-feed');
-            var pane = document.getElementById('people-pane');
+            const feed = document.getElementById('people-feed');
+            const pane = document.getElementById('people-pane');
             feed.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
             pane.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
         }
 
         window.onload = function() {
-            var feed = document.getElementById('people-feed');
-            var pane = document.getElementById('people-pane');
+            const feed = document.getElementById('people-feed');
+            const pane = document.getElementById('people-pane');
             feed.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
             pane.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
         }
