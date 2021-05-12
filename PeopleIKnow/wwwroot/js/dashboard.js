@@ -55,7 +55,7 @@ async function createContact() {
         console.log("Something went wrong while creating a contact. " + response.statusText);
     } else {
         updatePane(response);
-        reloadContactList();
+        await reloadContactList();
     }
     hideLoadingIndicator()
 }
@@ -64,12 +64,12 @@ async function createContact() {
 
 function addContactTeaserClickEvent() {
     const contactCards = document.querySelectorAll("#people-feed > .card");
-    contactCards.forEach(function (currentValue, currentIndex, listObj) {
+    contactCards.forEach(function (currentValue) {
         currentValue.onclick = handleTeaserClick;
     });
 
     const favs = document.querySelectorAll(".favorite");
-    favs.forEach(function (currentValue, currentIndex, listObj) {
+    favs.forEach(function (currentValue) {
         currentValue.onclick = favClick;
     });
 
@@ -105,11 +105,14 @@ function hideElementOnMobile(el) {
     el.classList.add("is-hidden-mobile");
 }
 
-function handleTeaserClick(element) {
+async function handleTeaserClick(element) {
     const id = element.currentTarget.getAttribute("data-contact-id");
-    fetch("/Dashboard/Details/" + id)
-        .then(showDetailsInPane);
-
+    const response = await fetch("/Dashboard/Details/" + id);
+    if (!response.ok) {
+        console.log("Something went wrong while loading a contact. " + response.statusText);
+        return;
+    }
+    showDetailsInPane(response);
     showPane();
 }
 
@@ -122,9 +125,13 @@ function addOnChangeEventToImageInput() {
     };
 }
 
-function backToDetails(id) {
-    fetch("/Dashboard/Details/" + id)
-        .then(updatePane);
+async function backToDetails(id) {
+    const response = await fetch("/Dashboard/Details/" + id);
+    if (!response.ok) {
+        console.log('Something went wrong while going back to the contact details');
+        return;
+    }
+    updatePane(response);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -165,29 +172,42 @@ function updateContactList(response) {
         .then(addContactTeaserClickEvent);
 }
 
-function reloadContactList() {
-    fetch("/dashboard/contactlist")
-        .then(updateContactList);
+async function reloadContactList() {
+    const response = await fetch("/dashboard/contactlist");
+    if (!response.ok) {
+        console.log('Something went wrong while reloading the contact list');
+        return;
+    }
+    updateContactList(response);
 }
 
-function favClick(event) {
+async function favClick(event) {
     event.stopPropagation();
     const i = event.currentTarget;
     const id = i.getAttribute("data-contact-id");
-    fetch("/Contact/Favorite/" + id, {
+    const response = await fetch("/Contact/Favorite/" + id, {
         method: "POST"
-    })
-        .then(updateContactList);
+    });
+    if (!response.ok) {
+        console.log('Something went wrong while triggering the favorite state');
+        return;
+    }
+    updateContactList(response);
 }
+
 /* Search */
 
-function search() {
+async function search() {
     const searchInput = document.getElementById("search-term");
     const term = searchInput.value;
     showLoadingIndicator();
-    fetch("/Search?term=" + term)
-        .then(updateContactList)
-        .finally(() => hideLoadingIndicator());
+    const response = await fetch("/Search?term=" + term);
+    if (!response.ok) {
+        console.log('Something went wrong while searching for contacts');
+        return;
+    }
+    await updateContactList(response);
+    hideLoadingIndicator();
     showFeed();
 }
 
@@ -197,17 +217,17 @@ const searchButton = document.getElementById("search-button");
 searchButton.onclick = search;
 
 const searchTerm = document.getElementById("search-term");
-searchTerm.addEventListener("keyup", function onEvent(e) {
+searchTerm.addEventListener("keyup", function onEvent() {
     clearTimeout(timeout);
-    timeout = setTimeout(function () {
-        search()
+    timeout = setTimeout(async function () {
+        await search()
     }, 600);
 });
 
-function searchRelationship(contactName) {
+async function searchRelationship(contactName) {
     const searchInput = document.getElementById("search-term");
     searchInput.value = contactName;
-    search();
+    await search();
 }
 
 /* Actions on Entities */
@@ -279,47 +299,69 @@ function saveContact() {
 
 /* CRUD entities */
 
-function addEntity(entityName) {
+async function addEntity(entityName) {
     const preview = document.querySelector(".contact-preview");
     const id = preview.getAttribute("data-contact-id");
     showLoadingIndicator();
-    fetch(`/${entityName}/Add?contactId=${id}`)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
+    const response = await fetch(`/${entityName}/Add?contactId=${id}`);
+    if (!response.ok) {
+        console.log(`Something went wrong while adding a ${entityName}`);
+        return
+    }
+    updatePane(response);
+    hideLoadingIndicator();
 }
 
-function saveEntity(entityName, formId) {
+async function saveEntity(entityName, formId) {
     const form = new FormData(document.getElementById(formId));
     showLoadingIndicator();
-    fetch(`/${entityName}/Add`, {
+    const response = await fetch(`/${entityName}/Add`, {
         method: "POST",
         body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
+    });
+    if (!response.ok) {
+        console.log(`Something went wrong while saving a ${entityName}`);
+        return
+    }
+    updatePane(response);
+    hideLoadingIndicator();
 }
 
-function editEntity(id, entityName) {
+async function editEntity(id, entityName) {
     showLoadingIndicator();
-    fetch(`/${entityName}/Edit/${id}`)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
+    const response = await fetch(`/${entityName}/Edit/${id}`);
+    if (!response.ok) {
+        console.log(`Something went wrong while editing a ${entityName}`);
+        return
+    }
+    updatePane(response);
+    hideLoadingIndicator();
 }
 
-function updateEntity(entityName, formId) {
+async function updateEntity(entityName, formId) {
     const form = new FormData(document.getElementById(formId));
     showLoadingIndicator();
-    fetch(`/${entityName}/Edit`, {
+    const response = await fetch(`/${entityName}/Edit`, {
         method: "POST",
         body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
+    });
+    if (!response.ok) {
+        console.log(`Something went wrong while updating a ${entityName}`);
+        return
+    }
+    updatePane(response);
+    hideLoadingIndicator();
 }
 
-function deleteEntity(id, entityName) {
+async function deleteEntity(id, entityName) {
     showLoadingIndicator();
-    fetch(`/${entityName}/Delete/${id}`)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
+    const response = await fetch(`/${entityName}/Delete/${id}`);
+    if (!response.ok) {
+        console.log(`Something went wrong while deleting a ${entityName}`);
+        return
+    }
+    updatePane(response);
+    hideLoadingIndicator();
 }
 
 /* Update Pane */
