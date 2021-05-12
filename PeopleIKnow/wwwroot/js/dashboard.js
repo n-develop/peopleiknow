@@ -230,43 +230,23 @@ async function searchRelationship(contactName) {
 
 /* Actions on Entities */
 
-function deleteContact() {
+async function deleteContact() {
     const id = document.querySelector(".contact-preview").getAttribute("data-contact-id");
     showLoadingIndicator();
-    fetch("/contact/delete/" + id, {
+    const response = await fetch("/contact/delete/" + id, {
         method: "DELETE"
-    })
-        .then((response) => {
-            return response.json();
-        })
-        .then((responseObj) => {
-            if (responseObj.success) {
-                const $target = document.getElementById("successfully-deleted-modal");
-                showToastNotification($target);
+    });
 
-                const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
-                    '        <div class="column">\n' +
-                    '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
-                    '        </div>\n' +
-                    '    </div>';
-                const detailsPane = document.getElementById("people-pane");
-                detailsPane.innerHTML = empty;
-
-                document.getElementById("contact-teaser-" + id).remove();
-            } else {
-                alert(responseObj.message);
-            }
-        })
-        .finally(() => hideLoadingIndicator());
-}
-
-function showToastNotification($target) {
-    rootEl.classList.add('is-clipped');
-    $target.classList.add('is-active');
-    setTimeout(() => {
-        rootEl.classList.remove('is-clipped');
-        $target.classList.remove('is-active');
-    }, 1800);
+    const responseObj = await response.json();
+    if (responseObj.success) {
+        const $target = document.getElementById("successfully-deleted-modal");
+        showToastNotification($target);
+        clearDetailsPane();
+        document.getElementById("contact-teaser-" + id).remove();
+    } else {
+        alert(responseObj.message);
+    }
+    hideLoadingIndicator();
 }
 
 function saveContact() {
@@ -373,6 +353,25 @@ async function showDetailsInPane(response) {
     const detailsPane = document.getElementById("people-pane");
     detailsPane.innerHTML = await response.text();
     addOnChangeEventToImageInput();
+}
+
+function clearDetailsPane() {
+    const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
+        '        <div class="column">\n' +
+        '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
+        '        </div>\n' +
+        '    </div>';
+    const detailsPane = document.getElementById("people-pane");
+    detailsPane.innerHTML = empty;
+}
+
+function showToastNotification($target) {
+    rootEl.classList.add('is-clipped');
+    $target.classList.add('is-active');
+    setTimeout(() => {
+        rootEl.classList.remove('is-clipped');
+        $target.classList.remove('is-active');
+    }, 1800);
 }
 
 /* Helper stuff */
