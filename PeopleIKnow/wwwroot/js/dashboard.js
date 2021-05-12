@@ -1,7 +1,19 @@
 const rootEl = document.documentElement;
 
-/* modal  stuff */
+/* loading indicator */
 const $loadingIndicator = document.getElementById('loading-indicator');
+
+function showLoadingIndicator() {
+    rootEl.classList.add('is-clipped');
+    $loadingIndicator.classList.add('is-active');
+}
+
+function hideLoadingIndicator() {
+    rootEl.classList.remove('is-clipped');
+    $loadingIndicator.classList.remove('is-active');
+}
+
+/* modal  stuff */
 const $modals = getAll('.modal');
 const $modalCloses = getAll('.modal-close, .delete');
 if ($modalCloses.length > 0) {
@@ -17,16 +29,6 @@ function closeModals() {
     $modals.forEach(function ($el) {
         $el.classList.remove('is-active');
     });
-}
-
-function showLoadingIndicator() {
-    rootEl.classList.add('is-clipped');
-    $loadingIndicator.classList.add('is-active');
-}
-
-function hideLoadingIndicator() {
-    rootEl.classList.remove('is-clipped');
-    $loadingIndicator.classList.remove('is-active');
 }
 
 /* Handle add button click */
