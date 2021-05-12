@@ -239,8 +239,7 @@ async function deleteContact() {
 
     const responseObj = await response.json();
     if (responseObj.success) {
-        const $target = document.getElementById("successfully-deleted-modal");
-        showToastNotification($target);
+        showToastNotification("successfully-deleted-modal");
         clearDetailsPane();
         document.getElementById("contact-teaser-" + id).remove();
     } else {
@@ -249,30 +248,36 @@ async function deleteContact() {
     hideLoadingIndicator();
 }
 
-function saveContact() {
+async function updateTeaser() {
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
+    const teaser = document.getElementById("contact-teaser-" + id);
+    const teaserResponse = await fetch("/contact/teaser?id=" + id);
+    if (!teaserResponse.ok) {
+        console.log(`Failed to update teaser for contact with id ${id}`);
+        return;
+    }
+    teaser.outerHTML = await teaserResponse.text();
+    addContactTeaserClickEvent();
+}
+
+async function saveContact() {
     const form = new FormData(document.getElementById('contact-form'));
     showLoadingIndicator();
-    fetch("/dashboard/details", {
+    const response = await fetch("/dashboard/details", {
         method: "POST",
         body: form
-    })
-        .then(updatePane)
-        .then(function () {
-            const $target = document.getElementById("successfully-saved-modal");
-            showToastNotification($target);
-        }).then(function () {
-        const preview = document.querySelector(".contact-preview");
-        const id = preview.getAttribute("data-contact-id");
-        const teaser = document.getElementById("contact-teaser-" + id);
-        fetch("/contact/teaser?id=" + id).then(function (response) {
-            response.text().then(function (value) {
-                teaser.outerHTML = value;
-            })
-                .then(addContactTeaserClickEvent);
-        });
+    });
+    if (!response.ok) {
+        console.log('Something went wrong saving a contact');
+        return;
+    }
+    await updatePane(response);
+    showToastNotification("successfully-saved-modal");
 
-    })
-        .finally(() => hideLoadingIndicator());
+    await updateTeaser();
+
+    hideLoadingIndicator();
 }
 
 /* CRUD entities */
@@ -365,7 +370,8 @@ function clearDetailsPane() {
     detailsPane.innerHTML = empty;
 }
 
-function showToastNotification($target) {
+function showToastNotification(modalId) {
+    const $target = document.getElementById(modalId);
     rootEl.classList.add('is-clipped');
     $target.classList.add('is-active');
     setTimeout(() => {
