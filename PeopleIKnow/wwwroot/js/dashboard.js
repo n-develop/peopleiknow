@@ -37,7 +37,7 @@ async function addContact() {
     if (!response.ok) {
         console.log("Something went wrong while creating a contact. " + response.statusText);
     } else {
-        updatePane(response);
+        await updatePane(response);
     }
     hideLoadingIndicator();
     showPane();
@@ -54,7 +54,7 @@ async function createContact() {
         // TODO maybe make sure there is a nice error message in the data?
         console.log("Something went wrong while creating a contact. " + response.statusText);
     } else {
-        updatePane(response);
+        await updatePane(response);
         await reloadContactList();
     }
     hideLoadingIndicator()
@@ -101,7 +101,7 @@ function showElementOnMobile(el) {
 }
 
 function hideElementOnMobile(el) {
-    el.classList.remove("is-full-mobile");  
+    el.classList.remove("is-full-mobile");
     el.classList.add("is-hidden-mobile");
 }
 
@@ -112,7 +112,7 @@ async function handleTeaserClick(element) {
         console.log("Something went wrong while loading a contact. " + response.statusText);
         return;
     }
-    showDetailsInPane(response);
+    await showDetailsInPane(response);
     showPane();
 }
 
@@ -131,7 +131,7 @@ async function backToDetails(id) {
         console.log('Something went wrong while going back to the contact details');
         return;
     }
-    updatePane(response);
+    await updatePane(response);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -164,12 +164,10 @@ addContactTeaserClickEvent();
 
 /* Contact List Stuff */
 
-function updateContactList(response) {
+async function updateContactList(response) {
     const feed = document.getElementById("people-feed");
-    response.text().then(function (value) {
-        feed.innerHTML = value;
-    })
-        .then(addContactTeaserClickEvent);
+    feed.innerHTML = await response.text();
+    addContactTeaserClickEvent();
 }
 
 async function reloadContactList() {
@@ -178,7 +176,7 @@ async function reloadContactList() {
         console.log('Something went wrong while reloading the contact list');
         return;
     }
-    updateContactList(response);
+    await updateContactList(response);
 }
 
 async function favClick(event) {
@@ -192,7 +190,7 @@ async function favClick(event) {
         console.log('Something went wrong while triggering the favorite state');
         return;
     }
-    updateContactList(response);
+    await updateContactList(response);
 }
 
 /* Search */
@@ -308,7 +306,7 @@ async function addEntity(entityName) {
         console.log(`Something went wrong while adding a ${entityName}`);
         return
     }
-    updatePane(response);
+    await updatePane(response);
     hideLoadingIndicator();
 }
 
@@ -323,7 +321,7 @@ async function saveEntity(entityName, formId) {
         console.log(`Something went wrong while saving a ${entityName}`);
         return
     }
-    updatePane(response);
+    await updatePane(response);
     hideLoadingIndicator();
 }
 
@@ -334,7 +332,7 @@ async function editEntity(id, entityName) {
         console.log(`Something went wrong while editing a ${entityName}`);
         return
     }
-    updatePane(response);
+    await updatePane(response);
     hideLoadingIndicator();
 }
 
@@ -349,7 +347,7 @@ async function updateEntity(entityName, formId) {
         console.log(`Something went wrong while updating a ${entityName}`);
         return
     }
-    updatePane(response);
+    await updatePane(response);
     hideLoadingIndicator();
 }
 
@@ -360,25 +358,21 @@ async function deleteEntity(id, entityName) {
         console.log(`Something went wrong while deleting a ${entityName}`);
         return
     }
-    updatePane(response);
+    await updatePane(response);
     hideLoadingIndicator();
 }
 
 /* Update Pane */
 
-function updatePane(response) {
+async function updatePane(response) {
     const detailsPane = document.getElementById("people-pane");
-    response.text().then(function (value) {
-        detailsPane.innerHTML = value;
-    });
+    detailsPane.innerHTML = await response.text();
 }
 
-function showDetailsInPane(response) {
+async function showDetailsInPane(response) {
     const detailsPane = document.getElementById("people-pane");
-    response.text().then(function (value) {
-        detailsPane.innerHTML = value;
-    })
-        .then(addOnChangeEventToImageInput);
+    detailsPane.innerHTML = await response.text();
+    addOnChangeEventToImageInput();
 }
 
 /* Helper stuff */
