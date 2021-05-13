@@ -3,11 +3,11 @@ const rootEl = document.documentElement;
 /* loading indicator */
 const $loadingIndicator = document.getElementById('loading-indicator');
 const LoadingIndicator = {
-    show() {
+    show: function () {
         rootEl.classList.add('is-clipped');
         $loadingIndicator.classList.add('is-active');
     },
-    hide() {
+    hide: function () {
         rootEl.classList.remove('is-clipped');
         $loadingIndicator.classList.remove('is-active');
     }
@@ -275,7 +275,7 @@ async function saveContact() {
 /* CRUD entities */
 
 const Entities = {
-    async add(entityName) {
+    add: async function (entityName) {
         const preview = document.querySelector(".contact-preview");
         const id = preview.getAttribute("data-contact-id");
         LoadingIndicator.show();
@@ -287,7 +287,7 @@ const Entities = {
         await updatePane(response);
         LoadingIndicator.hide();
     },
-    async save(entityName, formId) {
+    save: async function (entityName, formId) {
         const form = new FormData(document.getElementById(formId));
         LoadingIndicator.show();
         const response = await fetch(`/${entityName}/Add`, {
@@ -301,7 +301,7 @@ const Entities = {
         await updatePane(response);
         LoadingIndicator.hide();
     },
-    async edit(id, entityName) {
+    edit: async function (id, entityName) {
         LoadingIndicator.show();
         const response = await fetch(`/${entityName}/Edit/${id}`);
         if (!response.ok) {
@@ -311,7 +311,7 @@ const Entities = {
         await updatePane(response);
         LoadingIndicator.hide();
     },
-    async update(entityName, formId) {
+    update: async function (entityName, formId) {
         const form = new FormData(document.getElementById(formId));
         LoadingIndicator.show();
         const response = await fetch(`/${entityName}/Edit`, {
@@ -325,7 +325,7 @@ const Entities = {
         await updatePane(response);
         LoadingIndicator.hide();
     },
-    async delete(id, entityName) {
+    delete: async function (id, entityName) {
         LoadingIndicator.show();
         const response = await fetch(`/${entityName}/Delete/${id}`);
         if (!response.ok) {
