@@ -1,7 +1,19 @@
 const rootEl = document.documentElement;
 
-/* modal  stuff */
+/* loading indicator */
 const $loadingIndicator = document.getElementById('loading-indicator');
+const LoadingIndicator = {
+    show() {
+        rootEl.classList.add('is-clipped');
+        $loadingIndicator.classList.add('is-active');
+    },
+    hide() {
+        rootEl.classList.remove('is-clipped');
+        $loadingIndicator.classList.remove('is-active');
+    }
+};
+
+/* modal  stuff */
 const $modals = getAll('.modal');
 const $modalCloses = getAll('.modal-close, .delete');
 if ($modalCloses.length > 0) {
@@ -19,49 +31,47 @@ function closeModals() {
     });
 }
 
-function showLoadingIndicator() {
-    rootEl.classList.add('is-clipped');
-    $loadingIndicator.classList.add('is-active');
-}
-
-function hideLoadingIndicator() {
-    rootEl.classList.remove('is-clipped');
-    $loadingIndicator.classList.remove('is-active');
-}
-
 /* Handle add button click */
 
-function addContact() {
-    showLoadingIndicator();
-    fetch("/contact/add")
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
+async function addContact() {
+    LoadingIndicator.show();
+    const response = await fetch("/contact/add");
+    if (!response.ok) {
+        console.log("Something went wrong while creating a contact. " + response.statusText);
+    } else {
+        await updatePane(response);
+    }
+    LoadingIndicator.hide();
     showPane();
 }
 
-function createContact() {
+async function createContact() {
     const form = new FormData(document.getElementById('contact-form'));
-    showLoadingIndicator();
-    fetch("/contact/add", {
+    LoadingIndicator.show();
+    const response = await fetch("/contact/add", {
         method: "POST",
         body: form
-    })
-        .then(updatePane)
-        .then(reloadContactList)
-        .finally(() => hideLoadingIndicator());
-
+    });
+    if (!response.ok) {
+        // TODO maybe make sure there is a nice error message in the data?
+        console.log("Something went wrong while creating a contact. " + response.statusText);
+    } else {
+        await updatePane(response);
+        await reloadContactList();
+    }
+    LoadingIndicator.hide();
 }
 
 /* Handle Teaser clicks */
 
 function addContactTeaserClickEvent() {
     const contactCards = document.querySelectorAll("#people-feed > .card");
-    contactCards.forEach(function (currentValue, currentIndex, listObj) {
+    contactCards.forEach(function (currentValue) {
         currentValue.onclick = handleTeaserClick;
     });
 
     const favs = document.querySelectorAll(".favorite");
-    favs.forEach(function (currentValue, currentIndex, listObj) {
+    favs.forEach(function (currentValue) {
         currentValue.onclick = favClick;
     });
 
@@ -93,15 +103,18 @@ function showElementOnMobile(el) {
 }
 
 function hideElementOnMobile(el) {
-    el.classList.remove("is-full-mobile");  
+    el.classList.remove("is-full-mobile");
     el.classList.add("is-hidden-mobile");
 }
 
-function handleTeaserClick(element) {
+async function handleTeaserClick(element) {
     const id = element.currentTarget.getAttribute("data-contact-id");
-    fetch("/Dashboard/Details/" + id)
-        .then(showDetailsInPane);
-
+    const response = await fetch("/Dashboard/Details/" + id);
+    if (!response.ok) {
+        console.log("Something went wrong while loading a contact. " + response.statusText);
+        return;
+    }
+    await showDetailsInPane(response);
     showPane();
 }
 
@@ -114,72 +127,77 @@ function addOnChangeEventToImageInput() {
     };
 }
 
-function backToDetails(id) {
-    fetch("/Dashboard/Details/" + id)
-        .then(updatePane);
+async function backToDetails(id) {
+    const response = await fetch("/Dashboard/Details/" + id);
+    if (!response.ok) {
+        console.log('Something went wrong while going back to the contact details');
+        return;
+    }
+    await updatePane(response);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-    // Check if there are any navbar burgers
     if ($navbarBurgers.length > 0) {
-
-        // Add a click event on each of them
         $navbarBurgers.forEach(el => {
             el.addEventListener('click', () => {
-
-                // Get the target from the "data-target" attribute
                 const target = el.dataset.target;
                 const $target = document.getElementById(target);
 
-                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
                 el.classList.toggle('is-active');
                 $target.classList.toggle('is-active');
-
             });
         });
     }
-
 });
 
 addContactTeaserClickEvent();
 
 /* Contact List Stuff */
 
-function updateContactList(response) {
+async function updateContactList(response) {
     const feed = document.getElementById("people-feed");
-    response.text().then(function (value) {
-        feed.innerHTML = value;
-    })
-        .then(addContactTeaserClickEvent);
+    feed.innerHTML = await response.text();
+    addContactTeaserClickEvent();
 }
 
-function reloadContactList() {
-    fetch("/dashboard/contactlist")
-        .then(updateContactList);
+async function reloadContactList() {
+    const response = await fetch("/dashboard/contactlist");
+    if (!response.ok) {
+        console.log('Something went wrong while reloading the contact list');
+        return;
+    }
+    await updateContactList(response);
 }
 
-function favClick(event) {
+async function favClick(event) {
     event.stopPropagation();
     const i = event.currentTarget;
     const id = i.getAttribute("data-contact-id");
-    fetch("/Contact/Favorite/" + id, {
+    const response = await fetch("/Contact/Favorite/" + id, {
         method: "POST"
-    })
-        .then(updateContactList);
+    });
+    if (!response.ok) {
+        console.log('Something went wrong while triggering the favorite state');
+        return;
+    }
+    await updateContactList(response);
 }
+
 /* Search */
 
-function search() {
+async function search() {
     const searchInput = document.getElementById("search-term");
     const term = searchInput.value;
-    showLoadingIndicator();
-    fetch("/Search?term=" + term)
-        .then(updateContactList)
-        .finally(() => hideLoadingIndicator());
+    LoadingIndicator.show();
+    const response = await fetch("/Search?term=" + term);
+    if (!response.ok) {
+        console.log('Something went wrong while searching for contacts');
+        return;
+    }
+    await updateContactList(response);
+    LoadingIndicator.hide();
     showFeed();
 }
 
@@ -189,146 +207,167 @@ const searchButton = document.getElementById("search-button");
 searchButton.onclick = search;
 
 const searchTerm = document.getElementById("search-term");
-searchTerm.addEventListener("keyup", function onEvent(e) {
+searchTerm.addEventListener("keyup", function onEvent() {
     clearTimeout(timeout);
-    timeout = setTimeout(function () {
-        search()
+    timeout = setTimeout(async function () {
+        await search()
     }, 600);
 });
 
-function searchRelationship(contactName) {
+async function searchRelationship(contactName) {
     const searchInput = document.getElementById("search-term");
     searchInput.value = contactName;
-    search();
+    await search();
 }
 
 /* Actions on Entities */
 
-function deleteContact() {
+async function deleteContact() {
     const id = document.querySelector(".contact-preview").getAttribute("data-contact-id");
-    showLoadingIndicator();
-    fetch("/contact/delete/" + id, {
+    LoadingIndicator.show();
+    const response = await fetch("/contact/delete/" + id, {
         method: "DELETE"
-    })
-        .then((response) => {
-            return response.json();
-        })
-        .then((responseObj) => {
-            if (responseObj.success) {
-                const $target = document.getElementById("successfully-deleted-modal");
-                showToastNotification($target);
+    });
 
-                const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
-                    '        <div class="column">\n' +
-                    '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
-                    '        </div>\n' +
-                    '    </div>';
-                const detailsPane = document.getElementById("people-pane");
-                detailsPane.innerHTML = empty;
-
-                document.getElementById("contact-teaser-" + id).remove();
-            } else {
-                alert(responseObj.message);
-            }
-        })
-        .finally(() => hideLoadingIndicator());
+    const responseObj = await response.json();
+    if (responseObj.success) {
+        showToastNotification("successfully-deleted-modal");
+        clearDetailsPane();
+        document.getElementById("contact-teaser-" + id).remove();
+    } else {
+        alert(responseObj.message);
+    }
+    LoadingIndicator.hide();
 }
 
-function showToastNotification($target) {
+async function updateTeaser() {
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
+    const teaser = document.getElementById("contact-teaser-" + id);
+    const teaserResponse = await fetch("/contact/teaser?id=" + id);
+    if (!teaserResponse.ok) {
+        console.log(`Failed to update teaser for contact with id ${id}`);
+        return;
+    }
+    teaser.outerHTML = await teaserResponse.text();
+    addContactTeaserClickEvent();
+}
+
+async function saveContact() {
+    const form = new FormData(document.getElementById('contact-form'));
+    LoadingIndicator.show();
+    const response = await fetch("/dashboard/details", {
+        method: "POST",
+        body: form
+    });
+    if (!response.ok) {
+        console.log('Something went wrong saving a contact');
+        return;
+    }
+    await updatePane(response);
+    showToastNotification("successfully-saved-modal");
+
+    await updateTeaser();
+
+    LoadingIndicator.hide();
+}
+
+/* CRUD entities */
+
+const Entities = {
+    async add(entityName) {
+        const preview = document.querySelector(".contact-preview");
+        const id = preview.getAttribute("data-contact-id");
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Add?contactId=${id}`);
+        if (!response.ok) {
+            console.log(`Something went wrong while adding a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
+    },
+    async save(entityName, formId) {
+        const form = new FormData(document.getElementById(formId));
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Add`, {
+            method: "POST",
+            body: form
+        });
+        if (!response.ok) {
+            console.log(`Something went wrong while saving a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
+    },
+    async edit(id, entityName) {
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Edit/${id}`);
+        if (!response.ok) {
+            console.log(`Something went wrong while editing a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
+    },
+    async update(entityName, formId) {
+        const form = new FormData(document.getElementById(formId));
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Edit`, {
+            method: "POST",
+            body: form
+        });
+        if (!response.ok) {
+            console.log(`Something went wrong while updating a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
+    },
+    async delete(id, entityName) {
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Delete/${id}`);
+        if (!response.ok) {
+            console.log(`Something went wrong while deleting a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
+    }
+};
+
+/* Update Pane */
+
+async function updatePane(response) {
+    const detailsPane = document.getElementById("people-pane");
+    detailsPane.innerHTML = await response.text();
+}
+
+async function showDetailsInPane(response) {
+    const detailsPane = document.getElementById("people-pane");
+    detailsPane.innerHTML = await response.text();
+    addOnChangeEventToImageInput();
+}
+
+function clearDetailsPane() {
+    const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
+        '        <div class="column">\n' +
+        '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
+        '        </div>\n' +
+        '    </div>';
+    const detailsPane = document.getElementById("people-pane");
+    detailsPane.innerHTML = empty;
+}
+
+function showToastNotification(modalId) {
+    const $target = document.getElementById(modalId);
     rootEl.classList.add('is-clipped');
     $target.classList.add('is-active');
     setTimeout(() => {
         rootEl.classList.remove('is-clipped');
         $target.classList.remove('is-active');
     }, 1800);
-}
-
-function saveContact() {
-    const form = new FormData(document.getElementById('contact-form'));
-    showLoadingIndicator();
-    fetch("/dashboard/details", {
-        method: "POST",
-        body: form
-    })
-        .then(updatePane)
-        .then(function () {
-            const $target = document.getElementById("successfully-saved-modal");
-            showToastNotification($target);
-        }).then(function () {
-        const preview = document.querySelector(".contact-preview");
-        const id = preview.getAttribute("data-contact-id");
-        const teaser = document.getElementById("contact-teaser-" + id);
-        fetch("/contact/teaser?id=" + id).then(function (response) {
-            response.text().then(function (value) {
-                teaser.outerHTML = value;
-            })
-                .then(addContactTeaserClickEvent);
-        });
-
-    })
-        .finally(() => hideLoadingIndicator());
-}
-
-/* CRUD entities */
-
-function addEntity(entityName) {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
-    showLoadingIndicator();
-    fetch(`/${entityName}/Add?contactId=${id}`)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function saveEntity(entityName, formId) {
-    const form = new FormData(document.getElementById(formId));
-    showLoadingIndicator();
-    fetch(`/${entityName}/Add`, {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function editEntity(id, entityName) {
-    showLoadingIndicator();
-    fetch(`/${entityName}/Edit/${id}`)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function updateEntity(entityName, formId) {
-    const form = new FormData(document.getElementById(formId));
-    showLoadingIndicator();
-    fetch(`/${entityName}/Edit`, {
-        method: "POST",
-        body: form
-    }).then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-function deleteEntity(id, entityName) {
-    showLoadingIndicator();
-    fetch(`/${entityName}/Delete/${id}`)
-        .then(updatePane)
-        .finally(() => hideLoadingIndicator());
-}
-
-/* Update Pane */
-
-function updatePane(response) {
-    const detailsPane = document.getElementById("people-pane");
-    response.text().then(function (value) {
-        detailsPane.innerHTML = value;
-    });
-}
-
-function showDetailsInPane(response) {
-    const detailsPane = document.getElementById("people-pane");
-    response.text().then(function (value) {
-        detailsPane.innerHTML = value;
-    })
-        .then(addOnChangeEventToImageInput);
 }
 
 /* Helper stuff */

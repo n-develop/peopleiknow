@@ -3,7 +3,7 @@
 <div class="panel">
     <p class="panel-heading">
         📧 Emails
-        <a class="button is-pulled-right is-small is-success" onclick="addEntity('Email')">
+        <a class="button is-pulled-right is-small is-success" onclick="Entities.add('Email')">
             <i class="fa fa-plus-circle"></i>
         </a>
     </p>
@@ -22,12 +22,12 @@
                     <input class="input" value="@email.Email" type="email" placeholder="email@@domoain.com" disabled="disabled">
                 </div>
                 <p class="control">
-                    <a class="button is-warning" onclick="editEntity(@email.Id, 'Email')">
+                    <a class="button is-warning" onclick="Entities.edit(@email.Id, 'Email')">
                         <i class="fa fa-pencil-alt"></i>
                     </a>
                 </p>
                 <p class="control">
-                    <a class="button is-danger" onclick="deleteEntity(@email.Id, 'Email')">
+                    <a class="button is-danger" onclick="Entities.delete(@email.Id, 'Email')">
                         <i class="fa fa-minus-circle"></i>
                     </a>
                 </p>
