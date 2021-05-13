@@ -31,36 +31,87 @@ function closeModals() {
     });
 }
 
-/* Handle add button click */
+const Contact = {
+    add: async function () {
+        LoadingIndicator.show();
+        const response = await fetch("/contact/add");
+        if (!response.ok) {
+            console.log("Something went wrong while creating a contact. " + response.statusText);
+        } else {
+            await PeoplePane.update(response);
+        }
+        LoadingIndicator.hide();
+        showPane();
+    },
 
-async function addContact() {
-    LoadingIndicator.show();
-    const response = await fetch("/contact/add");
-    if (!response.ok) {
-        console.log("Something went wrong while creating a contact. " + response.statusText);
-    } else {
-        await updatePane(response);
-    }
-    LoadingIndicator.hide();
-    showPane();
-}
+    create: async function () {
+        const form = new FormData(document.getElementById('contact-form'));
+        LoadingIndicator.show();
+        const response = await fetch("/contact/add", {
+            method: "POST",
+            body: form
+        });
+        if (!response.ok) {
+            // TODO maybe make sure there is a nice error message in the data?
+            console.log("Something went wrong while creating a contact. " + response.statusText);
+        } else {
+            await PeoplePane.update(response);
+            await ContactList.reload();
+        }
+        LoadingIndicator.hide();
+    },
 
-async function createContact() {
-    const form = new FormData(document.getElementById('contact-form'));
-    LoadingIndicator.show();
-    const response = await fetch("/contact/add", {
-        method: "POST",
-        body: form
-    });
-    if (!response.ok) {
-        // TODO maybe make sure there is a nice error message in the data?
-        console.log("Something went wrong while creating a contact. " + response.statusText);
-    } else {
-        await updatePane(response);
-        await reloadContactList();
+    delete: async function () {
+        const id = document.querySelector(".contact-preview").getAttribute("data-contact-id");
+        LoadingIndicator.show();
+        const response = await fetch("/contact/delete/" + id, {
+            method: "DELETE"
+        });
+
+        const responseObj = await response.json();
+        if (responseObj.success) {
+            Notification.show("successfully-deleted-modal");
+            PeoplePane.clear();
+            document.getElementById("contact-teaser-" + id).remove();
+        } else {
+            alert(responseObj.message);
+        }
+        LoadingIndicator.hide();
+    },
+
+    save: async function () {
+        const form = new FormData(document.getElementById('contact-form'));
+        LoadingIndicator.show();
+        const response = await fetch("/dashboard/details", {
+            method: "POST",
+            body: form
+        });
+        if (!response.ok) {
+            console.log('Something went wrong saving a contact');
+            return;
+        }
+        await PeoplePane.update(response);
+        Notification.show("successfully-saved-modal");
+
+        await updateTeaser();
+
+        LoadingIndicator.hide();
+    },
+
+    toggleFavorite: async function (event) {
+        event.stopPropagation();
+        const i = event.currentTarget;
+        const id = i.getAttribute("data-contact-id");
+        const response = await fetch("/Contact/Favorite/" + id, {
+            method: "POST"
+        });
+        if (!response.ok) {
+            console.log('Something went wrong while triggering the favorite state');
+            return;
+        }
+        await ContactList.update(response);
     }
-    LoadingIndicator.hide();
-}
+};
 
 /* Handle Teaser clicks */
 
@@ -72,7 +123,7 @@ function addContactTeaserClickEvent() {
 
     const favs = document.querySelectorAll(".favorite");
     favs.forEach(function (currentValue) {
-        currentValue.onclick = favClick;
+        currentValue.onclick = Contact.toggleFavorite;
     });
 
     const backButton = document.getElementById("back-button");
@@ -114,7 +165,7 @@ async function handleTeaserClick(element) {
         console.log("Something went wrong while loading a contact. " + response.statusText);
         return;
     }
-    await showDetailsInPane(response);
+    await PeoplePane.showDetails(response);
     showPane();
 }
 
@@ -133,7 +184,7 @@ async function backToDetails(id) {
         console.log('Something went wrong while going back to the contact details');
         return;
     }
-    await updatePane(response);
+    await PeoplePane.update(response);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -154,91 +205,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
 addContactTeaserClickEvent();
 
-/* Contact List Stuff */
+const ContactList = {
+    update: async function (response) {
+        const feed = document.getElementById("people-feed");
+        feed.innerHTML = await response.text();
+        addContactTeaserClickEvent();
+    },
 
-async function updateContactList(response) {
-    const feed = document.getElementById("people-feed");
-    feed.innerHTML = await response.text();
-    addContactTeaserClickEvent();
-}
-
-async function reloadContactList() {
-    const response = await fetch("/dashboard/contactlist");
-    if (!response.ok) {
-        console.log('Something went wrong while reloading the contact list');
-        return;
+    reload: async function () {
+        const response = await fetch("/dashboard/contactlist");
+        if (!response.ok) {
+            console.log('Something went wrong while reloading the contact list');
+            return;
+        }
+        await this.update(response);
     }
-    await updateContactList(response);
-}
+};
 
-async function favClick(event) {
-    event.stopPropagation();
-    const i = event.currentTarget;
-    const id = i.getAttribute("data-contact-id");
-    const response = await fetch("/Contact/Favorite/" + id, {
-        method: "POST"
-    });
-    if (!response.ok) {
-        console.log('Something went wrong while triggering the favorite state');
-        return;
+const Search = {
+    execute: async function () {
+        const searchInput = document.getElementById("search-term");
+        const term = searchInput.value;
+        LoadingIndicator.show();
+        const response = await fetch("/Search?term=" + term);
+        if (!response.ok) {
+            console.log('Something went wrong while searching for contacts');
+            return;
+        }
+        await ContactList.update(response);
+        LoadingIndicator.hide();
+        showFeed();
+    },
+    init: function () {
+        let timeout = null;
+
+        const searchButton = document.getElementById("search-button");
+        searchButton.onclick = this.search;
+
+        const searchTerm = document.getElementById("search-term");
+        searchTerm.addEventListener("keyup", () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(async () => {
+                await this.execute()
+            }, 600);
+        });
+    },
+    searchRelationship: async function (contactName) {
+        const searchInput = document.getElementById("search-term");
+        searchInput.value = contactName;
+        await this.execute();
     }
-    await updateContactList(response);
-}
+};
 
-/* Search */
-
-async function search() {
-    const searchInput = document.getElementById("search-term");
-    const term = searchInput.value;
-    LoadingIndicator.show();
-    const response = await fetch("/Search?term=" + term);
-    if (!response.ok) {
-        console.log('Something went wrong while searching for contacts');
-        return;
-    }
-    await updateContactList(response);
-    LoadingIndicator.hide();
-    showFeed();
-}
-
-let timeout = null;
-
-const searchButton = document.getElementById("search-button");
-searchButton.onclick = search;
-
-const searchTerm = document.getElementById("search-term");
-searchTerm.addEventListener("keyup", function onEvent() {
-    clearTimeout(timeout);
-    timeout = setTimeout(async function () {
-        await search()
-    }, 600);
-});
-
-async function searchRelationship(contactName) {
-    const searchInput = document.getElementById("search-term");
-    searchInput.value = contactName;
-    await search();
-}
+Search.init();
 
 /* Actions on Entities */
-
-async function deleteContact() {
-    const id = document.querySelector(".contact-preview").getAttribute("data-contact-id");
-    LoadingIndicator.show();
-    const response = await fetch("/contact/delete/" + id, {
-        method: "DELETE"
-    });
-
-    const responseObj = await response.json();
-    if (responseObj.success) {
-        showToastNotification("successfully-deleted-modal");
-        clearDetailsPane();
-        document.getElementById("contact-teaser-" + id).remove();
-    } else {
-        alert(responseObj.message);
-    }
-    LoadingIndicator.hide();
-}
 
 async function updateTeaser() {
     const preview = document.querySelector(".contact-preview");
@@ -253,26 +274,6 @@ async function updateTeaser() {
     addContactTeaserClickEvent();
 }
 
-async function saveContact() {
-    const form = new FormData(document.getElementById('contact-form'));
-    LoadingIndicator.show();
-    const response = await fetch("/dashboard/details", {
-        method: "POST",
-        body: form
-    });
-    if (!response.ok) {
-        console.log('Something went wrong saving a contact');
-        return;
-    }
-    await updatePane(response);
-    showToastNotification("successfully-saved-modal");
-
-    await updateTeaser();
-
-    LoadingIndicator.hide();
-}
-
-/* CRUD entities */
 
 const Entities = {
     add: async function (entityName) {
@@ -284,7 +285,7 @@ const Entities = {
             console.log(`Something went wrong while adding a ${entityName}`);
             return
         }
-        await updatePane(response);
+        await PeoplePane.update(response);
         LoadingIndicator.hide();
     },
     save: async function (entityName, formId) {
@@ -298,7 +299,7 @@ const Entities = {
             console.log(`Something went wrong while saving a ${entityName}`);
             return
         }
-        await updatePane(response);
+        await PeoplePane.update(response);
         LoadingIndicator.hide();
     },
     edit: async function (id, entityName) {
@@ -308,7 +309,7 @@ const Entities = {
             console.log(`Something went wrong while editing a ${entityName}`);
             return
         }
-        await updatePane(response);
+        await PeoplePane.update(response);
         LoadingIndicator.hide();
     },
     update: async function (entityName, formId) {
@@ -322,7 +323,7 @@ const Entities = {
             console.log(`Something went wrong while updating a ${entityName}`);
             return
         }
-        await updatePane(response);
+        await PeoplePane.update(response);
         LoadingIndicator.hide();
     },
     delete: async function (id, entityName) {
@@ -332,43 +333,46 @@ const Entities = {
             console.log(`Something went wrong while deleting a ${entityName}`);
             return
         }
-        await updatePane(response);
+        await PeoplePane.update(response);
         LoadingIndicator.hide();
     }
 };
 
-/* Update Pane */
+const PeoplePane = {
+    update: async function (response) {
+        const detailsPane = document.getElementById("people-pane");
+        detailsPane.innerHTML = await response.text();
+    },
 
-async function updatePane(response) {
-    const detailsPane = document.getElementById("people-pane");
-    detailsPane.innerHTML = await response.text();
-}
+    showDetails: async function (response) {
+        const detailsPane = document.getElementById("people-pane");
+        detailsPane.innerHTML = await response.text();
+        addOnChangeEventToImageInput();
+    },
 
-async function showDetailsInPane(response) {
-    const detailsPane = document.getElementById("people-pane");
-    detailsPane.innerHTML = await response.text();
-    addOnChangeEventToImageInput();
-}
+    clear: function () {
+        const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
+            '        <div class="column">\n' +
+            '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
+            '        </div>\n' +
+            '    </div>';
+        const detailsPane = document.getElementById("people-pane");
+        detailsPane.innerHTML = empty;
+    }
+};
 
-function clearDetailsPane() {
-    const empty = '<div class="columns is-desktop is-vcentered" style="height: 100%;">\n' +
-        '        <div class="column">\n' +
-        '            <h2 class="has-text-centered">Choose a Contact from the list!</h2>\n' +
-        '        </div>\n' +
-        '    </div>';
-    const detailsPane = document.getElementById("people-pane");
-    detailsPane.innerHTML = empty;
-}
+const Notification = {
+    show: function (modalId) {
+        const $target = document.getElementById(modalId);
+        rootEl.classList.add('is-clipped');
+        $target.classList.add('is-active');
+        setTimeout(() => {
+            rootEl.classList.remove('is-clipped');
+            $target.classList.remove('is-active');
+        }, 1800);
+    }
+};
 
-function showToastNotification(modalId) {
-    const $target = document.getElementById(modalId);
-    rootEl.classList.add('is-clipped');
-    $target.classList.add('is-active');
-    setTimeout(() => {
-        rootEl.classList.remove('is-clipped');
-        $target.classList.remove('is-active');
-    }, 1800);
-}
 
 /* Helper stuff */
 

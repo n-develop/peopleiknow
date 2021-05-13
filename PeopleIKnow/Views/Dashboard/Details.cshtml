@@ -9,7 +9,7 @@
 <div class="box contact-preview" data-contact-id="@Model.Id">
     <form id="contact-form" asp-controller="Dashboard" asp-action="Details" method="post">
         <input type="hidden" asp-for="Id"/>
-        
+
         <partial name="ContactDetails/_ContactImage"/>
 
         <partial name="ContactDetails/_ContactName"/>
@@ -37,7 +37,7 @@
         <partial name="ContactDetails/_ContactTimeline"/>
 
 
-        <a class="button is-info is-medium" onclick="saveContact()"><i class="fas fa-download"></i>&nbsp;Save</a>
-        <a class="button is-danger is-medium" onclick="deleteContact()"><i class="fas fa-trash-alt"></i>&nbsp;Delete</a>
+        <a class="button is-info is-medium" onclick="Contact.save()"><i class="fas fa-download"></i>&nbsp;Save</a>
+        <a class="button is-danger is-medium" onclick="Contact.delete()"><i class="fas fa-trash-alt"></i>&nbsp;Delete</a>
     </form>
 </div>
