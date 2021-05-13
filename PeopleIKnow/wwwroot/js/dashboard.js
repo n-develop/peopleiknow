@@ -130,6 +130,32 @@ function addContactTeaserClickEvent() {
     backButton.onclick = showFeed;
 }
 
+addContactTeaserClickEvent();
+
+async function updateTeaser() {
+    const preview = document.querySelector(".contact-preview");
+    const id = preview.getAttribute("data-contact-id");
+    const teaser = document.getElementById("contact-teaser-" + id);
+    const teaserResponse = await fetch("/contact/teaser?id=" + id);
+    if (!teaserResponse.ok) {
+        console.log(`Failed to update teaser for contact with id ${id}`);
+        return;
+    }
+    teaser.outerHTML = await teaserResponse.text();
+    addContactTeaserClickEvent();
+}
+
+async function handleTeaserClick(element) {
+    const id = element.currentTarget.getAttribute("data-contact-id");
+    const response = await fetch("/Dashboard/Details/" + id);
+    if (!response.ok) {
+        console.log("Something went wrong while loading a contact. " + response.statusText);
+        return;
+    }
+    await PeoplePane.showDetails(response);
+    showPane();
+}
+
 function showPane() {
     const pane = document.getElementById("people-pane");
     showElementOnMobile(pane);
@@ -158,17 +184,6 @@ function hideElementOnMobile(el) {
     el.classList.add("is-hidden-mobile");
 }
 
-async function handleTeaserClick(element) {
-    const id = element.currentTarget.getAttribute("data-contact-id");
-    const response = await fetch("/Dashboard/Details/" + id);
-    if (!response.ok) {
-        console.log("Something went wrong while loading a contact. " + response.statusText);
-        return;
-    }
-    await PeoplePane.showDetails(response);
-    showPane();
-}
-
 function addOnChangeEventToImageInput() {
     const file = document.getElementById("image-input");
     file.onchange = function () {
@@ -178,32 +193,35 @@ function addOnChangeEventToImageInput() {
     };
 }
 
-async function backToDetails(id) {
-    const response = await fetch("/Dashboard/Details/" + id);
-    if (!response.ok) {
-        console.log('Something went wrong while going back to the contact details');
-        return;
-    }
-    await PeoplePane.update(response);
-}
+const Navigation = {
+    init: function () {
+        document.addEventListener('DOMContentLoaded', () => {
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
 
-    if ($navbarBurgers.length > 0) {
-        $navbarBurgers.forEach(el => {
-            el.addEventListener('click', () => {
-                const target = el.dataset.target;
-                const $target = document.getElementById(target);
-
-                el.classList.toggle('is-active');
-                $target.classList.toggle('is-active');
-            });
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
         });
+    },
+    backToDetails: async function (id) {
+        const response = await fetch("/Dashboard/Details/" + id);
+        if (!response.ok) {
+            console.log('Something went wrong while going back to the contact details');
+            return;
+        }
+        await PeoplePane.update(response);
     }
-});
+};
 
-addContactTeaserClickEvent();
+Navigation.init();
 
 const ContactList = {
     update: async function (response) {
@@ -258,22 +276,6 @@ const Search = {
 };
 
 Search.init();
-
-/* Actions on Entities */
-
-async function updateTeaser() {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
-    const teaser = document.getElementById("contact-teaser-" + id);
-    const teaserResponse = await fetch("/contact/teaser?id=" + id);
-    if (!teaserResponse.ok) {
-        console.log(`Failed to update teaser for contact with id ${id}`);
-        return;
-    }
-    teaser.outerHTML = await teaserResponse.text();
-    addContactTeaserClickEvent();
-}
-
 
 const Entities = {
     add: async function (entityName) {
