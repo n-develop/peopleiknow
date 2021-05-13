@@ -2,16 +2,16 @@ const rootEl = document.documentElement;
 
 /* loading indicator */
 const $loadingIndicator = document.getElementById('loading-indicator');
-
-function showLoadingIndicator() {
-    rootEl.classList.add('is-clipped');
-    $loadingIndicator.classList.add('is-active');
-}
-
-function hideLoadingIndicator() {
-    rootEl.classList.remove('is-clipped');
-    $loadingIndicator.classList.remove('is-active');
-}
+const LoadingIndicator = {
+    show() {
+        rootEl.classList.add('is-clipped');
+        $loadingIndicator.classList.add('is-active');
+    },
+    hide() {
+        rootEl.classList.remove('is-clipped');
+        $loadingIndicator.classList.remove('is-active');
+    }
+};
 
 /* modal  stuff */
 const $modals = getAll('.modal');
@@ -34,20 +34,20 @@ function closeModals() {
 /* Handle add button click */
 
 async function addContact() {
-    showLoadingIndicator();
+    LoadingIndicator.show();
     const response = await fetch("/contact/add");
     if (!response.ok) {
         console.log("Something went wrong while creating a contact. " + response.statusText);
     } else {
         await updatePane(response);
     }
-    hideLoadingIndicator();
+    LoadingIndicator.hide();
     showPane();
 }
 
 async function createContact() {
     const form = new FormData(document.getElementById('contact-form'));
-    showLoadingIndicator();
+    LoadingIndicator.show();
     const response = await fetch("/contact/add", {
         method: "POST",
         body: form
@@ -59,7 +59,7 @@ async function createContact() {
         await updatePane(response);
         await reloadContactList();
     }
-    hideLoadingIndicator()
+    LoadingIndicator.hide();
 }
 
 /* Handle Teaser clicks */
@@ -137,29 +137,19 @@ async function backToDetails(id) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-    // Check if there are any navbar burgers
     if ($navbarBurgers.length > 0) {
-
-        // Add a click event on each of them
         $navbarBurgers.forEach(el => {
             el.addEventListener('click', () => {
-
-                // Get the target from the "data-target" attribute
                 const target = el.dataset.target;
                 const $target = document.getElementById(target);
 
-                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
                 el.classList.toggle('is-active');
                 $target.classList.toggle('is-active');
-
             });
         });
     }
-
 });
 
 addContactTeaserClickEvent();
@@ -200,14 +190,14 @@ async function favClick(event) {
 async function search() {
     const searchInput = document.getElementById("search-term");
     const term = searchInput.value;
-    showLoadingIndicator();
+    LoadingIndicator.show();
     const response = await fetch("/Search?term=" + term);
     if (!response.ok) {
         console.log('Something went wrong while searching for contacts');
         return;
     }
     await updateContactList(response);
-    hideLoadingIndicator();
+    LoadingIndicator.hide();
     showFeed();
 }
 
@@ -234,7 +224,7 @@ async function searchRelationship(contactName) {
 
 async function deleteContact() {
     const id = document.querySelector(".contact-preview").getAttribute("data-contact-id");
-    showLoadingIndicator();
+    LoadingIndicator.show();
     const response = await fetch("/contact/delete/" + id, {
         method: "DELETE"
     });
@@ -247,7 +237,7 @@ async function deleteContact() {
     } else {
         alert(responseObj.message);
     }
-    hideLoadingIndicator();
+    LoadingIndicator.hide();
 }
 
 async function updateTeaser() {
@@ -265,7 +255,7 @@ async function updateTeaser() {
 
 async function saveContact() {
     const form = new FormData(document.getElementById('contact-form'));
-    showLoadingIndicator();
+    LoadingIndicator.show();
     const response = await fetch("/dashboard/details", {
         method: "POST",
         body: form
@@ -279,75 +269,73 @@ async function saveContact() {
 
     await updateTeaser();
 
-    hideLoadingIndicator();
+    LoadingIndicator.hide();
 }
 
 /* CRUD entities */
 
-async function addEntity(entityName) {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
-    showLoadingIndicator();
-    const response = await fetch(`/${entityName}/Add?contactId=${id}`);
-    if (!response.ok) {
-        console.log(`Something went wrong while adding a ${entityName}`);
-        return
+const Entities = {
+    async add(entityName) {
+        const preview = document.querySelector(".contact-preview");
+        const id = preview.getAttribute("data-contact-id");
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Add?contactId=${id}`);
+        if (!response.ok) {
+            console.log(`Something went wrong while adding a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
+    },
+    async save(entityName, formId) {
+        const form = new FormData(document.getElementById(formId));
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Add`, {
+            method: "POST",
+            body: form
+        });
+        if (!response.ok) {
+            console.log(`Something went wrong while saving a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
+    },
+    async edit(id, entityName) {
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Edit/${id}`);
+        if (!response.ok) {
+            console.log(`Something went wrong while editing a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
+    },
+    async update(entityName, formId) {
+        const form = new FormData(document.getElementById(formId));
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Edit`, {
+            method: "POST",
+            body: form
+        });
+        if (!response.ok) {
+            console.log(`Something went wrong while updating a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
+    },
+    async delete(id, entityName) {
+        LoadingIndicator.show();
+        const response = await fetch(`/${entityName}/Delete/${id}`);
+        if (!response.ok) {
+            console.log(`Something went wrong while deleting a ${entityName}`);
+            return
+        }
+        await updatePane(response);
+        LoadingIndicator.hide();
     }
-    await updatePane(response);
-    hideLoadingIndicator();
-}
-
-async function saveEntity(entityName, formId) {
-    const form = new FormData(document.getElementById(formId));
-    showLoadingIndicator();
-    const response = await fetch(`/${entityName}/Add`, {
-        method: "POST",
-        body: form
-    });
-    if (!response.ok) {
-        console.log(`Something went wrong while saving a ${entityName}`);
-        return
-    }
-    await updatePane(response);
-    hideLoadingIndicator();
-}
-
-async function editEntity(id, entityName) {
-    showLoadingIndicator();
-    const response = await fetch(`/${entityName}/Edit/${id}`);
-    if (!response.ok) {
-        console.log(`Something went wrong while editing a ${entityName}`);
-        return
-    }
-    await updatePane(response);
-    hideLoadingIndicator();
-}
-
-async function updateEntity(entityName, formId) {
-    const form = new FormData(document.getElementById(formId));
-    showLoadingIndicator();
-    const response = await fetch(`/${entityName}/Edit`, {
-        method: "POST",
-        body: form
-    });
-    if (!response.ok) {
-        console.log(`Something went wrong while updating a ${entityName}`);
-        return
-    }
-    await updatePane(response);
-    hideLoadingIndicator();
-}
-
-async function deleteEntity(id, entityName) {
-    showLoadingIndicator();
-    const response = await fetch(`/${entityName}/Delete/${id}`);
-    if (!response.ok) {
-        console.log(`Something went wrong while deleting a ${entityName}`);
-        return
-    }
-    await updatePane(response);
-    hideLoadingIndicator();
-}
+};
 
 /* Update Pane */
 

@@ -3,7 +3,7 @@
 <div class="panel">
     <p class="panel-heading">
         📝 Status Updates
-        <a class="button is-pulled-right is-small is-success" onclick="addEntity('StatusUpdate')">
+        <a class="button is-pulled-right is-small is-success" onclick="Entities.add('StatusUpdate')">
             <i class="fa fa-plus-circle"></i>
         </a>
     </p>
@@ -18,10 +18,10 @@
                 </div>
             </article>
             <div class="buttons">
-                <a class="button is-warning" onclick="editEntity(@statusUpdate.Id, 'StatusUpdate')">
+                <a class="button is-warning" onclick="Entities.edit(@statusUpdate.Id, 'StatusUpdate')">
                     <i class="fa fa-pencil-alt"></i>
                 </a>
-                <a class="button is-danger" onclick="deleteEntity(@statusUpdate.Id, 'StatusUpdate')">
+                <a class="button is-danger" onclick="Entities.delete(@statusUpdate.Id, 'StatusUpdate')">
                     <i class="fa fa-minus-circle"></i>
                 </a>
             </div>

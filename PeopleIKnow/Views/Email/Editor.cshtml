@@ -23,11 +23,11 @@
 
         @if (Model.Id == 0)
         {
-            <a onclick="saveEntity('Email', 'email-form')" class="button is-info is-medium"><i class="fas fa-plus-circle"></i>&nbsp;Add</a>
+            <a onclick="Entities.save('Email', 'email-form')" class="button is-info is-medium"><i class="fas fa-plus-circle"></i>&nbsp;Add</a>
         }
         else
         {
-            <a onclick="updateEntity('Email', 'email-form')" class="button is-info is-medium"><i class="fas fa-download"></i>&nbsp;Save</a>
+            <a onclick="Entities.update('Email', 'email-form')" class="button is-info is-medium"><i class="fas fa-download"></i>&nbsp;Save</a>
         }
         <a onclick="backToDetails(@Model.ContactId)" class="button is-danger is-medium"><i class="fas fa-times-circle"></i>&nbsp;Cancel</a>
     </form>

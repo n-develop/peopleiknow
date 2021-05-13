@@ -3,7 +3,7 @@
 <div class="panel">
     <p class="panel-heading">
         🧑‍🤝‍🧑 Relationships
-        <a class="button is-pulled-right is-small is-success" onclick="addEntity('Relationship')">
+        <a class="button is-pulled-right is-small is-success" onclick="Entities.add('Relationship')">
             <i class="fa fa-plus-circle"></i>
         </a>
     </p>
@@ -25,12 +25,12 @@
                     </span>
                 </div>
                 <p class="control">
-                    <a class="button is-warning" onclick="editEntity(@relationship.Id, 'Relationship')">
+                    <a class="button is-warning" onclick="Entities.edit(@relationship.Id, 'Relationship')">
                         <i class="fa fa-pencil-alt"></i>
                     </a>
                 </p>
                 <p class="control">
-                    <a class="button is-danger" onclick="deleteEntity(@relationship.Id, 'Relationship')">
+                    <a class="button is-danger" onclick="Entities.delete(@relationship.Id, 'Relationship')">
                         <i class="fa fa-minus-circle"></i>
                     </a>
                 </p>
