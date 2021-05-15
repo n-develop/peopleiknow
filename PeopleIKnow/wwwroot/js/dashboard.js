@@ -31,6 +31,33 @@ function closeModals() {
     });
 }
 
+const MobileFlow = {
+    showPane: function () {
+        const pane = document.getElementById("people-pane");
+        MobileFlow.showElementOnMobile(pane);
+        const feed = document.getElementById("people-feed");
+        MobileFlow.hideElementOnMobile(feed);
+        const backButton = document.getElementById("back-button");
+        backButton.classList.remove("is-hidden-mobile");
+    },
+    showFeed: function () {
+        const feed = document.getElementById("people-feed");
+        MobileFlow.showElementOnMobile(feed);
+        const pane = document.getElementById("people-pane");
+        MobileFlow.hideElementOnMobile(pane);
+        const backButton = document.getElementById("back-button");
+        backButton.classList.add("is-hidden-mobile");
+    },
+    showElementOnMobile: function (el) {
+        el.classList.remove("is-hidden-mobile");
+        el.classList.add("is-full-mobile");
+    },
+    hideElementOnMobile: function (el) {
+        el.classList.remove("is-full-mobile");
+        el.classList.add("is-hidden-mobile");
+    }
+};
+
 const Contact = {
     add: async function () {
         LoadingIndicator.show();
@@ -41,7 +68,7 @@ const Contact = {
             await PeoplePane.update(response);
         }
         LoadingIndicator.hide();
-        showPane();
+        MobileFlow.showPane();
     },
 
     create: async function () {
@@ -93,7 +120,7 @@ const Contact = {
         await PeoplePane.update(response);
         Notification.show("successfully-saved-modal");
 
-        await updateTeaser();
+        await Teaser.update();
 
         LoadingIndicator.hide();
     },
@@ -113,76 +140,46 @@ const Contact = {
     }
 };
 
-/* Handle Teaser clicks */
+const Teaser = {
+    addClickEvent: function () {
+        const contactCards = document.querySelectorAll("#people-feed > .card");
+        contactCards.forEach((currentValue) => {
+            currentValue.onclick = this.handleClick;
+        });
 
-function addContactTeaserClickEvent() {
-    const contactCards = document.querySelectorAll("#people-feed > .card");
-    contactCards.forEach(function (currentValue) {
-        currentValue.onclick = handleTeaserClick;
-    });
+        const favs = document.querySelectorAll(".favorite");
+        favs.forEach(function (currentValue) {
+            currentValue.onclick = Contact.toggleFavorite;
+        });
 
-    const favs = document.querySelectorAll(".favorite");
-    favs.forEach(function (currentValue) {
-        currentValue.onclick = Contact.toggleFavorite;
-    });
-
-    const backButton = document.getElementById("back-button");
-    backButton.onclick = showFeed;
-}
-
-addContactTeaserClickEvent();
-
-async function updateTeaser() {
-    const preview = document.querySelector(".contact-preview");
-    const id = preview.getAttribute("data-contact-id");
-    const teaser = document.getElementById("contact-teaser-" + id);
-    const teaserResponse = await fetch("/contact/teaser?id=" + id);
-    if (!teaserResponse.ok) {
-        console.log(`Failed to update teaser for contact with id ${id}`);
-        return;
+        const backButton = document.getElementById("back-button");
+        backButton.onclick = MobileFlow.showFeed;
+    },
+    update: async function () {
+        const preview = document.querySelector(".contact-preview");
+        const id = preview.getAttribute("data-contact-id");
+        const teaser = document.getElementById("contact-teaser-" + id);
+        const teaserResponse = await fetch("/contact/teaser?id=" + id);
+        if (!teaserResponse.ok) {
+            console.log(`Failed to update teaser for contact with id ${id}`);
+            return;
+        }
+        teaser.outerHTML = await teaserResponse.text();
+        this.addClickEvent();
+    },
+    handleClick: async function (element) {
+        const id = element.currentTarget.getAttribute("data-contact-id");
+        const response = await fetch("/Dashboard/Details/" + id);
+        if (!response.ok) {
+            console.log("Something went wrong while loading a contact. " + response.statusText);
+            return;
+        }
+        await PeoplePane.showDetails(response);
+        MobileFlow.showPane();
     }
-    teaser.outerHTML = await teaserResponse.text();
-    addContactTeaserClickEvent();
-}
+};
 
-async function handleTeaserClick(element) {
-    const id = element.currentTarget.getAttribute("data-contact-id");
-    const response = await fetch("/Dashboard/Details/" + id);
-    if (!response.ok) {
-        console.log("Something went wrong while loading a contact. " + response.statusText);
-        return;
-    }
-    await PeoplePane.showDetails(response);
-    showPane();
-}
-
-function showPane() {
-    const pane = document.getElementById("people-pane");
-    showElementOnMobile(pane);
-    const feed = document.getElementById("people-feed");
-    hideElementOnMobile(feed);
-    const backButton = document.getElementById("back-button");
-    backButton.classList.remove("is-hidden-mobile");
-}
-
-function showFeed() {
-    const feed = document.getElementById("people-feed");
-    showElementOnMobile(feed);
-    const pane = document.getElementById("people-pane");
-    hideElementOnMobile(pane);
-    const backButton = document.getElementById("back-button");
-    backButton.classList.add("is-hidden-mobile");
-}
-
-function showElementOnMobile(el) {
-    el.classList.remove("is-hidden-mobile");
-    el.classList.add("is-full-mobile");
-}
-
-function hideElementOnMobile(el) {
-    el.classList.remove("is-full-mobile");
-    el.classList.add("is-hidden-mobile");
-}
+Teaser.addClickEvent();
 
 function addOnChangeEventToImageInput() {
     const file = document.getElementById("image-input");
@@ -227,7 +224,7 @@ const ContactList = {
     update: async function (response) {
         const feed = document.getElementById("people-feed");
         feed.innerHTML = await response.text();
-        addContactTeaserClickEvent();
+        Teaser.addClickEvent();
     },
 
     reload: async function () {
@@ -252,7 +249,7 @@ const Search = {
         }
         await ContactList.update(response);
         LoadingIndicator.hide();
-        showFeed();
+        MobileFlow.showFeed();
     },
     init: function () {
         let timeout = null;
