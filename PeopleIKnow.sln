@@ -13,6 +13,8 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleIKnow.UiTests", "PeopleIKnow.UiTests\PeopleIKnow.UiTests.csproj", "{D8954E97-E695-4F6E-BF3C-F85FADB5E0E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{76521CBE-C47E-4E59-B1CC-8D85F426FFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76521CBE-C47E-4E59-B1CC-8D85F426FFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76521CBE-C47E-4E59-B1CC-8D85F426FFE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8954E97-E695-4F6E-BF3C-F85FADB5E0E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8954E97-E695-4F6E-BF3C-F85FADB5E0E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8954E97-E695-4F6E-BF3C-F85FADB5E0E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8954E97-E695-4F6E-BF3C-F85FADB5E0E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
