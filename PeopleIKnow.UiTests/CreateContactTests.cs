@@ -11,6 +11,9 @@ namespace PeopleIKnow.UiTests
         public CreateContactTests()
         {
             Driver = new ChromeDriver();
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            Driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(5);
+            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
         }
 
         public void Dispose()
@@ -22,34 +25,12 @@ namespace PeopleIKnow.UiTests
         [Fact]
         public void NewContactIsShownInTheFeed()
         {
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            Driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(10);
-            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
             Login();
-            WaitFor("add-button");
-            AddNewContact();
+            var contactName = AddNewContact();
 
             var feed = Driver.FindElement(By.Id("people-feed"));
             var teasers = feed.FindElements(By.ClassName("card"));
-            teasers.Should().Contain(c => c.Text == "Harry James Potter");
-        }
-
-        private void AddNewContact()
-        {
-            Driver.FindElement(By.Id("add-button")).Click();
-            WaitFor("Firstname");
-            Driver.FindElement(By.Id("Firstname")).SendKeys("Harry");
-            Driver.FindElement(By.Id("Middlename")).SendKeys("James");
-            Driver.FindElement(By.Id("Lastname")).SendKeys("Potter");
-            Driver.FindElement(By.Id("save-button")).Click();
-        }
-
-        private void Login()
-        {
-            Driver.Navigate().GoToUrl("https://localhost:5001/");
-            Driver.FindElement(By.Id("Input_Email")).SendKeys("test@test.com");
-            Driver.FindElement(By.Id("Input_Password")).SendKeys("Test1234.");
-            Driver.FindElement(By.Id("Submit_Button")).Click();
+            teasers.Should().Contain(c => c.Text == contactName);
         }
     }
 }
