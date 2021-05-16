@@ -1,8 +1,8 @@
 using System;
-using System.Threading;
 using FluentAssertions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using Xunit;
 
 namespace PeopleIKnow.UiTests
@@ -27,21 +27,25 @@ namespace PeopleIKnow.UiTests
         {
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             _driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(10);
+            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
             Login();
-            Thread.Sleep(1000);
-
+            WaitFor("add-button");
             AddNewContact();
-            Thread.Sleep(1000);
 
             var feed = _driver.FindElement(By.Id("people-feed"));
             var teasers = feed.FindElements(By.ClassName("card"));
             teasers.Should().Contain(c => c.Text == "Harry James Potter");
         }
 
+        private void WaitFor(string idToFind)
+        {
+            new WebDriverWait(_driver, TimeSpan.FromSeconds(10)).Until(driver => driver.FindElement(By.Id(idToFind)));
+        }
+
         private void AddNewContact()
         {
             _driver.FindElement(By.Id("add-button")).Click();
-            Thread.Sleep(1000);
+            WaitFor("Firstname");
             _driver.FindElement(By.Id("Firstname")).SendKeys("Harry");
             _driver.FindElement(By.Id("Middlename")).SendKeys("James");
             _driver.FindElement(By.Id("Lastname")).SendKeys("Potter");
