@@ -2,9 +2,11 @@ using System;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using Xunit;
 
 namespace PeopleIKnow.UiTests
 {
+    [Collection("Sequential")]
     public abstract class UiTest
     {
         protected IWebDriver Driver;
