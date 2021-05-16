@@ -30,7 +30,7 @@
             <div class="columns is-centered">
                 <div class="column is-5-tablet is-4-desktop is-3-widescreen">
                     <form id="account" aria-labelledby="legend" class="box" method="post">
-                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div id="error-summary" asp-validation-summary="All" class="has-text-danger"></div>
                         <div class="field">
                             <label class="label" asp-for="Input.Email"></label>
                             <div class="control has-icons-left">
@@ -39,7 +39,7 @@
                                 </span>
                                 <input asp-for="Input.Email" class="input" placeholder="john.smith@yourmail.com"/>
                             </div>
-                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            <span asp-validation-for="Input.Email" class="has-text-danger"></span>
                         </div>
                         <div class="field">
                             <label class="label" asp-for="Input.Password"></label>
@@ -49,7 +49,7 @@
                                 </span>
                                 <input asp-for="Input.Password" class="input" placeholder="Password"/>
                             </div>
-                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            <span asp-validation-for="Input.Password" class="has-text-danger"></span>
                         </div>
                         <div class="field">
                             <div class="checkbox">
