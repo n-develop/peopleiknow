@@ -28,23 +28,26 @@ namespace PeopleIKnow.UiTests.Entities
         {
             Login();
             var contactName = AddNewContact();
-            var feed = Driver.FindElement(By.Id("people-feed"));
-            var teasers = feed.FindElements(By.ClassName("card"));
-            var contactTeaser = teasers.First(t => t.Text.Contains(contactName));
-            contactTeaser.Click();
-            WaitFor("Firstname");
-            Driver.FindElement(By.Id("add-gift")).Click();
-            WaitFor("Description");
-            Driver.FindElement(By.Id("Description")).SendKeys("Awesome Gift");
-            Driver.FindElement(By.Id("GiftType")).SendKeys("Given");
-            Driver.FindElement(By.Id("save-gift-button")).Click();
-            WaitFor("Firstname");
+            OpenContact(contactName);
+            var giftName = AddGift();
             var giftPanel = Driver.FindElement(By.Id("gift-panel"));
 
             var awesomeGift = giftPanel.FindElements(By.TagName("input"))
-                .Where(t => t.GetProperty("value") == "Awesome Gift").ToList();
+                .Where(t => t.GetProperty("value") == giftName).ToList();
             awesomeGift.Should().HaveCount(1);
             awesomeGift.First().Should().NotBeNull();
+        }
+
+        private string AddGift()
+        {
+            var giftName = DateTime.Now.Ticks.ToString();
+            Driver.FindElement(By.Id("add-gift")).Click();
+            WaitFor("Description");
+            Driver.FindElement(By.Id("Description")).SendKeys(giftName);
+            Driver.FindElement(By.Id("GiftType")).SendKeys("Given");
+            Driver.FindElement(By.Id("save-gift-button")).Click();
+            WaitFor("Firstname");
+            return giftName;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -35,6 +36,15 @@ namespace PeopleIKnow.UiTests
             Driver.FindElement(By.Id("Submit_Button")).Click();
             WaitFor("add-button");
             Thread.Sleep(500);
+        }
+
+        protected void OpenContact(string contactName)
+        {
+            var feed = Driver.FindElement(By.Id("people-feed"));
+            var teasers = feed.FindElements(By.ClassName("card"));
+            var contactTeaser = teasers.First(t => t.Text.Contains(contactName));
+            contactTeaser.Click();
+            WaitFor("Firstname");
         }
     }
 }
