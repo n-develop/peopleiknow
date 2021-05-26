@@ -14,20 +14,18 @@
             <label class="label">@giftGroup.Key</label>
             @foreach (var gift in giftGroup)
             {
-                <div class="field has-addons">
-                    <div class="control is-expanded">
-                        <input class="input" value="@gift.Description" placeholder="Gift description..." disabled="disabled">
+                <article class="message entry">
+                    <div class="message-body">
+                        @gift.Description
                     </div>
-                    <p class="control">
-                        <a class="button is-warning" onclick="Entities.edit(@gift.Id, 'Gift')">
-                            <i class="fa fa-pencil-alt"></i>
-                        </a>
-                    </p>
-                    <p class="control">
-                        <a class="button is-danger" onclick="Entities.delete(@gift.Id, 'Gift')">
-                            <i class="fa fa-minus-circle"></i>
-                        </a>
-                    </p>
+                </article>
+                <div class="buttons">
+                    <a class="button is-warning" onclick="Entities.edit(@gift.Id, 'Gift')">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                    <a class="button is-danger" onclick="Entities.delete(@gift.Id, 'Gift')">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
                 </div>
             }
         </div>
