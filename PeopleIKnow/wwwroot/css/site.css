@@ -8,6 +8,10 @@
     margin-bottom: 0;
 }
 
+.entry {
+    margin-bottom: 0.5rem !important;
+}
+
 .segments {
     background-color: #0E082B;
     color: lightgray;
