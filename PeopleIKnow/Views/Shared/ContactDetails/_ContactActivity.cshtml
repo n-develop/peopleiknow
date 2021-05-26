@@ -12,20 +12,18 @@
     {
         <div class="panel-block">
             <label class="label">@activity.Date.ToString("dd.MM.yyyy")</label>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <input class="input" value="@activity.Description" placeholder="Description" disabled="disabled">
+            <article class="message">
+                <div class="message-body">
+                    @activity.Description
                 </div>
-                <p class="control">
-                    <a class="button is-warning" onclick="Entities.edit(@activity.Id, 'CommonActivity')">
-                        <i class="fa fa-pencil-alt"></i>
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button is-danger" onclick="Entities.delete(@activity.Id, 'CommonActivity')">
-                        <i class="fa fa-minus-circle"></i>
-                    </a>
-                </p>
+            </article>
+            <div class="buttons">
+                <a class="button is-warning" onclick="Entities.edit(@activity.Id, 'CommonActivity')">
+                    <i class="fa fa-pencil-alt"></i>
+                </a>
+                <a class="button is-danger" onclick="Entities.delete(@activity.Id, 'CommonActivity')">
+                    <i class="fa fa-minus-circle"></i>
+                </a>
             </div>
         </div>
     }
