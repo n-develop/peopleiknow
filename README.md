@@ -81,7 +81,7 @@ I think SQLite is a good fit for this app for a couple of reasons:
 
 1. How many contacts do you have on your phone? Hundrets? Or maybe a few thousands? That's basically nothing. Even for a SQLite database.
 2. Super easy to make a backup. Just copy the `people.db` somewhere (like your Dropbox/OneDrive/GoogleDrive). You're done. That makes automation of the backups simple as hell.
-3. No additional installations needed. With SQLite, die app will create and maintain your database. No need to setup a DBMS. Just setup the app.
+3. No additional installations needed. With SQLite, the app will create and maintain your database. No need to setup a DBMS. Just setup the app.
 
 ## Something is missing?
 
