@@ -47,7 +47,7 @@ namespace PeopleIKnow.Controllers
 
             await _repository.AddAsync(telephoneNumber);
 
-            return RedirectToAction("Details", "Dashboard", new {id = telephoneNumber.ContactId});
+            return RedirectToAction("Details", "Dashboard", new { id = telephoneNumber.ContactId });
         }
 
         public async Task<ActionResult> Edit(int id)
@@ -79,7 +79,7 @@ namespace PeopleIKnow.Controllers
 
             await _repository.UpdateAsync(telephoneNumber);
 
-            return RedirectToAction("Details", "Dashboard", new {id = telephoneNumber.ContactId});
+            return RedirectToAction("Details", "Dashboard", new { id = telephoneNumber.ContactId });
         }
 
         public async Task<ActionResult> Delete(int id)
@@ -98,7 +98,7 @@ namespace PeopleIKnow.Controllers
 
             await _repository.DeleteAsync(telephoneNumber);
 
-            return RedirectToAction("Details", "Dashboard", new {id = telephoneNumber.ContactId});
+            return RedirectToAction("Details", "Dashboard", new { id = telephoneNumber.ContactId });
         }
     }
 }

@@ -10,7 +10,7 @@ namespace PeopleIKnow.UnitTests
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
-            base.Calls++;
+            Calls++;
             throw new Exception("Request Failed");
         }
     }

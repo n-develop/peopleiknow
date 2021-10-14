@@ -7,7 +7,7 @@ namespace PeopleIKnow.UnitTests
 {
     public class MockHttpMessageHandler : HttpMessageHandler
     {
-        public int Calls { get; protected set; } = 0;
+        public int Calls { get; protected set; }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)

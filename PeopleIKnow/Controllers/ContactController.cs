@@ -50,10 +50,10 @@ namespace PeopleIKnow.Controllers
 
             if (success)
             {
-                return Json(new {Success = true, Message = SuccessfullyDeletedMessage});
+                return Json(new { Success = true, Message = SuccessfullyDeletedMessage });
             }
 
-            return Json(new {Success = false, Message = ContactCannotBeDeleted});
+            return Json(new { Success = false, Message = ContactCannotBeDeleted });
         }
 
         public IActionResult Add()
@@ -79,7 +79,7 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            return RedirectToAction("Details", "Dashboard", new {id = contactFromRepository.Id});
+            return RedirectToAction("Details", "Dashboard", new { id = contactFromRepository.Id });
         }
 
         public async Task<IActionResult> Favorite(int id)

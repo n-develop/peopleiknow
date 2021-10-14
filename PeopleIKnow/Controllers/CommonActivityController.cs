@@ -50,7 +50,7 @@ namespace PeopleIKnow.Controllers
 
             await _repository.AddAsync(commonActivity);
 
-            return RedirectToAction("Details", "Dashboard", new {id = commonActivity.ContactId});
+            return RedirectToAction("Details", "Dashboard", new { id = commonActivity.ContactId });
         }
 
         public async Task<ActionResult> Edit(int id)
@@ -83,7 +83,7 @@ namespace PeopleIKnow.Controllers
 
             await _repository.UpdateAsync(commonActivity);
 
-            return RedirectToAction("Details", "Dashboard", new {id = commonActivity.ContactId});
+            return RedirectToAction("Details", "Dashboard", new { id = commonActivity.ContactId });
         }
 
         public async Task<ActionResult> Delete(int id)
@@ -102,7 +102,7 @@ namespace PeopleIKnow.Controllers
 
             await _repository.DeleteAsync(commonActivity);
 
-            return RedirectToAction("Details", "Dashboard", new {id = commonActivity.ContactId});
+            return RedirectToAction("Details", "Dashboard", new { id = commonActivity.ContactId });
         }
     }
 }
