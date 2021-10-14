@@ -230,3 +230,5 @@ PeopleIKnow/people.db
 *.Development.json
 *.Production.json
 PeopleIKnow/wwwroot/images/contacts/*
+backups/
+deploy.sh
