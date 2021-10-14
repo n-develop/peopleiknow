@@ -6,24 +6,24 @@
         ]
     },
     {
-        "outputFileName": "wwwroot/js/site.min.js",
-        "inputFiles": [
-            "wwwroot/js/site.js"
-        ],
-        "minify": {
-            "enabled": true,
-            "renameLocals": true
-        },
-        "sourceMap": false
-    },
-    {
         "outputFileName": "wwwroot/js/dashboard.min.js",
         "inputFiles": [
-            "wwwroot/js/dashboard.js"
+            "wwwroot/js/dashboard.js",
+            "wwwroot/js/LoadingIndicator.js",
+            "wwwroot/js/Modals.js",
+            "wwwroot/js/MobileFlow.js",
+            "wwwroot/js/Contact.js",
+            "wwwroot/js/Teaser.js",
+            "wwwroot/js/Navigation.js",
+            "wwwroot/js/ContactList.js",
+            "wwwroot/js/Search.js",
+            "wwwroot/js/Entities.js",
+            "wwwroot/js/PeoplePane.js",
+            "wwwroot/js/Notification.js"
         ],
         "minify": {
-            "enabled": true,
-            "renameLocals": true
+            "enabled": false,
+            "renameLocals": false
         },
         "sourceMap": false
     }
