@@ -1,30 +1,44 @@
 @model Contact
 
-<div class="panel">
-    <p class="panel-heading">
-        🚴 Activities
-        <a class="button is-pulled-right is-small is-success" onclick="Entities.add('CommonActivity')">
-            <i class="fa fa-plus-circle"></i>
-        </a>
-    </p>
-
-    @foreach (var activity in Model.ActivityTimeline)
-    {
+@if (Model.Id == 0)
+{
+    <div class="panel">
+        <p class="panel-heading">
+            🚴 Activities
+        </p>
         <div class="panel-block">
-            <label class="label">@activity.Date.ToString("dd.MM.yyyy")</label>
-            <article class="message entry">
-                <div class="message-body">
-                    @activity.Description
-                </div>
-            </article>
-            <div class="buttons">
-                <a class="button is-warning" onclick="Entities.edit(@activity.Id, 'CommonActivity')">
-                    <i class="fa fa-pencil-alt"></i>
-                </a>
-                <a class="button is-danger" onclick="Entities.delete(@activity.Id, 'CommonActivity')">
-                    <i class="fa fa-minus-circle"></i>
-                </a>
-            </div>
+            You have to save the contact before you can add activities
         </div>
-    }
-</div>
+    </div>
+}
+else
+{
+    <div class="panel">
+        <p class="panel-heading">
+            🚴 Activities
+            <a class="button is-pulled-right is-small is-success" onclick="Entities.add('CommonActivity')">
+                <i class="fa fa-plus-circle"></i>
+            </a>
+        </p>
+
+        @foreach (var activity in Model.ActivityTimeline)
+        {
+            <div class="panel-block">
+                <label class="label">@activity.Date.ToString("dd.MM.yyyy")</label>
+                <article class="message entry">
+                    <div class="message-body">
+                        @activity.Description
+                    </div>
+                </article>
+                <div class="buttons">
+                    <a class="button is-warning" onclick="Entities.edit(@activity.Id, 'CommonActivity')">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                    <a class="button is-danger" onclick="Entities.delete(@activity.Id, 'CommonActivity')">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+}

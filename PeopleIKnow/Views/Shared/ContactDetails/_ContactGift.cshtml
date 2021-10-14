@@ -1,33 +1,47 @@
 @model Contact
 
-<div class="panel">
-    <p class="panel-heading">
-        🎁 Gifts
-        <a class="button is-pulled-right is-small is-success" onclick="Entities.add('Gift')">
-            <i class="fa fa-plus-circle"></i>
-        </a>
-    </p>
-
-    @foreach (var giftGroup in Model.Gifts.GroupBy(g => g.GiftType))
-    {
+@if (Model.Id == 0)
+{
+    <div class="panel">
+        <p class="panel-heading">
+            🎁 Gifts
+        </p>
         <div class="panel-block">
-            <label class="label">@giftGroup.Key</label>
-            @foreach (var gift in giftGroup)
-            {
-                <article class="message entry">
-                    <div class="message-body">
-                        @gift.Description
-                    </div>
-                </article>
-                <div class="buttons">
-                    <a class="button is-warning" onclick="Entities.edit(@gift.Id, 'Gift')">
-                        <i class="fa fa-pencil-alt"></i>
-                    </a>
-                    <a class="button is-danger" onclick="Entities.delete(@gift.Id, 'Gift')">
-                        <i class="fa fa-minus-circle"></i>
-                    </a>
-                </div>
-            }
+            You have to save the contact before you can add gifts
         </div>
-    }
-</div>
+    </div>
+}
+else
+{
+    <div class="panel">
+        <p class="panel-heading">
+            🎁 Gifts
+            <a class="button is-pulled-right is-small is-success" onclick="Entities.add('Gift')">
+                <i class="fa fa-plus-circle"></i>
+            </a>
+        </p>
+
+        @foreach (var giftGroup in Model.Gifts.GroupBy(g => g.GiftType))
+        {
+            <div class="panel-block">
+                <label class="label">@giftGroup.Key</label>
+                @foreach (var gift in giftGroup)
+                {
+                    <article class="message entry">
+                        <div class="message-body">
+                            @gift.Description
+                        </div>
+                    </article>
+                    <div class="buttons">
+                        <a class="button is-warning" onclick="Entities.edit(@gift.Id, 'Gift')">
+                            <i class="fa fa-pencil-alt"></i>
+                        </a>
+                        <a class="button is-danger" onclick="Entities.delete(@gift.Id, 'Gift')">
+                            <i class="fa fa-minus-circle"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}

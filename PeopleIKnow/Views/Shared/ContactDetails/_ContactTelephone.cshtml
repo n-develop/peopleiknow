@@ -1,37 +1,51 @@
 @model Contact
 
-<div class="panel">
-    <p class="panel-heading">
-        ☎️ Telephone
-        <a class="button is-pulled-right is-small is-success" onclick="Entities.add('Telephone')">
-            <i class="fa fa-plus-circle"></i>
-        </a>
-    </p>
-
-    @foreach (var telephone in Model.TelephoneNumbers)
-    {
+@if (Model.Id == 0)
+{
+    <div class="panel">
+        <p class="panel-heading">
+            ☎️ Telephone
+        </p>
         <div class="panel-block">
-            <label class="label">@telephone.Type</label>
-            <div class="field has-addons">
-                <p class="control">
-                    <a class="button is-info" href="tel:@telephone.TelephoneNormalized">
-                        <i class="fa fa-phone"></i>
-                    </a>
-                </p>
-                <div class="control is-expanded">
-                    <input class="input" value="@telephone.Telephone" type="tel" disabled="disabled">
-                </div>
-                <p class="control">
-                    <a class="button is-warning" onclick="Entities.edit(@telephone.Id, 'Telephone')">
-                        <i class="fa fa-pencil-alt"></i>
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button is-danger" onclick="Entities.delete(@telephone.Id, 'Telephone')">
-                        <i class="fa fa-minus-circle"></i>
-                    </a>
-                </p>
-            </div>
+            You have to save the contact before you can add telephone numbers
         </div>
-    }
-</div>
+    </div>
+}
+else
+{
+    <div class="panel">
+        <p class="panel-heading">
+            ☎️ Telephone
+            <a class="button is-pulled-right is-small is-success" onclick="Entities.add('Telephone')">
+                <i class="fa fa-plus-circle"></i>
+            </a>
+        </p>
+
+        @foreach (var telephone in Model.TelephoneNumbers)
+        {
+            <div class="panel-block">
+                <label class="label">@telephone.Type</label>
+                <div class="field has-addons">
+                    <p class="control">
+                        <a class="button is-info" href="tel:@telephone.TelephoneNormalized">
+                            <i class="fa fa-phone"></i>
+                        </a>
+                    </p>
+                    <div class="control is-expanded">
+                        <input class="input" value="@telephone.Telephone" type="tel" disabled="disabled">
+                    </div>
+                    <p class="control">
+                        <a class="button is-warning" onclick="Entities.edit(@telephone.Id, 'Telephone')">
+                            <i class="fa fa-pencil-alt"></i>
+                        </a>
+                    </p>
+                    <p class="control">
+                        <a class="button is-danger" onclick="Entities.delete(@telephone.Id, 'Telephone')">
+                            <i class="fa fa-minus-circle"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+}

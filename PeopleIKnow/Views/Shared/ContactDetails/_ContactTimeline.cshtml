@@ -1,30 +1,44 @@
 @model Contact
 
-<div class="panel">
-    <p class="panel-heading">
-        📝 Status Updates
-        <a class="button is-pulled-right is-small is-success" onclick="Entities.add('StatusUpdate')">
-            <i class="fa fa-plus-circle"></i>
-        </a>
-    </p>
-
-    @foreach (var statusUpdate in Model.StatusTimeline)
-    {
+@if (Model.Id == 0)
+{
+    <div class="panel">
+        <p class="panel-heading">
+            📝 Status Updates
+        </p>
         <div class="panel-block">
-            <label class="label">@statusUpdate.Created.ToString("dd.MM.yyyy")</label>
-            <article class="message entry">
-                <div class="message-body">
-                    @statusUpdate.StatusText
-                </div>
-            </article>
-            <div class="buttons">
-                <a class="button is-warning" onclick="Entities.edit(@statusUpdate.Id, 'StatusUpdate')">
-                    <i class="fa fa-pencil-alt"></i>
-                </a>
-                <a class="button is-danger" onclick="Entities.delete(@statusUpdate.Id, 'StatusUpdate')">
-                    <i class="fa fa-minus-circle"></i>
-                </a>
-            </div>
+            You have to save the contact before you can add status updates
         </div>
-    }
-</div>
+    </div>
+}
+else
+{
+    <div class="panel">
+        <p class="panel-heading">
+            📝 Status Updates
+            <a class="button is-pulled-right is-small is-success" onclick="Entities.add('StatusUpdate')">
+                <i class="fa fa-plus-circle"></i>
+            </a>
+        </p>
+
+        @foreach (var statusUpdate in Model.StatusTimeline)
+        {
+            <div class="panel-block">
+                <label class="label">@statusUpdate.Created.ToString("dd.MM.yyyy")</label>
+                <article class="message entry">
+                    <div class="message-body">
+                        @statusUpdate.StatusText
+                    </div>
+                </article>
+                <div class="buttons">
+                    <a class="button is-warning" onclick="Entities.edit(@statusUpdate.Id, 'StatusUpdate')">
+                        <i class="fa fa-pencil-alt"></i>
+                    </a>
+                    <a class="button is-danger" onclick="Entities.delete(@statusUpdate.Id, 'StatusUpdate')">
+                        <i class="fa fa-minus-circle"></i>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+}

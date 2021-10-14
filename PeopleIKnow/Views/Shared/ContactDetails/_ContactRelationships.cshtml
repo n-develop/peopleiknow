@@ -1,40 +1,54 @@
 @model Contact
 
-<div class="panel">
-    <p class="panel-heading">
-        🧑‍🤝‍🧑 Relationships
-        <a class="button is-pulled-right is-small is-success" onclick="Entities.add('Relationship')">
-            <i class="fa fa-plus-circle"></i>
-        </a>
-    </p>
-
-    @foreach (var relationship in Model.Relationships)
-    {
+@if (Model.Id == 0)
+{
+    <div class="panel">
+        <p class="panel-heading">
+            🧑‍🤝‍🧑 Relationships
+        </p>
         <div class="panel-block">
-            <label class="label">@relationship.Type</label>
-            <div class="field has-addons">
-                <p class="control">
-                    <a class="button is-info" onclick="Search.searchRelationship('@relationship.Person')">
-                        <i class="fa fa-search"></i>
-                    </a>
-                </p>
-                <div class="control is-expanded has-icons-left">
-                    <input class="input" value="@relationship.Person" disabled="disabled">
-                    <span class="icon is-small is-left">
-                        <i class="fa fa-user-friends"></i>
-                    </span>
-                </div>
-                <p class="control">
-                    <a class="button is-warning" onclick="Entities.edit(@relationship.Id, 'Relationship')">
-                        <i class="fa fa-pencil-alt"></i>
-                    </a>
-                </p>
-                <p class="control">
-                    <a class="button is-danger" onclick="Entities.delete(@relationship.Id, 'Relationship')">
-                        <i class="fa fa-minus-circle"></i>
-                    </a>
-                </p>
-            </div>
+            You have to save the contact before you can add relationships
         </div>
-    }
-</div>
+    </div>
+}
+else
+{
+    <div class="panel">
+        <p class="panel-heading">
+            🧑‍🤝‍🧑 Relationships
+            <a class="button is-pulled-right is-small is-success" onclick="Entities.add('Relationship')">
+                <i class="fa fa-plus-circle"></i>
+            </a>
+        </p>
+
+        @foreach (var relationship in Model.Relationships)
+        {
+            <div class="panel-block">
+                <label class="label">@relationship.Type</label>
+                <div class="field has-addons">
+                    <p class="control">
+                        <a class="button is-info" onclick="Search.searchRelationship('@relationship.Person')">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </p>
+                    <div class="control is-expanded has-icons-left">
+                        <input class="input" value="@relationship.Person" disabled="disabled">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-user-friends"></i>
+                        </span>
+                    </div>
+                    <p class="control">
+                        <a class="button is-warning" onclick="Entities.edit(@relationship.Id, 'Relationship')">
+                            <i class="fa fa-pencil-alt"></i>
+                        </a>
+                    </p>
+                    <p class="control">
+                        <a class="button is-danger" onclick="Entities.delete(@relationship.Id, 'Relationship')">
+                            <i class="fa fa-minus-circle"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+}
