@@ -51,6 +51,12 @@
     position: fixed;
 }
 
+#save-button {
+    bottom: 10px;
+    right: 80px;
+    position: fixed;
+}
+
 input[disabled] {
     color: #333 !important;
 }
