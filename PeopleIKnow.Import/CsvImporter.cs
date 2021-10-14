@@ -71,7 +71,7 @@ namespace PeopleIKnow.Import
 
         private string GetImagePath(GoogleContact googleContact, int nextContactId)
         {
-            var imagePath = "/images/contacts/unknown.jpg";
+            var imagePath = "/images/contacts/unknown.png";
             if (string.IsNullOrEmpty(googleContact.Photo))
             {
                 return imagePath;
