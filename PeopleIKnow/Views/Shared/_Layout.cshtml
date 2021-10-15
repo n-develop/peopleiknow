@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>People I Know</title>
 
+    <link rel="stylesheet" href="~/lib/bulma/bulma.min.css"/>
+
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bulma/bulma.min.css"/>
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="~/lib/bulma/bulma.min.css"/>
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
     </environment>
 </head>
@@ -34,6 +34,6 @@
     <script defer src="~/lib/fontawesome/font-awesome.js"></script>
 </environment>
 
-@RenderSection("Scripts", required: false)
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

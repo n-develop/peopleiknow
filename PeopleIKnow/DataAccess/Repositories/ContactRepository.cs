@@ -26,12 +26,6 @@ namespace PeopleIKnow.DataAccess.Repositories
                 .AsNoTracking().ToListAsync();
         }
 
-        public async Task<IEnumerable<Contact>> GetContacts(int skip, int take)
-        {
-            return await _context.Contacts.Include(contact => contact.EmailAddresses).AsNoTracking().Skip(skip)
-                .Take(take).ToListAsync();
-        }
-
         public Contact GetContactById(int id)
         {
             var contact = _context.Contacts

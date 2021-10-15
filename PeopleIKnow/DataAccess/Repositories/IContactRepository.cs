@@ -9,7 +9,6 @@ namespace PeopleIKnow.DataAccess.Repositories
     {
         Task<IEnumerable<Contact>> SearchContacts(string term);
         Task<IEnumerable<Contact>> GetAllContacts();
-        Task<IEnumerable<Contact>> GetContacts(int skip, int take);
         Contact GetContactById(int id);
         bool DeleteContact(int id);
         Task<Contact> AddContact(Contact contact);
