@@ -44,8 +44,8 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            _logger.LogInformation(
-                $"ADD request for status update '{statusUpdate.StatusText}' on contact with ID '{statusUpdate.ContactId}'");
+            _logger.LogInformation("ADD request for status update '{StatusText}' on contact with ID '{ContactId}'",
+                statusUpdate.StatusText, statusUpdate.ContactId);
 
             await _repository.AddAsync(statusUpdate);
 
@@ -76,8 +76,8 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            _logger.LogInformation(
-                $"EDIT request for status update '{statusUpdate.StatusText}' on contact with ID '{statusUpdate.ContactId}'");
+            _logger.LogInformation("EDIT request for status update '{StatusText}' on contact with ID '{ContactId}'",
+                statusUpdate.StatusText, statusUpdate.ContactId);
 
             await _repository.UpdateAsync(statusUpdate);
 
@@ -86,7 +86,7 @@ namespace PeopleIKnow.Controllers
 
         public async Task<ActionResult> Delete(int id)
         {
-            _logger.LogInformation($"DELETE request for status update with ID '{id}'");
+            _logger.LogInformation("DELETE request for status update with ID '{Id}'", id);
             if (id <= 0)
             {
                 return NotFound();

@@ -64,7 +64,7 @@ namespace PeopleIKnow.Controllers
             contactFromDb.BusinessTitle = contact.BusinessTitle;
             contactFromDb.Tags = contact.Tags;
 
-            if (contact.Image != null && contact.Image.Length > 0)
+            if (contact.Image is { Length: > 0 })
             {
                 contactFromDb.ImagePath = await _imageRepository.WriteFileToDiskAsync(contact.Image, contact.Id);
             }
