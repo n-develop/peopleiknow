@@ -1,0 +1,38 @@
+@model IEnumerable<PeopleIKnow.Models.Contact>
+
+<div id="people-pane" class="column pane is-multiline">
+    <div class="table-container">
+        <table class="table is-bordered is-striped is-hoverable">
+            <thead>
+            <tr>
+                <th>Contact</th>
+                <th>Birthday</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var contact in Model)
+            {
+                <tr>
+                    <td>@contact.FullName</td>
+                    <td>@contact.Birthday.ToString("dd.MM.yyyy")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        window.onresize = function() {
+            const pane = document.getElementById('people-pane');
+            pane.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
+        }
+
+        window.onload = function() {
+            const pane = document.getElementById('people-pane');
+            pane.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
+        }
+    </script>
+}

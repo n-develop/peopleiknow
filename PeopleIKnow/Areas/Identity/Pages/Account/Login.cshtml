@@ -2,72 +2,46 @@
 @model LoginModel
 
 @{
-    Layout = null;
-    ViewData["Title"] = "Log in";
+    ViewBag.Title = "Login";
+    Layout = "_IdentityLayout";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <meta name="description" content="Sign in to the website"/>
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bulma/bulma.css"/>
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="~/lib/bulma/bulma.min.css"/>
-    </environment>
-    <link rel="stylesheet" href="~/css/login.css"/>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-</head>
-<body>
-<section id="login-screen" class="hero is-fullheight">
-    <div class="hero-body">
-        <div class="container">
-            <div class="columns is-centered">
-                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
-                    <form id="account" aria-labelledby="legend" class="box" method="post">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="field">
-                            <label class="label" asp-for="Input.Email"></label>
-                            <div class="control has-icons-left">
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-user-circle-o"></i>
-                                </span>
-                                <input asp-for="Input.Email" class="input" placeholder="john.smith@yourmail.com"/>
-                            </div>
-                            <span asp-validation-for="Input.Email" class="text-danger"></span>
-                        </div>
-                        <div class="field">
-                            <label class="label" asp-for="Input.Password"></label>
-                            <div class="control has-icons-left">
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-lock"></i>
-                                </span>
-                                <input asp-for="Input.Password" class="input" placeholder="Password"/>
-                            </div>
-                            <span asp-validation-for="Input.Password" class="text-danger"></span>
-                        </div>
-                        <div class="field">
-                            <div class="checkbox">
-                                <label asp-for="Input.RememberMe" class="checkbox">
-                                    <input asp-for="Input.RememberMe"/>
-                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
-                                </label>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <button type="submit" class="button is-info">Log in</button>
-                        </div>
-                    </form>
-                </div>
+<div class="column is-5-tablet is-4-desktop is-3-widescreen">
+    <form id="account" aria-labelledby="legend" class="box" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="field">
+            <label class="label" asp-for="Input.Email"></label>
+            <div class="control has-icons-left">
+                <span class="icon is-small is-left">
+                    <i class="far fa-user-circle"></i>
+                </span>
+                <input asp-for="Input.Email" class="input" placeholder="john.smith@yourmail.com"/>
+            </div>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <label class="label" asp-for="Input.Password"></label>
+            <div class="control has-icons-left">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                </span>
+                <input asp-for="Input.Password" class="input" placeholder="Password"/>
+            </div>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <div class="checkbox">
+                <label asp-for="Input.RememberMe" class="checkbox">
+                    <input asp-for="Input.RememberMe"/>
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
             </div>
         </div>
-    </div>
-</section>
-</body>
-
-</html>
+        <div class="field">
+            <button type="submit" class="button is-info">Log in</button>
+        </div>
+        <div class="field">
+            <a asp-area="Identity" asp-page="/Account/Register">Register here</a>
+        </div>
+    </form>
+</div>

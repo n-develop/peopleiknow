@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,8 @@ namespace PeopleIKnow
             {
                 var db = scope.ServiceProvider.GetRequiredService<ContactContext>();
                 db.Database.Migrate();
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                SeedData.EnsureIdentityRoles(roleManager);
                 if (!db.Contacts.Any())
                 {
                     SeedData.Initialize(db);

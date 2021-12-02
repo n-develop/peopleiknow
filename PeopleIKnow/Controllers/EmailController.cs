@@ -7,7 +7,7 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class EmailController : Controller
     {
         private readonly IRepository<EmailAddress> _repository;

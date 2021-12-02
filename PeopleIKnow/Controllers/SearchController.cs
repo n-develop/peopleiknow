@@ -6,7 +6,7 @@ using PeopleIKnow.DataAccess.Repositories;
 
 namespace PeopleIKnow.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class SearchController : Controller
     {
         private readonly IContactRepository _repository;

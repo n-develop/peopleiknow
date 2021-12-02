@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -62,10 +61,12 @@ namespace PeopleIKnow.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -74,18 +75,40 @@ namespace PeopleIKnow.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser {UserName = Input.Email, Email = Input.Email};
+                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("User created a new account with password");
+
+                    if (_userManager.Users.Count() == 1)
+                    {
+                        var assignmentResult = await _userManager.AddToRolesAsync(user, new[] { "admin", "user" });
+                        if (!assignmentResult.Succeeded)
+                        {
+                            _logger.LogError("An error occured while assigning roles 'admin' and 'user' to user");
+                            ModelState.AddModelError(string.Empty, "User created, but failed to grant permissions");
+                        }
+                        else
+                        {
+                            _logger.LogInformation(
+                                "User {User} is the first one to register and therefore granted admin access",
+                                user.Email);
+                        }
+                    }
+                    else
+                    {
+                        _logger.LogInformation("User {User} registered, but needs 'user' role to access any page",
+                            user.Email);
+                    }
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new {area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl},
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
@@ -93,7 +116,8 @@ namespace PeopleIKnow.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new {email = Input.Email, returnUrl = returnUrl});
+                        return RedirectToPage("RegisterConfirmation",
+                            new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {

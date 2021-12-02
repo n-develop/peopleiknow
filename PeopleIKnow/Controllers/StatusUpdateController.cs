@@ -8,7 +8,7 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class StatusUpdateController : Controller
     {
         private readonly IRepository<StatusUpdate> _repository;

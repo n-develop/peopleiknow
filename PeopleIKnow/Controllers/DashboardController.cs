@@ -8,7 +8,7 @@ using PeopleIKnow.ViewModels;
 
 namespace PeopleIKnow.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class DashboardController : Controller
     {
         private readonly IContactRepository _repository;

@@ -7,7 +7,7 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class TelephoneController : Controller
     {
         private readonly IRepository<TelephoneNumber> _repository;

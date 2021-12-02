@@ -1,0 +1,72 @@
+@model List<PeopleIKnow.Models.User>
+
+@{
+    ViewBag.Title = "Manage users";
+    Layout = "_Layout";
+}
+
+<div id="people-pane" class="column pane is-multiline">
+    <div class="table-container">
+        <table class="table is-bordered is-striped is-hoverable">
+            <thead>
+            <tr>
+                <th>Email</th>
+                <th>Access</th>
+                <th>Admin</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>
+                        @if (user.IsUser)
+                        {
+                            <a class="button is-success" onclick="Users.revokeAccess(@user.Id)">
+                                <i class="fas fa-check-circle"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="button is-danger" onclick="Users.grantAccess(@user.Id)">
+                                <i class="fas fa-minus-circle"></i>
+                            </a>
+                        }
+
+                    </td>
+                    <td>
+                        @if (user.IsAdmin)
+                        {
+                            <a class="button is-success" onclick="Users.revokeAdminRights(@user.Id)">
+                                <i class="fas fa-check-circle"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="button is-danger" onclick="Users.grantAdminRights(@user.Id)">
+                                <i class="fas fa-minus-circle"></i>
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        window.onresize = function() {
+            const pane = document.getElementById('people-pane');
+            pane.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
+        }
+
+        window.onload = function() {
+            const pane = document.getElementById('people-pane');
+            pane.style.height = (window.innerHeight - document.getElementById('top').offsetHeight) + "px";
+        }
+    </script>
+}

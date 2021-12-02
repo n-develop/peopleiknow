@@ -7,7 +7,7 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class ContactController : Controller
     {
         public static readonly string SuccessfullyDeletedMessage = "Successfully deleted";

@@ -8,7 +8,7 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class ReminderController : Controller
     {
         private readonly ILogger<ReminderController> _logger;

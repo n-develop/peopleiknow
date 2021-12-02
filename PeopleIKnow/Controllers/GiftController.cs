@@ -7,7 +7,7 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class GiftController : Controller
     {
         private readonly ILogger<GiftController> _logger;

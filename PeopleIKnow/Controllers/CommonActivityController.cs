@@ -8,7 +8,7 @@ using PeopleIKnow.Models;
 
 namespace PeopleIKnow.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "user")]
     public class CommonActivityController : Controller
     {
         private readonly IRepository<CommonActivity> _repository;

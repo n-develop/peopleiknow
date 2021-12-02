@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using PeopleIKnow.Models;
 
 namespace PeopleIKnow.DataAccess
@@ -20,14 +21,14 @@ namespace PeopleIKnow.DataAccess
                 TelephoneNumbers =
                     new List<TelephoneNumber>
                     {
-                        new TelephoneNumber {Telephone = "0371 - 555 371987", Type = "Private"}
+                        new TelephoneNumber { Telephone = "0371 - 555 371987", Type = "Private" }
                     },
                 Employer = "Stark Industries",
                 BusinessTitle = "CEO",
                 Relationships = new List<Relationship>
                 {
-                    new Relationship {Person = "Jane Smith", Type = "Wife"},
-                    new Relationship {Person = "Michael Roger", Type = "Brother"}
+                    new Relationship { Person = "Jane Smith", Type = "Wife" },
+                    new Relationship { Person = "Michael Roger", Type = "Brother" }
                 },
                 StatusUpdates = new List<StatusUpdate>
                 {
@@ -57,14 +58,14 @@ namespace PeopleIKnow.DataAccess
                 TelephoneNumbers =
                     new List<TelephoneNumber>
                     {
-                        new TelephoneNumber {Telephone = "0371 - 555 371987", Type = "Private"}
+                        new TelephoneNumber { Telephone = "0371 - 555 371987", Type = "Private" }
                     },
                 Employer = "Stark Industries",
                 BusinessTitle = "CFO",
                 Relationships = new List<Relationship>
                 {
-                    new Relationship {Person = "John Smith", Type = "Husband"},
-                    new Relationship {Person = "Michael Roger", Type = "Brother-in-Law"}
+                    new Relationship { Person = "John Smith", Type = "Husband" },
+                    new Relationship { Person = "Michael Roger", Type = "Brother-in-Law" }
                 },
                 StatusUpdates = new List<StatusUpdate>
                 {
@@ -95,17 +96,17 @@ namespace PeopleIKnow.DataAccess
                 TelephoneNumbers =
                     new List<TelephoneNumber>
                     {
-                        new TelephoneNumber {Telephone = "04123 - 555 9573", Type = "Private"}
+                        new TelephoneNumber { Telephone = "04123 - 555 9573", Type = "Private" }
                     },
                 Employer = "Crazy Stuff AG",
                 BusinessTitle = "Application Developer",
                 Relationships = new List<Relationship>
                 {
-                    new Relationship {Person = "Manuela Mustermann", Type = "Wife"},
-                    new Relationship {Person = "Kathrin Mustermann", Type = "Daughter"},
-                    new Relationship {Person = "Linus Mustermann", Type = "Son"},
-                    new Relationship {Person = "Ronja Baumann", Type = "Sister"},
-                    new Relationship {Person = "Moritz Mustermann", Type = "Brother"},
+                    new Relationship { Person = "Manuela Mustermann", Type = "Wife" },
+                    new Relationship { Person = "Kathrin Mustermann", Type = "Daughter" },
+                    new Relationship { Person = "Linus Mustermann", Type = "Son" },
+                    new Relationship { Person = "Ronja Baumann", Type = "Sister" },
+                    new Relationship { Person = "Moritz Mustermann", Type = "Brother" },
                 },
                 StatusUpdates = new List<StatusUpdate>
                 {
@@ -137,14 +138,27 @@ namespace PeopleIKnow.DataAccess
 
             var emails = new List<EmailAddress>
             {
-                new EmailAddress {Id = 1, Email = "john@smith.com", Type = "Private", ContactId = john.Id},
-                new EmailAddress {Id = 2, Email = "jane.smith@webmail.com", Type = "Private", ContactId = jane.Id},
-                new EmailAddress {Id = 3, Email = "max@mustermann.example.com", Type = "Private", ContactId = max.Id},
-                new EmailAddress {Id = 4, Email = "mustermann.max@crazystuffag.de", Type = "Work", ContactId = max.Id}
+                new EmailAddress { Id = 1, Email = "john@smith.com", Type = "Private", ContactId = john.Id },
+                new EmailAddress { Id = 2, Email = "jane.smith@webmail.com", Type = "Private", ContactId = jane.Id },
+                new EmailAddress { Id = 3, Email = "max@mustermann.example.com", Type = "Private", ContactId = max.Id },
+                new EmailAddress { Id = 4, Email = "mustermann.max@crazystuffag.de", Type = "Work", ContactId = max.Id }
             };
 
             db.EmailAddresses.AddRange(emails);
             db.SaveChanges();
+        }
+
+        public static void EnsureIdentityRoles(RoleManager<IdentityRole> roleManager)
+        {
+            if (!roleManager.RoleExistsAsync("admin").Result)
+            {
+                roleManager.CreateAsync(new IdentityRole("admin")).Wait();
+            }
+
+            if (!roleManager.RoleExistsAsync("user").Result)
+            {
+                roleManager.CreateAsync(new IdentityRole("user")).Wait();
+            }
         }
     }
 }

@@ -116,6 +116,25 @@ namespace PeopleIKnow.DataAccess.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Contact>> GetUpcomingBirthdaysAsync()
+        {
+            var today = DateTime.Now.Date;
+            var contactsWithBirthday =
+                await _context.Contacts.Where(c => c.Birthday != DateTime.MinValue).ToListAsync();
+            var birthdaysAfterToday = contactsWithBirthday
+                .Where(c => new DateTime(today.Year, c.Birthday.Month, c.Birthday.Day) >= today)
+                .OrderBy(c => c.Birthday.Month)
+                .ThenBy(c => c.Birthday.Day)
+                .ToList();
+            var birthdaysBeforeToday = contactsWithBirthday.Where(c =>
+                    new DateTime(today.Year, c.Birthday.Month, c.Birthday.Day) < today)
+                .OrderBy(c => c.Birthday.Month)
+                .ThenBy(c => c.Birthday.Day)
+                .ToList();
+            var allBirthdays = birthdaysAfterToday.Union(birthdaysBeforeToday);
+            return allBirthdays;
+        }
+
         public async Task<IEnumerable<Contact>> SearchContacts(string term)
         {
             var allContacts = await GetAllContacts();

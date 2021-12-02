@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bulma/bulma.css"/>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/bulma/bulma.min.css"/>
+    </environment>
+    <link rel="stylesheet" href="~/css/login.css"/>
+</head>
+<body>
+<section id="account-screen" class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</section>
+<script defer src="~/lib/fontawesome/font-awesome.js"></script>
+</body>
+</html>
