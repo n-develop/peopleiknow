@@ -23,13 +23,13 @@
                     <td>
                         @if (user.IsUser)
                         {
-                            <a class="button is-success" onclick="Users.revokeAccess(@user.Id)">
+                            <a id="user-@user.Id" class="button is-success" onclick="Users.toggleRole('@user.Id', 'user')">
                                 <i class="fas fa-check-circle"></i>
                             </a>
                         }
                         else
                         {
-                            <a class="button is-danger" onclick="Users.grantAccess(@user.Id)">
+                            <a id="user-@user.Id" class="button is-danger" onclick="Users.toggleRole('@user.Id', 'user')">
                                 <i class="fas fa-minus-circle"></i>
                             </a>
                         }
@@ -38,13 +38,13 @@
                     <td>
                         @if (user.IsAdmin)
                         {
-                            <a class="button is-success" onclick="Users.revokeAdminRights(@user.Id)">
+                            <a id="admin-@user.Id" class="button is-success" onclick="Users.toggleRole('@user.Id', 'admin')">
                                 <i class="fas fa-check-circle"></i>
                             </a>
                         }
                         else
                         {
-                            <a class="button is-danger" onclick="Users.grantAdminRights(@user.Id)">
+                            <a id="admin-@user.Id" class="button is-danger" onclick="Users.toggleRole('@user.Id', 'admin')">
                                 <i class="fas fa-minus-circle"></i>
                             </a>
                         }
@@ -58,6 +58,8 @@
 
 @section Scripts
 {
+    <script src="js/Admin.js" asp-append-version="true"></script>
+    <script src="js/LoadingIndicator.js" asp-append-version="true"></script>
     <script>
         window.onresize = function() {
             const pane = document.getElementById('people-pane');

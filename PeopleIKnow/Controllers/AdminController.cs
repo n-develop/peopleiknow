@@ -36,8 +36,8 @@ namespace PeopleIKnow.Controllers
             return View(users);
         }
 
-        [HttpPut("Grant/{roleName}/{userId}")]
-        public async Task<IActionResult> Grant(string roleName, string userId)
+        [HttpPut("Admin/Toggle/{roleName}/{userId}")]
+        public async Task<IActionResult> Toggle(string roleName, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
@@ -45,10 +45,21 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            var result = await _userManager.AddToRoleAsync(user, roleName);
-            if (result.Succeeded)
+            if (await _userManager.IsInRoleAsync(user, roleName))
             {
-                return Ok();
+                var result = await _userManager.RemoveFromRoleAsync(user, roleName);
+                if (result.Succeeded)
+                {
+                    return Ok("REVOKED");
+                }
+            }
+            else
+            {
+                var result = await _userManager.AddToRoleAsync(user, roleName);
+                if (result.Succeeded)
+                {
+                    return Ok("GRANTED");
+                }
             }
 
             return BadRequest();
