@@ -9,18 +9,9 @@ namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
     {
         #region test infrastructure
 
-        protected IContactRepository _contactRepository;
-        protected IImageRepository _imageRepository;
-
-        protected BaseDashboardControllerTests()
-        {
-            _contactRepository = Substitute.For<IContactRepository>();
-            _imageRepository = Substitute.For<IImageRepository>();
-        }
-
         protected DashboardController CreateController()
         {
-            return new DashboardController(_contactRepository, _imageRepository);
+            return new DashboardController();
         }
 
         #endregion

@@ -41,7 +41,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
             var resultObject = actionResult as ViewResult;
             var model = resultObject.Model;
             model.Should().BeOfType<EmailAddress>();
-            ((EmailAddress) model).ContactId.Should().Be(1);
+            ((EmailAddress)model).ContactId.Should().Be(1);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
             // Assert
             var redirect = actionResult as RedirectToActionResult;
             redirect.ActionName.Should().Be("Details");
-            redirect.ControllerName.Should().Be("Dashboard");
+            redirect.ControllerName.Should().Be("Contact");
         }
     }
 }

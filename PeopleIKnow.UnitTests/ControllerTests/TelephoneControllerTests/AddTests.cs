@@ -41,7 +41,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
             var resultObject = actionResult as ViewResult;
             var model = resultObject.Model;
             model.Should().BeOfType<TelephoneNumber>();
-            ((TelephoneNumber) model).ContactId.Should().Be(1);
+            ((TelephoneNumber)model).ContactId.Should().Be(1);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
             // Assert
             var redirect = actionResult as RedirectToActionResult;
             redirect.ActionName.Should().Be("Details");
-            redirect.ControllerName.Should().Be("Dashboard");
+            redirect.ControllerName.Should().Be("Contact");
         }
     }
 }

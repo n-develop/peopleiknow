@@ -8,9 +8,9 @@ using PeopleIKnow.Models;
 using PeopleIKnow.ViewModels;
 using Xunit;
 
-namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
+namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
 {
-    public class DetailsTests : BaseDashboardControllerTests
+    public class DetailsTests : TestBase
     {
         [Fact]
         public void Get_ReceivesInvalidId_ReturnsNotFound()
@@ -57,7 +57,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
         public void Get_FoundContact_ReturnsContactAsModel()
         {
             // Arrange
-            _contactRepository.GetContactById(3).Returns(new Contact {Id = 3});
+            _contactRepository.GetContactById(3).Returns(new Contact { Id = 3 });
             var controller = CreateController();
 
             // Act
@@ -89,7 +89,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
             var controller = CreateController();
 
             // Act
-            var actionResult = await controller.Details(new ContactUpdateViewModel {Id = 1});
+            var actionResult = await controller.Details(new ContactUpdateViewModel { Id = 1 });
 
             // Assert
             actionResult.Should().BeOfType<NotFoundResult>();
@@ -99,7 +99,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.DashboardControllerTests
         public async Task Post_ReceivesValidModel_SavesPropertiesCorrectly()
         {
             // Arrange
-            var contact = new Contact {Id = 1};
+            var contact = new Contact { Id = 1 };
             _contactRepository.GetContactById(1).Returns(contact);
             _imageRepository.WriteFileToDiskAsync(Arg.Any<IFormFile>(), 1).Returns("test.jpg");
             var controller = CreateController();

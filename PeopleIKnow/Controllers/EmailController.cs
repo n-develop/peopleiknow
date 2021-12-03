@@ -47,7 +47,7 @@ namespace PeopleIKnow.Controllers
 
             await _repository.AddAsync(mail);
 
-            return RedirectToAction("Details", "Dashboard", new { id = mail.ContactId });
+            return RedirectToAction("Details", "Contact", new { id = mail.ContactId });
         }
 
         public async Task<ActionResult> Edit(int id)
@@ -79,7 +79,7 @@ namespace PeopleIKnow.Controllers
 
             await _repository.UpdateAsync(mail);
 
-            return RedirectToAction("Details", "Dashboard", new { id = mail.ContactId });
+            return RedirectToAction("Details", "Contact", new { id = mail.ContactId });
         }
 
         public async Task<ActionResult> Delete(int id)
@@ -98,7 +98,7 @@ namespace PeopleIKnow.Controllers
 
             await _repository.DeleteAsync(mail);
 
-            return RedirectToAction("Details", "Dashboard", new { id = mail.ContactId });
+            return RedirectToAction("Details", "Contact", new { id = mail.ContactId });
         }
     }
 }

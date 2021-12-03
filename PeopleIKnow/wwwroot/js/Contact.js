@@ -49,7 +49,7 @@ const Contact = {
     save: async function () {
         const form = new FormData(document.getElementById('contact-form'));
         LoadingIndicator.show();
-        const response = await fetch("/dashboard/details", {
+        const response = await fetch("/Contact/Details", {
             method: "POST",
             body: form
         });

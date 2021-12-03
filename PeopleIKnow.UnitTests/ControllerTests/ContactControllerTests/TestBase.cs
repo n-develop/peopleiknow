@@ -10,17 +10,19 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
         #region test infrastructure
 
         protected IContactRepository _contactRepository;
+        protected IImageRepository _imageRepository;
         private ILogger<ContactController> _logger;
 
         protected TestBase()
         {
             _contactRepository = Substitute.For<IContactRepository>();
+            _imageRepository = Substitute.For<IImageRepository>();
             _logger = Substitute.For<ILogger<ContactController>>();
         }
 
         protected ContactController CreateController()
         {
-            return new ContactController(_contactRepository, _logger);
+            return new ContactController(_contactRepository, _logger, _imageRepository);
         }
 
         #endregion

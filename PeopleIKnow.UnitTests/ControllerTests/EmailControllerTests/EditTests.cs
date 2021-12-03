@@ -38,7 +38,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         public async Task Get_ReceivesValidId_ReturnsView()
         {
             // Arrange
-            _repository.GetByIdAsync(2).Returns(new EmailAddress {Id = 2});
+            _repository.GetByIdAsync(2).Returns(new EmailAddress { Id = 2 });
 
             // Act
             var actionResult = await _sut.Edit(2);
@@ -51,7 +51,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         public async Task Get_ReceivesValidId_ReturnsModelWithId()
         {
             // Arrange
-            _repository.GetByIdAsync(2).Returns(new EmailAddress {Id = 2});
+            _repository.GetByIdAsync(2).Returns(new EmailAddress { Id = 2 });
 
             // Act
             var actionResult = await _sut.Edit(2);
@@ -93,7 +93,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
 
             // Assert
             actionResult.ActionName.Should().Be("Details");
-            actionResult.ControllerName.Should().Be("Dashboard");
+            actionResult.ControllerName.Should().Be("Contact");
         }
     }
 }

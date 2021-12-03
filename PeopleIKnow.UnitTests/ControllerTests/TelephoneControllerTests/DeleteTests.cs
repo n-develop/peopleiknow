@@ -38,7 +38,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
         public async Task ReceivesValidId_ReturnRedirect()
         {
             // Arrange
-            _repository.GetByIdAsync(1).Returns(new TelephoneNumber {ContactId = 2});
+            _repository.GetByIdAsync(1).Returns(new TelephoneNumber { ContactId = 2 });
 
             // Act
             var actionResult = await _sut.Delete(1);
@@ -51,14 +51,14 @@ namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
         public async Task ReceivesValidId_ReturnsRedirectToDetails()
         {
             // Arrange
-            _repository.GetByIdAsync(1).Returns(new TelephoneNumber {ContactId = 2});
+            _repository.GetByIdAsync(1).Returns(new TelephoneNumber { ContactId = 2 });
 
             // Act
             var redirectResult = await _sut.Delete(1) as RedirectToActionResult;
 
             // Assert
             redirectResult.ActionName.Should().Be("Details");
-            redirectResult.ControllerName.Should().Be("Dashboard");
+            redirectResult.ControllerName.Should().Be("Contact");
         }
     }
 }

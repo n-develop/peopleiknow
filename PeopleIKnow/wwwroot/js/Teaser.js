@@ -27,7 +27,7 @@ const Teaser = {
     },
     handleClick: async function (element) {
         const id = element.currentTarget.getAttribute("data-contact-id");
-        const response = await fetch("/Dashboard/Details/" + id);
+        const response = await fetch("/Contact/Details/" + id);
         if (!response.ok) {
             console.log("Something went wrong while loading a contact. " + response.statusText);
             return;

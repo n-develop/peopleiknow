@@ -41,7 +41,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ReminderControllerTests
             var resultObject = actionResult as ViewResult;
             var model = resultObject.Model;
             model.Should().BeOfType<Reminder>();
-            ((Reminder) model).ContactId.Should().Be(1);
+            ((Reminder)model).ContactId.Should().Be(1);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ReminderControllerTests
             // Assert
             var redirect = actionResult as RedirectToActionResult;
             redirect.ActionName.Should().Be("Details");
-            redirect.ControllerName.Should().Be("Dashboard");
+            redirect.ControllerName.Should().Be("Contact");
         }
     }
 }
