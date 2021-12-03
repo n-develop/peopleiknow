@@ -27,6 +27,12 @@
             <a asp-controller="Dashboard" asp-action="Index" class="navbar-item">
                 👩‍💻 Contacts
             </a>
+            @if (User.IsInRole("admin"))
+            {
+                <a asp-controller="Admin" asp-action="Index" class="navbar-item">
+                    ⚙️ Users
+                </a>
+            }
         </div>
         <div class="navbar-end">
             <div class="navbar-item">
