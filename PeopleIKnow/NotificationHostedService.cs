@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,9 +28,12 @@ namespace PeopleIKnow
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Notification service started");
             var daily = TimeSpan.FromHours(24);
             var todaysSchedule = DateTime.Today.AddHours(_settings.Time.Hour).AddMinutes(_settings.Time.Minute);
             var nextRunTime = todaysSchedule > DateTime.Now ? todaysSchedule : todaysSchedule.AddDays(1);
+            _logger.LogInformation("Next runtime of notification service is {RuntimeDate}",
+                nextRunTime.ToString(CultureInfo.InvariantCulture));
             var timeUntilFirstRuntime = nextRunTime.Subtract(DateTime.Now);
             _timer = new Timer(Notify, null, timeUntilFirstRuntime, daily);
 
