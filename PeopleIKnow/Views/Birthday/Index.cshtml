@@ -1,4 +1,4 @@
-@model IEnumerable<PeopleIKnow.Models.Contact>
+@model IEnumerable<PeopleIKnow.Models.BirthdayContact>
 
 <div id="people-pane" class="column pane is-multiline">
     <div class="table-container">
@@ -13,7 +13,7 @@
             @foreach (var contact in Model)
             {
                 <tr>
-                    <td>@contact.FullName</td>
+                    <td>@(contact.BirthdayToday ? "👑 " : "")@contact.FullName</td>
                     <td>@contact.Birthday.ToString("dd.MM.yyyy")</td>
                 </tr>
             }

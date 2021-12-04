@@ -116,7 +116,7 @@ namespace PeopleIKnow.DataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Contact>> GetUpcomingBirthdaysAsync()
+        public async Task<IEnumerable<BirthdayContact>> GetUpcomingBirthdaysAsync()
         {
             var today = DateTime.Now.Date;
             var contactsWithBirthday =
@@ -132,7 +132,12 @@ namespace PeopleIKnow.DataAccess.Repositories
                 .ThenBy(c => c.Birthday.Day)
                 .ToList();
             var allBirthdays = birthdaysAfterToday.Union(birthdaysBeforeToday);
-            return allBirthdays;
+            return allBirthdays.Select(b => new BirthdayContact
+            {
+                FullName = b.FullName,
+                Birthday = b.Birthday,
+                BirthdayToday = b.Birthday.Day == today.Day && b.Birthday.Month == today.Month
+            });
         }
 
         public async Task<IEnumerable<Contact>> SearchContacts(string term)

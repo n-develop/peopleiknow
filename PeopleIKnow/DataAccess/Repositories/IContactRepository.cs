@@ -14,6 +14,6 @@ namespace PeopleIKnow.DataAccess.Repositories
         Task<Contact> AddContact(Contact contact);
         Task SaveContact(Contact contact);
         Task<IEnumerable<Contact>> GetBirthdayContactsAsync(DateTime birthday);
-        Task<IEnumerable<Contact>> GetUpcomingBirthdaysAsync();
+        Task<IEnumerable<BirthdayContact>> GetUpcomingBirthdaysAsync();
     }
 }
