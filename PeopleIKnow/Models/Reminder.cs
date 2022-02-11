@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace PeopleIKnow.Models
 {
-    public class Reminder : IEntity
+    public class Reminder : IContactProperty
     {
         public int Id { get; set; }
         public string Description { get; set; }

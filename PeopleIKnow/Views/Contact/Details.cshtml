@@ -10,6 +10,8 @@
     <form id="contact-form" asp-controller="Contact" asp-action="Details" method="post">
         <input type="hidden" asp-for="Id"/>
 
+        <partial name="ContactDetails/_ContactHeader"/>
+        
         <partial name="ContactDetails/_ContactImage"/>
 
         <partial name="ContactDetails/_ContactName"/>

@@ -11,11 +11,15 @@ namespace PeopleIKnow.Controllers
     public class TelephoneController : Controller
     {
         private readonly IRepository<TelephoneNumber> _repository;
+        private readonly IContactRepository _contactRepository;
         private readonly ILogger<TelephoneController> _logger;
 
-        public TelephoneController(IRepository<TelephoneNumber> repository, ILogger<TelephoneController> logger)
+        public TelephoneController(IRepository<TelephoneNumber> repository,
+            IContactRepository contactRepository,
+            ILogger<TelephoneController> logger)
         {
             _repository = repository;
+            _contactRepository = contactRepository;
             _logger = logger;
         }
 
@@ -26,8 +30,10 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
+            var contact = _contactRepository.GetContactById(contactId);
             var telephoneNumber = new TelephoneNumber
             {
+                Contact = contact,
                 ContactId = contactId
             };
 

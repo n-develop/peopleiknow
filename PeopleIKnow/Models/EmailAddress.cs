@@ -2,7 +2,7 @@ using System.Runtime.Serialization;
 
 namespace PeopleIKnow.Models
 {
-    public class EmailAddress
+    public class EmailAddress : IContactProperty
     {
         public int Id { get; set; }
         public string Email { get; set; }

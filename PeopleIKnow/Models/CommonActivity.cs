@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace PeopleIKnow.Models
 {
-    public class CommonActivity
+    public class CommonActivity : IContactProperty
     {
         public int Id { get; set; }
         public string Description { get; set; }

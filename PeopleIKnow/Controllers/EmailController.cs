@@ -11,11 +11,13 @@ namespace PeopleIKnow.Controllers
     public class EmailController : Controller
     {
         private readonly IRepository<EmailAddress> _repository;
+        private readonly IContactRepository _contactRepository;
         private readonly ILogger<EmailController> _logger;
 
-        public EmailController(IRepository<EmailAddress> repository, ILogger<EmailController> logger)
+        public EmailController(IRepository<EmailAddress> repository, IContactRepository contactRepository, ILogger<EmailController> logger)
         {
             _repository = repository;
+            _contactRepository = contactRepository;
             _logger = logger;
         }
 
@@ -25,9 +27,10 @@ namespace PeopleIKnow.Controllers
             {
                 return NotFound();
             }
-
+            var contact = _contactRepository.GetContactById(contactId);
             var mail = new EmailAddress
             {
+                Contact = contact,
                 ContactId = contactId
             };
 

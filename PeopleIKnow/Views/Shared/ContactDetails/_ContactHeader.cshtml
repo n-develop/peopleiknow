@@ -1,0 +1,16 @@
+@model PeopleIKnow.Models.Contact
+@if (string.IsNullOrEmpty(Model.ImagePath))
+{
+    Model.ImagePath = "images/contacts/unknown.png";
+}
+
+<div class="media block">
+    <figure class="media-left">
+        <p class="image is-96x96">
+            <img  src="@Model.ImagePath" alt="Profile image">
+        </p>
+    </figure>
+    <div class="media-content">
+        <h1 class="title is-1">@Model.FullName</h1>
+    </div>
+</div>

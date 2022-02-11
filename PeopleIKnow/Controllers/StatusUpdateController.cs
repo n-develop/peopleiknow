@@ -12,11 +12,15 @@ namespace PeopleIKnow.Controllers
     public class StatusUpdateController : Controller
     {
         private readonly IRepository<StatusUpdate> _repository;
+        private readonly IContactRepository _contactRepository;
         private readonly ILogger<StatusUpdateController> _logger;
 
-        public StatusUpdateController(IRepository<StatusUpdate> repository, ILogger<StatusUpdateController> logger)
+        public StatusUpdateController(IRepository<StatusUpdate> repository,
+            IContactRepository contactRepository,
+            ILogger<StatusUpdateController> logger)
         {
             _repository = repository;
+            _contactRepository = contactRepository;
             _logger = logger;
         }
 
@@ -27,8 +31,10 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
+            var contact = _contactRepository.GetContactById(contactId);
             var statusUpdate = new StatusUpdate
             {
+                Contact = contact,
                 ContactId = contactId,
                 Created = DateTime.Now
             };

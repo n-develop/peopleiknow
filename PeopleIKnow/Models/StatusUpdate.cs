@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace PeopleIKnow.Models
 {
-    public class StatusUpdate
+    public class StatusUpdate : IContactProperty
     {
         public int Id { get; set; }
         public string StatusText { get; set; }

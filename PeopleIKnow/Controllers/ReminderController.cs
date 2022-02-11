@@ -12,11 +12,15 @@ namespace PeopleIKnow.Controllers
     public class ReminderController : Controller
     {
         private readonly ILogger<ReminderController> _logger;
+        private readonly IContactRepository _contactRepository;
         private readonly IRepository<Reminder> _repository;
 
-        public ReminderController(ILogger<ReminderController> logger, IRepository<Reminder> repository)
+        public ReminderController(ILogger<ReminderController> logger, 
+            IContactRepository contactRepository, 
+            IRepository<Reminder> repository)
         {
             _logger = logger;
+            _contactRepository = contactRepository;
             _repository = repository;
         }
 
@@ -27,8 +31,10 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
+            var contact = _contactRepository.GetContactById(contactId);
             var reminder = new Reminder
             {
+                Contact = contact,
                 Date = DateTime.Today,
                 ContactId = contactId
             };

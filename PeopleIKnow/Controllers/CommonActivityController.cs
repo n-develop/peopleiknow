@@ -12,12 +12,15 @@ namespace PeopleIKnow.Controllers
     public class CommonActivityController : Controller
     {
         private readonly IRepository<CommonActivity> _repository;
+        private readonly IContactRepository _contactRepository;
         private readonly ILogger<CommonActivityController> _logger;
 
         public CommonActivityController(IRepository<CommonActivity> repository,
+            IContactRepository contactRepository,
             ILogger<CommonActivityController> logger)
         {
             _repository = repository;
+            _contactRepository = contactRepository;
             _logger = logger;
         }
 
@@ -28,8 +31,10 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
+            var contact = _contactRepository.GetContactById(contactId);
             var commonActivity = new CommonActivity
             {
+                Contact = contact,
                 ContactId = contactId,
                 Date = DateTime.Now
             };

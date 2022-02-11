@@ -11,11 +11,15 @@ namespace PeopleIKnow.Controllers
     public class GiftController : Controller
     {
         private readonly ILogger<GiftController> _logger;
+        private readonly IContactRepository _contactRepository;
         private readonly IRepository<Gift> _repository;
 
-        public GiftController(ILogger<GiftController> logger, IRepository<Gift> repository)
+        public GiftController(ILogger<GiftController> logger,
+            IContactRepository contactRepository,
+            IRepository<Gift> repository)
         {
             _logger = logger;
+            _contactRepository = contactRepository;
             _repository = repository;
         }
 
@@ -26,8 +30,10 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
+            var contact = _contactRepository.GetContactById(contactId);
             var gift = new Gift
             {
+                Contact = contact,
                 ContactId = contactId
             };
 
@@ -42,7 +48,7 @@ namespace PeopleIKnow.Controllers
                 return BadRequest();
             }
 
-            _logger.LogInformation("ADD request for Gift '{Descriptoin}' on contact with ID '{ContactId}'",
+            _logger.LogInformation("ADD request for Gift '{Description}' on contact with ID '{ContactId}'",
                 gift.Description, gift.ContactId);
 
             await _repository.AddAsync(gift);

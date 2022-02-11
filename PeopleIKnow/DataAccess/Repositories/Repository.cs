@@ -1,10 +1,12 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using PeopleIKnow.Models;
 
 namespace PeopleIKnow.DataAccess.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, new()
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IContactProperty, new()
     {
         private readonly ContactContext _database;
 
@@ -27,7 +29,9 @@ namespace PeopleIKnow.DataAccess.Repositories
 
         public async Task<TEntity> GetByIdAsync(int id)
         {
-            return await _database.FindAsync<TEntity>(id);
+            return await _database.Set<TEntity>()
+                .Include(c => c.Contact)
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)

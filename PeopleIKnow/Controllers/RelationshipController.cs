@@ -11,11 +11,15 @@ namespace PeopleIKnow.Controllers
     public class RelationshipController : Controller
     {
         private readonly IRepository<Relationship> _repository;
+        private readonly IContactRepository _contactRepository;
         private readonly ILogger<RelationshipController> _logger;
 
-        public RelationshipController(IRepository<Relationship> repository, ILogger<RelationshipController> logger)
+        public RelationshipController(IRepository<Relationship> repository,
+            IContactRepository contactRepository,
+            ILogger<RelationshipController> logger)
         {
             _repository = repository;
+            _contactRepository = contactRepository;
             _logger = logger;
         }
 
@@ -26,8 +30,10 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            var relationship = new Relationship()
+            var contact = _contactRepository.GetContactById(contactId);
+            var relationship = new Relationship
             {
+                Contact = contact,
                 ContactId = contactId
             };
 

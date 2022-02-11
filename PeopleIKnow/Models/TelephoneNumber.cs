@@ -2,7 +2,7 @@ using System.Runtime.Serialization;
 
 namespace PeopleIKnow.Models
 {
-    public class TelephoneNumber
+    public class TelephoneNumber : IContactProperty
     {
         public int Id { get; set; }
         public string Telephone { get; set; }

@@ -1,8 +1,10 @@
-@model PeopleIKnow.Models.Gift
+@model Gift
 @{
     Layout = null;
 }
 <div class="box">
+    <partial name="ContactDetails/_ContactHeader" model="Model.Contact"/>
+    
     <form id="gift-form">
         <input type="hidden" asp-for="Id"/>
         <input type="hidden" asp-for="ContactId"/>
