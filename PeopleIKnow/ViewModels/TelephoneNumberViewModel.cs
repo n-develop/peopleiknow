@@ -1,6 +1,6 @@
 namespace PeopleIKnow.ViewModels
 {
-    public class ContactViewModel
+    public class TelephoneNumberViewModel
     {
         
     }
