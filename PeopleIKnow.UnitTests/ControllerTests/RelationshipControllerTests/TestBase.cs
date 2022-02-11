@@ -13,12 +13,14 @@ namespace PeopleIKnow.UnitTests.ControllerTests.RelationshipControllerTests
         protected IRepository<Relationship> _repository;
         private ILogger<RelationshipController> _logger;
         protected readonly RelationshipController _sut;
+        protected IContactRepository _contactRepository;
 
         protected TestBase()
         {
             _repository = Substitute.For<IRepository<Relationship>>();
             _logger = Substitute.For<ILogger<RelationshipController>>();
-            _sut = new RelationshipController(_repository, _logger);
+            _contactRepository = Substitute.For<IContactRepository>();
+            _sut = new RelationshipController(_repository, _contactRepository, _logger);
         }
 
         #endregion

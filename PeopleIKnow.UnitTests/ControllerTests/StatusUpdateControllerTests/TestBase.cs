@@ -13,12 +13,14 @@ namespace PeopleIKnow.UnitTests.ControllerTests.StatusUpdateControllerTests
         protected IRepository<StatusUpdate> _repository;
         private ILogger<StatusUpdateController> _logger;
         protected readonly StatusUpdateController _sut;
+        protected IContactRepository _contactRepository;
 
         protected TestBase()
         {
             _repository = Substitute.For<IRepository<StatusUpdate>>();
             _logger = Substitute.For<ILogger<StatusUpdateController>>();
-            _sut = new StatusUpdateController(_repository, _logger);
+            _contactRepository = Substitute.For<IContactRepository>();
+            _sut = new StatusUpdateController(_repository, _contactRepository, _logger);
         }
 
         #endregion

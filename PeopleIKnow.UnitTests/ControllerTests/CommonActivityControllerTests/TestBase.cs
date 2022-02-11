@@ -13,12 +13,14 @@ namespace PeopleIKnow.UnitTests.ControllerTests.CommonActivityControllerTests
         protected readonly CommonActivityController _sut;
         private ILogger<CommonActivityController> _logger;
         protected IRepository<CommonActivity> _repository;
+        protected IContactRepository _contactRepository;
 
         public TestBase()
         {
             _logger = Substitute.For<ILogger<CommonActivityController>>();
             _repository = Substitute.For<IRepository<CommonActivity>>();
-            _sut = new CommonActivityController(_repository, _logger);
+            _contactRepository = Substitute.For<IContactRepository>();
+            _sut = new CommonActivityController(_repository, _contactRepository, _logger);
         }
 
         #endregion

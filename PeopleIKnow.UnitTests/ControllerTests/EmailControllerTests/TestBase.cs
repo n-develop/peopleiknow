@@ -13,12 +13,14 @@ namespace PeopleIKnow.UnitTests.ControllerTests.EmailControllerTests
         protected IRepository<EmailAddress> _repository;
         private ILogger<EmailController> _logger;
         protected readonly EmailController _sut;
+        protected IContactRepository _contactRepository;
 
         protected TestBase()
         {
             _repository = Substitute.For<IRepository<EmailAddress>>();
             _logger = Substitute.For<ILogger<EmailController>>();
-            _sut = new EmailController(_repository, _logger);
+            _contactRepository = Substitute.For<IContactRepository>();
+            _sut = new EmailController(_repository, _contactRepository, _logger);
         }
 
         #endregion

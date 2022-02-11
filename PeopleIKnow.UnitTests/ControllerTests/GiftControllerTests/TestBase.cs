@@ -13,12 +13,14 @@ namespace PeopleIKnow.UnitTests.ControllerTests.GiftControllerTests
         protected GiftController _sut;
         protected IRepository<Gift> _repository;
         private ILogger<GiftController> _logger;
+        protected IContactRepository _contactRepository;
 
         public TestBase()
         {
             _repository = Substitute.For<IRepository<Gift>>();
             _logger = Substitute.For<ILogger<GiftController>>();
-            _sut = new GiftController(_logger, _repository);
+            _contactRepository = Substitute.For<IContactRepository>();
+            _sut = new GiftController(_logger, _contactRepository, _repository);
         }
 
         #endregion

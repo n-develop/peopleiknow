@@ -13,12 +13,14 @@ namespace PeopleIKnow.UnitTests.ControllerTests.TelephoneControllerTests
         protected IRepository<TelephoneNumber> _repository;
         private ILogger<TelephoneController> _logger;
         protected TelephoneController _sut;
+        protected IContactRepository _contactRepository;
 
         protected TestBase()
         {
             _repository = Substitute.For<IRepository<TelephoneNumber>>();
             _logger = Substitute.For<ILogger<TelephoneController>>();
-            _sut = new TelephoneController(_repository, _logger);
+            _contactRepository = Substitute.For<IContactRepository>();
+            _sut = new TelephoneController(_repository, _contactRepository, _logger);
         }
 
         #endregion
