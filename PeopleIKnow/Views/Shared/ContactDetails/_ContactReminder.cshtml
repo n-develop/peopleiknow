@@ -24,7 +24,13 @@ else
         @foreach (var reminder in Model.Reminders)
         {
             <div class="panel-block">
-                <label class="label">@reminder.Date.ToString("dd.MM.yyyy")</label>
+                <label class="label">
+                    @reminder.Date.ToString("dd.MM.yyyy")
+                    @if (reminder.RemindMeEveryYear)
+                    {
+                        <i class="fas fa-sync-alt"></i>
+                    }
+                </label>
                 <div class="field has-addons">
                     <div class="control is-expanded">
                         <input class="input" value="@reminder.Description" disabled="disabled">
