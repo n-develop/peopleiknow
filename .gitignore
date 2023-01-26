@@ -225,6 +225,8 @@ ServiceFabricBackup/
 
 # Custom Stuff
 PeopleIKnow/people.db
+PeopleIKnow/people.db-shm
+PeopleIKnow/people.db-wal
 *.min.css
 *.min.js
 *.Development.json
@@ -232,3 +234,4 @@ PeopleIKnow/people.db
 PeopleIKnow/wwwroot/images/contacts/*
 backups/
 deploy.sh
+
