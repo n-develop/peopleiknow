@@ -138,6 +138,7 @@ namespace PeopleIKnow.Controllers
 
             contactFromDb.Address = contact.Address;
             contactFromDb.Birthday = contact.Birthday;
+            contactFromDb.SendBirthdayNotification = contact.SendBirthdayNotification;
             contactFromDb.Employer = contact.Employer;
             contactFromDb.Lastname = contact.Lastname;
             contactFromDb.Firstname = contact.Firstname;

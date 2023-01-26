@@ -7,8 +7,6 @@ namespace PeopleIKnow.ViewModels
     {
         public int Id { get; set; }
 
-        public bool IsFavorite { get; set; }
-
         public string Firstname { get; set; }
 
         public string Middlename { get; set; }
@@ -18,6 +16,8 @@ namespace PeopleIKnow.ViewModels
         public IFormFile Image { get; set; }
 
         public DateTime Birthday { get; set; }
+        
+        public bool SendBirthdayNotification { get; set; }
 
         public string Address { get; set; }
 
