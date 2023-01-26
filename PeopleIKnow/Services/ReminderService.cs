@@ -45,8 +45,11 @@ namespace PeopleIKnow.Services
             var birthdayContacts = await _contactRepository.GetBirthdayContactsAsync(reminderDate);
             foreach (var birthdayContact in birthdayContacts)
             {
-                await _messagingService.SendMessageAsync("🎁 " + birthdayContact.FullName,
-                    $"It's {birthdayContact.FullName}'s birthday");
+                if (birthdayContact.SendBirthdayNotification)
+                {
+                    await _messagingService.SendMessageAsync("🎁 " + birthdayContact.FullName,
+                        $"It's {birthdayContact.FullName}'s birthday");    
+                }
             }
         }
     }

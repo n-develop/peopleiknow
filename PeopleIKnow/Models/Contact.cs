@@ -21,6 +21,8 @@ namespace PeopleIKnow.Models
 
         public DateTime Birthday { get; set; }
 
+        public bool SendBirthdayNotification { get; set; }
+
         public string Address { get; set; }
 
         public List<TelephoneNumber> TelephoneNumbers { get; set; }
