@@ -132,6 +132,30 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_ContactTelephone.de-DE.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactTimeline.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactTimeline.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactTimeline.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactTimeline.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactWork.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactWork.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactWork.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactWork.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\_NavbarPartial.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_NavbarPartial.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\_NavbarPartial.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_NavbarPartial.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -244,6 +268,36 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>_ContactTelephone.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactTimeline.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactTimeline.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactTimeline.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactTimeline.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactWork.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactWork.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactWork.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactWork.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\_NavbarPartial.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_NavbarPartial.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\_NavbarPartial.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_NavbarPartial.de-DE.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 </Project>
