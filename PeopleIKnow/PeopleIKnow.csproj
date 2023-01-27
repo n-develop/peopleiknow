@@ -156,6 +156,22 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>_NavbarPartial.de-DE.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Localization\SharedResources.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResources.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Localization\SharedResources.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResources.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\CommonActivity\Editor.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\CommonActivity\Editor.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -298,6 +314,26 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>_NavbarPartial.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Localization\SharedResources.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SharedResources.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Localization\SharedResources.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SharedResources.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\CommonActivity\Editor.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\CommonActivity\Editor.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.de-DE.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 </Project>

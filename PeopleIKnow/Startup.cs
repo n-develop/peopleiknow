@@ -34,8 +34,16 @@ namespace PeopleIKnow
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.SetDefaultCulture("en-US");
+                options.AddSupportedUICultures("en-US", "de-DE");
+                options.FallBackToParentUICultures = true;
+                options.RequestCultureProviders.Clear();
+            });
             services.AddControllersWithViews()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
             
             services.AddRazorPages();
             services.AddDbContext<ContactContext>(options => options.UseSqlite("Data Source=people.db"));
