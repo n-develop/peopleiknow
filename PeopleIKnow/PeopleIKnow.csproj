@@ -42,4 +42,46 @@
             <DependentUpon>appsettings.json</DependentUpon>
         </Content>
     </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactBirthday.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactBirthday.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactBirthday.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactBirthday.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactActivity.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactActivity.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactActivity.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactActivity.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactBirthday.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactBirthday.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactBirthday.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactBirthday.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactActivity.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactActivity.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactActivity.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactActivity.de-DE.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
 </Project>

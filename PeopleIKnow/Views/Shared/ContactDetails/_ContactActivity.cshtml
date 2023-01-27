@@ -1,13 +1,15 @@
+@using Microsoft.AspNetCore.Mvc.Localization
 @model Contact
+@inject IViewLocalizer Localizer
 
 @if (Model.Id == 0)
 {
     <div class="panel">
         <p class="panel-heading">
-            🚴 Activities
+            🚴 @Localizer["activities"]
         </p>
         <div class="panel-block">
-            You have to save the contact before you can add activities
+            @Localizer["activities save before edit"]
         </div>
     </div>
 }
@@ -15,7 +17,7 @@ else
 {
     <div class="panel">
         <p class="panel-heading">
-            🚴 Activities
+            🚴 @Localizer["activities"]
             <a class="button is-pulled-right is-small is-success" onclick="Entities.add('CommonActivity')">
                 <i class="fa fa-plus-circle"></i>
             </a>
