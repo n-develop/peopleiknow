@@ -39,4 +39,7 @@
     <data name="save" xml:space="preserve">
         <value>Save</value>
     </data>
+    <data name="delete" xml:space="preserve">
+        <value>Delete</value>
+    </data>
 </root>

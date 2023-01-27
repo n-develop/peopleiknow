@@ -86,5 +86,11 @@ namespace PeopleIKnow.Resources.Localization {
                 return ResourceManager.GetString("cancel", resourceCulture);
             }
         }
+        
+        internal static string delete {
+            get {
+                return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
     }
 }
