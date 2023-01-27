@@ -51,9 +51,9 @@ namespace PeopleIKnow.Resources.Views.Shared.ContactDetails {
             }
         }
         
-        internal static string activities_save_before_edit {
+        internal static string activities_save_before_add {
             get {
-                return ResourceManager.GetString("activities save before edit", resourceCulture);
+                return ResourceManager.GetString("activities save before add", resourceCulture);
             }
         }
     }

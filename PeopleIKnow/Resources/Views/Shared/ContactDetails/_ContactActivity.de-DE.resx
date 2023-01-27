@@ -21,7 +21,7 @@
     <data name="activities" xml:space="preserve">
         <value>Gemeinsame Aktivitäten</value>
     </data>
-    <data name="activities save before edit" xml:space="preserve">
-        <value>Du musst den Kontakt einmal speichern bevor du Aktivitäten hinzufügen kannst</value>
+    <data name="activities save before add" xml:space="preserve">
+        <value>Du musst den Kontakt speichern bevor du Aktivitäten hinzufügen kannst</value>
     </data>
 </root>

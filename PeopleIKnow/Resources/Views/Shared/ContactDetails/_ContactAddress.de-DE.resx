@@ -18,10 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="activities" xml:space="preserve">
-        <value>Activities</value>
-    </data>
-    <data name="activities save before add" xml:space="preserve">
-        <value>You have to save the contact before you can add activities</value>
+    <data name="address" xml:space="preserve">
+        <value>Adresse</value>
     </data>
 </root>

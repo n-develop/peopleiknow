@@ -14,21 +14,21 @@ namespace PeopleIKnow.Resources.Views.Shared.ContactDetails {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class _ContactActivity_en_US {
+    internal class _ContactAddress_de_DE {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _ContactActivity_en_US() {
+        internal _ContactAddress_de_DE() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Shared.ContactDetails._ContactActivity_en_US", typeof(_ContactActivity_en_US).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Shared.ContactDetails._ContactAddress_de_DE", typeof(_ContactAddress_de_DE).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,15 +45,9 @@ namespace PeopleIKnow.Resources.Views.Shared.ContactDetails {
             }
         }
         
-        internal static string activities {
+        internal static string address {
             get {
-                return ResourceManager.GetString("activities", resourceCulture);
-            }
-        }
-        
-        internal static string activities_save_before_add {
-            get {
-                return ResourceManager.GetString("activities save before add", resourceCulture);
+                return ResourceManager.GetString("address", resourceCulture);
             }
         }
     }
