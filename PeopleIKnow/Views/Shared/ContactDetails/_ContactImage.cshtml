@@ -1,7 +1,9 @@
+@using Microsoft.AspNetCore.Mvc.Localization
 @model Contact
+@inject IViewLocalizer Localizer
 
 <div class="field">
-    <label class="label">Profile Image</label>
+    <label class="label">@Localizer["photo"]</label>
     <div class="field">
         <figure class="image is-96x96">
             <img src="@Model.ImagePath" alt="Profile image">
@@ -16,11 +18,11 @@
                         <i class="fas fa-upload"></i>
                     </span>
                     <span class="file-label">
-                        Browse…
+                        @Localizer["browse"]
                     </span>
                 </span>
                 <span id="file-name" class="file-name">
-                    Select a file
+                    @Localizer["select a file"]
                 </span>
             </label>
         </div>
