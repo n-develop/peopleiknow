@@ -127,7 +127,8 @@ namespace PeopleIKnow.UnitTests.Services
                     {
                         Firstname = "Joseph",
                         Lastname = "Jasper",
-                        Birthday = new DateTime(1990, 9, 21)
+                        Birthday = new DateTime(1990, 9, 21),
+                        SendBirthdayNotification = true
                     }
                 });
 
@@ -136,6 +137,29 @@ namespace PeopleIKnow.UnitTests.Services
 
             // Assert
             await _messagingService.Received(1).SendMessageAsync("🎁 Joseph Jasper", "It's Joseph Jasper's birthday");
+        }
+        
+        [Fact]
+        public async Task OneBirthdayFound_ButNoReminderShouldBeSent_NoReminderSent()
+        {
+            // Arrange
+            _contactRepository.GetBirthdayContactsAsync(Arg.Any<DateTime>())
+                .Returns(new List<Contact>
+                {
+                    new Contact
+                    {
+                        Firstname = "Joseph",
+                        Lastname = "Jasper",
+                        Birthday = new DateTime(1990, 9, 21),
+                        SendBirthdayNotification = false
+                    }
+                });
+
+            // Act
+            await _sut.SendReminders(new DateTime(2021, 9, 21));
+
+            // Assert
+            await _messagingService.DidNotReceive().SendMessageAsync(Arg.Any<string>(), Arg.Any<string>());
         }
     }
 }
