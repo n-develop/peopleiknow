@@ -1,13 +1,15 @@
+@using Microsoft.AspNetCore.Mvc.Localization
 @model Contact
+@inject IViewLocalizer Localizer
 
 @if (Model.Id == 0)
 {
     <div class="panel">
         <p class="panel-heading">
-            📧 Emails
+            📧 @Localizer["emails"]
         </p>
         <div class="panel-block">
-            You have to save the contact before you can add emails
+            @Localizer["emails save before add"]
         </div>
     </div>
 }
@@ -15,7 +17,7 @@ else
 {
     <div class="panel">
         <p class="panel-heading">
-            📧 Emails
+            📧 @Localizer["emails"]
             <a class="button is-pulled-right is-small is-success" onclick="Entities.add('Email')">
                 <i class="fa fa-plus-circle"></i>
             </a>

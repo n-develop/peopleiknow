@@ -1,4 +1,11 @@
+@using PeopleIKnow.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
 @model PeopleIKnow.Models.CommonActivity
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@inject IViewLocalizer Localizer
+
 @{
     Layout = null;
 }
@@ -8,28 +15,28 @@
         <input type="hidden" asp-for="ContactId"/>
 
         <div class="field">
-            <label class="label">Date</label>
+            <label class="label">@SharedLocalizer["date"]</label>
             <div class="control">
                 <input class="input" asp-for="Date" type="date">
             </div>
         </div>
 
         <div class="field">
-            <label class="label">Description</label>
+            <label class="label">@SharedLocalizer["description"]</label>
             <div class="control">
-                <textarea class="textarea" asp-for="Description" placeholder="Describe the activity here...">
+                <textarea class="textarea" asp-for="Description" placeholder="@Localizer["describe activity here"]">
                 </textarea>
             </div>
         </div>
 
         @if (Model.Id == 0)
         {
-            <a onclick="Entities.save('CommonActivity', 'common-activity-form')" class="button is-info is-medium"><i class="fas fa-plus-circle"></i>&nbsp;Add</a>
+            <a onclick="Entities.save('CommonActivity', 'common-activity-form')" class="button is-info is-medium"><i class="fas fa-plus-circle"></i>&nbsp;@SharedLocalizer["add"]</a>
         }
         else
         {
-            <a onclick="Entities.update('CommonActivity', 'common-activity-form')" class="button is-info is-medium"><i class="fas fa-download"></i>&nbsp;Save</a>
+            <a onclick="Entities.update('CommonActivity', 'common-activity-form')" class="button is-info is-medium"><i class="fas fa-download"></i>&nbsp;@SharedLocalizer["save"]</a>
         }
-        <a onclick="Navigation.backToDetails(@Model.ContactId)" class="button is-danger is-medium"><i class="fas fa-times-circle"></i>&nbsp;Cancel</a>
+        <a onclick="Navigation.backToDetails(@Model.ContactId)" class="button is-danger is-medium"><i class="fas fa-times-circle"></i>&nbsp;@SharedLocalizer["cancel"]</a>
     </form>
 </div>

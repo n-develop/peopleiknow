@@ -1,4 +1,7 @@
+@using Microsoft.Extensions.Localization
+@using PeopleIKnow.Localization
 @model Contact
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
     Layout = null;
 }
@@ -33,4 +36,4 @@
     </form>
 </div>
 
-<a id="save-button" class="button is-info is-large" onclick="Contact.create()"><i class="fas fa-download"></i>&nbsp;Save</a>
+<a id="save-button" class="button is-info is-large" onclick="Contact.create()"><i class="fas fa-download"></i>&nbsp;@SharedLocalizer["save"]</a>

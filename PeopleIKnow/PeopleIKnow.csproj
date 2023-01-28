@@ -42,4 +42,460 @@
             <DependentUpon>appsettings.json</DependentUpon>
         </Content>
     </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactBirthday.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactBirthday.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactBirthday.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactBirthday.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactActivity.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactActivity.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactActivity.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactActivity.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactAddress.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactAddress.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactAddress.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactAddress.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactEmails.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactEmails.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactEmails.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactEmails.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactGift.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactGift.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactGift.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactGift.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactImage.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactImage.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactImage.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactImage.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactName.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactName.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactName.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactName.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactRelationships.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactRelationships.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactRelationships.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactRelationships.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactReminder.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactReminder.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactReminder.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactReminder.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactTags.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactTags.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactTags.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactTags.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactTelephone.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactTelephone.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactTelephone.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactTelephone.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactTimeline.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactTimeline.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactTimeline.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactTimeline.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactWork.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactWork.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\ContactDetails\_ContactWork.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_ContactWork.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\_NavbarPartial.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_NavbarPartial.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Shared\_NavbarPartial.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>_NavbarPartial.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Localization\SharedResources.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResources.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Localization\SharedResources.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResources.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\CommonActivity\Editor.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\CommonActivity\Editor.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Dashboard\Index.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Dashboard\Index.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Email\Editor.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Email\Editor.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Gift\Editor.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Gift\Editor.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Relationship\Editor.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Relationship\Editor.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\GiftType.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>GiftType.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Models\GiftType.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>GiftType.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Reminder\Editor.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Reminder\Editor.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\StatusUpdate\Editor.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\StatusUpdate\Editor.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Telephone\Editor.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Telephone\Editor.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Editor.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Admin\Index.en-US.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.en-US.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Admin\Index.de-DE.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Index.de-DE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactBirthday.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactBirthday.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactBirthday.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactBirthday.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactActivity.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactActivity.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactActivity.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactActivity.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactAddress.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactAddress.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactAddress.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactAddress.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactEmails.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactEmails.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactEmails.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactEmails.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactGift.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactGift.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactGift.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactGift.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactImage.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactImage.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactImage.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactImage.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactName.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactName.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactName.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactName.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactRelationships.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactRelationships.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactRelationships.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactRelationships.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactReminder.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactReminder.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactReminder.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactReminder.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactTags.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactTags.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactTags.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactTags.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactTelephone.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactTelephone.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactTelephone.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactTelephone.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactTimeline.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactTimeline.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactTimeline.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactTimeline.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactWork.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactWork.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\ContactDetails\_ContactWork.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_ContactWork.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\_NavbarPartial.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_NavbarPartial.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Shared\_NavbarPartial.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>_NavbarPartial.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Localization\SharedResources.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SharedResources.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Localization\SharedResources.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SharedResources.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\CommonActivity\Editor.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\CommonActivity\Editor.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Dashboard\Index.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Dashboard\Index.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Email\Editor.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Email\Editor.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Gift\Editor.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Gift\Editor.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Relationship\Editor.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.en-US-resx.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Relationship\Editor.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\GiftType.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>GiftType.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Models\GiftType.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>GiftType.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Reminder\Editor.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Reminder\Editor.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\StatusUpdate\Editor.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\StatusUpdate\Editor.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Telephone\Editor.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Telephone\Editor.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Editor.de-DE.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Admin\Index.en-US.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.en-US.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Admin\Index.de-DE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Index.de-DE.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
 </Project>

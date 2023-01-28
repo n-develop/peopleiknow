@@ -1,7 +1,10 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model Contact
+@inject IViewLocalizer Localizer
 
 <div class="field">
-    <label class="label">Birthday</label>
+    <label class="label">@Localizer["birthday"]</label>
     <div class="control has-icons-left">
         <input class="input" asp-for="Birthday" type="date" min="1900-01-01">
         <span class="icon is-small is-left">
@@ -13,7 +16,7 @@
     <div class="control">
         <label class="checkbox">
             <input type="checkbox" asp-for="SendBirthdayNotification">
-            Enable birthday notification
+            @Localizer["enable birthday notification"]
         </label>
     </div>
 </div>

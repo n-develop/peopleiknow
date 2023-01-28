@@ -1,4 +1,8 @@
+@using PeopleIKnow.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Localization
 @model Contact
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
     Layout = null;
 }
@@ -36,8 +40,8 @@
 
         <partial name="ContactDetails/_ContactTimeline"/>
 
-        <a class="button is-danger is-large" onclick="Contact.delete()"><i class="fas fa-trash-alt"></i>&nbsp;Delete</a>
+        <a class="button is-danger is-large" onclick="Contact.delete()"><i class="fas fa-trash-alt"></i>&nbsp;@SharedLocalizer["delete"]</a>
     </form>
 </div>
 
-<a id="save-button" class="button is-info is-large" onclick="Contact.save()"><i class="fas fa-download"></i>&nbsp;Save</a>
+<a id="save-button" class="button is-info is-large" onclick="Contact.save()"><i class="fas fa-download"></i>&nbsp;@SharedLocalizer["save"]</a>

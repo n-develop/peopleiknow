@@ -1,4 +1,11 @@
+@using Microsoft.Extensions.Localization
+@using PeopleIKnow.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model PeopleIKnow.Models.Reminder
+@inject IViewLocalizer Localizer
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+
 @{
     Layout = null;
 }
@@ -8,7 +15,7 @@
         <input type="hidden" asp-for="ContactId"/>
 
         <div class="field">
-            <label class="label">Date</label>
+            <label class="label">@SharedLocalizer["date"]</label>
             <div class="control">
                 <input class="input" asp-for="Date" type="date">
             </div>
@@ -17,25 +24,25 @@
             <div class="control">
                 <label class="checkbox">
                     <input type="checkbox" asp-for="RemindMeEveryYear">
-                    Remind me every year
+                    @Localizer["remind me every year"]
                 </label>
             </div>
         </div>
         <div class="field">
-            <label class="label">Description</label>
+            <label class="label">@SharedLocalizer["description"]</label>
             <div class="control">
-                <input class="input" asp-for="Description" type="text" placeholder="Write the reminder here...">
+                <input class="input" asp-for="Description" type="text" placeholder="@Localizer["description placeholder"]">
             </div>
         </div>
 
         @if (Model.Id == 0)
         {
-            <a onclick="Entities.save('Reminder', 'reminder-form')" class="button is-info is-medium"><i class="fas fa-plus-circle"></i>&nbsp;Add</a>
+            <a onclick="Entities.save('Reminder', 'reminder-form')" class="button is-info is-medium"><i class="fas fa-plus-circle"></i>&nbsp;@SharedLocalizer["add"]</a>
         }
         else
         {
-            <a onclick="Entities.update('Reminder', 'reminder-form')" class="button is-info is-medium"><i class="fas fa-download"></i>&nbsp;Save</a>
+            <a onclick="Entities.update('Reminder', 'reminder-form')" class="button is-info is-medium"><i class="fas fa-download"></i>&nbsp;@SharedLocalizer["save"]</a>
         }
-        <a onclick="Navigation.backToDetails(@Model.ContactId)" class="button is-danger is-medium"><i class="fas fa-times-circle"></i>&nbsp;Cancel</a>
+        <a onclick="Navigation.backToDetails(@Model.ContactId)" class="button is-danger is-medium"><i class="fas fa-times-circle"></i>&nbsp;@SharedLocalizer["cancel"]</a>
     </form>
 </div>

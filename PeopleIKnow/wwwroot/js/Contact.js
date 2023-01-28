@@ -29,6 +29,10 @@ const Contact = {
     },
 
     delete: async function () {
+        let shouldDeleteContact = confirm("Do you really want to delete this contact?")
+        if (!shouldDeleteContact) {
+            return
+        }
         const id = document.querySelector(".contact-preview").getAttribute("data-contact-id");
         LoadingIndicator.show();
         const response = await fetch("/contact/delete/" + id, {

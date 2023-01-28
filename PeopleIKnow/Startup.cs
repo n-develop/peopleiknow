@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,14 +33,25 @@ namespace PeopleIKnow
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
-            services.AddControllersWithViews();
+            services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.SetDefaultCulture("en-US");
+                options.AddSupportedUICultures("en-US", "de-DE");
+                options.FallBackToParentUICultures = true;
+                options.RequestCultureProviders.Clear();
+            });
+            services.AddControllersWithViews()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+            
             services.AddRazorPages();
             services.AddDbContext<ContactContext>(options => options.UseSqlite("Data Source=people.db"));
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ContactContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
-
+            
             services.AddHostedService<NotificationHostedService>();
         }
 

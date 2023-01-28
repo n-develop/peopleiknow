@@ -1,18 +1,21 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model Contact
+@inject IViewLocalizer Localizer
 
 <div class="field">
-    <label class="label">Employer</label>
+    <label class="label">@Localizer["employer"]</label>
     <div class="control has-icons-left">
-        <input class="input" asp-for="Employer" placeholder="Employer">
+        <input class="input" asp-for="Employer" placeholder="@Localizer["employer"]">
         <span class="icon is-small is-left">
             <i class="fa fa-building"></i>
         </span>
     </div>
 </div>
 <div class="field">
-    <label class="label">Business Title</label>
+    <label class="label">@Localizer["business title"]</label>
     <div class="control has-icons-left">
-        <input class="input" asp-for="BusinessTitle" placeholder="Business Title">
+        <input class="input" asp-for="BusinessTitle" placeholder="@Localizer["business title"]">
         <span class="icon is-small is-left">
             <i class="fa fa-briefcase"></i>
         </span>

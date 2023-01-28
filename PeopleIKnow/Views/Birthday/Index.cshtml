@@ -1,12 +1,15 @@
+@using PeopleIKnow.Localization
+@using Microsoft.Extensions.Localization
 @model IEnumerable<PeopleIKnow.Models.BirthdayContact>
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 <div id="people-pane" class="column pane is-multiline">
     <div class="table-container">
         <table class="table is-bordered is-striped is-hoverable">
             <thead>
             <tr>
-                <th>Contact</th>
-                <th>Birthday</th>
+                <th>@SharedLocalizer["contact"]</th>
+                <th>@SharedLocalizer["birthday"]</th>
             </tr>
             </thead>
             <tbody>
