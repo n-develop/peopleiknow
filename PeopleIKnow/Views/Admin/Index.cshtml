@@ -1,7 +1,10 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model List<PeopleIKnow.Models.User>
+@inject IViewLocalizer Localizer
 
 @{
-    ViewBag.Title = "Manage users";
+    ViewBag.Title = Localizer["page title"];
     Layout = "_Layout";
 }
 
@@ -10,9 +13,9 @@
         <table class="table is-bordered is-striped is-hoverable">
             <thead>
             <tr>
-                <th>Email</th>
-                <th>Access</th>
-                <th>Admin</th>
+                <th>@Localizer["email"]</th>
+                <th>@Localizer["access"]</th>
+                <th>@Localizer["admin"]</th>
             </tr>
             </thead>
             <tbody>
