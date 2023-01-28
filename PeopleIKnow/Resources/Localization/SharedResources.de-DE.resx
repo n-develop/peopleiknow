@@ -42,4 +42,10 @@
     <data name="delete" xml:space="preserve">
         <value>Löschen</value>
     </data>
+    <data name="yes" xml:space="preserve">
+        <value>Ja</value>
+    </data>
+    <data name="no" xml:space="preserve">
+        <value>Nein</value>
+    </data>
 </root>

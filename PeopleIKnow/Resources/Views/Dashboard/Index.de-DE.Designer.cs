@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PeopleIKnow.Resources.Localization {
+namespace PeopleIKnow.Resources.Views.Dashboard {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SharedResources_de_DE {
+    internal class Index_de_DE {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SharedResources_de_DE() {
+        internal Index_de_DE() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Localization.SharedResources_de_DE", typeof(SharedResources_de_DE).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Dashboard.Index_de_DE", typeof(Index_de_DE).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,63 +45,33 @@ namespace PeopleIKnow.Resources.Localization {
             }
         }
         
-        internal static string contact {
+        internal static string choose_a_contact_from_the_list {
             get {
-                return ResourceManager.GetString("contact", resourceCulture);
+                return ResourceManager.GetString("choose a contact from the list", resourceCulture);
             }
         }
         
-        internal static string birthday {
+        internal static string are_you_sure {
             get {
-                return ResourceManager.GetString("birthday", resourceCulture);
+                return ResourceManager.GetString("are you sure", resourceCulture);
             }
         }
         
-        internal static string date {
+        internal static string user_deletion_confirmation {
             get {
-                return ResourceManager.GetString("date", resourceCulture);
+                return ResourceManager.GetString("user deletion confirmation", resourceCulture);
             }
         }
         
-        internal static string description {
+        internal static string successfully_saved {
             get {
-                return ResourceManager.GetString("description", resourceCulture);
+                return ResourceManager.GetString("successfully saved", resourceCulture);
             }
         }
         
-        internal static string add {
+        internal static string successfully_deleted {
             get {
-                return ResourceManager.GetString("add", resourceCulture);
-            }
-        }
-        
-        internal static string save {
-            get {
-                return ResourceManager.GetString("save", resourceCulture);
-            }
-        }
-        
-        internal static string cancel {
-            get {
-                return ResourceManager.GetString("cancel", resourceCulture);
-            }
-        }
-        
-        internal static string delete {
-            get {
-                return ResourceManager.GetString("delete", resourceCulture);
-            }
-        }
-        
-        internal static string yes {
-            get {
-                return ResourceManager.GetString("yes", resourceCulture);
-            }
-        }
-        
-        internal static string no {
-            get {
-                return ResourceManager.GetString("no", resourceCulture);
+                return ResourceManager.GetString("successfully deleted", resourceCulture);
             }
         }
     }

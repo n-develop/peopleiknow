@@ -18,34 +18,24 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="contact" xml:space="preserve">
-        <value>Contact</value>
+    <data name="choose a contact from the list" xml:space="preserve">
+        <value>Choose a contact from the list!</value>
+        <comment>choose a contact from the list</comment>
     </data>
-    <data name="birthday" xml:space="preserve">
-        <value>Birthday</value>
+    <data name="are you sure" xml:space="preserve">
+        <value>Are your sure?</value>
+        <comment>are you sure</comment>
     </data>
-    <data name="add" xml:space="preserve">
-        <value>Add</value>
+    <data name="user deletion confirmation" xml:space="preserve">
+        <value>Are you sure, that you want to delete this contact?</value>
+        <comment>user deletion confirmation</comment>
     </data>
-    <data name="cancel" xml:space="preserve">
-        <value>Cancel</value>
+    <data name="successfully saved" xml:space="preserve">
+        <value>Successfully saved!</value>
+        <comment>successfully saved</comment>
     </data>
-    <data name="date" xml:space="preserve">
-        <value>Date</value>
-    </data>
-    <data name="description" xml:space="preserve">
-        <value>Description</value>
-    </data>
-    <data name="save" xml:space="preserve">
-        <value>Save</value>
-    </data>
-    <data name="delete" xml:space="preserve">
-        <value>Delete</value>
-    </data>
-    <data name="no" xml:space="preserve">
-        <value>No</value>
-    </data>
-    <data name="yes" xml:space="preserve">
-        <value>Yes</value>
+    <data name="successfully deleted" xml:space="preserve">
+        <value>Successfully deleted!</value>
+        <comment>successfully deleted</comment>
     </data>
 </root>

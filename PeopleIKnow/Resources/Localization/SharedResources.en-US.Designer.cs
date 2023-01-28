@@ -92,5 +92,17 @@ namespace PeopleIKnow.Resources.Localization {
                 return ResourceManager.GetString("delete", resourceCulture);
             }
         }
+        
+        internal static string no {
+            get {
+                return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        internal static string yes {
+            get {
+                return ResourceManager.GetString("yes", resourceCulture);
+            }
+        }
     }
 }
