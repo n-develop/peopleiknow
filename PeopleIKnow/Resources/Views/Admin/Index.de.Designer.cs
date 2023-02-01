@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PeopleIKnow.Resources.Views.Email {
+namespace PeopleIKnow.Resources.Views.Admin {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Editor_de_DE {
+    internal class Index_de {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Editor_de_DE() {
+        internal Index_de() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Email.Editor_de_DE", typeof(Editor_de_DE).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Admin.Index_de", typeof(Index_de).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,21 +45,27 @@ namespace PeopleIKnow.Resources.Views.Email {
             }
         }
         
-        internal static string type {
-            get {
-                return ResourceManager.GetString("type", resourceCulture);
-            }
-        }
-        
-        internal static string type_placeholder {
-            get {
-                return ResourceManager.GetString("type placeholder", resourceCulture);
-            }
-        }
-        
         internal static string email {
             get {
                 return ResourceManager.GetString("email", resourceCulture);
+            }
+        }
+        
+        internal static string access {
+            get {
+                return ResourceManager.GetString("access", resourceCulture);
+            }
+        }
+        
+        internal static string admin {
+            get {
+                return ResourceManager.GetString("admin", resourceCulture);
+            }
+        }
+        
+        internal static string page_title {
+            get {
+                return ResourceManager.GetString("page title", resourceCulture);
             }
         }
     }

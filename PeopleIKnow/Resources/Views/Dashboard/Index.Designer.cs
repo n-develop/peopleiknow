@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PeopleIKnow.Resources.Views.Reminder {
+namespace PeopleIKnow.Resources.Views.Dashboard {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Editor_de_DE {
+    internal class Index {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Editor_de_DE() {
+        internal Index() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Reminder.Editor_de_DE", typeof(Editor_de_DE).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Dashboard.Index", typeof(Index).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,15 +45,33 @@ namespace PeopleIKnow.Resources.Views.Reminder {
             }
         }
         
-        internal static string remind_me_every_year {
+        internal static string choose_a_contact_from_the_list {
             get {
-                return ResourceManager.GetString("remind me every year", resourceCulture);
+                return ResourceManager.GetString("choose a contact from the list", resourceCulture);
             }
         }
         
-        internal static string description_placeholder {
+        internal static string are_you_sure {
             get {
-                return ResourceManager.GetString("description placeholder", resourceCulture);
+                return ResourceManager.GetString("are you sure", resourceCulture);
+            }
+        }
+        
+        internal static string user_deletion_confirmation {
+            get {
+                return ResourceManager.GetString("user deletion confirmation", resourceCulture);
+            }
+        }
+        
+        internal static string successfully_saved {
+            get {
+                return ResourceManager.GetString("successfully saved", resourceCulture);
+            }
+        }
+        
+        internal static string successfully_deleted {
+            get {
+                return ResourceManager.GetString("successfully deleted", resourceCulture);
             }
         }
     }

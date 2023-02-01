@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PeopleIKnow.Resources.Views.CommonActivity {
+namespace PeopleIKnow.Resources.Views.Gift {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Editor_en_US {
+    internal class Editor {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Editor_en_US() {
+        internal Editor() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.CommonActivity.Editor_en_US", typeof(Editor_en_US).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Gift.Editor", typeof(Editor).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,9 +45,15 @@ namespace PeopleIKnow.Resources.Views.CommonActivity {
             }
         }
         
-        internal static string describe_activity_here {
+        internal static string type {
             get {
-                return ResourceManager.GetString("describe activity here", resourceCulture);
+                return ResourceManager.GetString("type", resourceCulture);
+            }
+        }
+        
+        internal static string description_placeholder {
+            get {
+                return ResourceManager.GetString("description placeholder", resourceCulture);
             }
         }
     }

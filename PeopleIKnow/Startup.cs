@@ -36,22 +36,22 @@ namespace PeopleIKnow
             services.AddLocalization(o => { o.ResourcesPath = "Resources"; });
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                options.SetDefaultCulture("en-US");
-                options.AddSupportedUICultures("en-US", "de-DE");
+                options.SetDefaultCulture("en");
+                options.AddSupportedUICultures("en", "de");
                 options.FallBackToParentUICultures = true;
                 options.RequestCultureProviders.Clear();
             });
             services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
-            
+
             services.AddRazorPages();
             services.AddDbContext<ContactContext>(options => options.UseSqlite("Data Source=people.db"));
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ContactContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
-            
+
             services.AddHostedService<NotificationHostedService>();
         }
 

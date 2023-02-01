@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PeopleIKnow.Resources.Models {
+namespace PeopleIKnow.Resources.Views.Shared.ContactDetails {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class GiftType_en_US {
+    internal class _ContactActivity {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal GiftType_en_US() {
+        internal _ContactActivity() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Models.GiftType_en_US", typeof(GiftType_en_US).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Shared.ContactDetails._ContactActivity", typeof(_ContactActivity).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,21 +45,15 @@ namespace PeopleIKnow.Resources.Models {
             }
         }
         
-        internal static string received {
+        internal static string activities {
             get {
-                return ResourceManager.GetString("received", resourceCulture);
+                return ResourceManager.GetString("activities", resourceCulture);
             }
         }
         
-        internal static string given {
+        internal static string activities_save_before_add {
             get {
-                return ResourceManager.GetString("given", resourceCulture);
-            }
-        }
-        
-        internal static string idea {
-            get {
-                return ResourceManager.GetString("idea", resourceCulture);
+                return ResourceManager.GetString("activities save before add", resourceCulture);
             }
         }
     }

@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PeopleIKnow.Resources.Models {
+namespace PeopleIKnow.Resources.Views.Email {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class GiftType_de_DE {
+    internal class Editor {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal GiftType_de_DE() {
+        internal Editor() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Models.GiftType_de_DE", typeof(GiftType_de_DE).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Email.Editor", typeof(Editor).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,21 +45,21 @@ namespace PeopleIKnow.Resources.Models {
             }
         }
         
-        internal static string given {
+        internal static string type {
             get {
-                return ResourceManager.GetString("given", resourceCulture);
+                return ResourceManager.GetString("type", resourceCulture);
             }
         }
         
-        internal static string idea {
+        internal static string type_placeholder {
             get {
-                return ResourceManager.GetString("idea", resourceCulture);
+                return ResourceManager.GetString("type placeholder", resourceCulture);
             }
         }
         
-        internal static string received {
+        internal static string email {
             get {
-                return ResourceManager.GetString("received", resourceCulture);
+                return ResourceManager.GetString("email", resourceCulture);
             }
         }
     }

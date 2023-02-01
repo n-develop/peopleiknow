@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PeopleIKnow.Resources.Views.Relationship {
+namespace PeopleIKnow.Resources.Views.Reminder {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Editor_de_DE {
+    internal class Editor {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Editor_de_DE() {
+        internal Editor() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Relationship.Editor_de_DE", typeof(Editor_de_DE).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("PeopleIKnow.Resources.Views.Reminder.Editor", typeof(Editor).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,21 +45,15 @@ namespace PeopleIKnow.Resources.Views.Relationship {
             }
         }
         
-        internal static string type {
+        internal static string remind_me_every_year {
             get {
-                return ResourceManager.GetString("type", resourceCulture);
+                return ResourceManager.GetString("remind me every year", resourceCulture);
             }
         }
         
-        internal static string type_placeholder {
+        internal static string description_placeholder {
             get {
-                return ResourceManager.GetString("type placeholder", resourceCulture);
-            }
-        }
-        
-        internal static string name {
-            get {
-                return ResourceManager.GetString("name", resourceCulture);
+                return ResourceManager.GetString("description placeholder", resourceCulture);
             }
         }
     }
