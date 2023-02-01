@@ -39,7 +39,6 @@ namespace PeopleIKnow
                 options.SetDefaultCulture("en");
                 options.AddSupportedUICultures("en", "de");
                 options.FallBackToParentUICultures = true;
-                options.RequestCultureProviders.Clear();
             });
             services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
@@ -68,6 +67,7 @@ namespace PeopleIKnow
                 app.UseHsts();
             }
 
+            app.UseRequestLocalization();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
