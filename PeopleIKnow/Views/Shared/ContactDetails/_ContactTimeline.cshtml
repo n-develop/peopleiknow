@@ -22,10 +22,22 @@ else
                 <i class="fa fa-plus-circle"></i>
             </a>
         </p>
-
+        <p class="panel-tabs">
+            @{
+                var years = Model.StatusTimeline
+                    .Select(status => status.Created.Year)
+                    .Distinct()
+                    .OrderDescending()
+                    .ToList();
+            }
+            @foreach (var year in years)
+            {
+                <a class="@(year == years.First() ? "is-active" : "")" data-tab="status" id="tab-status-@year" onclick="Tabs.show('status', 'status-@year')">@year</a>
+            }
+        </p>
         @foreach (var statusUpdate in Model.StatusTimeline)
         {
-            <div class="panel-block">
+            <div class="panel-block" data-category="status" data-key="status-@statusUpdate.Created.Year" style="@(statusUpdate.Created.Year == years.First() ? "" : "display: none !important;")">
                 <label class="label">@statusUpdate.Created.ToString("dd.MM.yyyy")</label>
                 <article class="message entry">
                     <div class="message-body">

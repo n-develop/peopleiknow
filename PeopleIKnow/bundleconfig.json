@@ -19,7 +19,8 @@
             "wwwroot/js/Search.js",
             "wwwroot/js/Entities.js",
             "wwwroot/js/PeoplePane.js",
-            "wwwroot/js/Notification.js"
+            "wwwroot/js/Notification.js",
+            "wwwroot/js/Tabs.js"
         ],
         "minify": {
             "enabled": false,

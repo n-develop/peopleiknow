@@ -71,6 +71,10 @@ input[disabled] {
     animation: spin 2s linear infinite;
 }
 
+.tab-element {
+    margin-bottom: 1rem;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);

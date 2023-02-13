@@ -22,10 +22,24 @@ else
                 <i class="fa fa-plus-circle"></i>
             </a>
         </p>
-
+        
+        <p class="panel-tabs">
+            @{
+                var years = Model.ActivityTimeline
+                    .Select(activity => activity.Date.Year)
+                    .Distinct()
+                    .OrderDescending()
+                    .ToList();
+            }
+            @foreach (var year in years)
+            {
+                <a class="@(year == years.First() ? "is-active" : "")" data-tab="activity" id="tab-activity-@year" onclick="Tabs.show('activity', 'activity-@year')">@year</a>
+            }
+        </p>
+        
         @foreach (var activity in Model.ActivityTimeline)
         {
-            <div class="panel-block">
+            <div class="panel-block" data-category="activity" data-key="activity-@activity.Date.Year" style="@(activity.Date.Year == years.First() ? "" : "display: none !important;")">
                 <label class="label">@activity.Date.ToString("dd.MM.yyyy")</label>
                 <article class="message entry">
                     <div class="message-body">
