@@ -5,7 +5,7 @@ const Entities = {
         LoadingIndicator.show();
         const response = await fetch(`/${entityName}/Add?contactId=${id}`);
         if (!response.ok) {
-            console.log(`Something went wrong while adding a ${entityName}`);
+            Notification.showError(`Something went wrong while adding a ${entityName}`);
             return
         }
         await PeoplePane.update(response);
@@ -19,7 +19,7 @@ const Entities = {
             body: form
         });
         if (!response.ok) {
-            console.log(`Something went wrong while saving a ${entityName}`);
+            Notification.showError(`Something went wrong while saving a ${entityName}`);
             return
         }
         await PeoplePane.update(response);
@@ -29,7 +29,7 @@ const Entities = {
         LoadingIndicator.show();
         const response = await fetch(`/${entityName}/Edit/${id}`);
         if (!response.ok) {
-            console.log(`Something went wrong while editing a ${entityName}`);
+            Notification.showError(`Something went wrong while editing a ${entityName}`);
             return
         }
         await PeoplePane.update(response);
@@ -43,7 +43,7 @@ const Entities = {
             body: form
         });
         if (!response.ok) {
-            console.log(`Something went wrong while updating a ${entityName}`);
+            Notification.showError(`Something went wrong while updating a ${entityName}`);
             return
         }
         await PeoplePane.update(response);
@@ -53,7 +53,7 @@ const Entities = {
         LoadingIndicator.show();
         const response = await fetch(`/${entityName}/Delete/${id}`);
         if (!response.ok) {
-            console.log(`Something went wrong while deleting a ${entityName}`);
+            Notification.showError(`Something went wrong while deleting a ${entityName}`);
             return
         }
         await PeoplePane.update(response);

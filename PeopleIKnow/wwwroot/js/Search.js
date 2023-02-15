@@ -5,7 +5,7 @@ const Search = {
         LoadingIndicator.show();
         const response = await fetch("/Search?term=" + term);
         if (!response.ok) {
-            console.log('Something went wrong while searching for contacts');
+            Notification.showError('Something went wrong while searching for contacts');
             return;
         }
         await ContactList.update(response);

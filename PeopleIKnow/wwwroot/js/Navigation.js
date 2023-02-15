@@ -19,7 +19,7 @@ const Navigation = {
     backToDetails: async function (id) {
         const response = await fetch("/Contact/Details/" + id);
         if (!response.ok) {
-            console.log('Something went wrong while going back to the contact details');
+            Notification.showError('Something went wrong while going back to the contact details');
             return;
         }
         await PeoplePane.update(response);

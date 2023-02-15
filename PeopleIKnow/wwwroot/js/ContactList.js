@@ -8,7 +8,7 @@ const ContactList = {
     reload: async function () {
         const response = await fetch("/dashboard/contactlist");
         if (!response.ok) {
-            console.log('Something went wrong while reloading the contact list');
+            Notification.showError('Something went wrong while reloading the contact list');
             return;
         }
         await this.update(response);

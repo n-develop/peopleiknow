@@ -1,7 +1,9 @@
+using System;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using PeopleIKnow.Controllers;
+using PeopleIKnow.DataAccess.Repositories;
 using Xunit;
 
 namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
@@ -26,7 +28,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
         public void NotSuccessful_ReturnsJsonResult()
         {
             // Arrange
-            _contactRepository.DeleteContact(1).Returns(false);
+            _contactRepository.When(fake => fake.DeleteContact(1)).Throw<ContactNotFoundException>();
             var controller = CreateController();
 
             // Act
@@ -41,7 +43,6 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
         public void Successful_ReturnsSuccessTrue()
         {
             // Arrange
-            _contactRepository.DeleteContact(1).Returns(true);
             var controller = CreateController();
 
             // Act
@@ -58,7 +59,6 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
         public void Successful_ReturnsSuccessfulMessage()
         {
             // Arrange
-            _contactRepository.DeleteContact(1).Returns(true);
             var controller = CreateController();
 
             // Act
@@ -75,7 +75,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
         public void Unsuccessful_ReturnsSuccessFalse()
         {
             // Arrange
-            _contactRepository.DeleteContact(1).Returns(false);
+            _contactRepository.When(fake => fake.DeleteContact(1)).Throw<ContactNotFoundException>();
             var controller = CreateController();
 
             // Act
@@ -92,7 +92,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
         public void Unsuccessful_ReturnsUnsuccessfulMessage()
         {
             // Arrange
-            _contactRepository.DeleteContact(1).Returns(false);
+            _contactRepository.When(fake => fake.DeleteContact(1)).Throw(new Exception("ERROR"));
             var controller = CreateController();
 
             // Act
@@ -102,7 +102,7 @@ namespace PeopleIKnow.UnitTests.ControllerTests.ContactControllerTests
             actionResult.Should().NotBeNull();
             var resultObject = ((JsonResult) actionResult).Value;
             var message = GetPropertyByName(resultObject, "Message");
-            message.Should().Be(ContactController.ContactCannotBeDeleted);
+            message.Should().Be(ContactController.ContactCannotBeDeleted + " ERROR");
         }
 
         private object GetPropertyByName(object obj, string propertyName)

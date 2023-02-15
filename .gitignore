@@ -233,5 +233,4 @@ PeopleIKnow/people.db-wal
 *.Production.json
 PeopleIKnow/wwwroot/images/contacts/*
 backups/
-deploy.sh
-
+deploy*.sh

@@ -19,7 +19,7 @@ const Teaser = {
         const teaser = document.getElementById("contact-teaser-" + id);
         const teaserResponse = await fetch("/contact/teaser?id=" + id);
         if (!teaserResponse.ok) {
-            console.log(`Failed to update teaser for contact with id ${id}`);
+            Notification.showError(`Failed to update teaser for contact with id ${id}`);
             return;
         }
         teaser.outerHTML = await teaserResponse.text();
@@ -29,7 +29,7 @@ const Teaser = {
         const id = element.currentTarget.getAttribute("data-contact-id");
         const response = await fetch("/Contact/Details/" + id);
         if (!response.ok) {
-            console.log("Something went wrong while loading a contact. " + response.statusText);
+            Notification.showError('Something went wrong while loading a contact.');
             return;
         }
         await PeoplePane.showDetails(response);
