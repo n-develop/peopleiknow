@@ -40,13 +40,13 @@ namespace PeopleIKnow.DataAccess.Repositories
             return contact ?? NullContact.GetInstance();
         }
 
-        public bool DeleteContact(int id)
+        public void DeleteContact(int id)
         {
             var contact = GetContactById(id);
             if (contact.IsNull())
             {
                 _logger.LogInformation("Contact with ID {Id} could not be found for deletion", id);
-                return false;
+                throw new ContactNotFoundException();
             }
 
             foreach (var emailAddress in contact.EmailAddresses)
@@ -85,11 +85,9 @@ namespace PeopleIKnow.DataAccess.Repositories
             }
 
             _context.Contacts.Remove(contact);
-
-            _logger.LogInformation("Contact with ID {Id} successfully deleted", id);
-
             _context.SaveChanges();
-            return true;
+            
+            _logger.LogInformation("Contact with ID {Id} successfully deleted", id);
         }
 
         public async Task<Contact> AddContact(Contact contact)
@@ -150,6 +148,13 @@ namespace PeopleIKnow.DataAccess.Repositories
                                 StringComparison.InvariantCultureIgnoreCase))
                 .ToList();
             return filtered;
+        }
+    }
+
+    public class ContactNotFoundException : Exception
+    {
+        public ContactNotFoundException() : base("Contact not found")
+        {
         }
     }
 }

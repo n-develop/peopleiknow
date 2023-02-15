@@ -3,7 +3,7 @@ const Contact = {
         LoadingIndicator.show();
         const response = await fetch("/contact/add");
         if (!response.ok) {
-            console.log("Something went wrong while creating a contact. " + response.statusText);
+            Notification.showError('Something went wrong while creating a contact');
         } else {
             await PeoplePane.update(response);
         }
@@ -19,8 +19,7 @@ const Contact = {
             body: form
         });
         if (!response.ok) {
-            // TODO maybe make sure there is a nice error message in the data?
-            console.log("Something went wrong while creating a contact. " + response.statusText);
+            Notification.showError('Something went wrong while creating a contact');
         } else {
             await PeoplePane.update(response);
             await ContactList.reload();
@@ -45,7 +44,7 @@ const Contact = {
             PeoplePane.clear();
             document.getElementById("contact-teaser-" + id).remove();
         } else {
-            alert(responseObj.message);
+            Notification.showError(responseObj.message);
         }
         LoadingIndicator.hide();
     },
@@ -58,7 +57,7 @@ const Contact = {
             body: form
         });
         if (!response.ok) {
-            console.log('Something went wrong saving a contact');
+            Notification.showError('Something went wrong saving the contact');
             return;
         }
         await PeoplePane.update(response);
@@ -71,13 +70,13 @@ const Contact = {
 
     toggleFavorite: async function (event) {
         event.stopPropagation();
-        const i = event.currentTarget;
-        const id = i.getAttribute("data-contact-id");
+        const target = event.currentTarget;
+        const id = target.getAttribute("data-contact-id");
         const response = await fetch("/Contact/Favorite/" + id, {
             method: "POST"
         });
         if (!response.ok) {
-            console.log('Something went wrong while triggering the favorite state');
+            Notification.showError('Something went wrong while triggering the favorite state');
             return;
         }
         await ContactList.update(response);

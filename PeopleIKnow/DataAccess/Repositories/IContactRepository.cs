@@ -10,7 +10,7 @@ namespace PeopleIKnow.DataAccess.Repositories
         Task<IEnumerable<Contact>> SearchContacts(string term);
         Task<IEnumerable<Contact>> GetAllContacts();
         Contact GetContactById(int id);
-        bool DeleteContact(int id);
+        void DeleteContact(int id);
         Task<Contact> AddContact(Contact contact);
         Task SaveContact(Contact contact);
         Task<IEnumerable<Contact>> GetBirthdayContactsAsync(DateTime birthday);

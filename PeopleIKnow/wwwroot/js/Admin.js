@@ -7,7 +7,8 @@ const Users = {
         });
         LoadingIndicator.hide();
         if (!response.ok) {
-            console.log(`Something went wrong while revoke access for user with id ${userId}`);
+            Notification.showError('Something went wrong while updating the permissions');
+            console.log(`Something went wrong while updating the permissions for user with id ${userId}`);
             return
         }
         const state = await response.text();

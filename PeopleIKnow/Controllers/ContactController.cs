@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +12,8 @@ namespace PeopleIKnow.Controllers
     [Authorize(Roles = "user")]
     public class ContactController : Controller
     {
-        public static readonly string SuccessfullyDeletedMessage = "Successfully deleted";
-        public static readonly string ContactCannotBeDeleted = "Contact cannot be deleted";
+        public static readonly string SuccessfullyDeletedMessage = "Successfully deleted.";
+        public static readonly string ContactCannotBeDeleted = "Contact cannot be deleted.";
         private readonly IContactRepository _repository;
         private readonly ILogger<ContactController> _logger;
         private readonly IImageRepository _imageRepository;
@@ -50,14 +51,22 @@ namespace PeopleIKnow.Controllers
                 return NotFound();
             }
 
-            var success = _repository.DeleteContact(id);
-
-            if (success)
+            try
             {
+                _repository.DeleteContact(id);
                 return Json(new { Success = true, Message = SuccessfullyDeletedMessage });
             }
+            catch (ContactNotFoundException notFoundException)
+            {
+                return Json(new { Success = false, Message = notFoundException.Message });
+            }
+            catch (Exception e)
+            {
+                return Json(new { Success = false, Message = ContactCannotBeDeleted + $" {e.Message}" });
+            }
 
-            return Json(new { Success = false, Message = ContactCannotBeDeleted });
+
+            
         }
 
         public IActionResult Add()
