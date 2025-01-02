@@ -38,4 +38,8 @@
         <value>Successfully deleted!</value>
         <comment>successfully deleted</comment>
     </data>
+    <data name="new" xml:space="preserve">
+        <value>New</value>
+        <comment>new</comment>
+    </data>
 </root>

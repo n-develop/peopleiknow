@@ -74,5 +74,11 @@ namespace PeopleIKnow.Resources.Views.Dashboard {
                 return ResourceManager.GetString("successfully deleted", resourceCulture);
             }
         }
+        
+        internal static string _new {
+            get {
+                return ResourceManager.GetString("new", resourceCulture);
+            }
+        }
     }
 }

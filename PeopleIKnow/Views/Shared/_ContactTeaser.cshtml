@@ -29,18 +29,15 @@
         <div class="content">
             @if (!string.IsNullOrWhiteSpace(Model.Address))
             {
-                <i class="fa fa-map-marked-alt"></i>
-                @Model.Address<br/>
+                <span>📍 @Model.Address</span><br/>
             }
             @if (!string.IsNullOrWhiteSpace(Model.Employer))
             {
-                <i class="fa fa-building"></i>
-                @Model.Employer<br/>
+                <span>🏢 @Model.Employer</span><br/>
             }
             @if (!string.IsNullOrWhiteSpace(Model.BusinessTitle))
             {
-                <i class="fa fa-briefcase"></i>
-                @Model.BusinessTitle<br/>
+                <span>💼 @Model.BusinessTitle</span><br/>
             }
         </div>
     </div>

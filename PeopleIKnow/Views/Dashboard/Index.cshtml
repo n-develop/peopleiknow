@@ -9,11 +9,11 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div id="people-feed" class="column is-4-desktop is-full-mobile feed">
+<div id="people-feed" class="column is-3-desktop is-full-mobile feed">
     @await Component.InvokeAsync("ContactList")
 </div>
 
-<div id="people-pane" class="column is-8-desktop is-hidden-mobile pane">
+<div id="people-pane" class="column is-9-desktop is-hidden-mobile pane">
     <div class="columns is-desktop is-vcentered" style="height: 100%;">
         <div class="column">
             <h2 class="has-text-centered">@Localizer["choose a contact from the list"]</h2>
@@ -22,7 +22,7 @@
 </div>
 
 <button id="add-button" class="button is-success is-large" onclick="Contact.add()">
-    <i class="fa fa-plus-circle"></i>
+    <i class="fa fa-plus-circle"></i>&nbsp;@Localizer["new"]
 </button>
 
 <div class="modal" id="confirm-modal">
