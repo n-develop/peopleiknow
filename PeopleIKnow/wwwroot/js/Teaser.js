@@ -27,12 +27,14 @@ const Teaser = {
     },
     handleClick: async function (element) {
         const id = element.currentTarget.getAttribute("data-contact-id");
+        LoadingIndicator.show();
         const response = await fetch("/Contact/Details/" + id);
         if (!response.ok) {
             Notification.showError('Something went wrong while loading a contact.');
             return;
         }
         await PeoplePane.showDetails(response);
+        LoadingIndicator.hide();
         MobileFlow.showPane();
     }
 };
