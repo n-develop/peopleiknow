@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using PeopleIKnow.Configuration;
 using PeopleIKnow.DataAccess;
 using PeopleIKnow.DataAccess.Repositories;
@@ -44,12 +47,32 @@ namespace PeopleIKnow
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
 
-            services.AddRazorPages();
             services.AddDbContext<ContactContext>(options => options.UseSqlite("Data Source=people.db"));
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ContactContext>()
-                .AddDefaultTokenProviders()
-                .AddDefaultUI();
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                })
+                .AddCookie(options =>
+                {
+                    options.AccessDeniedPath = "/Account/AccessDenied";
+                })
+                .AddOpenIdConnect(options =>
+                {
+                    options.Authority = Configuration["Keycloak:Authority"];
+                    options.ClientId = Configuration["Keycloak:ClientId"];
+                    options.ClientSecret = Configuration["Keycloak:ClientSecret"];
+                    options.ResponseType = "code";
+                    options.UsePkce = true;
+                    options.SaveTokens = true;
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                    options.Scope.Add("openid");
+                    options.Scope.Add("profile");
+                    options.Scope.Add("email");
+                    options.TokenValidationParameters.NameClaimType = "preferred_username";
+                    options.TokenValidationParameters.RoleClaimType = ClaimTypes.Role;
+                });
 
             services.AddHostedService<NotificationHostedService>();
         }
@@ -78,7 +101,6 @@ namespace PeopleIKnow
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Dashboard}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
         }
     }

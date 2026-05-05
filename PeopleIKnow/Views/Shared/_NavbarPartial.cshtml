@@ -31,12 +31,6 @@
             <a asp-controller="Birthday" asp-action="Index" class="navbar-item">
                 🎂 @Localizer["birthdays"]
             </a>
-            @if (User.IsInRole("admin"))
-            {
-                <a asp-controller="Admin" asp-action="Index" class="navbar-item">
-                    ⚙️ @Localizer["users"]
-                </a>
-            }
         </div>
         <div class="navbar-end">
             <div class="navbar-item">

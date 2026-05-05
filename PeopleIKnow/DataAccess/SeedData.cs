@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
 using PeopleIKnow.Models;
 
 namespace PeopleIKnow.DataAccess
@@ -146,19 +145,6 @@ namespace PeopleIKnow.DataAccess
 
             db.EmailAddresses.AddRange(emails);
             db.SaveChanges();
-        }
-
-        public static void EnsureIdentityRoles(RoleManager<IdentityRole> roleManager)
-        {
-            if (!roleManager.RoleExistsAsync("admin").Result)
-            {
-                roleManager.CreateAsync(new IdentityRole("admin")).Wait();
-            }
-
-            if (!roleManager.RoleExistsAsync("user").Result)
-            {
-                roleManager.CreateAsync(new IdentityRole("user")).Wait();
-            }
         }
     }
 }
