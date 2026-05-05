@@ -92,6 +92,10 @@ namespace PeopleIKnow
 
             app.UseRequestLocalization();
             app.UseStaticFiles();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto
+            });
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
