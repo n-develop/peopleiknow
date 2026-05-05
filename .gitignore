@@ -234,3 +234,4 @@ PeopleIKnow/people.db-wal
 PeopleIKnow/wwwroot/images/contacts/*
 backups/
 deploy*.sh
+PeopleIKnow.CardDavExport/export/
